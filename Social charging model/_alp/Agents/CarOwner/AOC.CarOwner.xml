@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ActiveObjectClass>
-	<Id>1743154070893</Id>
-	<Name><![CDATA[Main]]></Name>
-	<StartupCode><![CDATA[f_initializeModel();]]></StartupCode>
+	<Id>1745940665088</Id>
+	<Name><![CDATA[CarOwner]]></Name>
 	<Generic>false</Generic>
 	<GenericParameter>
-		<Id>1743154070899</Id>
-		<Name><![CDATA[1743154070899]]></Name>
+		<Id>1745940665094</Id>
+		<Name><![CDATA[1745940665094]]></Name>
 		<GenericParameterValue Class="CodeValue">
 			<Code><![CDATA[T extends Agent]]></Code>
 		</GenericParameterValue>
@@ -64,7 +63,7 @@
 	<DatasetsCreationProperties>
 		<AutoCreate>true</AutoCreate>
 		<OccurrenceAtTime>true</OccurrenceAtTime>
-		<OccurrenceDate>1743235200000</OccurrenceDate>
+		<OccurrenceDate>1746000000000</OccurrenceDate>
 		<OccurrenceTime Class="CodeUnitValue">
 			<Code><![CDATA[0]]></Code>
 			<Unit Class="TimeUnits">HOUR</Unit>
@@ -75,7 +74,7 @@
 		</RecurrenceCode>
 	</DatasetsCreationProperties>
 	<ScaleRuler>
-		<Id>1743154070896</Id>
+		<Id>1745940665091</Id>
 		<Name><![CDATA[scale]]></Name>
 		<X>0</X>
 		<Y>-150</Y>
@@ -91,14 +90,13 @@
 		<Scale>10</Scale>
 		<InheritedFromParentAgentType>true</InheritedFromParentAgentType>
 	</ScaleRuler>
-	<CurrentLevel>1743154070900</CurrentLevel>
-	<ConnectionsId>1743154070894</ConnectionsId>
+	<CurrentLevel>1745940665095</CurrentLevel>
+	<ConnectionsId>1745940665089</ConnectionsId>
 	<Variables xmlns:al="http://anylogic.com"/>
-	<Events xmlns:al="http://anylogic.com"/>
 	<Functions xmlns:al="http://anylogic.com"/>
 	<AgentLinks>
 		<AgentLink>
-			<Id>1743154070894</Id>
+			<Id>1745940665089</Id>
 			<Name><![CDATA[connections]]></Name>
 			<X>50</X>
 			<Y>-50</Y>
@@ -121,10 +119,28 @@
 			<LineArrowPosition>END</LineArrowPosition>
 		</AgentLink>
 	</AgentLinks>
-	<EmbeddedObjects xmlns:al="http://anylogic.com"/>
+	<ContainerLinks>
+		<ContainerLink>
+			<Id>1745940691748</Id>
+			<Name><![CDATA[main]]></Name>
+			<X>50</X>
+			<Y>-100</Y>
+			<Label>
+				<X>10</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<ActiveObjectClass>
+				<PackageName>social_charging_model</PackageName>
+				<ClassName>Main</ClassName>
+			</ActiveObjectClass>
+		</ContainerLink>
+	</ContainerLinks>
 	<Presentation>
 		<Level>
-			<Id>1743154070900</Id>
+			<Id>1745940665095</Id>
 			<Name><![CDATA[level]]></Name>
 			<X>0</X>
 			<Y>0</Y>
@@ -140,49 +156,5 @@
 			<LevelVisibility>DIM_NON_CURRENT</LevelVisibility>
 			<Presentation xmlns:al="http://anylogic.com"/>
 		</Level>
-		<EmbeddedObjectPresentation>
-			<Id>1745925568504</Id>
-			<Name><![CDATA[EVOwners_presentation]]></Name>
-			<X>150</X>
-			<Y>50</Y>
-			<Label>
-				<X>10</X>
-				<Y>0</Y>
-			</Label>
-			<PublicFlag>true</PublicFlag>
-			<PresentationFlag>true</PresentationFlag>
-			<ShowLabel>false</ShowLabel>
-			<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-			<EmbeddedIcon>false</EmbeddedIcon>
-			<Z>0</Z>
-			<Rotation>0.0</Rotation>
-			<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
-			<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
-			<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
-			<Latitude>0.0</Latitude>
-			<Longitude>0.0</Longitude>
-		</EmbeddedObjectPresentation>
-		<EmbeddedObjectPresentation>
-			<Id>1745940691738</Id>
-			<Name><![CDATA[ICECarOwners_presentation]]></Name>
-			<X>150</X>
-			<Y>30</Y>
-			<Label>
-				<X>10</X>
-				<Y>0</Y>
-			</Label>
-			<PublicFlag>true</PublicFlag>
-			<PresentationFlag>true</PresentationFlag>
-			<ShowLabel>false</ShowLabel>
-			<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-			<EmbeddedIcon>false</EmbeddedIcon>
-			<Z>0</Z>
-			<Rotation>0.0</Rotation>
-			<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
-			<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
-			<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
-			<Latitude>0.0</Latitude>
-			<Longitude>0.0</Longitude>
-		</EmbeddedObjectPresentation>
 	</Presentation>
 </ActiveObjectClass>

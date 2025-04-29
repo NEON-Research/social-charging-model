@@ -38,7 +38,20 @@
 				<Alignment>LEFT</Alignment>
 			</Text>
 		</Presentation>
-		<Parameters/>
+		<Parameters>
+			<Parameter>
+				<ParameterName>p_cars</ParameterName>
+			</Parameter>
+			<Parameter>
+				<ParameterName>p_parkingPlaces</ParameterName>
+			</Parameter>
+			<Parameter>
+				<ParameterName>p_chargePoints</ParameterName>
+			</Parameter>
+			<Parameter>
+				<ParameterName>p_shareEVs</ParameterName>
+			</Parameter>
+		</Parameters>
 		<PresentationProperties>
 			<EnableZoomAndPanning>true</EnableZoomAndPanning>
 			<ExecutionMode>realTimeScaled</ExecutionMode>

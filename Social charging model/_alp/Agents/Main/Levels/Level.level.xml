@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Presentation>
+	<TimeStackChart>
+		<Id>1745933804444</Id>
+		<Name><![CDATA[ch_countEVs]]></Name>
+		<X>340</X>
+		<Y>60</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<AutoUpdate>false</AutoUpdate>
+		<OccurrenceAtTime>true</OccurrenceAtTime>
+		<OccurrenceDate>1746000000000</OccurrenceDate>
+		<OccurrenceTime Class="CodeUnitValue">
+			<Code><![CDATA[0]]></Code>
+			<Unit Class="TimeUnits">MINUTE</Unit>
+		</OccurrenceTime>
+		<RecurrenceCode Class="CodeUnitValue">
+			<Code><![CDATA[1]]></Code>
+			<Unit Class="TimeUnits">MINUTE</Unit>
+		</RecurrenceCode>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Width>440</Width>
+		<Height>320</Height>
+		<BackgroundColor/>
+		<BorderColor/>
+		<ChartArea>
+			<XOffset>50</XOffset>
+			<YOffset>30</YOffset>
+			<Width>360</Width>
+			<Height>230</Height>
+			<BackgroundColor>-1</BackgroundColor>
+			<BorderColor>-16777216</BorderColor>
+			<GridColor>-12566464</GridColor>
+		</ChartArea>
+		<Legend>
+			<Place>SOUTH</Place>
+			<TextColor>-16777216</TextColor>
+			<Size>30</Size>
+		</Legend>
+		<Labels>
+			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+			<TextColor>-12566464</TextColor>
+		</Labels>
+		<ShowLegend>true</ShowLegend>
+		<TimeWindowsMovementType>MOVEMENT_WITH_TIME</TimeWindowsMovementType>
+		<TimeWindowUnits>MODEL_TIME_UNIT</TimeWindowUnits>
+		<TimeWindowExpression>100</TimeWindowExpression>
+		<DatasetExpression>
+			<Id>1745933806443</Id>
+			<Expression>my_dataset</Expression>
+			<Color>-32944</Color>
+			<Expression2>v_EVsOnTrip</Expression2>
+			<Expression2Flag>true</Expression2Flag>
+			<Title>On trip</Title>
+		</DatasetExpression>
+		<DatasetExpression>
+			<Id>1745933823247</Id>
+			<Expression>my_dataset1</Expression>
+			<Color>-13447886</Color>
+			<Expression2>v_EVsParkedNonCP</Expression2>
+			<Expression2Flag>true</Expression2Flag>
+			<Title>Parked not at charge point</Title>
+		</DatasetExpression>
+		<DatasetExpression>
+			<Id>1745933825284</Id>
+			<Expression>my_dataset2</Expression>
+			<Color>-9404272</Color>
+			<Expression2>v_EVsParkedAtCPCharging</Expression2>
+			<Expression2Flag>true</Expression2Flag>
+			<Title>Parked at charge point and charging</Title>
+		</DatasetExpression>
+		<DatasetExpression>
+			<Id>1745933925274</Id>
+			<Expression>my_dataset3</Expression>
+			<Color>-7667573</Color>
+			<Expression2>v_EVsParkedAtCPIdle</Expression2>
+			<Expression2Flag>true</Expression2Flag>
+			<Title>Parked at charge point and idle</Title>
+		</DatasetExpression>
+		<SamplesToKeep>10080</SamplesToKeep>
+		<VerScaleToExpression>1</VerScaleToExpression>
+		<VerScaleType>AUTO</VerScaleType>
+		<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
+	</TimeStackChart>
+</Presentation>

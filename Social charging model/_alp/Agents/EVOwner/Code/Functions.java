@@ -1,0 +1,5 @@
+double f_setSOC()
+{/*ALCODESTART::1745940903321*/
+
+/*ALCODEEND*/}
+
