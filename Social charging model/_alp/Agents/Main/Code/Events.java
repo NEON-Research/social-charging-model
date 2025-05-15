@@ -5,6 +5,14 @@ if(time() == 0){
 }
 
 f_triggerTrips();
+
+//Update charging
+for(EVOwner x : EVOwners){
+	if(x.v_status == PARKED_CHARGE_POINT_CHARGING){
+		x.f_chargeCar();
+	}
+}
+
 f_countTotals();
 
 //Update minute of week

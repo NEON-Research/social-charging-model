@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Experiments>
-	<SimulationExperiment ActiveObjectClassId="1743154070893">
+	<SimulationExperiment ActiveObjectClassId="1746024451522">
 		<Id>1743154070913</Id>
 		<Name><![CDATA[Simulation]]></Name>
 		<CommandLineArguments/>
-		<MaximumMemory>512</MaximumMemory>
+		<MaximumMemory>4096</MaximumMemory>
 		<RandomNumberGenerationType>fixedSeed</RandomNumberGenerationType>
 		<CustomGeneratorCode>new Random()</CustomGeneratorCode>
 		<SeedValue>1</SeedValue>
@@ -38,27 +38,14 @@
 				<Alignment>LEFT</Alignment>
 			</Text>
 		</Presentation>
-		<Parameters>
-			<Parameter>
-				<ParameterName>p_cars</ParameterName>
-			</Parameter>
-			<Parameter>
-				<ParameterName>p_parkingPlaces</ParameterName>
-			</Parameter>
-			<Parameter>
-				<ParameterName>p_chargePoints</ParameterName>
-			</Parameter>
-			<Parameter>
-				<ParameterName>p_shareEVs</ParameterName>
-			</Parameter>
-		</Parameters>
+		<Parameters/>
 		<PresentationProperties>
 			<EnableZoomAndPanning>true</EnableZoomAndPanning>
 			<ExecutionMode>realTimeScaled</ExecutionMode>
 			<Title>Social charging model : Simulation</Title>
 			<EnableDeveloperPanel>true</EnableDeveloperPanel>
 			<ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart>
-			<RealTimeScale>1.0</RealTimeScale>
+			<RealTimeScale>25.0</RealTimeScale>
 		</PresentationProperties>
 		<ModelTimeProperties>
 			<StopOption>Never</StopOption>

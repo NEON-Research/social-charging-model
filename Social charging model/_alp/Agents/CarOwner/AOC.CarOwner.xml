@@ -137,6 +137,23 @@
 				<ClassName>Main</ClassName>
 			</ActiveObjectClass>
 		</ContainerLink>
+		<ContainerLink>
+			<Id>1746024643059</Id>
+			<Name><![CDATA[startup_agent]]></Name>
+			<X>150</X>
+			<Y>-100</Y>
+			<Label>
+				<X>10</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<ActiveObjectClass>
+				<PackageName>social_charging_model</PackageName>
+				<ClassName>Startup_agent</ClassName>
+			</ActiveObjectClass>
+		</ContainerLink>
 	</ContainerLinks>
 	<Presentation>
 		<Level>

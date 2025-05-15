@@ -2,7 +2,11 @@
 <ActiveObjectClass>
 	<Id>1743154070893</Id>
 	<Name><![CDATA[Main]]></Name>
-	<StartupCode><![CDATA[f_initializeModel();]]></StartupCode>
+	<Import><![CDATA[import java.util.stream.Collectors;
+]]></Import>
+	<StartupCode><![CDATA[f_initializeModel();
+f_simulatePeriod(p_nbOfTimesteps);
+viewArea.navigateTo();]]></StartupCode>
 	<Generic>false</Generic>
 	<GenericParameter>
 		<Id>1743154070899</Id>
@@ -62,7 +66,7 @@
 		<MCode>10</MCode>
 	</EnvironmentProperties>
 	<DatasetsCreationProperties>
-		<AutoCreate>true</AutoCreate>
+		<AutoCreate>false</AutoCreate>
 		<OccurrenceAtTime>true</OccurrenceAtTime>
 		<OccurrenceDate>1743235200000</OccurrenceDate>
 		<OccurrenceTime Class="CodeUnitValue">
@@ -96,6 +100,216 @@
 	<Variables xmlns:al="http://anylogic.com"/>
 	<Events xmlns:al="http://anylogic.com"/>
 	<Functions xmlns:al="http://anylogic.com"/>
+	<AnalysisData>
+		<DataSet>
+			<Id>1746089839600</Id>
+			<Name><![CDATA[data_carsOnTrip]]></Name>
+			<X>400</X>
+			<Y>740</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>false</AutoUpdate>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1746172800000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+			<FreezeXAxis>true</FreezeXAxis>
+			<SamplesToKeep>525600</SamplesToKeep>
+		</DataSet>
+		<DataSet>
+			<Id>1746089852522</Id>
+			<Name><![CDATA[data_ICECarsParkedNonCP]]></Name>
+			<X>400</X>
+			<Y>760</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>false</AutoUpdate>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1746172800000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+			<FreezeXAxis>true</FreezeXAxis>
+			<SamplesToKeep>525600</SamplesToKeep>
+		</DataSet>
+		<DataSet>
+			<Id>1746089863759</Id>
+			<Name><![CDATA[data_EVsParkedNonCPChargingRequired]]></Name>
+			<X>400</X>
+			<Y>780</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>false</AutoUpdate>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1746172800000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+			<FreezeXAxis>true</FreezeXAxis>
+			<SamplesToKeep>525600</SamplesToKeep>
+		</DataSet>
+		<DataSet>
+			<Id>1746089877445</Id>
+			<Name><![CDATA[data_EVsParkedNonCPChargingNotRequired]]></Name>
+			<X>400</X>
+			<Y>800</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>false</AutoUpdate>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1746172800000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+			<FreezeXAxis>true</FreezeXAxis>
+			<SamplesToKeep>525600</SamplesToKeep>
+		</DataSet>
+		<DataSet>
+			<Id>1746089904125</Id>
+			<Name><![CDATA[data_EVsParkedAtCPCharging]]></Name>
+			<X>400</X>
+			<Y>820</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>false</AutoUpdate>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1746172800000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+			<FreezeXAxis>true</FreezeXAxis>
+			<SamplesToKeep>525600</SamplesToKeep>
+		</DataSet>
+		<DataSet>
+			<Id>1746089921755</Id>
+			<Name><![CDATA[data_EVsParkedAtCPIdle]]></Name>
+			<X>400</X>
+			<Y>840</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>false</AutoUpdate>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1746172800000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+			<FreezeXAxis>true</FreezeXAxis>
+			<SamplesToKeep>525600</SamplesToKeep>
+		</DataSet>
+		<DataSet>
+			<Id>1746092186888</Id>
+			<Name><![CDATA[data_CPOccupied]]></Name>
+			<X>400</X>
+			<Y>880</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>false</AutoUpdate>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1746172800000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+			<FreezeXAxis>true</FreezeXAxis>
+			<SamplesToKeep>525600</SamplesToKeep>
+		</DataSet>
+		<DataSet>
+			<Id>1746092200373</Id>
+			<Name><![CDATA[data_CPAvailable]]></Name>
+			<X>400</X>
+			<Y>900</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>false</AutoUpdate>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1746172800000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+			<FreezeXAxis>true</FreezeXAxis>
+			<SamplesToKeep>525600</SamplesToKeep>
+		</DataSet>
+	</AnalysisData>
 	<AgentLinks>
 		<AgentLink>
 			<Id>1743154070894</Id>
@@ -121,6 +335,25 @@
 			<LineArrowPosition>END</LineArrowPosition>
 		</AgentLink>
 	</AgentLinks>
+	<ContainerLinks>
+		<ContainerLink>
+			<Id>1746024643054</Id>
+			<Name><![CDATA[startup_agent]]></Name>
+			<X>50</X>
+			<Y>-100</Y>
+			<Label>
+				<X>10</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<ActiveObjectClass>
+				<PackageName>social_charging_model</PackageName>
+				<ClassName>Startup_agent</ClassName>
+			</ActiveObjectClass>
+		</ContainerLink>
+	</ContainerLinks>
 	<EmbeddedObjects xmlns:al="http://anylogic.com"/>
 	<Presentation>
 		<Level>
@@ -185,4 +418,22 @@
 			<Longitude>0.0</Longitude>
 		</EmbeddedObjectPresentation>
 	</Presentation>
+	<Areas>
+		<Area>
+			<Id>1746087455238</Id>
+			<Name><![CDATA[viewArea]]></Name>
+			<X>0</X>
+			<Y>0</Y>
+			<Label>
+				<X>0</X>
+				<Y>-10</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>false</ShowLabel>
+			<Title/>
+			<Width>1000</Width>
+			<Height>600</Height>
+		</Area>
+	</Areas>
 </ActiveObjectClass>

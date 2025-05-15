@@ -18,8 +18,12 @@
 					<Name><![CDATA[ON_TRIP]]></Name>
 				</Option>
 				<Option>
+					<Id>1746014658892</Id>
+					<Name><![CDATA[PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED]]></Name>
+				</Option>
+				<Option>
 					<Id>1745939345024</Id>
-					<Name><![CDATA[PARKED_NON_CHARGE_POINT]]></Name>
+					<Name><![CDATA[PARKED_NON_CHARGE_POINT_CHARGING_NOT_REQUIRED]]></Name>
 				</Option>
 				<Option>
 					<Id>1745939345025</Id>
@@ -28,6 +32,18 @@
 				<Option>
 					<Id>1745939345026</Id>
 					<Name><![CDATA[PARKED_CHARGE_POINT_IDLE]]></Name>
+				</Option>
+			</OptionList>
+			<OptionList>
+				<Id>1746018242293</Id>
+				<Name><![CDATA[CarType]]></Name>
+				<Option>
+					<Id>1746018242294</Id>
+					<Name><![CDATA[ICE]]></Name>
+				</Option>
+				<Option>
+					<Id>1746018242295</Id>
+					<Name><![CDATA[EV]]></Name>
 				</Option>
 			</OptionList>
 		</OptionLists>
@@ -86,10 +102,10 @@
 			</ImportSettings>
 			<ExportSettings/>
 		</Database>
-		<RunConfiguration ActiveObjectClassId="1743154070893">
+		<RunConfiguration ActiveObjectClassId="1746024451522">
 			<Id>1743154070922</Id>
 			<Name><![CDATA[RunConfiguration]]></Name>
-			<MaximumMemory>512</MaximumMemory>
+			<MaximumMemory>16384</MaximumMemory>
 			<ModelTimeProperties>
 				<StopOption>Stop at specified time</StopOption>
 				<InitialDate>1743120000000</InitialDate>
@@ -100,7 +116,7 @@
 			<AnimationProperties>
 				<StopNever>true</StopNever>
 				<ExecutionMode>realTimeScaled</ExecutionMode>
-				<RealTimeScale>1.0</RealTimeScale>
+				<RealTimeScale>25.0</RealTimeScale>
 				<EnableZoomAndPanning>true</EnableZoomAndPanning>
 				<EnableDeveloperPanel>false</EnableDeveloperPanel>
 				<ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart>
@@ -113,6 +129,10 @@
 				<Id>1745927664352</Id>
 				<Name><![CDATA[J_Trip]]></Name>
 			</JavaClass>
+			<JavaClass>
+				<Id>1746011695816</Id>
+				<Name><![CDATA[J_ChargePoint]]></Name>
+			</JavaClass>
 		</JavaClasses>
 		<RequiredLibraryReference>
 			<LibraryName>com.anylogic.libraries.modules.markup_descriptors</LibraryName>
@@ -120,5 +140,6 @@
 			<VersionMinor>0</VersionMinor>
 			<VersionBuild>0</VersionBuild>
 		</RequiredLibraryReference>
+		<CloudModelUuid>2ede84d6-4c25-4f24-8957-1c28222fa614</CloudModelUuid>
 	</Model>
 </AnyLogicWorkspace>

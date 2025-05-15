@@ -24,7 +24,7 @@ public class J_Trip {
      */
     public double getDepartureTime() { return departureTime; }
     public double getArrivalTime() { return arrivalTime; }
-    public double getDistrance_km() { return distance_km; }
+    public double getDistance_km() { return distance_km; }
     
     @Override
     public String toString() {
