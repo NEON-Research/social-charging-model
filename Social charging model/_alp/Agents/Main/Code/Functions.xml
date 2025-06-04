@@ -59,7 +59,7 @@
 		<Id>1745930872659</Id>
 		<Name><![CDATA[f_triggerTrips]]></Name>
 		<X>80</X>
-		<Y>1100</Y>
+		<Y>1120</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -75,7 +75,7 @@
 		<Id>1745939185407</Id>
 		<Name><![CDATA[f_countTotals]]></Name>
 		<X>80</X>
-		<Y>1180</Y>
+		<Y>1270</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -135,7 +135,7 @@
 		<Id>1746025438383</Id>
 		<Name><![CDATA[f_simulatePeriod]]></Name>
 		<X>70</X>
-		<Y>1080</Y>
+		<Y>1100</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -155,7 +155,7 @@
 		<Id>1746089953946</Id>
 		<Name><![CDATA[f_updateChart]]></Name>
 		<X>70</X>
-		<Y>1310</Y>
+		<Y>1400</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -171,7 +171,7 @@
 		<Id>1746090357452</Id>
 		<Name><![CDATA[f_endSimulationPeriod]]></Name>
 		<X>60</X>
-		<Y>1290</Y>
+		<Y>1380</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -187,7 +187,7 @@
 		<Id>1746096423531</Id>
 		<Name><![CDATA[f_writeResultsToExcel]]></Name>
 		<X>60</X>
-		<Y>1330</Y>
+		<Y>1420</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -207,7 +207,7 @@
 		<Id>1747135321123</Id>
 		<Name><![CDATA[f_checkAvailableChargePoints]]></Name>
 		<X>80</X>
-		<Y>1140</Y>
+		<Y>1160</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -223,7 +223,7 @@
 		<Id>1747135360798</Id>
 		<Name><![CDATA[f_chargeCars]]></Name>
 		<X>80</X>
-		<Y>1120</Y>
+		<Y>1140</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -236,10 +236,10 @@
 	<Function AccessType="default" StaticFunction="false">
 		<ReturnModificator>VOID</ReturnModificator>
 		<ReturnType>double</ReturnType>
-		<Id>1747140139549</Id>
-		<Name><![CDATA[f_prosocialChargingBehaviour]]></Name>
-		<X>80</X>
-		<Y>1160</Y>
+		<Id>1748942230602</Id>
+		<Name><![CDATA[f_simulateFirstWeekToGetInitialLocationCars]]></Name>
+		<X>70</X>
+		<Y>1060</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -247,5 +247,6 @@
 		<PublicFlag>false</PublicFlag>
 		<PresentationFlag>true</PresentationFlag>
 		<ShowLabel>true</ShowLabel>
+		<Body xmlns:al="http://anylogic.com"/>
 	</Function>
 </Functions>

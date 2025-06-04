@@ -81,3 +81,18 @@ if(currentStatus == PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED && v_status == PAR
 */
 /*ALCODEEND*/}
 
+double f_requestToMoveAVehicleFromChargePoint()
+{/*ALCODESTART::1748950054381*/
+
+/*ALCODEEND*/}
+
+double f_notifyChargePointAvailable()
+{/*ALCODESTART::1748950054518*/
+
+/*ALCODEEND*/}
+
+double f_movingVehicleFromChargePoint()
+{/*ALCODESTART::1748950054520*/
+
+/*ALCODEEND*/}
+

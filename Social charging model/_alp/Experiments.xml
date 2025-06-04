@@ -45,11 +45,11 @@
 			<Title>Social charging model : Simulation</Title>
 			<EnableDeveloperPanel>true</EnableDeveloperPanel>
 			<ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart>
-			<RealTimeScale>25.0</RealTimeScale>
+			<RealTimeScale>1.0</RealTimeScale>
 		</PresentationProperties>
 		<ModelTimeProperties>
 			<StopOption>Never</StopOption>
-			<InitialDate>1743120000000</InitialDate>
+			<InitialDate>1735689600000</InitialDate>
 			<InitialTime>0.0</InitialTime>
 			<FinalDate>1745798400000</FinalDate>
 			<FinalTime>100.0</FinalTime>

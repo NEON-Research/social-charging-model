@@ -31,6 +31,8 @@ int nbOfInputTrips = (int) selectFirstValue(int.class,
 //Create ICEs and EVs
 f_createICECarOwners(nbOfInputTrips);
 f_createEVOwners(nbOfInputTrips);
+
+f_simulateFirstWeekToGetInitialLocationCars();
 /*ALCODEEND*/}
 
 int f_initalizeMinuteOfWeek()
@@ -124,6 +126,7 @@ carOwner.f_initializeNextTrip(minuteOfWeek);
 double f_simulatePeriod(int nbOfTimesteps)
 {/*ALCODESTART::1746025438383*/
 v_timestep = 0;
+v_hourOfDay = 0;
 
 //Trigger over timesteps
 for(int i=0; i < nbOfTimesteps; i++){
@@ -146,7 +149,7 @@ for(int i=0; i < nbOfTimesteps; i++){
 	
 	//4. Count totals
 	f_countTotals();
-	
+		
 	v_timestep++;
     v_hourOfDay = (v_timestep * p_timestep_minutes / 60.0) % 24;
 }
@@ -254,8 +257,35 @@ for(EVOwner x : EVOwners){
 }
 /*ALCODEEND*/}
 
-double f_prosocialChargingBehaviour()
-{/*ALCODESTART::1747140139549*/
+double f_simulateFirstWeekToGetInitialLocationCars()
+{/*ALCODESTART::1748942230602*/
+v_timestep = 0;
+int minutesPerWeek = 7 * 24 * 60;
+double timestepsInWeek = (double) minutesPerWeek / p_timestep_minutes;
 
+//Trigger over timesteps
+for(int i=0; i < timestepsInWeek; i++){
+	
+	//1. Trigger trips	
+	f_triggerTrips();
+		
+	//2. Update charging
+	f_chargeCars();
+	
+	//3. Check if CP have become available for waiting EVs
+	if(p_checkCPAvailability){
+		f_checkAvailableChargePoints();
+	}
+	
+	//4. prosocial charging behaviour
+	if(p_hasProsocialChargingBehaviour){
+		f_prosocialChargingBehaviour();
+	}
+
+	v_timestep++;
+    v_hourOfDay = (v_timestep * p_timestep_minutes / 60.0) % 24;
+}
+
+traceln("Finished initial week for division car location");
 /*ALCODEEND*/}
 
