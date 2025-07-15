@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ModelResources>
 	<Resource>
+		<Id>1743154059999</Id>
 		<Path>AlbatrossProcessedVehicleTrips.xlsx</Path>
 		<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		<Location>FILE_SYSTEM</Location>
 	</Resource>
 	<Resource>
+		<Id>1743154059998</Id>
 		<Path>Export_ModelData.xlsx</Path>
+		<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		<Location>FILE_SYSTEM</Location>
+	</Resource>
+	<Resource>
+		<Id>1752583427579</Id>
+		<Path>social_psychological_variables.xlsx</Path>
 		<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		<Location>FILE_SYSTEM</Location>
 	</Resource>

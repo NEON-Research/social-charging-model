@@ -1,0 +1,4143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AnyLogicWorkspace splitVersion="1"
+                   WorkspaceVersion="1.9"
+                   AnyLogicVersion="8.9.2.202410172110"
+                   AlpVersion="8.9.2">
+	<Model xmlns:al="http://anylogic.com">
+		<Id>1743154070890</Id>
+		<Name>Social charging model</Name>
+		<EngineVersion>6</EngineVersion>
+		<JavaPackageName>social_charging_model</JavaPackageName>
+		<ModelTimeUnit>Hour</ModelTimeUnit>
+		<OptionLists>
+			<OptionList>
+				<Id>1745939345022</Id>
+				<Name>Status</Name>
+				<Option>
+					<Id>1745939345023</Id>
+					<Name>ON_TRIP</Name>
+				</Option>
+				<Option>
+					<Id>1746014658892</Id>
+					<Name>PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED</Name>
+				</Option>
+				<Option>
+					<Id>1745939345024</Id>
+					<Name>PARKED_NON_CHARGE_POINT_CHARGING_NOT_REQUIRED</Name>
+				</Option>
+				<Option>
+					<Id>1745939345025</Id>
+					<Name>PARKED_CHARGE_POINT_CHARGING</Name>
+				</Option>
+				<Option>
+					<Id>1745939345026</Id>
+					<Name>PARKED_CHARGE_POINT_IDLE</Name>
+				</Option>
+			</OptionList>
+			<OptionList>
+				<Id>1746018242293</Id>
+				<Name>CarType</Name>
+				<Option>
+					<Id>1746018242294</Id>
+					<Name>ICE</Name>
+				</Option>
+				<Option>
+					<Id>1746018242295</Id>
+					<Name>EV</Name>
+				</Option>
+			</OptionList>
+		</OptionLists>
+		<Folders/>
+		<ActiveObjectClasses>
+			<ActiveObjectClass>
+				<Id>1745940665088</Id>
+				<Name>CarOwner</Name>
+				<Generic>false</Generic>
+				<GenericParameter>
+					<Id>1745940665094</Id>
+					<Name>1745940665094</Name>
+					<GenericParameterValue Class="CodeValue">
+						<Code>T extends Agent</Code>
+					</GenericParameterValue>
+					<GenericParameterLabel>Generic parameter:</GenericParameterLabel>
+				</GenericParameter>
+				<FlowChartsUsage>ENTITY</FlowChartsUsage>
+				<SamplesToKeep>100</SamplesToKeep>
+				<LimitNumberOfArrayElements>false</LimitNumberOfArrayElements>
+				<ElementsLimitValue>100</ElementsLimitValue>
+				<MakeDefaultViewArea>true</MakeDefaultViewArea>
+				<SceneGridColor/>
+				<SceneBackgroundColor/>
+				<SceneSkybox>null</SceneSkybox>
+				<AgentProperties>
+					<EnvironmentDefinesInitialLocation>true</EnvironmentDefinesInitialLocation>
+					<RotateAnimationTowardsMovement>true</RotateAnimationTowardsMovement>
+					<RotateAnimationVertically>false</RotateAnimationVertically>
+					<VelocityCode Class="CodeUnitValue">
+						<Code>10</Code>
+						<Unit Class="SpeedUnits">MPS</Unit>
+					</VelocityCode>
+					<PhysicalLength Class="CodeUnitValue">
+						<Code>1</Code>
+						<Unit Class="LengthUnits">METER</Unit>
+					</PhysicalLength>
+					<PhysicalWidth Class="CodeUnitValue">
+						<Code>1</Code>
+						<Unit Class="LengthUnits">METER</Unit>
+					</PhysicalWidth>
+					<PhysicalHeight Class="CodeUnitValue">
+						<Code>1</Code>
+						<Unit Class="LengthUnits">METER</Unit>
+					</PhysicalHeight>
+				</AgentProperties>
+				<EnvironmentProperties>
+					<EnableSteps>false</EnableSteps>
+					<StepDurationCode Class="CodeUnitValue">
+						<Code>1.0</Code>
+						<Unit Class="TimeUnits">SECOND</Unit>
+					</StepDurationCode>
+					<SpaceType>CONTINUOUS</SpaceType>
+					<WidthCode>500</WidthCode>
+					<HeightCode>500</HeightCode>
+					<ZHeightCode>0</ZHeightCode>
+					<ColumnsCountCode>100</ColumnsCountCode>
+					<RowsCountCode>100</RowsCountCode>
+					<NeigborhoodType>MOORE</NeigborhoodType>
+					<LayoutType>USER_DEF</LayoutType>
+					<NetworkType>USER_DEF</NetworkType>
+					<ConnectionsPerAgentCode>2</ConnectionsPerAgentCode>
+					<ConnectionsRangeCode>50</ConnectionsRangeCode>
+					<NeighborLinkFractionCode>0.95</NeighborLinkFractionCode>
+					<MCode>10</MCode>
+				</EnvironmentProperties>
+				<DatasetsCreationProperties>
+					<AutoCreate>true</AutoCreate>
+					<OccurrenceAtTime>true</OccurrenceAtTime>
+					<OccurrenceDate>1746000000000</OccurrenceDate>
+					<OccurrenceTime Class="CodeUnitValue">
+						<Code>0</Code>
+						<Unit Class="TimeUnits">HOUR</Unit>
+					</OccurrenceTime>
+					<RecurrenceCode Class="CodeUnitValue">
+						<Code>1</Code>
+						<Unit Class="TimeUnits">HOUR</Unit>
+					</RecurrenceCode>
+				</DatasetsCreationProperties>
+				<ScaleRuler>
+					<Id>1745940665091</Id>
+					<Name>scale</Name>
+					<X>0</X>
+					<Y>-150</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Length>100</Length>
+					<Rotation>0</Rotation>
+					<ScaleType>BASED_ON_LENGTH</ScaleType>
+					<ModelLength>10</ModelLength>
+					<LengthUnits>METER</LengthUnits>
+					<Scale>10</Scale>
+					<InheritedFromParentAgentType>true</InheritedFromParentAgentType>
+				</ScaleRuler>
+				<CurrentLevel>1745940665095</CurrentLevel>
+				<ConnectionsId>1745940665089</ConnectionsId>
+				<Variables>
+					<Variable Class="PlainVariable">
+						<Id>1745940705458</Id>
+						<Name>v_nextTrip</Name>
+						<X>100</X>
+						<Y>240</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>J_Trip</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1745940705460</Id>
+						<Name>v_status</Name>
+						<X>100</X>
+						<Y>310</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>Status</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1745940705462</Id>
+						<Name>v_km_driven</Name>
+						<X>100</X>
+						<Y>280</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1746018217670</Id>
+						<Name>v_type</Name>
+						<X>100</X>
+						<Y>370</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>CarType</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="CollectionVariable">
+						<Id>1745940705450</Id>
+						<Name>c_tripSchedule</Name>
+						<X>100</X>
+						<Y>70</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+							<CollectionClass>ArrayList</CollectionClass>
+							<ElementClass>J_Trip</ElementClass>
+							<ValueElementClass>String</ValueElementClass>
+						</Properties>
+					</Variable>
+				</Variables>
+				<Functions>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1745940705452</Id>
+						<Name>f_initializeNextTrip</Name>
+						<X>100</X>
+						<Y>120</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Parameter>
+							<Name>minuteOfWeek</Name>
+							<Type>int</Type>
+						</Parameter>
+						<Body>c_tripSchedule.sort(Comparator.comparing(J_Trip::getDepartureTime));&#xD;
+&#xD;
+v_nextTrip = null;&#xD;
+&#xD;
+for (J_Trip trip : c_tripSchedule) {&#xD;
+    if (trip.getDepartureTime() &gt; minuteOfWeek) {&#xD;
+        v_nextTrip = trip;&#xD;
+        break;&#xD;
+    }&#xD;
+}&#xD;
+&#xD;
+// If no future trip is found, wrap around to the first trip in the schedule&#xD;
+if (v_nextTrip == null &amp;&amp; !c_tripSchedule.isEmpty()) {&#xD;
+    v_nextTrip = c_tripSchedule.get(0);&#xD;
+}&#xD;
+&#xD;
+text_nextTrip.setText("Next trip = " + v_nextTrip.toString());&#xD;
+&#xD;
+f_initializeStatus();</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1745940705454</Id>
+						<Name>f_updateTripStatus</Name>
+						<X>100</X>
+						<Y>150</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Parameter>
+							<Name>timestepStart</Name>
+							<Type>double</Type>
+						</Parameter>
+						<Parameter>
+							<Name>minutesPerTimestep</Name>
+							<Type>double</Type>
+						</Parameter>
+						<Body>//Start trip in timestep?&#xD;
+int departureTime = (int) v_nextTrip.getDepartureTime();&#xD;
+boolean departureInTimestep = f_isInCurrentTimestep(departureTime, timestepStart, minutesPerTimestep);&#xD;
+&#xD;
+//Start if in timestep&#xD;
+if( departureInTimestep ){&#xD;
+	//for EVs&#xD;
+    if (v_type == EV) {&#xD;
+    	if(v_status == PARKED_CHARGE_POINT_CHARGING || v_status == PARKED_CHARGE_POINT_IDLE){&#xD;
+    		main.v_chargePointAvailable++;&#xD;
+    	}&#xD;
+    }&#xD;
+    v_status = ON_TRIP;&#xD;
+}&#xD;
+&#xD;
+//Finish trip&#xD;
+int arrivalTime = (int) v_nextTrip.getArrivalTime();&#xD;
+boolean arrivalInTimestep = f_isInCurrentTimestep(arrivalTime, timestepStart, minutesPerTimestep);&#xD;
+if (arrivalInTimestep) {&#xD;
+    v_km_driven += v_nextTrip.getDistance_km();&#xD;
+&#xD;
+    //for EVs&#xD;
+    if (v_type == EV) {&#xD;
+    	//this.f_updateChargingStatus(v_nextTrip); // Cast and call the function&#xD;
+        ((EVOwner) this).f_updateSOC(v_nextTrip.getDistance_km()); // Cast and call the function&#xD;
+    	((EVOwner) this).f_setParkingStatus();&#xD;
+    }&#xD;
+    else {&#xD;
+    	v_status = PARKED_NON_CHARGE_POINT_CHARGING_NOT_REQUIRED;&#xD;
+    }&#xD;
+&#xD;
+	//New next trip&#xD;
+    f_updateNextTrip();&#xD;
+}&#xD;
+</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1745940705456</Id>
+						<Name>f_updateNextTrip</Name>
+						<X>110</X>
+						<Y>170</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Body>int currentIndex = c_tripSchedule.indexOf(v_nextTrip);&#xD;
+int nextIndex = (currentIndex + 1) % c_tripSchedule.size();&#xD;
+v_nextTrip = c_tripSchedule.get(nextIndex);&#xD;
+&#xD;
+text_nextTrip.setText("Next trip = " + v_nextTrip.toString());</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1746001340956</Id>
+						<Name>f_initializeStatus</Name>
+						<X>100</X>
+						<Y>340</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Body>v_status = PARKED_NON_CHARGE_POINT_CHARGING_NOT_REQUIRED;</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+						<ReturnType>boolean</ReturnType>
+						<Id>1746027432257</Id>
+						<Name>f_isInCurrentTimestep</Name>
+						<X>110</X>
+						<Y>190</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Parameter>
+							<Name>timeToCheck</Name>
+							<Type>int</Type>
+						</Parameter>
+						<Parameter>
+							<Name>timestepStartMinuteOfWeek</Name>
+							<Type>double</Type>
+						</Parameter>
+						<Parameter>
+							<Name>minutesPerTimestep</Name>
+							<Type>double</Type>
+						</Parameter>
+						<Body>double timestepEndMinuteOfWeek = (timestepStartMinuteOfWeek + minutesPerTimestep) % 10080;&#xD;
+&#xD;
+if (timestepStartMinuteOfWeek &lt;= timestepEndMinuteOfWeek) {&#xD;
+	// Normal case: no wrap-around&#xD;
+	return timeToCheck &gt;= timestepStartMinuteOfWeek &amp;&amp; timeToCheck &lt; timestepEndMinuteOfWeek;&#xD;
+} else {&#xD;
+	// Wrap-around case: timestep spans end of week&#xD;
+	return timeToCheck &gt;= timestepStartMinuteOfWeek || timeToCheck &lt; timestepEndMinuteOfWeek;&#xD;
+}&#xD;
+</Body>
+					</Function>
+				</Functions>
+				<AgentLinks>
+					<AgentLink>
+						<Id>1745940665089</Id>
+						<Name>connections</Name>
+						<X>50</X>
+						<Y>-50</Y>
+						<Label>
+							<X>15</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<HandleReceiveInConnections>false</HandleReceiveInConnections>
+						<AgentLinkType>COLLECTION_OF_LINKS</AgentLinkType>
+						<AgentLinkBidirectional>true</AgentLinkBidirectional>
+						<MessageType>Object</MessageType>
+						<LineStyle>SOLID</LineStyle>
+						<LineWidth>1</LineWidth>
+						<LineColor>-16777216</LineColor>
+						<LineZOrder>UNDER_AGENTS</LineZOrder>
+						<LineArrow>NONE</LineArrow>
+						<LineArrowPosition>END</LineArrowPosition>
+					</AgentLink>
+				</AgentLinks>
+				<ContainerLinks>
+					<ContainerLink>
+						<Id>1745940691748</Id>
+						<Name>main</Name>
+						<X>50</X>
+						<Y>-100</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<ActiveObjectClass>
+							<PackageName>social_charging_model</PackageName>
+							<ClassName>Main</ClassName>
+						</ActiveObjectClass>
+					</ContainerLink>
+					<ContainerLink>
+						<Id>1746024643059</Id>
+						<Name>startup_agent</Name>
+						<X>150</X>
+						<Y>-100</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<ActiveObjectClass>
+							<PackageName>social_charging_model</PackageName>
+							<ClassName>Startup_agent</ClassName>
+						</ActiveObjectClass>
+					</ContainerLink>
+				</ContainerLinks>
+				<Presentation>
+					<Level>
+						<Id>1745940665095</Id>
+						<Name>level</Name>
+						<X>0</X>
+						<Y>0</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>true</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>false</ShowLabel>
+						<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+						<Z>0</Z>
+						<LevelVisibility>DIM_NON_CURRENT</LevelVisibility>
+						<Presentation>
+							<Text>
+								<Id>1745940705446</Id>
+								<Name>text_nextTrip</Name>
+								<X>100</X>
+								<Y>410</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>false</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>text</Text>
+								<Font>
+									<Name>SansSerif</Name>
+									<Size>18</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+						</Presentation>
+					</Level>
+				</Presentation>
+			</ActiveObjectClass>
+			<ActiveObjectClass>
+				<Id>1745925517345</Id>
+				<Name>EVOwner</Name>
+				<ExtendsReference>
+					<PackageName>social_charging_model</PackageName>
+					<ClassName>CarOwner</ClassName>
+				</ExtendsReference>
+				<Generic>false</Generic>
+				<GenericParameter>
+					<Id>1745925517351</Id>
+					<Name>1745925517351</Name>
+					<GenericParameterValue Class="CodeValue">
+						<Code>T extends Agent</Code>
+					</GenericParameterValue>
+					<GenericParameterLabel>Generic parameter:</GenericParameterLabel>
+				</GenericParameter>
+				<FlowChartsUsage>ENTITY</FlowChartsUsage>
+				<SamplesToKeep>100</SamplesToKeep>
+				<LimitNumberOfArrayElements>false</LimitNumberOfArrayElements>
+				<ElementsLimitValue>100</ElementsLimitValue>
+				<MakeDefaultViewArea>true</MakeDefaultViewArea>
+				<SceneGridColor/>
+				<SceneBackgroundColor/>
+				<SceneSkybox>null</SceneSkybox>
+				<AgentProperties>
+					<EnvironmentDefinesInitialLocation>true</EnvironmentDefinesInitialLocation>
+					<RotateAnimationTowardsMovement>true</RotateAnimationTowardsMovement>
+					<RotateAnimationVertically>false</RotateAnimationVertically>
+					<VelocityCode Class="CodeUnitValue">
+						<Code>10</Code>
+						<Unit Class="SpeedUnits">MPS</Unit>
+					</VelocityCode>
+					<PhysicalLength Class="CodeUnitValue">
+						<Code>1</Code>
+						<Unit Class="LengthUnits">METER</Unit>
+					</PhysicalLength>
+					<PhysicalWidth Class="CodeUnitValue">
+						<Code>1</Code>
+						<Unit Class="LengthUnits">METER</Unit>
+					</PhysicalWidth>
+					<PhysicalHeight Class="CodeUnitValue">
+						<Code>1</Code>
+						<Unit Class="LengthUnits">METER</Unit>
+					</PhysicalHeight>
+				</AgentProperties>
+				<EnvironmentProperties>
+					<EnableSteps>false</EnableSteps>
+					<StepDurationCode Class="CodeUnitValue">
+						<Code>1.0</Code>
+						<Unit Class="TimeUnits">SECOND</Unit>
+					</StepDurationCode>
+					<SpaceType>CONTINUOUS</SpaceType>
+					<WidthCode>500</WidthCode>
+					<HeightCode>500</HeightCode>
+					<ZHeightCode>0</ZHeightCode>
+					<ColumnsCountCode>100</ColumnsCountCode>
+					<RowsCountCode>100</RowsCountCode>
+					<NeigborhoodType>MOORE</NeigborhoodType>
+					<LayoutType>USER_DEF</LayoutType>
+					<NetworkType>USER_DEF</NetworkType>
+					<ConnectionsPerAgentCode>2</ConnectionsPerAgentCode>
+					<ConnectionsRangeCode>50</ConnectionsRangeCode>
+					<NeighborLinkFractionCode>0.95</NeighborLinkFractionCode>
+					<MCode>10</MCode>
+				</EnvironmentProperties>
+				<DatasetsCreationProperties>
+					<AutoCreate>true</AutoCreate>
+					<OccurrenceAtTime>true</OccurrenceAtTime>
+					<OccurrenceDate>1746000000000</OccurrenceDate>
+					<OccurrenceTime Class="CodeUnitValue">
+						<Code>0</Code>
+						<Unit Class="TimeUnits">HOUR</Unit>
+					</OccurrenceTime>
+					<RecurrenceCode Class="CodeUnitValue">
+						<Code>1</Code>
+						<Unit Class="TimeUnits">HOUR</Unit>
+					</RecurrenceCode>
+				</DatasetsCreationProperties>
+				<ScaleRuler>
+					<Id>1745925517348</Id>
+					<Name>scale</Name>
+					<X>0</X>
+					<Y>-150</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Length>100</Length>
+					<Rotation>0</Rotation>
+					<ScaleType>BASED_ON_LENGTH</ScaleType>
+					<ModelLength>10</ModelLength>
+					<LengthUnits>METER</LengthUnits>
+					<Scale>10</Scale>
+					<InheritedFromParentAgentType>true</InheritedFromParentAgentType>
+				</ScaleRuler>
+				<CurrentLevel>1745925517352</CurrentLevel>
+				<ConnectionsId>1745925517346</ConnectionsId>
+				<Variables>
+					<Variable Class="PlainVariable">
+						<Id>1745940748198</Id>
+						<Name>v_EVType</Name>
+						<X>300</X>
+						<Y>70</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1745940755041</Id>
+						<Name>v_batteryCapacity_kWh</Name>
+						<X>300</X>
+						<Y>100</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1745940859598</Id>
+						<Name>v_soc</Name>
+						<X>300</X>
+						<Y>190</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1745940872204</Id>
+						<Name>v_electricityConsumption_kWhperKm</Name>
+						<X>300</X>
+						<Y>120</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1746011357593</Id>
+						<Name>v_electricityInBattery_kWh</Name>
+						<X>300</X>
+						<Y>170</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1746012725326</Id>
+						<Name>v_socChargingThreshold</Name>
+						<X>300</X>
+						<Y>140</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0.2</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1746022880949</Id>
+						<Name>v_outOfModelCharge_kWh</Name>
+						<X>300</X>
+						<Y>215</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+						</Properties>
+					</Variable>
+				</Variables>
+				<Functions>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1746011747637</Id>
+						<Name>f_findChargePoint</Name>
+						<ExcludeFromBuild>true</ExcludeFromBuild>
+						<X>300</X>
+						<Y>330</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Body>//Charge car if below threshold&#xD;
+if(main.v_chargePointAvailable &gt; 0){&#xD;
+	f_chargeCar();&#xD;
+}&#xD;
+&#xD;
+&#xD;
+if(v_soc &lt; 0){&#xD;
+	traceln("ERROR - soc in car " + this.getIndex() + " is below 0 at " + v_soc);&#xD;
+}</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1746011766273</Id>
+						<Name>f_chargeCar</Name>
+						<X>300</X>
+						<Y>305</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Body>if(v_soc &lt; 1){&#xD;
+	double timestepsPerHour = 60 / main.p_timestep_minutes;&#xD;
+	double charge_kWhperTimestep = main.p_chargingPower_kW / timestepsPerHour;&#xD;
+	v_electricityInBattery_kWh += charge_kWhperTimestep;&#xD;
+	//traceln("EV " + this.getIndex() + " is charging in status " + v_status + ", current charge " + charge_kWhperTimestep + " current bat cap "+ v_electricityInBattery_kWh + "kWh, cap " + v_batteryCapacity_kWh + "kwh and soc " + v_soc);&#xD;
+	if( v_electricityInBattery_kWh &gt;= v_batteryCapacity_kWh){&#xD;
+		v_electricityInBattery_kWh = v_batteryCapacity_kWh;&#xD;
+		v_status = PARKED_CHARGE_POINT_IDLE;&#xD;
+	}&#xD;
+}&#xD;
+&#xD;
+v_soc = v_electricityInBattery_kWh / v_batteryCapacity_kWh;</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1746011780748</Id>
+						<Name>f_updateSOC</Name>
+						<X>300</X>
+						<Y>250</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Parameter>
+							<Name>tripDistance_km</Name>
+							<Type>double</Type>
+						</Parameter>
+						<Body>//Update SOC&#xD;
+double electricityConsumed_kWh = tripDistance_km;&#xD;
+v_electricityInBattery_kWh -= electricityConsumed_kWh;&#xD;
+v_soc = v_electricityInBattery_kWh / v_batteryCapacity_kWh;&#xD;
+if(v_soc &lt; 0){&#xD;
+	double outOfModelCharging_soc = abs(v_soc) + 0.1; //Cars charge to 10% when doing fast charging outside of model&#xD;
+	v_outOfModelCharge_kWh += (outOfModelCharging_soc * v_batteryCapacity_kWh);&#xD;
+	v_electricityInBattery_kWh += v_outOfModelCharge_kWh;&#xD;
+	v_soc = v_electricityInBattery_kWh / v_batteryCapacity_kWh;&#xD;
+	//traceln("ERROR - soc in car " + this.getIndex() + " is below 0 at " + v_soc);&#xD;
+}&#xD;
+&#xD;
+&#xD;
+</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1747136105778</Id>
+						<Name>f_setParkingStatus</Name>
+						<X>300</X>
+						<Y>270</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Body>Status currentStatus = v_status;&#xD;
+&#xD;
+boolean wantsToCharge = false;&#xD;
+boolean chargePointAvailable = false;&#xD;
+&#xD;
+//Charge car if below threshold&#xD;
+if( v_soc &lt; v_socChargingThreshold){&#xD;
+	wantsToCharge = true;&#xD;
+}&#xD;
+&#xD;
+//Check available charge points&#xD;
+if(main.v_chargePointAvailable &gt; 0){&#xD;
+	chargePointAvailable = true;&#xD;
+}&#xD;
+&#xD;
+//Update status&#xD;
+if(wantsToCharge &amp;&amp; chargePointAvailable){&#xD;
+	v_status = PARKED_CHARGE_POINT_CHARGING;&#xD;
+	main.v_chargePointAvailable--;&#xD;
+}&#xD;
+else if(wantsToCharge){&#xD;
+	v_status = PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED;&#xD;
+}&#xD;
+else {&#xD;
+	v_status = PARKED_NON_CHARGE_POINT_CHARGING_NOT_REQUIRED;&#xD;
+}&#xD;
+&#xD;
+/*&#xD;
+if(currentStatus == PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED &amp;&amp; v_status == PARKED_CHARGE_POINT_CHARGING){&#xD;
+	traceln("EV " + this.getIndex() + " has moved from parking to charge point and started charging");&#xD;
+}&#xD;
+*/</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1748950054381</Id>
+						<Name>f_requestToMoveAVehicleFromChargePoint</Name>
+						<X>320</X>
+						<Y>370</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1748950054518</Id>
+						<Name>f_notifyChargePointAvailable</Name>
+						<X>320</X>
+						<Y>390</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1748950054520</Id>
+						<Name>f_movingVehicleFromChargePoint</Name>
+						<X>320</X>
+						<Y>410</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+					</Function>
+				</Functions>
+				<AgentLinks>
+					<AgentLink>
+						<Id>1745925517346</Id>
+						<Name>connections</Name>
+						<X>50</X>
+						<Y>-50</Y>
+						<Label>
+							<X>15</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<HandleReceiveInConnections>false</HandleReceiveInConnections>
+						<AgentLinkType>COLLECTION_OF_LINKS</AgentLinkType>
+						<AgentLinkBidirectional>true</AgentLinkBidirectional>
+						<MessageType>Object</MessageType>
+						<LineStyle>SOLID</LineStyle>
+						<LineWidth>1</LineWidth>
+						<LineColor>-16777216</LineColor>
+						<LineZOrder>UNDER_AGENTS</LineZOrder>
+						<LineArrow>NONE</LineArrow>
+						<LineArrowPosition>END</LineArrowPosition>
+					</AgentLink>
+				</AgentLinks>
+				<ContainerLinks>
+					<ContainerLink>
+						<Id>1745925568510</Id>
+						<Name>main</Name>
+						<X>50</X>
+						<Y>-100</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<ActiveObjectClass>
+							<PackageName>social_charging_model</PackageName>
+							<ClassName>Main</ClassName>
+						</ActiveObjectClass>
+					</ContainerLink>
+					<ContainerLink>
+						<Id>1746024643062</Id>
+						<Name>startup_agent</Name>
+						<ExcludeFromBuild>true</ExcludeFromBuild>
+						<X>150</X>
+						<Y>-100</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<ActiveObjectClass>
+							<PackageName>social_charging_model</PackageName>
+							<ClassName>Startup_agent</ClassName>
+						</ActiveObjectClass>
+					</ContainerLink>
+				</ContainerLinks>
+				<Presentation>
+					<Level>
+						<Id>1745925517352</Id>
+						<Name>level</Name>
+						<X>0</X>
+						<Y>0</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>true</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>false</ShowLabel>
+						<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+						<Z>0</Z>
+						<LevelVisibility>DIM_NON_CURRENT</LevelVisibility>
+					</Level>
+				</Presentation>
+			</ActiveObjectClass>
+			<ActiveObjectClass>
+				<Id>1743154070893</Id>
+				<Name>Main</Name>
+				<Import>import java.util.stream.Collectors;
+</Import>
+				<StartupCode>f_initializeModel();
+f_simulatePeriod(p_nbOfTimesteps);
+viewArea.navigateTo();</StartupCode>
+				<Generic>false</Generic>
+				<GenericParameter>
+					<Id>1743154070899</Id>
+					<Name>1743154070899</Name>
+					<GenericParameterValue Class="CodeValue">
+						<Code>T extends Agent</Code>
+					</GenericParameterValue>
+					<GenericParameterLabel>Generic parameter:</GenericParameterLabel>
+				</GenericParameter>
+				<FlowChartsUsage>ENTITY</FlowChartsUsage>
+				<SamplesToKeep>100</SamplesToKeep>
+				<LimitNumberOfArrayElements>false</LimitNumberOfArrayElements>
+				<ElementsLimitValue>100</ElementsLimitValue>
+				<MakeDefaultViewArea>true</MakeDefaultViewArea>
+				<SceneGridColor/>
+				<SceneBackgroundColor/>
+				<SceneSkybox>null</SceneSkybox>
+				<AgentProperties>
+					<EnvironmentDefinesInitialLocation>true</EnvironmentDefinesInitialLocation>
+					<RotateAnimationTowardsMovement>true</RotateAnimationTowardsMovement>
+					<RotateAnimationVertically>false</RotateAnimationVertically>
+					<VelocityCode Class="CodeUnitValue">
+						<Code>10</Code>
+						<Unit Class="SpeedUnits">MPS</Unit>
+					</VelocityCode>
+					<PhysicalLength Class="CodeUnitValue">
+						<Code>1</Code>
+						<Unit Class="LengthUnits">METER</Unit>
+					</PhysicalLength>
+					<PhysicalWidth Class="CodeUnitValue">
+						<Code>1</Code>
+						<Unit Class="LengthUnits">METER</Unit>
+					</PhysicalWidth>
+					<PhysicalHeight Class="CodeUnitValue">
+						<Code>1</Code>
+						<Unit Class="LengthUnits">METER</Unit>
+					</PhysicalHeight>
+				</AgentProperties>
+				<EnvironmentProperties>
+					<EnableSteps>false</EnableSteps>
+					<StepDurationCode Class="CodeUnitValue">
+						<Code>1.0</Code>
+						<Unit Class="TimeUnits">SECOND</Unit>
+					</StepDurationCode>
+					<SpaceType>CONTINUOUS</SpaceType>
+					<WidthCode>500</WidthCode>
+					<HeightCode>500</HeightCode>
+					<ZHeightCode>0</ZHeightCode>
+					<ColumnsCountCode>100</ColumnsCountCode>
+					<RowsCountCode>100</RowsCountCode>
+					<NeigborhoodType>MOORE</NeigborhoodType>
+					<LayoutType>USER_DEF</LayoutType>
+					<NetworkType>USER_DEF</NetworkType>
+					<ConnectionsPerAgentCode>2</ConnectionsPerAgentCode>
+					<ConnectionsRangeCode>50</ConnectionsRangeCode>
+					<NeighborLinkFractionCode>0.95</NeighborLinkFractionCode>
+					<MCode>10</MCode>
+				</EnvironmentProperties>
+				<DatasetsCreationProperties>
+					<AutoCreate>false</AutoCreate>
+					<OccurrenceAtTime>true</OccurrenceAtTime>
+					<OccurrenceDate>1743235200000</OccurrenceDate>
+					<OccurrenceTime Class="CodeUnitValue">
+						<Code>0</Code>
+						<Unit Class="TimeUnits">HOUR</Unit>
+					</OccurrenceTime>
+					<RecurrenceCode Class="CodeUnitValue">
+						<Code>1</Code>
+						<Unit Class="TimeUnits">HOUR</Unit>
+					</RecurrenceCode>
+				</DatasetsCreationProperties>
+				<ScaleRuler>
+					<Id>1743154070896</Id>
+					<Name>scale</Name>
+					<X>0</X>
+					<Y>-150</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Length>100</Length>
+					<Rotation>0</Rotation>
+					<ScaleType>BASED_ON_LENGTH</ScaleType>
+					<ModelLength>10</ModelLength>
+					<LengthUnits>METER</LengthUnits>
+					<Scale>10</Scale>
+					<InheritedFromParentAgentType>true</InheritedFromParentAgentType>
+				</ScaleRuler>
+				<CurrentLevel>1743154070900</CurrentLevel>
+				<ConnectionsId>1743154070894</ConnectionsId>
+				<Variables>
+					<Variable Class="PlainVariable">
+						<Id>1745930227564</Id>
+						<Name>v_hourOfDay</Name>
+						<X>50</X>
+						<Y>280</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1745939158262</Id>
+						<Name>v_EVsParkedAtCPIdle</Name>
+						<X>60</X>
+						<Y>850</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1745939168906</Id>
+						<Name>v_EVsParkedAtCPCharging</Name>
+						<X>60</X>
+						<Y>830</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1745939173737</Id>
+						<Name>v_EVsParkedNonCPChargingRequired</Name>
+						<X>60</X>
+						<Y>790</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1745939179719</Id>
+						<Name>v_carsOnTrip</Name>
+						<X>60</X>
+						<Y>750</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1746012695970</Id>
+						<Name>v_chargePointAvailable</Name>
+						<X>70</X>
+						<Y>1310</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>int</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1746015323562</Id>
+						<Name>v_EVsParkedNonCPChargingNotRequired</Name>
+						<X>60</X>
+						<Y>810</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1746015441342</Id>
+						<Name>v_ICECarsParkedNonCP</Name>
+						<X>60</X>
+						<Y>770</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1746025674550</Id>
+						<Name>v_timestep</Name>
+						<X>50</X>
+						<Y>260</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>int</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="Parameter">
+						<Id>1745926425800</Id>
+						<Name>p_cars</Name>
+						<X>50</X>
+						<Y>80</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+							<Type>int</Type>
+							<UnitType>NONE</UnitType>
+							<SdArray>false</SdArray>
+							<ParameterEditor>
+								<Id>1745926425798</Id>
+								<EditorContolType>TEXT_BOX</EditorContolType>
+								<MinSliderValue>0</MinSliderValue>
+								<MaxSliderValue>100</MaxSliderValue>
+								<DelimeterType>NO_DELIMETER</DelimeterType>
+							</ParameterEditor>
+						</Properties>
+					</Variable>
+					<Variable Class="Parameter">
+						<Id>1745940413496</Id>
+						<Name>p_parkingPlaces</Name>
+						<X>50</X>
+						<Y>120</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+							<Type>int</Type>
+							<UnitType>NONE</UnitType>
+							<SdArray>false</SdArray>
+							<ParameterEditor>
+								<Id>1745940413494</Id>
+								<EditorContolType>TEXT_BOX</EditorContolType>
+								<MinSliderValue>0</MinSliderValue>
+								<MaxSliderValue>100</MaxSliderValue>
+								<DelimeterType>NO_DELIMETER</DelimeterType>
+							</ParameterEditor>
+						</Properties>
+					</Variable>
+					<Variable Class="Parameter">
+						<Id>1745940498293</Id>
+						<Name>p_chargePoints</Name>
+						<X>50</X>
+						<Y>140</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+							<Type>int</Type>
+							<UnitType>NONE</UnitType>
+							<SdArray>false</SdArray>
+							<ParameterEditor>
+								<Id>1745940498291</Id>
+								<EditorContolType>TEXT_BOX</EditorContolType>
+								<MinSliderValue>0</MinSliderValue>
+								<MaxSliderValue>100</MaxSliderValue>
+								<DelimeterType>NO_DELIMETER</DelimeterType>
+							</ParameterEditor>
+						</Properties>
+					</Variable>
+					<Variable Class="Parameter">
+						<Id>1745940513240</Id>
+						<Name>p_shareEVs</Name>
+						<X>50</X>
+						<Y>100</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+							<Type>double</Type>
+							<UnitType>NONE</UnitType>
+							<SdArray>false</SdArray>
+							<ParameterEditor>
+								<Id>1745940513238</Id>
+								<EditorContolType>TEXT_BOX</EditorContolType>
+								<MinSliderValue>0</MinSliderValue>
+								<MaxSliderValue>100</MaxSliderValue>
+								<DelimeterType>NO_DELIMETER</DelimeterType>
+							</ParameterEditor>
+						</Properties>
+					</Variable>
+					<Variable Class="Parameter">
+						<Id>1746011074513</Id>
+						<Name>p_EVEnergyConsumption_kWhperKm</Name>
+						<X>50</X>
+						<Y>170</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+							<Type>double</Type>
+							<UnitType>NONE</UnitType>
+							<SdArray>false</SdArray>
+							<ParameterEditor>
+								<Id>1746011074511</Id>
+								<EditorContolType>TEXT_BOX</EditorContolType>
+								<MinSliderValue>0</MinSliderValue>
+								<MaxSliderValue>100</MaxSliderValue>
+								<DelimeterType>NO_DELIMETER</DelimeterType>
+							</ParameterEditor>
+						</Properties>
+					</Variable>
+					<Variable Class="Parameter">
+						<Id>1746013657818</Id>
+						<Name>p_chargingPower_kW</Name>
+						<X>50</X>
+						<Y>190</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+							<Type>double</Type>
+							<UnitType>NONE</UnitType>
+							<SdArray>false</SdArray>
+							<ParameterEditor>
+								<Id>1746013657816</Id>
+								<EditorContolType>TEXT_BOX</EditorContolType>
+								<MinSliderValue>0</MinSliderValue>
+								<MaxSliderValue>100</MaxSliderValue>
+								<DelimeterType>NO_DELIMETER</DelimeterType>
+							</ParameterEditor>
+						</Properties>
+					</Variable>
+					<Variable Class="Parameter">
+						<Id>1746015007282</Id>
+						<Name>p_timestep_minutes</Name>
+						<X>50</X>
+						<Y>220</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+							<Type>double</Type>
+							<UnitType>NONE</UnitType>
+							<SdArray>false</SdArray>
+							<ParameterEditor>
+								<Id>1746015007280</Id>
+								<EditorContolType>TEXT_BOX</EditorContolType>
+								<MinSliderValue>0</MinSliderValue>
+								<MaxSliderValue>100</MaxSliderValue>
+								<DelimeterType>NO_DELIMETER</DelimeterType>
+							</ParameterEditor>
+						</Properties>
+					</Variable>
+					<Variable Class="Parameter">
+						<Id>1746088628185</Id>
+						<Name>p_nbOfTimesteps</Name>
+						<X>50</X>
+						<Y>240</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+							<Type>int</Type>
+							<UnitType>NONE</UnitType>
+							<SdArray>false</SdArray>
+							<ParameterEditor>
+								<Id>1746088628183</Id>
+								<EditorContolType>TEXT_BOX</EditorContolType>
+								<MinSliderValue>0</MinSliderValue>
+								<MaxSliderValue>100</MaxSliderValue>
+								<DelimeterType>NO_DELIMETER</DelimeterType>
+							</ParameterEditor>
+						</Properties>
+					</Variable>
+					<Variable Class="Parameter">
+						<Id>1747141377109</Id>
+						<Name>p_checkCPAvailability</Name>
+						<X>50</X>
+						<Y>300</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+							<Type>boolean</Type>
+							<UnitType>NONE</UnitType>
+							<SdArray>false</SdArray>
+							<ParameterEditor>
+								<Id>1747141377107</Id>
+								<EditorContolType>CHECK_BOX</EditorContolType>
+								<MinSliderValue>0</MinSliderValue>
+								<MaxSliderValue>100</MaxSliderValue>
+								<DelimeterType>NO_DELIMETER</DelimeterType>
+							</ParameterEditor>
+						</Properties>
+					</Variable>
+					<Variable Class="Parameter">
+						<Id>1747141388080</Id>
+						<Name>p_hasProsocialChargingBehaviour</Name>
+						<X>50</X>
+						<Y>320</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+							<Type>boolean</Type>
+							<UnitType>NONE</UnitType>
+							<SdArray>false</SdArray>
+							<ParameterEditor>
+								<Id>1747141388078</Id>
+								<EditorContolType>CHECK_BOX</EditorContolType>
+								<MinSliderValue>0</MinSliderValue>
+								<MaxSliderValue>100</MaxSliderValue>
+								<DelimeterType>NO_DELIMETER</DelimeterType>
+							</ParameterEditor>
+						</Properties>
+					</Variable>
+					<Variable Class="Parameter">
+						<Id>1747141404520</Id>
+						<Name>p_hasSocialInteractionBehaviour</Name>
+						<X>50</X>
+						<Y>340</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+							<Type>boolean</Type>
+							<UnitType>NONE</UnitType>
+							<SdArray>false</SdArray>
+							<ParameterEditor>
+								<Id>1747141404518</Id>
+								<EditorContolType>CHECK_BOX</EditorContolType>
+								<MinSliderValue>0</MinSliderValue>
+								<MaxSliderValue>100</MaxSliderValue>
+								<DelimeterType>NO_DELIMETER</DelimeterType>
+							</ParameterEditor>
+						</Properties>
+					</Variable>
+					<Variable Class="CollectionVariable">
+						<Id>1746001520580</Id>
+						<Name>c_carOwners</Name>
+						<X>50</X>
+						<Y>370</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+							<CollectionClass>ArrayList</CollectionClass>
+							<ElementClass>CarOwner</ElementClass>
+							<ValueElementClass>String</ValueElementClass>
+						</Properties>
+					</Variable>
+					<Variable Class="CollectionVariable">
+						<Id>1746013636149</Id>
+						<Name>c_chargePoints</Name>
+						<X>50</X>
+						<Y>390</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+							<CollectionClass>ArrayList</CollectionClass>
+							<ElementClass>J_ChargePoint</ElementClass>
+							<ValueElementClass>String</ValueElementClass>
+						</Properties>
+					</Variable>
+				</Variables>
+				<Events>
+					<Event>
+						<Id>1745930528409</Id>
+						<Name>e_activityTrigger</Name>
+						<ExcludeFromBuild>true</ExcludeFromBuild>
+						<X>70</X>
+						<Y>950</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties TriggerType="timeout" Mode="cyclic">
+							<Timeout Class="CodeUnitValue">
+								<Code>1</Code>
+								<Unit Class="TimeUnits">MINUTE</Unit>
+							</Timeout>
+							<Rate Class="CodeUnitValue">
+								<Code>1</Code>
+								<Unit Class="RateUnits">PER_MINUTE</Unit>
+							</Rate>
+							<OccurrenceAtTime>true</OccurrenceAtTime>
+							<OccurrenceDate>1746000000000</OccurrenceDate>
+							<OccurrenceTime Class="CodeUnitValue">
+								<Code>0</Code>
+								<Unit Class="TimeUnits">MINUTE</Unit>
+							</OccurrenceTime>
+							<RecurrenceCode Class="CodeUnitValue">
+								<Code>1</Code>
+								<Unit Class="TimeUnits">MINUTE</Unit>
+							</RecurrenceCode>
+							<Condition>false</Condition>
+						</Properties>
+						<Action>if(time() == 0){&#xD;
+	pauseSimulation();&#xD;
+}&#xD;
+&#xD;
+f_triggerTrips();&#xD;
+&#xD;
+//Update charging&#xD;
+for(EVOwner x : EVOwners){&#xD;
+	if(x.v_status == PARKED_CHARGE_POINT_CHARGING){&#xD;
+		x.f_chargeCar();&#xD;
+	}&#xD;
+}&#xD;
+&#xD;
+f_countTotals();&#xD;
+&#xD;
+//Update minute of week&#xD;
+v_minuteOfWeek = (v_minuteOfWeek + 1) % 10080;&#xD;
+</Action>
+					</Event>
+				</Events>
+				<Functions>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1745925425403</Id>
+						<Name>f_createEVOwners</Name>
+						<X>80</X>
+						<Y>1020</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Parameter>
+							<Name>nbOfInputTrips</Name>
+							<Type>int</Type>
+						</Parameter>
+						<Body>int EVs = roundToInt(p_cars*p_shareEVs);&#xD;
+for(int i = 0; i &lt; EVs; i++){&#xD;
+	EVOwner x = add_EVOwners();&#xD;
+	x.v_type = EV;&#xD;
+    f_initializeTrips(nbOfInputTrips, x);&#xD;
+    &#xD;
+    int minBatteryCap_kWh = 50;&#xD;
+    int maxBatteryCap_kWh = 80;&#xD;
+    int meanBatteryCap_kWh = 65;&#xD;
+    int spread = 5;&#xD;
+    &#xD;
+    x.v_batteryCapacity_kWh = normal(minBatteryCap_kWh, maxBatteryCap_kWh, meanBatteryCap_kWh, spread);&#xD;
+    double randomShare = uniform(0.25, 1);&#xD;
+    x.v_electricityInBattery_kWh = x.v_batteryCapacity_kWh * randomShare;&#xD;
+    x.v_soc = x.v_electricityInBattery_kWh / x.v_batteryCapacity_kWh;&#xD;
+    c_carOwners.add(x);&#xD;
+}</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1745928671433</Id>
+						<Name>f_initializeModel</Name>
+						<X>70</X>
+						<Y>980</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Body>v_chargePointAvailable = p_chargePoints;&#xD;
+v_hourOfDay = 0;&#xD;
+&#xD;
+//Get nb of trips in database&#xD;
+int nbOfInputTrips = (int) selectFirstValue(int.class,&#xD;
+	"SELECT COUNT (*) FROM vehicle_trips;"&#xD;
+);&#xD;
+//Create ICEs and EVs&#xD;
+f_createICECarOwners(nbOfInputTrips);&#xD;
+f_createEVOwners(nbOfInputTrips);&#xD;
+&#xD;
+f_simulateFirstWeekToGetInitialLocationCars();</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>int</ReturnType>
+						<Id>1745929564814</Id>
+						<Name>f_initalizeMinuteOfWeek</Name>
+						<ExcludeFromBuild>true</ExcludeFromBuild>
+						<X>60</X>
+						<Y>920</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Body>int daySunday0 = getDayOfWeek();&#xD;
+int dayOfWeek = 0;&#xD;
+if(daySunday0 == 0){&#xD;
+	dayOfWeek = 6;&#xD;
+}&#xD;
+else {&#xD;
+	dayOfWeek = daySunday0 - 1;&#xD;
+}&#xD;
+int hourOfDay = getHourOfDay();&#xD;
+int minuteOfHour = getMinute();&#xD;
+v_minuteOfWeek = (dayOfWeek * 24 * 60 + hourOfDay * 60 + minuteOfHour);&#xD;
+&#xD;
+</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1745930872659</Id>
+						<Name>f_triggerTrips</Name>
+						<X>80</X>
+						<Y>1120</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Body>for(CarOwner x : c_carOwners){&#xD;
+	//Update minute of week to match database&#xD;
+	double minutesPerTimestep = p_timestep_minutes;&#xD;
+	double timestepStartMinuteOfWeek = (v_timestep * minutesPerTimestep) % (7 * 24 * 60);&#xD;
+	&#xD;
+	//Update trip status &#xD;
+	x.f_updateTripStatus(timestepStartMinuteOfWeek, minutesPerTimestep);&#xD;
+}</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1745939185407</Id>
+						<Name>f_countTotals</Name>
+						<X>80</X>
+						<Y>1270</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Body>v_carsOnTrip = count(c_carOwners, x-&gt;x.v_status == ON_TRIP);&#xD;
+v_ICECarsParkedNonCP = count(ICECarOwners, x-&gt;x.v_status == PARKED_NON_CHARGE_POINT_CHARGING_NOT_REQUIRED);&#xD;
+v_EVsParkedNonCPChargingRequired = count(EVOwners, x-&gt;x.v_status == PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED);&#xD;
+v_EVsParkedNonCPChargingNotRequired = count(EVOwners, x-&gt;x.v_status == PARKED_NON_CHARGE_POINT_CHARGING_NOT_REQUIRED);&#xD;
+v_EVsParkedAtCPCharging = count(c_carOwners, x-&gt;x.v_status == PARKED_CHARGE_POINT_CHARGING);&#xD;
+v_EVsParkedAtCPIdle = count(c_carOwners, x-&gt;x.v_status == PARKED_CHARGE_POINT_IDLE);&#xD;
+&#xD;
+data_carsOnTrip.add(v_timestep, v_carsOnTrip);&#xD;
+data_ICECarsParkedNonCP.add(v_timestep, v_ICECarsParkedNonCP);&#xD;
+data_EVsParkedNonCPChargingRequired.add(v_timestep, v_EVsParkedNonCPChargingRequired);&#xD;
+data_EVsParkedNonCPChargingNotRequired.add(v_timestep, v_EVsParkedNonCPChargingNotRequired);&#xD;
+data_EVsParkedAtCPCharging.add(v_timestep, v_EVsParkedAtCPCharging);&#xD;
+data_EVsParkedAtCPIdle.add(v_timestep, v_EVsParkedAtCPIdle);&#xD;
+&#xD;
+data_CPAvailable.add(v_timestep, v_chargePointAvailable);&#xD;
+data_CPOccupied.add(v_timestep, p_chargePoints - v_chargePointAvailable);&#xD;
+</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1745941028755</Id>
+						<Name>f_createICECarOwners</Name>
+						<X>80</X>
+						<Y>1000</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Parameter>
+							<Name>nbOfInputTrips</Name>
+							<Type>int</Type>
+						</Parameter>
+						<Body>int ICECars = roundToInt(p_cars*(1-p_shareEVs));&#xD;
+for(int i = 0; i &lt; ICECars; i++){&#xD;
+	CarOwner x = add_ICECarOwners();&#xD;
+	x.v_type = ICE;&#xD;
+    f_initializeTrips(nbOfInputTrips, x);&#xD;
+    c_carOwners.add(x);&#xD;
+}&#xD;
+</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1745941211927</Id>
+						<Name>f_initializeTrips</Name>
+						<X>90</X>
+						<Y>1040</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Parameter>
+							<Name>nbOfInputTrips</Name>
+							<Type>int</Type>
+						</Parameter>
+						<Parameter>
+							<Name>carOwner</Name>
+							<Type>CarOwner</Type>
+						</Parameter>
+						<Body>//Get trip index based on nb of input trips&#xD;
+int tripIndex = uniform_discr(0, nbOfInputTrips - 1);&#xD;
+&#xD;
+//Get result set of trip index&#xD;
+ResultSet rs = selectResultSet("SELECT * FROM vehicle_trips LIMIT 1 OFFSET " + tripIndex);&#xD;
+// Check if there is a row in the rs&#xD;
+if (rs.next()) {        &#xD;
+	// Retrieve the number of trips from the result&#xD;
+	int nbTripsPerWeek = rs.getInt("nb_trips");&#xD;
+	        &#xD;
+	// Loop over the trips and add them to the EVOwner's trip schedule&#xD;
+	for (int t = 1; t &lt;= nbTripsPerWeek; t++) {&#xD;
+		double dep = rs.getDouble("departure" + t);&#xD;
+		double arr = rs.getDouble("arrival" + t);&#xD;
+		double dist = rs.getDouble("distance" + t);&#xD;
+	&#xD;
+		carOwner.c_tripSchedule.add(new J_Trip(dep, arr, dist));&#xD;
+	}&#xD;
+}&#xD;
+int minuteOfWeek = 0;&#xD;
+carOwner.f_initializeNextTrip(minuteOfWeek);&#xD;
+</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1746025438383</Id>
+						<Name>f_simulatePeriod</Name>
+						<X>70</X>
+						<Y>1100</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Parameter>
+							<Name>nbOfTimesteps</Name>
+							<Type>int</Type>
+						</Parameter>
+						<Body>v_timestep = 0;&#xD;
+v_hourOfDay = 0;&#xD;
+&#xD;
+//Trigger over timesteps&#xD;
+for(int i=0; i &lt; nbOfTimesteps; i++){&#xD;
+	&#xD;
+	//1. Trigger trips	&#xD;
+	f_triggerTrips();&#xD;
+		&#xD;
+	//2. Update charging&#xD;
+	f_chargeCars();&#xD;
+	&#xD;
+	//3. Check if CP have become available for waiting EVs&#xD;
+	if(p_checkCPAvailability){&#xD;
+		f_checkAvailableChargePoints();&#xD;
+	}&#xD;
+	&#xD;
+	//4. prosocial charging behaviour&#xD;
+	if(p_hasProsocialChargingBehaviour){&#xD;
+		f_prosocialChargingBehaviour();&#xD;
+	}&#xD;
+	&#xD;
+	//4. Count totals&#xD;
+	f_countTotals();&#xD;
+		&#xD;
+	v_timestep++;&#xD;
+    v_hourOfDay = (v_timestep * p_timestep_minutes / 60.0) % 24;&#xD;
+}&#xD;
+&#xD;
+&#xD;
+f_endSimulationPeriod();&#xD;
+traceln("Simulation finished after " + v_timestep + " timesteps ");&#xD;
+&#xD;
+	</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1746089953946</Id>
+						<Name>f_updateChart</Name>
+						<X>70</X>
+						<Y>1400</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Body>ch_countEVs.removeAll();&#xD;
+ch_countEVs.addDataSet(data_carsOnTrip, "Cars on trip", coral);&#xD;
+ch_countEVs.addDataSet(data_ICECarsParkedNonCP, "ICE cars parked", darkKhaki);&#xD;
+ch_countEVs.addDataSet(data_EVsParkedNonCPChargingNotRequired, "EVs parked not at charge point charging not required", limeGreen);&#xD;
+ch_countEVs.addDataSet(data_EVsParkedNonCPChargingRequired, "EVs parked not at charge point charging required", slateGray);&#xD;
+ch_countEVs.addDataSet(data_EVsParkedAtCPCharging, "EVs parked at charge point and charging", darkMagenta);&#xD;
+ch_countEVs.addDataSet(data_EVsParkedAtCPIdle, "EVs parked at charge point and idle", orange);&#xD;
+&#xD;
+ch_countCPs.removeAll();&#xD;
+ch_countCPs.addDataSet(data_CPAvailable, "Charge points available", limeGreen);&#xD;
+ch_countCPs.addDataSet(data_CPOccupied, "Charge points occupied", coral);</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1746090357452</Id>
+						<Name>f_endSimulationPeriod</Name>
+						<X>60</X>
+						<Y>1380</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Body>f_updateChart();</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1746096423531</Id>
+						<Name>f_writeResultsToExcel</Name>
+						<X>60</X>
+						<Y>1420</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Parameter>
+							<Name>excel_exportResults</Name>
+							<Type>ExcelFile</Type>
+						</Parameter>
+						<Body>//traceln("Start writing results to excel!");&#xD;
+int sheetIndex = 1;&#xD;
+int columnYear = 1;&#xD;
+int columnNGB = 2;&#xD;
+int columnNGBl = 3;&#xD;
+int columnHHP = 4;&#xD;
+int columnEHP = 5;&#xD;
+int columnDH = 6;&#xD;
+&#xD;
+//Clear the sheet first&#xD;
+&#xD;
+//Set column names&#xD;
+int row = 1;&#xD;
+excel_exportResults.setCellValue("simulation run", sheetIndex, row, columnYear);&#xD;
+excel_exportResults.setCellValue("chargingSatisfaction", sheetIndex, row, columnNGB);&#xD;
+/*&#xD;
+excel_exportResults.setCellValue("Gas block heating", sheetIndex, row, columnNGBl);&#xD;
+excel_exportResults.setCellValue("Hybrid heat pump", sheetIndex, row, columnHHP);&#xD;
+excel_exportResults.setCellValue("Electric heat pump", sheetIndex, row, columnEHP);&#xD;
+excel_exportResults.setCellValue("District heating", sheetIndex, row, columnDH);&#xD;
+&#xD;
+//Get data&#xD;
+double startYear = v_startYear;&#xD;
+double endYear = v_startYear + data_naturalGasBoilers_nb.size();&#xD;
+traceln("Start year " + startYear + " end year " + endYear);&#xD;
+for (int i = 0; i &lt; endYear - startYear + 1 ; i++) {&#xD;
+&#xD;
+	//Time series&#xD;
+	excel_exportResults.setCellValue(startYear + i, sheetIndex, i+2, columnYear);&#xD;
+	excel_exportResults.setCellValue(data_naturalGasBoilers_nb.getY(i), sheetIndex, i+2, columnNGB);&#xD;
+	excel_exportResults.setCellValue(data_naturalGasBlock_nb.getY(i), sheetIndex, i+2, columnNGBl);&#xD;
+	excel_exportResults.setCellValue(data_hybridHeatPumps_nb.getY(i), sheetIndex, i+2, columnHHP);&#xD;
+	excel_exportResults.setCellValue(data_electricHeatPumps_nb.getY(i), sheetIndex, i+2, columnEHP);&#xD;
+	excel_exportResults.setCellValue(data_districtHeating_nb.getY(i), sheetIndex, i+2, columnDH);&#xD;
+}&#xD;
+*/&#xD;
+//Write file&#xD;
+excel_exportResults.writeFile();&#xD;
+&#xD;
+traceln("Finished writing results to excel!");</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1747135321123</Id>
+						<Name>f_checkAvailableChargePoints</Name>
+						<X>80</X>
+						<Y>1160</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Body>int EVsAwaitingCharge = count(c_carOwners, x-&gt;x.v_status == PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED);&#xD;
+boolean inMoveableTimePeriod = false;&#xD;
+if( v_hourOfDay &gt;= 7 &amp;&amp; v_hourOfDay &lt;= 22){&#xD;
+	inMoveableTimePeriod = true;&#xD;
+}&#xD;
+&#xD;
+if(v_chargePointAvailable &gt; 0 &amp;&amp; EVsAwaitingCharge &gt; 0 &amp;&amp; inMoveableTimePeriod){&#xD;
+	List&lt;EVOwner&gt; tempEVsAwaitingCharge = EVOwners.stream()&#xD;
+        .filter(x -&gt; x.v_status == PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED)&#xD;
+        .collect(Collectors.toList());&#xD;
+    &#xD;
+    while(v_chargePointAvailable &gt; 0 &amp;&amp; !tempEVsAwaitingCharge.isEmpty()){&#xD;
+    	EVOwner EV = randomWhere(tempEVsAwaitingCharge, x-&gt;x.v_status == PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED);&#xD;
+		EV.f_setParkingStatus();&#xD;
+		//traceln("EV " + EV.getIndex() + " tried to find cp");&#xD;
+		tempEVsAwaitingCharge.remove(EV);&#xD;
+			&#xD;
+	}&#xD;
+}</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1747135360798</Id>
+						<Name>f_chargeCars</Name>
+						<X>80</X>
+						<Y>1140</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Body>for(EVOwner x : EVOwners){&#xD;
+	if(x.v_status == PARKED_CHARGE_POINT_CHARGING){&#xD;
+		x.f_chargeCar();&#xD;
+	}&#xD;
+}</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1748942230602</Id>
+						<Name>f_simulateFirstWeekToGetInitialLocationCars</Name>
+						<X>70</X>
+						<Y>1060</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Body>v_timestep = 0;&#xD;
+int minutesPerWeek = 7 * 24 * 60;&#xD;
+double timestepsInWeek = (double) minutesPerWeek / p_timestep_minutes;&#xD;
+&#xD;
+//Trigger over timesteps&#xD;
+for(int i=0; i &lt; timestepsInWeek; i++){&#xD;
+	&#xD;
+	//1. Trigger trips	&#xD;
+	f_triggerTrips();&#xD;
+		&#xD;
+	//2. Update charging&#xD;
+	f_chargeCars();&#xD;
+	&#xD;
+	//3. Check if CP have become available for waiting EVs&#xD;
+	if(p_checkCPAvailability){&#xD;
+		f_checkAvailableChargePoints();&#xD;
+	}&#xD;
+	&#xD;
+	//4. prosocial charging behaviour&#xD;
+	if(p_hasProsocialChargingBehaviour){&#xD;
+		f_prosocialChargingBehaviour();&#xD;
+	}&#xD;
+&#xD;
+	v_timestep++;&#xD;
+    v_hourOfDay = (v_timestep * p_timestep_minutes / 60.0) % 24;&#xD;
+}&#xD;
+&#xD;
+traceln("Finished initial week for division car location");</Body>
+					</Function>
+				</Functions>
+				<AnalysisData>
+					<DataSet>
+						<Id>1746089839600</Id>
+						<Name>data_carsOnTrip</Name>
+						<X>400</X>
+						<Y>740</Y>
+						<Label>
+							<X>15</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<AutoUpdate>false</AutoUpdate>
+						<OccurrenceAtTime>true</OccurrenceAtTime>
+						<OccurrenceDate>1746172800000</OccurrenceDate>
+						<OccurrenceTime Class="CodeUnitValue">
+							<Code>0</Code>
+							<Unit Class="TimeUnits">HOUR</Unit>
+						</OccurrenceTime>
+						<RecurrenceCode Class="CodeUnitValue">
+							<Code>1</Code>
+							<Unit Class="TimeUnits">HOUR</Unit>
+						</RecurrenceCode>
+						<FreezeXAxis>true</FreezeXAxis>
+						<SamplesToKeep>525600</SamplesToKeep>
+					</DataSet>
+					<DataSet>
+						<Id>1746089852522</Id>
+						<Name>data_ICECarsParkedNonCP</Name>
+						<X>400</X>
+						<Y>760</Y>
+						<Label>
+							<X>15</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<AutoUpdate>false</AutoUpdate>
+						<OccurrenceAtTime>true</OccurrenceAtTime>
+						<OccurrenceDate>1746172800000</OccurrenceDate>
+						<OccurrenceTime Class="CodeUnitValue">
+							<Code>0</Code>
+							<Unit Class="TimeUnits">HOUR</Unit>
+						</OccurrenceTime>
+						<RecurrenceCode Class="CodeUnitValue">
+							<Code>1</Code>
+							<Unit Class="TimeUnits">HOUR</Unit>
+						</RecurrenceCode>
+						<FreezeXAxis>true</FreezeXAxis>
+						<SamplesToKeep>525600</SamplesToKeep>
+					</DataSet>
+					<DataSet>
+						<Id>1746089863759</Id>
+						<Name>data_EVsParkedNonCPChargingRequired</Name>
+						<X>400</X>
+						<Y>780</Y>
+						<Label>
+							<X>15</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<AutoUpdate>false</AutoUpdate>
+						<OccurrenceAtTime>true</OccurrenceAtTime>
+						<OccurrenceDate>1746172800000</OccurrenceDate>
+						<OccurrenceTime Class="CodeUnitValue">
+							<Code>0</Code>
+							<Unit Class="TimeUnits">HOUR</Unit>
+						</OccurrenceTime>
+						<RecurrenceCode Class="CodeUnitValue">
+							<Code>1</Code>
+							<Unit Class="TimeUnits">HOUR</Unit>
+						</RecurrenceCode>
+						<FreezeXAxis>true</FreezeXAxis>
+						<SamplesToKeep>525600</SamplesToKeep>
+					</DataSet>
+					<DataSet>
+						<Id>1746089877445</Id>
+						<Name>data_EVsParkedNonCPChargingNotRequired</Name>
+						<X>400</X>
+						<Y>800</Y>
+						<Label>
+							<X>15</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<AutoUpdate>false</AutoUpdate>
+						<OccurrenceAtTime>true</OccurrenceAtTime>
+						<OccurrenceDate>1746172800000</OccurrenceDate>
+						<OccurrenceTime Class="CodeUnitValue">
+							<Code>0</Code>
+							<Unit Class="TimeUnits">HOUR</Unit>
+						</OccurrenceTime>
+						<RecurrenceCode Class="CodeUnitValue">
+							<Code>1</Code>
+							<Unit Class="TimeUnits">HOUR</Unit>
+						</RecurrenceCode>
+						<FreezeXAxis>true</FreezeXAxis>
+						<SamplesToKeep>525600</SamplesToKeep>
+					</DataSet>
+					<DataSet>
+						<Id>1746089904125</Id>
+						<Name>data_EVsParkedAtCPCharging</Name>
+						<X>400</X>
+						<Y>820</Y>
+						<Label>
+							<X>15</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<AutoUpdate>false</AutoUpdate>
+						<OccurrenceAtTime>true</OccurrenceAtTime>
+						<OccurrenceDate>1746172800000</OccurrenceDate>
+						<OccurrenceTime Class="CodeUnitValue">
+							<Code>0</Code>
+							<Unit Class="TimeUnits">HOUR</Unit>
+						</OccurrenceTime>
+						<RecurrenceCode Class="CodeUnitValue">
+							<Code>1</Code>
+							<Unit Class="TimeUnits">HOUR</Unit>
+						</RecurrenceCode>
+						<FreezeXAxis>true</FreezeXAxis>
+						<SamplesToKeep>525600</SamplesToKeep>
+					</DataSet>
+					<DataSet>
+						<Id>1746089921755</Id>
+						<Name>data_EVsParkedAtCPIdle</Name>
+						<X>400</X>
+						<Y>840</Y>
+						<Label>
+							<X>15</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<AutoUpdate>false</AutoUpdate>
+						<OccurrenceAtTime>true</OccurrenceAtTime>
+						<OccurrenceDate>1746172800000</OccurrenceDate>
+						<OccurrenceTime Class="CodeUnitValue">
+							<Code>0</Code>
+							<Unit Class="TimeUnits">HOUR</Unit>
+						</OccurrenceTime>
+						<RecurrenceCode Class="CodeUnitValue">
+							<Code>1</Code>
+							<Unit Class="TimeUnits">HOUR</Unit>
+						</RecurrenceCode>
+						<FreezeXAxis>true</FreezeXAxis>
+						<SamplesToKeep>525600</SamplesToKeep>
+					</DataSet>
+					<DataSet>
+						<Id>1746092186888</Id>
+						<Name>data_CPOccupied</Name>
+						<X>400</X>
+						<Y>880</Y>
+						<Label>
+							<X>15</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<AutoUpdate>false</AutoUpdate>
+						<OccurrenceAtTime>true</OccurrenceAtTime>
+						<OccurrenceDate>1746172800000</OccurrenceDate>
+						<OccurrenceTime Class="CodeUnitValue">
+							<Code>0</Code>
+							<Unit Class="TimeUnits">HOUR</Unit>
+						</OccurrenceTime>
+						<RecurrenceCode Class="CodeUnitValue">
+							<Code>1</Code>
+							<Unit Class="TimeUnits">HOUR</Unit>
+						</RecurrenceCode>
+						<FreezeXAxis>true</FreezeXAxis>
+						<SamplesToKeep>525600</SamplesToKeep>
+					</DataSet>
+					<DataSet>
+						<Id>1746092200373</Id>
+						<Name>data_CPAvailable</Name>
+						<X>400</X>
+						<Y>900</Y>
+						<Label>
+							<X>15</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<AutoUpdate>false</AutoUpdate>
+						<OccurrenceAtTime>true</OccurrenceAtTime>
+						<OccurrenceDate>1746172800000</OccurrenceDate>
+						<OccurrenceTime Class="CodeUnitValue">
+							<Code>0</Code>
+							<Unit Class="TimeUnits">HOUR</Unit>
+						</OccurrenceTime>
+						<RecurrenceCode Class="CodeUnitValue">
+							<Code>1</Code>
+							<Unit Class="TimeUnits">HOUR</Unit>
+						</RecurrenceCode>
+						<FreezeXAxis>true</FreezeXAxis>
+						<SamplesToKeep>525600</SamplesToKeep>
+					</DataSet>
+				</AnalysisData>
+				<AgentLinks>
+					<AgentLink>
+						<Id>1743154070894</Id>
+						<Name>connections</Name>
+						<X>50</X>
+						<Y>-50</Y>
+						<Label>
+							<X>15</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<HandleReceiveInConnections>false</HandleReceiveInConnections>
+						<AgentLinkType>COLLECTION_OF_LINKS</AgentLinkType>
+						<AgentLinkBidirectional>true</AgentLinkBidirectional>
+						<MessageType>Object</MessageType>
+						<LineStyle>SOLID</LineStyle>
+						<LineWidth>1</LineWidth>
+						<LineColor>-16777216</LineColor>
+						<LineZOrder>UNDER_AGENTS</LineZOrder>
+						<LineArrow>NONE</LineArrow>
+						<LineArrowPosition>END</LineArrowPosition>
+					</AgentLink>
+				</AgentLinks>
+				<ContainerLinks>
+					<ContainerLink>
+						<Id>1746024643054</Id>
+						<Name>startup_agent</Name>
+						<X>50</X>
+						<Y>-100</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<ActiveObjectClass>
+							<PackageName>social_charging_model</PackageName>
+							<ClassName>Startup_agent</ClassName>
+						</ActiveObjectClass>
+					</ContainerLink>
+				</ContainerLinks>
+				<EmbeddedObjects>
+					<EmbeddedObject>
+						<Id>1745925568502</Id>
+						<Name>EVOwners</Name>
+						<X>50</X>
+						<Y>50</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<PresentationId>1745925568504</PresentationId>
+						<ActiveObjectClass>
+							<PackageName>social_charging_model</PackageName>
+							<ClassName>EVOwner</ClassName>
+						</ActiveObjectClass>
+						<GenericParameterSubstitute>
+							<GenericParameterSubstituteReference>
+								<PackageName>social_charging_model</PackageName>
+								<ClassName>EVOwner</ClassName>
+								<ItemName>1745925517351</ItemName>
+							</GenericParameterSubstituteReference>
+						</GenericParameterSubstitute>
+						<Parameters/>
+						<ReplicationFlag>true</ReplicationFlag>
+						<Replication Class="CodeValue">
+							<Code>100</Code>
+						</Replication>
+						<CollectionType>ARRAY_LIST_BASED</CollectionType>
+						<InEnvironment>true</InEnvironment>
+						<InitialLocationType>XYZ</InitialLocationType>
+						<ColumnCode Class="CodeValue">
+							<Code>0</Code>
+						</ColumnCode>
+						<RowCode Class="CodeValue">
+							<Code>0</Code>
+						</RowCode>
+						<LocationNameCode Class="CodeValue">
+							<Code>""</Code>
+						</LocationNameCode>
+						<InitializationType>EMPTY</InitializationType>
+						<InitializationDatabaseTableQuery>
+							<TableReference/>
+						</InitializationDatabaseTableQuery>
+						<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+						<QuantityColumn/>
+					</EmbeddedObject>
+					<EmbeddedObject>
+						<Id>1745940691736</Id>
+						<Name>ICECarOwners</Name>
+						<X>50</X>
+						<Y>30</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<PresentationId>1745940691738</PresentationId>
+						<ActiveObjectClass>
+							<PackageName>social_charging_model</PackageName>
+							<ClassName>CarOwner</ClassName>
+						</ActiveObjectClass>
+						<GenericParameterSubstitute>
+							<GenericParameterSubstituteReference>
+								<PackageName>social_charging_model</PackageName>
+								<ClassName>CarOwner</ClassName>
+								<ItemName>1745940665094</ItemName>
+							</GenericParameterSubstituteReference>
+						</GenericParameterSubstitute>
+						<Parameters/>
+						<ReplicationFlag>true</ReplicationFlag>
+						<Replication Class="CodeValue">
+							<Code>100</Code>
+						</Replication>
+						<CollectionType>ARRAY_LIST_BASED</CollectionType>
+						<InEnvironment>true</InEnvironment>
+						<InitialLocationType>XYZ</InitialLocationType>
+						<ColumnCode Class="CodeValue">
+							<Code>0</Code>
+						</ColumnCode>
+						<RowCode Class="CodeValue">
+							<Code>0</Code>
+						</RowCode>
+						<LocationNameCode Class="CodeValue">
+							<Code>""</Code>
+						</LocationNameCode>
+						<InitializationType>EMPTY</InitializationType>
+						<InitializationDatabaseTableQuery>
+							<TableReference/>
+						</InitializationDatabaseTableQuery>
+						<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+						<QuantityColumn/>
+					</EmbeddedObject>
+				</EmbeddedObjects>
+				<Presentation>
+					<Level>
+						<Id>1743154070900</Id>
+						<Name>level</Name>
+						<X>0</X>
+						<Y>0</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>true</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>false</ShowLabel>
+						<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+						<Z>0</Z>
+						<LevelVisibility>DIM_NON_CURRENT</LevelVisibility>
+						<Presentation>
+							<TimeStackChart>
+								<Id>1745933804444</Id>
+								<Name>ch_countEVs</Name>
+								<X>340</X>
+								<Y>60</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+								<AutoUpdate>false</AutoUpdate>
+								<OccurrenceAtTime>true</OccurrenceAtTime>
+								<OccurrenceDate>1746000000000</OccurrenceDate>
+								<OccurrenceTime Class="CodeUnitValue">
+									<Code>0</Code>
+									<Unit Class="TimeUnits">MINUTE</Unit>
+								</OccurrenceTime>
+								<RecurrenceCode Class="CodeUnitValue">
+									<Code>1</Code>
+									<Unit Class="TimeUnits">MINUTE</Unit>
+								</RecurrenceCode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Width>360</Width>
+								<Height>320</Height>
+								<BackgroundColor/>
+								<BorderColor/>
+								<ChartArea>
+									<XOffset>50</XOffset>
+									<YOffset>30</YOffset>
+									<Width>280</Width>
+									<Height>230</Height>
+									<BackgroundColor>-1</BackgroundColor>
+									<BorderColor>-16777216</BorderColor>
+									<GridColor>-12566464</GridColor>
+								</ChartArea>
+								<Legend>
+									<Place>SOUTH</Place>
+									<TextColor>-16777216</TextColor>
+									<Size>30</Size>
+								</Legend>
+								<Labels>
+									<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+									<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+									<TextColor>-12566464</TextColor>
+								</Labels>
+								<ShowLegend>true</ShowLegend>
+								<TimeWindowsMovementType>MOVEMENT_WITH_TIME</TimeWindowsMovementType>
+								<TimeWindowUnits>MODEL_TIME_UNIT</TimeWindowUnits>
+								<TimeWindowExpression>p_nbOfTimesteps</TimeWindowExpression>
+								<SamplesToKeep>35040</SamplesToKeep>
+								<VerScaleToExpression>1</VerScaleToExpression>
+								<VerScaleType>AUTO</VerScaleType>
+								<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
+							</TimeStackChart>
+							<Control Type="Button">
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Id>1746091499247</Id>
+								<Name>b_endRun</Name>
+								<X>50</X>
+								<Y>450</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+								<BasicProperties Width="250" Height="30">
+									<EmbeddedIcon>false</EmbeddedIcon>
+									<TextColor/>
+									<Enabled>true</Enabled>
+									<ActionCode>f_writeResultsToExcel(startup_agent.excel_exportResults);
+startup_agent.simulationCount++;
+if(startup_agent.simulationCount == 1){
+	startup_agent.fileChooser_exportResults.setEnabled(true);
+}
+startup_agent.viewArea.navigateTo();
+this.deleteSelf();</ActionCode>
+								</BasicProperties>
+								<ExtendedProperties>
+									<Font Name="Dialog" Size="16" Style="0"/>
+									<LabelText>End run</LabelText>
+								</ExtendedProperties>
+							</Control>
+							<TimeStackChart>
+								<Id>1746092163471</Id>
+								<Name>ch_countCPs</Name>
+								<X>680</X>
+								<Y>60</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+								<AutoUpdate>false</AutoUpdate>
+								<OccurrenceAtTime>true</OccurrenceAtTime>
+								<OccurrenceDate>1746000000000</OccurrenceDate>
+								<OccurrenceTime Class="CodeUnitValue">
+									<Code>0</Code>
+									<Unit Class="TimeUnits">MINUTE</Unit>
+								</OccurrenceTime>
+								<RecurrenceCode Class="CodeUnitValue">
+									<Code>1</Code>
+									<Unit Class="TimeUnits">MINUTE</Unit>
+								</RecurrenceCode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Width>360</Width>
+								<Height>320</Height>
+								<BackgroundColor/>
+								<BorderColor/>
+								<ChartArea>
+									<XOffset>50</XOffset>
+									<YOffset>30</YOffset>
+									<Width>280</Width>
+									<Height>230</Height>
+									<BackgroundColor>-1</BackgroundColor>
+									<BorderColor>-16777216</BorderColor>
+									<GridColor>-12566464</GridColor>
+								</ChartArea>
+								<Legend>
+									<Place>SOUTH</Place>
+									<TextColor>-16777216</TextColor>
+									<Size>30</Size>
+								</Legend>
+								<Labels>
+									<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+									<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+									<TextColor>-12566464</TextColor>
+								</Labels>
+								<ShowLegend>true</ShowLegend>
+								<TimeWindowsMovementType>MOVEMENT_WITH_TIME</TimeWindowsMovementType>
+								<TimeWindowUnits>MODEL_TIME_UNIT</TimeWindowUnits>
+								<TimeWindowExpression>p_nbOfTimesteps</TimeWindowExpression>
+								<SamplesToKeep>35040</SamplesToKeep>
+								<VerScaleToExpression>1</VerScaleToExpression>
+								<VerScaleType>AUTO</VerScaleType>
+								<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
+							</TimeStackChart>
+						</Presentation>
+					</Level>
+					<EmbeddedObjectPresentation>
+						<Id>1745925568504</Id>
+						<Name>EVOwners_presentation</Name>
+						<X>150</X>
+						<Y>50</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>true</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>false</ShowLabel>
+						<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+						<EmbeddedIcon>false</EmbeddedIcon>
+						<Z>0</Z>
+						<Rotation>0.0</Rotation>
+						<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
+						<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
+						<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
+						<Latitude>0.0</Latitude>
+						<Longitude>0.0</Longitude>
+					</EmbeddedObjectPresentation>
+					<EmbeddedObjectPresentation>
+						<Id>1745940691738</Id>
+						<Name>ICECarOwners_presentation</Name>
+						<X>150</X>
+						<Y>30</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>true</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>false</ShowLabel>
+						<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+						<EmbeddedIcon>false</EmbeddedIcon>
+						<Z>0</Z>
+						<Rotation>0.0</Rotation>
+						<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
+						<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
+						<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
+						<Latitude>0.0</Latitude>
+						<Longitude>0.0</Longitude>
+					</EmbeddedObjectPresentation>
+				</Presentation>
+				<Areas>
+					<Area>
+						<Id>1746087455238</Id>
+						<Name>viewArea</Name>
+						<X>0</X>
+						<Y>0</Y>
+						<Label>
+							<X>0</X>
+							<Y>-10</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>false</ShowLabel>
+						<Title/>
+						<Width>1000</Width>
+						<Height>600</Height>
+					</Area>
+				</Areas>
+			</ActiveObjectClass>
+			<ActiveObjectClass>
+				<Id>1746024451522</Id>
+				<Name>Startup_agent</Name>
+				<Generic>false</Generic>
+				<GenericParameter>
+					<Id>1746024451528</Id>
+					<Name>1746024451528</Name>
+					<GenericParameterValue Class="CodeValue">
+						<Code>T extends Agent</Code>
+					</GenericParameterValue>
+					<GenericParameterLabel>Generic parameter:</GenericParameterLabel>
+				</GenericParameter>
+				<FlowChartsUsage>ENTITY</FlowChartsUsage>
+				<SamplesToKeep>100</SamplesToKeep>
+				<LimitNumberOfArrayElements>false</LimitNumberOfArrayElements>
+				<ElementsLimitValue>100</ElementsLimitValue>
+				<MakeDefaultViewArea>true</MakeDefaultViewArea>
+				<SceneGridColor/>
+				<SceneBackgroundColor/>
+				<SceneSkybox>null</SceneSkybox>
+				<AgentProperties>
+					<EnvironmentDefinesInitialLocation>true</EnvironmentDefinesInitialLocation>
+					<RotateAnimationTowardsMovement>true</RotateAnimationTowardsMovement>
+					<RotateAnimationVertically>false</RotateAnimationVertically>
+					<VelocityCode Class="CodeUnitValue">
+						<Code>10</Code>
+						<Unit Class="SpeedUnits">MPS</Unit>
+					</VelocityCode>
+					<PhysicalLength Class="CodeUnitValue">
+						<Code>1</Code>
+						<Unit Class="LengthUnits">METER</Unit>
+					</PhysicalLength>
+					<PhysicalWidth Class="CodeUnitValue">
+						<Code>1</Code>
+						<Unit Class="LengthUnits">METER</Unit>
+					</PhysicalWidth>
+					<PhysicalHeight Class="CodeUnitValue">
+						<Code>1</Code>
+						<Unit Class="LengthUnits">METER</Unit>
+					</PhysicalHeight>
+				</AgentProperties>
+				<EnvironmentProperties>
+					<EnableSteps>false</EnableSteps>
+					<StepDurationCode Class="CodeUnitValue">
+						<Code>1.0</Code>
+						<Unit Class="TimeUnits">SECOND</Unit>
+					</StepDurationCode>
+					<SpaceType>CONTINUOUS</SpaceType>
+					<WidthCode>500</WidthCode>
+					<HeightCode>500</HeightCode>
+					<ZHeightCode>0</ZHeightCode>
+					<ColumnsCountCode>100</ColumnsCountCode>
+					<RowsCountCode>100</RowsCountCode>
+					<NeigborhoodType>MOORE</NeigborhoodType>
+					<LayoutType>USER_DEF</LayoutType>
+					<NetworkType>USER_DEF</NetworkType>
+					<ConnectionsPerAgentCode>2</ConnectionsPerAgentCode>
+					<ConnectionsRangeCode>50</ConnectionsRangeCode>
+					<NeighborLinkFractionCode>0.95</NeighborLinkFractionCode>
+					<MCode>10</MCode>
+				</EnvironmentProperties>
+				<DatasetsCreationProperties>
+					<AutoCreate>false</AutoCreate>
+					<OccurrenceAtTime>true</OccurrenceAtTime>
+					<OccurrenceDate>1746086400000</OccurrenceDate>
+					<OccurrenceTime Class="CodeUnitValue">
+						<Code>0</Code>
+						<Unit Class="TimeUnits">HOUR</Unit>
+					</OccurrenceTime>
+					<RecurrenceCode Class="CodeUnitValue">
+						<Code>1</Code>
+						<Unit Class="TimeUnits">HOUR</Unit>
+					</RecurrenceCode>
+				</DatasetsCreationProperties>
+				<ScaleRuler>
+					<Id>1746024451525</Id>
+					<Name>scale</Name>
+					<X>0</X>
+					<Y>-150</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Length>100</Length>
+					<Rotation>0</Rotation>
+					<ScaleType>BASED_ON_LENGTH</ScaleType>
+					<ModelLength>10</ModelLength>
+					<LengthUnits>METER</LengthUnits>
+					<Scale>10</Scale>
+					<InheritedFromParentAgentType>true</InheritedFromParentAgentType>
+				</ScaleRuler>
+				<CurrentLevel>1746024451529</CurrentLevel>
+				<ConnectionsId>1746024451523</ConnectionsId>
+				<Variables>
+					<Variable Class="PlainVariable">
+						<Id>1746024803989</Id>
+						<Name>v_cars</Name>
+						<X>-200</X>
+						<Y>320</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>int</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1746024850145</Id>
+						<Name>v_shareEVs</Name>
+						<X>-200</X>
+						<Y>340</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1746025253111</Id>
+						<Name>v_parkingPlaces</Name>
+						<X>-200</X>
+						<Y>380</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>int</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1746025260574</Id>
+						<Name>v_EVEnergyConsumption_kWhperKm</Name>
+						<X>-200</X>
+						<Y>400</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1746025267406</Id>
+						<Name>v_chargingPower_kW</Name>
+						<X>-200</X>
+						<Y>420</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1746025272926</Id>
+						<Name>v_timestep_minutes</Name>
+						<X>-200</X>
+						<Y>440</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1746028072239</Id>
+						<Name>v_chargePoints</Name>
+						<X>-200</X>
+						<Y>360</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>int</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1746087661032</Id>
+						<Name>v_numberOfTimesteps</Name>
+						<X>-200</X>
+						<Y>510</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>int</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1746087803170</Id>
+						<Name>v_periods</Name>
+						<X>-200</X>
+						<Y>480</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>int</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1746087857865</Id>
+						<Name>v_simulationPeriod</Name>
+						<X>-200</X>
+						<Y>460</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>String</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1746096478941</Id>
+						<Name>simulationCount</Name>
+						<X>-200</X>
+						<Y>590</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>int</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1747139962091</Id>
+						<Name>v_checkCPAvailability</Name>
+						<X>-200</X>
+						<Y>620</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>boolean</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1747139972141</Id>
+						<Name>v_prosocialBehaviour</Name>
+						<X>-200</X>
+						<Y>640</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>boolean</Type>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1747139982251</Id>
+						<Name>v_cpInteraction</Name>
+						<X>-200</X>
+						<Y>660</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>boolean</Type>
+						</Properties>
+					</Variable>
+				</Variables>
+				<Events>
+					<Event>
+						<Id>1746024518579</Id>
+						<Name>e_pause</Name>
+						<X>-200</X>
+						<Y>200</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties TriggerType="timeout" Mode="occuresOnce">
+							<Timeout Class="CodeUnitValue">
+								<Code>1</Code>
+								<Unit Class="TimeUnits">HOUR</Unit>
+							</Timeout>
+							<Rate Class="CodeUnitValue">
+								<Code>1</Code>
+								<Unit Class="RateUnits">PER_HOUR</Unit>
+							</Rate>
+							<OccurrenceAtTime>true</OccurrenceAtTime>
+							<OccurrenceDate>1746086400000</OccurrenceDate>
+							<OccurrenceTime Class="CodeUnitValue">
+								<Code>0</Code>
+								<Unit Class="TimeUnits">HOUR</Unit>
+							</OccurrenceTime>
+							<RecurrenceCode Class="CodeUnitValue">
+								<Code>1</Code>
+								<Unit Class="TimeUnits">HOUR</Unit>
+							</RecurrenceCode>
+							<Condition>false</Condition>
+						</Properties>
+						<Action>pauseSimulation();&#xD;
+f_setDefaultValues();&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+</Action>
+					</Event>
+				</Events>
+				<Functions>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1746025123736</Id>
+						<Name>f_initializeModel</Name>
+						<X>-200</X>
+						<Y>270</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Body>Main m = add_mains(v_cars,&#xD;
+	v_parkingPlaces,&#xD;
+	v_chargePoints,&#xD;
+	v_shareEVs,&#xD;
+	v_EVEnergyConsumption_kWhperKm,&#xD;
+	v_chargingPower_kW,&#xD;
+	v_timestep_minutes,&#xD;
+	v_numberOfTimesteps,&#xD;
+	v_checkCPAvailability,&#xD;
+	v_prosocialBehaviour,&#xD;
+	v_cpInteraction&#xD;
+	);</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1746086906741</Id>
+						<Name>f_setDefaultValues</Name>
+						<X>-200</X>
+						<Y>290</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Body>v_cars = 100;&#xD;
+v_shareEVs = 0.50;&#xD;
+v_chargePoints = 11;&#xD;
+v_parkingPlaces = 100;&#xD;
+&#xD;
+v_chargingPower_kW = 11;&#xD;
+v_EVEnergyConsumption_kWhperKm = 0.178;&#xD;
+&#xD;
+v_timestep_minutes = 15;&#xD;
+v_simulationPeriod = "week";&#xD;
+v_periods = 1;&#xD;
+&#xD;
+eb_cars.setText(v_cars);&#xD;
+eb_shareElectric.setText(v_shareEVs);&#xD;
+eb_chargePoints.setText(v_chargePoints);&#xD;
+eb_parkingPlaces.setText(v_parkingPlaces);&#xD;
+cb_simulationPeriod.setValue(v_simulationPeriod);&#xD;
+eb_nbOfPeriods.setText(v_periods, true);&#xD;
+&#xD;
+cb_checkCPAvailability.setSelected(true, true);&#xD;
+cb_prosocialBehaviour.setSelected(false, true);&#xD;
+cb_cpInteraction.setSelected(false, true);&#xD;
+</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1746087969109</Id>
+						<Name>f_setNbOfTimesteps</Name>
+						<X>-200</X>
+						<Y>530</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Body>int minutesPerPeriod = 0;&#xD;
+if(v_simulationPeriod.equals("day")){&#xD;
+	minutesPerPeriod = 60 * 24;&#xD;
+} else if(v_simulationPeriod.equals("week")){&#xD;
+	minutesPerPeriod = 60 * 24 * 7;&#xD;
+} else if(v_simulationPeriod.equals("year")){&#xD;
+	minutesPerPeriod = 60 * 24 * 365;&#xD;
+}&#xD;
+&#xD;
+v_numberOfTimesteps = (int) (minutesPerPeriod * v_periods / v_timestep_minutes);</Body>
+					</Function>
+				</Functions>
+				<Connectivity>
+					<ExcelFile>
+						<Id>1746095456060</Id>
+						<Name>excel_exportResults</Name>
+						<X>-200</X>
+						<Y>560</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<ResourceReference>
+							<PackageName>social_charging_model</PackageName>
+							<ClassName>Export_ModelData.xlsx</ClassName>
+						</ResourceReference>
+						<SaveInSnapshot>false</SaveInSnapshot>
+						<LoadOnStartup>true</LoadOnStartup>
+						<SaveOnDispose>true</SaveOnDispose>
+					</ExcelFile>
+				</Connectivity>
+				<AgentLinks>
+					<AgentLink>
+						<Id>1746024451523</Id>
+						<Name>connections</Name>
+						<X>50</X>
+						<Y>-50</Y>
+						<Label>
+							<X>15</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<HandleReceiveInConnections>false</HandleReceiveInConnections>
+						<AgentLinkType>COLLECTION_OF_LINKS</AgentLinkType>
+						<AgentLinkBidirectional>true</AgentLinkBidirectional>
+						<MessageType>Object</MessageType>
+						<LineStyle>SOLID</LineStyle>
+						<LineWidth>1</LineWidth>
+						<LineColor>-16777216</LineColor>
+						<LineZOrder>UNDER_AGENTS</LineZOrder>
+						<LineArrow>NONE</LineArrow>
+						<LineArrowPosition>END</LineArrowPosition>
+					</AgentLink>
+				</AgentLinks>
+				<EmbeddedObjects>
+					<EmbeddedObject>
+						<Id>1746024643041</Id>
+						<Name>mains</Name>
+						<X>-200</X>
+						<Y>250</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<PresentationId>1746024643043</PresentationId>
+						<ActiveObjectClass>
+							<PackageName>social_charging_model</PackageName>
+							<ClassName>Main</ClassName>
+						</ActiveObjectClass>
+						<GenericParameterSubstitute>
+							<GenericParameterSubstituteReference>
+								<PackageName>social_charging_model</PackageName>
+								<ClassName>Main</ClassName>
+								<ItemName>1743154070899</ItemName>
+							</GenericParameterSubstituteReference>
+						</GenericParameterSubstitute>
+						<Parameters>
+							<Parameter>
+								<Name>p_cars</Name>
+							</Parameter>
+							<Parameter>
+								<Name>p_parkingPlaces</Name>
+							</Parameter>
+							<Parameter>
+								<Name>p_chargePoints</Name>
+							</Parameter>
+							<Parameter>
+								<Name>p_shareEVs</Name>
+							</Parameter>
+							<Parameter>
+								<Name>p_EVEnergyConsumption_kWhperKm</Name>
+							</Parameter>
+							<Parameter>
+								<Name>p_chargingPower_kW</Name>
+							</Parameter>
+							<Parameter>
+								<Name>p_timestep_minutes</Name>
+							</Parameter>
+							<Parameter>
+								<Name>p_nbOfTimesteps</Name>
+							</Parameter>
+							<Parameter>
+								<Name>p_checkCPAvailability</Name>
+							</Parameter>
+							<Parameter>
+								<Name>p_hasProsocialChargingBehaviour</Name>
+							</Parameter>
+							<Parameter>
+								<Name>p_hasSocialInteractionBehaviour</Name>
+							</Parameter>
+						</Parameters>
+						<ReplicationFlag>true</ReplicationFlag>
+						<Replication Class="CodeValue">
+							<Code>100</Code>
+						</Replication>
+						<CollectionType>ARRAY_LIST_BASED</CollectionType>
+						<InEnvironment>true</InEnvironment>
+						<InitialLocationType>XYZ</InitialLocationType>
+						<ColumnCode Class="CodeValue">
+							<Code>0</Code>
+						</ColumnCode>
+						<RowCode Class="CodeValue">
+							<Code>0</Code>
+						</RowCode>
+						<LocationNameCode Class="CodeValue">
+							<Code>""</Code>
+						</LocationNameCode>
+						<InitializationType>EMPTY</InitializationType>
+						<InitializationDatabaseTableQuery>
+							<TableReference/>
+						</InitializationDatabaseTableQuery>
+						<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+						<QuantityColumn/>
+					</EmbeddedObject>
+				</EmbeddedObjects>
+				<Presentation>
+					<Level>
+						<Id>1746024451529</Id>
+						<Name>level</Name>
+						<X>0</X>
+						<Y>0</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>true</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>false</ShowLabel>
+						<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+						<Z>0</Z>
+						<LevelVisibility>DIM_NON_CURRENT</LevelVisibility>
+						<Presentation>
+							<Control Type="Button">
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Id>1746024488760</Id>
+								<Name>b_startSimualtion</Name>
+								<X>150</X>
+								<Y>340</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+								<BasicProperties Width="250" Height="30">
+									<EmbeddedIcon>false</EmbeddedIcon>
+									<TextColor/>
+									<Enabled>true</Enabled>
+									<ActionCode>f_initializeModel();</ActionCode>
+								</BasicProperties>
+								<ExtendedProperties>
+									<Font Name="Dialog" Size="16" Style="0"/>
+									<LabelText>Start simulation</LabelText>
+								</ExtendedProperties>
+							</Control>
+							<Control Type="EditBox">
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Id>1746024775863</Id>
+								<Name>eb_cars</Name>
+								<X>300</X>
+								<Y>70</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+								<BasicProperties Width="100" Height="30">
+									<EmbeddedIcon>false</EmbeddedIcon>
+									<FillColor/>
+									<TextColor/>
+									<Enabled>true</Enabled>
+								</BasicProperties>
+								<ExtendedProperties>
+									<Font Name="Dialog" Size="16" Style="0"/>
+									<MinValue>0</MinValue>
+									<MaxValue>10000</MaxValue>
+									<LinkTo>true</LinkTo>
+									<Link>v_cars</Link>
+								</ExtendedProperties>
+							</Control>
+							<Control Type="EditBox">
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Id>1746024861888</Id>
+								<Name>eb_shareElectric</Name>
+								<X>300</X>
+								<Y>110</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+								<BasicProperties Width="100" Height="30">
+									<EmbeddedIcon>false</EmbeddedIcon>
+									<FillColor/>
+									<TextColor/>
+									<Enabled>true</Enabled>
+								</BasicProperties>
+								<ExtendedProperties>
+									<Font Name="Dialog" Size="16" Style="0"/>
+									<MinValue>0</MinValue>
+									<MaxValue>1</MaxValue>
+									<LinkTo>true</LinkTo>
+									<Link>v_shareEVs</Link>
+								</ExtendedProperties>
+							</Control>
+							<Control Type="EditBox">
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Id>1746025318595</Id>
+								<Name>eb_parkingPlaces</Name>
+								<X>300</X>
+								<Y>150</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+								<BasicProperties Width="100" Height="30">
+									<EmbeddedIcon>false</EmbeddedIcon>
+									<FillColor/>
+									<TextColor/>
+									<Enabled>true</Enabled>
+								</BasicProperties>
+								<ExtendedProperties>
+									<Font Name="Dialog" Size="16" Style="0"/>
+									<MinValue>0</MinValue>
+									<MaxValue>10000</MaxValue>
+									<LinkTo>true</LinkTo>
+									<Link>v_parkingPlaces</Link>
+								</ExtendedProperties>
+							</Control>
+							<Control Type="EditBox">
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Id>1746028080824</Id>
+								<Name>eb_chargePoints</Name>
+								<X>300</X>
+								<Y>190</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+								<BasicProperties Width="100" Height="30">
+									<EmbeddedIcon>false</EmbeddedIcon>
+									<FillColor/>
+									<TextColor/>
+									<Enabled>true</Enabled>
+								</BasicProperties>
+								<ExtendedProperties>
+									<Font Name="Dialog" Size="16" Style="0"/>
+									<MinValue>0</MinValue>
+									<MaxValue>10000</MaxValue>
+									<LinkTo>true</LinkTo>
+									<Link>v_chargePoints</Link>
+								</ExtendedProperties>
+							</Control>
+							<Text>
+								<Id>1746086719488</Id>
+								<Name>text</Name>
+								<X>150</X>
+								<Y>75</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>Cars:</Text>
+								<Font>
+									<Name>Dialog</Name>
+									<Size>16</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<Text>
+								<Id>1746086785619</Id>
+								<Name>text1</Name>
+								<X>150</X>
+								<Y>115</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>Share electric:</Text>
+								<Font>
+									<Name>Dialog</Name>
+									<Size>16</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<Text>
+								<Id>1746086837341</Id>
+								<Name>text2</Name>
+								<X>150</X>
+								<Y>155</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>Parking places:</Text>
+								<Font>
+									<Name>Dialog</Name>
+									<Size>16</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<Text>
+								<Id>1746086837346</Id>
+								<Name>text3</Name>
+								<X>150</X>
+								<Y>195</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>Charge points:</Text>
+								<Font>
+									<Name>Dialog</Name>
+									<Size>16</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<Control Type="EditBox">
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Id>1746087694918</Id>
+								<Name>eb_nbOfPeriods</Name>
+								<X>300</X>
+								<Y>290</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+								<BasicProperties Width="100" Height="30">
+									<EmbeddedIcon>false</EmbeddedIcon>
+									<FillColor/>
+									<TextColor/>
+									<Enabled>true</Enabled>
+									<ActionCode>f_setNbOfTimesteps();</ActionCode>
+								</BasicProperties>
+								<ExtendedProperties>
+									<Font Name="Dialog" Size="11" Style="0"/>
+									<MinValue>0</MinValue>
+									<MaxValue>1000</MaxValue>
+									<LinkTo>true</LinkTo>
+									<Link>v_periods</Link>
+								</ExtendedProperties>
+							</Control>
+							<Control Type="ComboBox">
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Id>1746087719786</Id>
+								<Name>cb_simulationPeriod</Name>
+								<X>300</X>
+								<Y>250</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+								<BasicProperties Width="100" Height="30">
+									<EmbeddedIcon>false</EmbeddedIcon>
+									<FillColor/>
+									<TextColor/>
+									<Enabled>true</Enabled>
+									<ActionCode>v_simulationPeriod = cb_simulationPeriod.getValue();
+
+f_setNbOfTimesteps();</ActionCode>
+								</BasicProperties>
+								<ExtendedProperties>
+									<Font Name="Dialog" Size="16" Style="0"/>
+									<Editable>false</Editable>
+									<Button>Day</Button>
+									<Button>Week</Button>
+									<Button>Year</Button>
+									<LinkTo>false</LinkTo>
+								</ExtendedProperties>
+							</Control>
+							<Text>
+								<Id>1746087753443</Id>
+								<Name>text4</Name>
+								<X>150</X>
+								<Y>255</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>Simulation period:</Text>
+								<Font>
+									<Name>Dialog</Name>
+									<Size>16</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<Text>
+								<Id>1746087777286</Id>
+								<Name>text5</Name>
+								<X>150</X>
+								<Y>295</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>Number of periods:</Text>
+								<Font>
+									<Name>Dialog</Name>
+									<Size>16</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<Control Type="FileChooser">
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Id>1746095456056</Id>
+								<Name>fileChooser_exportResults</Name>
+								<X>150</X>
+								<Y>400</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+								<BasicProperties Width="250" Height="30">
+									<EmbeddedIcon>false</EmbeddedIcon>
+									<FillColor/>
+									<TextColor/>
+									<Enabled>false</Enabled>
+									<ActionCode>fileChooser_exportResults.setEnabled(false);</ActionCode>
+								</BasicProperties>
+								<ExtendedProperties>
+									<Font Name="Dialog" Size="16" Style="0"/>
+									<Title>Download results in excel</Title>
+									<Type>DOWNLOAD</Type>
+									<Filters>.xlsx, .xls</Filters>
+									<FileName>Export_ModelData.xlsx</FileName>
+								</ExtendedProperties>
+							</Control>
+							<Text>
+								<Id>1747139674326</Id>
+								<Name>text6</Name>
+								<X>460</X>
+								<Y>70</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>EV drivers requiring charge check charge point availability</Text>
+								<Font>
+									<Name>Dialog</Name>
+									<Size>16</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<Text>
+								<Id>1747139674605</Id>
+								<Name>text7</Name>
+								<X>460</X>
+								<Y>110</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>EV drivers perform prosocial behaviour (removing EV when full)</Text>
+								<Font>
+									<Name>Dialog</Name>
+									<Size>16</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<Text>
+								<Id>1747139674607</Id>
+								<Name>text8</Name>
+								<X>460</X>
+								<Y>150</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>EV drivers interact on charge point occupation</Text>
+								<Font>
+									<Name>Dialog</Name>
+									<Size>16</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<Control Type="CheckBox">
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Id>1747139796746</Id>
+								<Name>cb_checkCPAvailability</Name>
+								<X>935</X>
+								<Y>65</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+								<BasicProperties Width="40" Height="30">
+									<EmbeddedIcon>false</EmbeddedIcon>
+									<TextColor/>
+									<Enabled>true</Enabled>
+								</BasicProperties>
+								<ExtendedProperties>
+									<Font Name="Dialog" Size="12" Style="0"/>
+									<LabelText/>
+									<LinkTo>true</LinkTo>
+									<Link>v_checkCPAvailability</Link>
+								</ExtendedProperties>
+							</Control>
+							<Control Type="CheckBox">
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Id>1747139860479</Id>
+								<Name>cb_prosocialBehaviour</Name>
+								<X>935</X>
+								<Y>105</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+								<BasicProperties Width="40" Height="30">
+									<EmbeddedIcon>false</EmbeddedIcon>
+									<TextColor/>
+									<Enabled>true</Enabled>
+								</BasicProperties>
+								<ExtendedProperties>
+									<Font Name="Dialog" Size="12" Style="0"/>
+									<LabelText/>
+									<LinkTo>true</LinkTo>
+									<Link>v_prosocialBehaviour</Link>
+								</ExtendedProperties>
+							</Control>
+							<Control Type="CheckBox">
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Id>1747139876862</Id>
+								<Name>cb_cpInteraction</Name>
+								<X>935</X>
+								<Y>145</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+								<BasicProperties Width="40" Height="30">
+									<EmbeddedIcon>false</EmbeddedIcon>
+									<TextColor/>
+									<Enabled>true</Enabled>
+								</BasicProperties>
+								<ExtendedProperties>
+									<Font Name="Dialog" Size="12" Style="0"/>
+									<LabelText/>
+									<LinkTo>true</LinkTo>
+									<Link>v_cpInteraction</Link>
+								</ExtendedProperties>
+							</Control>
+						</Presentation>
+					</Level>
+					<EmbeddedObjectPresentation>
+						<Id>1746024643043</Id>
+						<Name>mains_presentation</Name>
+						<X>0</X>
+						<Y>850</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>true</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>false</ShowLabel>
+						<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+						<EmbeddedIcon>false</EmbeddedIcon>
+						<Z>0</Z>
+						<Rotation>0.0</Rotation>
+						<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
+						<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
+						<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
+						<Latitude>0.0</Latitude>
+						<Longitude>0.0</Longitude>
+					</EmbeddedObjectPresentation>
+				</Presentation>
+				<Areas>
+					<Area>
+						<Id>1746091642928</Id>
+						<Name>viewArea</Name>
+						<X>0</X>
+						<Y>0</Y>
+						<Label>
+							<X>0</X>
+							<Y>-10</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>false</ShowLabel>
+						<Title/>
+						<Width>1000</Width>
+						<Height>600</Height>
+					</Area>
+				</Areas>
+			</ActiveObjectClass>
+		</ActiveObjectClasses>
+		<DifferentialEquationsMethod>EULER</DifferentialEquationsMethod>
+		<MixedEquationsMethod>RK45_NEWTON</MixedEquationsMethod>
+		<AlgebraicEquationsMethod>MODIFIED_NEWTON</AlgebraicEquationsMethod>
+		<AbsoluteAccuracy>1.0E-5</AbsoluteAccuracy>
+		<FixedTimeStep>0.001</FixedTimeStep>
+		<RelativeAccuracy>1.0E-5</RelativeAccuracy>
+		<TimeAccuracy>1.0E-5</TimeAccuracy>
+		<Frame>
+			<Width>1000</Width>
+			<Height>600</Height>
+		</Frame>
+		<Database>
+			<Logging>false</Logging>
+			<AutoExport>false</AutoExport>
+			<ShutdownCompact>false</ShutdownCompact>
+			<ImportSettings>
+				<ExternalConnection>
+					<Id>1745925931813</Id>
+					<Name>database</Name>
+					<X>0</X>
+					<Y>0</Y>
+					<Label>
+						<X>10</X>
+						<Y>0</Y>
+					</Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<DatabaseType>EXCEL_ACCESS</DatabaseType>
+					<ConnectionURL/>
+					<ConnectOnStartup>true</ConnectOnStartup>
+					<DatabaseName/>
+					<ResourceReference>
+						<PackageName>social_charging_model</PackageName>
+						<ClassName>AlbatrossProcessedVehicleTrips.xlsx</ClassName>
+					</ResourceReference>
+					<Host>localhost</Host>
+					<JdbcDriverClassName>net.sourceforge.jtds.jdbc.Driver</JdbcDriverClassName>
+					<Login/>
+					<Password/>
+				</ExternalConnection>
+				<TableImportSettings>
+					<TableReference>
+						<PackageName>social_charging_model</PackageName>
+						<ClassName>vehicle_trips</ClassName>
+					</TableReference>
+					<ConnectionIndex>0</ConnectionIndex>
+					<ExternalTableName>"Sheet1"</ExternalTableName>
+					<AutoImport>false</AutoImport>
+				</TableImportSettings>
+			</ImportSettings>
+			<ExportSettings/>
+		</Database>
+		<RunConfiguration ActiveObjectClassId="1746024451522">
+			<Id>1743154070922</Id>
+			<Name>RunConfiguration</Name>
+			<MaximumMemory>16384</MaximumMemory>
+			<ModelTimeProperties>
+				<StopOption>Stop at specified time</StopOption>
+				<InitialDate>1743120000000</InitialDate>
+				<InitialTime>0.0</InitialTime>
+				<FinalDate>1745798400000</FinalDate>
+				<FinalTime>100.0</FinalTime>
+			</ModelTimeProperties>
+			<AnimationProperties>
+				<StopNever>true</StopNever>
+				<ExecutionMode>realTimeScaled</ExecutionMode>
+				<RealTimeScale>25.0</RealTimeScale>
+				<EnableZoomAndPanning>true</EnableZoomAndPanning>
+				<EnableDeveloperPanel>false</EnableDeveloperPanel>
+				<ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart>
+			</AnimationProperties>
+			<Inputs/>
+			<Outputs/>
+		</RunConfiguration>
+		<JavaClasses>
+			<JavaClass>
+				<Id>1745927664352</Id>
+				<Name>J_Trip</Name>
+				<Text>/**&#xD;
+ * J_Trip&#xD;
+ */	&#xD;
+public class J_Trip {&#xD;
+	private double departureTime;&#xD;
+	private double arrivalTime;&#xD;
+	private double distance_km;&#xD;
+    /**&#xD;
+     * Default constructor&#xD;
+     */&#xD;
+    public J_Trip(double dep, double arr, double dist) {&#xD;
+    	this.departureTime = dep;&#xD;
+    	this.arrivalTime = arr;&#xD;
+    	this.distance_km = dist;&#xD;
+    }&#xD;
+&#xD;
+    &#xD;
+    /** Setters&#xD;
+     * &#xD;
+     */&#xD;
+    &#xD;
+    /** Getters&#xD;
+     * &#xD;
+     */&#xD;
+    public double getDepartureTime() { return departureTime; }&#xD;
+    public double getArrivalTime() { return arrivalTime; }&#xD;
+    public double getDistance_km() { return distance_km; }&#xD;
+    &#xD;
+    @Override&#xD;
+    public String toString() {&#xD;
+        return "J_Trip{" +&#xD;
+               "departureTime=" + departureTime +&#xD;
+               ", arrivalTime=" + arrivalTime +&#xD;
+               ", distance_km=" + distance_km +&#xD;
+               '}';&#xD;
+    }&#xD;
+}</Text>
+			</JavaClass>
+			<JavaClass>
+				<Id>1746011695816</Id>
+				<Name>J_ChargePoint</Name>
+				<Text>/**&#xD;
+ * J_ChargePoint&#xD;
+ */	&#xD;
+public class J_ChargePoint {&#xD;
+&#xD;
+    /**&#xD;
+     * Default constructor&#xD;
+     */&#xD;
+    public J_ChargePoint() {&#xD;
+    }&#xD;
+&#xD;
+	@Override&#xD;
+	public String toString() {&#xD;
+		return super.toString();&#xD;
+	}&#xD;
+&#xD;
+}</Text>
+			</JavaClass>
+		</JavaClasses>
+		<RequiredLibraryReference>
+			<LibraryName>com.anylogic.libraries.modules.markup_descriptors</LibraryName>
+			<VersionMajor>1</VersionMajor>
+			<VersionMinor>0</VersionMinor>
+			<VersionBuild>0</VersionBuild>
+		</RequiredLibraryReference>
+		<CloudModelUuid>2ede84d6-4c25-4f24-8957-1c28222fa614</CloudModelUuid>
+		<ModelResources>
+			<Resource>
+				<Path>AlbatrossProcessedVehicleTrips.xlsx</Path>
+				<ReferencedFromUserCode>false</ReferencedFromUserCode>
+				<Location>FILE_SYSTEM</Location>
+			</Resource>
+			<Resource>
+				<Path>Export_ModelData.xlsx</Path>
+				<ReferencedFromUserCode>false</ReferencedFromUserCode>
+				<Location>FILE_SYSTEM</Location>
+			</Resource>
+		</ModelResources>
+		<Experiments>
+			<SimulationExperiment ActiveObjectClassId="1746024451522">
+				<Id>1743154070913</Id>
+				<Name>Simulation</Name>
+				<CommandLineArguments/>
+				<MaximumMemory>4096</MaximumMemory>
+				<RandomNumberGenerationType>fixedSeed</RandomNumberGenerationType>
+				<CustomGeneratorCode>new Random()</CustomGeneratorCode>
+				<SeedValue>1</SeedValue>
+				<SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
+				<VmArgs/>
+				<LoadRootFromSnapshot>false</LoadRootFromSnapshot>
+				<Presentation>
+					<Text>
+						<Id>1743154070921</Id>
+						<Name>text</Name>
+						<X>50</X>
+						<Y>30</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>true</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>false</ShowLabel>
+						<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+						<EmbeddedIcon>false</EmbeddedIcon>
+						<Z>0</Z>
+						<Rotation>0.0</Rotation>
+						<Color>-12490271</Color>
+						<Text>Social charging model</Text>
+						<Font>
+							<Name>SansSerif</Name>
+							<Size>24</Size>
+							<Style>0</Style>
+						</Font>
+						<Alignment>LEFT</Alignment>
+					</Text>
+				</Presentation>
+				<Parameters/>
+				<PresentationProperties>
+					<EnableZoomAndPanning>true</EnableZoomAndPanning>
+					<ExecutionMode>realTimeScaled</ExecutionMode>
+					<Title>Social charging model : Simulation</Title>
+					<EnableDeveloperPanel>true</EnableDeveloperPanel>
+					<ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart>
+					<RealTimeScale>1.0</RealTimeScale>
+				</PresentationProperties>
+				<ModelTimeProperties>
+					<StopOption>Never</StopOption>
+					<InitialDate>1735689600000</InitialDate>
+					<InitialTime>0.0</InitialTime>
+					<FinalDate>1745798400000</FinalDate>
+					<FinalTime>100.0</FinalTime>
+				</ModelTimeProperties>
+				<BypassInitialScreen>true</BypassInitialScreen>
+			</SimulationExperiment>
+		</Experiments>
+	</Model>
+</AnyLogicWorkspace>

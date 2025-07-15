@@ -72,6 +72,7 @@ text_nextTrip.setText("Next trip = " + v_nextTrip.toString());
 double f_initializeStatus()
 {/*ALCODESTART::1746001340956*/
 v_status = PARKED_NON_CHARGE_POINT_CHARGING_NOT_REQUIRED;
+
 /*ALCODEEND*/}
 
 boolean f_isInCurrentTimestep(int timeToCheck,double timestepStartMinuteOfWeek,double minutesPerTimestep)

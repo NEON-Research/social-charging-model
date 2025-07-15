@@ -73,9 +73,9 @@
 		<ReturnModificator>VOID</ReturnModificator>
 		<ReturnType>double</ReturnType>
 		<Id>1748950054381</Id>
-		<Name><![CDATA[f_requestToMoveAVehicleFromChargePoint]]></Name>
+		<Name><![CDATA[f_b2_requestToMoveAVehicleFromChargePoint]]></Name>
 		<X>320</X>
-		<Y>370</Y>
+		<Y>500</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -83,14 +83,15 @@
 		<PublicFlag>false</PublicFlag>
 		<PresentationFlag>true</PresentationFlag>
 		<ShowLabel>true</ShowLabel>
+		<Body xmlns:al="http://anylogic.com"/>
 	</Function>
 	<Function AccessType="default" StaticFunction="false">
 		<ReturnModificator>VOID</ReturnModificator>
 		<ReturnType>double</ReturnType>
 		<Id>1748950054518</Id>
-		<Name><![CDATA[f_notifyChargePointAvailable]]></Name>
+		<Name><![CDATA[f_b3_notifyChargePointAvailable]]></Name>
 		<X>320</X>
-		<Y>390</Y>
+		<Y>520</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -98,14 +99,32 @@
 		<PublicFlag>false</PublicFlag>
 		<PresentationFlag>true</PresentationFlag>
 		<ShowLabel>true</ShowLabel>
+		<Body xmlns:al="http://anylogic.com"/>
 	</Function>
 	<Function AccessType="default" StaticFunction="false">
 		<ReturnModificator>VOID</ReturnModificator>
 		<ReturnType>double</ReturnType>
 		<Id>1748950054520</Id>
-		<Name><![CDATA[f_movingVehicleFromChargePoint]]></Name>
+		<Name><![CDATA[f_b1_movingVehicleFromChargePoint]]></Name>
 		<X>320</X>
-		<Y>410</Y>
+		<Y>470</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>VOID</ReturnModificator>
+		<ReturnType>double</ReturnType>
+		<Id>1751447497408</Id>
+		<Name><![CDATA[f_b4_chargeOnlyNecessaryEnergy]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
+		<X>320</X>
+		<Y>550</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>

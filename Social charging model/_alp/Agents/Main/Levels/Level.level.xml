@@ -14,16 +14,19 @@
 		<ShowLabel>false</ShowLabel>
 		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
 		<AutoUpdate>false</AutoUpdate>
-		<OccurrenceAtTime>true</OccurrenceAtTime>
-		<OccurrenceDate>1746000000000</OccurrenceDate>
-		<OccurrenceTime Class="CodeUnitValue">
-			<Code><![CDATA[0]]></Code>
-			<Unit Class="TimeUnits">MINUTE</Unit>
-		</OccurrenceTime>
-		<RecurrenceCode Class="CodeUnitValue">
-			<Code><![CDATA[1]]></Code>
-			<Unit Class="TimeUnits">MINUTE</Unit>
-		</RecurrenceCode>
+		<RecurrenceProperties>
+			<Id>1751443772784</Id>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1746000000000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">MINUTE</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">MINUTE</Unit>
+			</RecurrenceCode>
+		</RecurrenceProperties>
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Width>360</Width>
 		<Height>320</Height>
@@ -73,7 +76,7 @@
 		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
 		<BasicProperties Width="250" Height="30">
 			<EmbeddedIcon>false</EmbeddedIcon>
-			<TextColor/>
+			<TextColor>-16777216</TextColor>
 			<Enabled>true</Enabled>
 			<ActionCode>f_writeResultsToExcel(startup_agent.excel_exportResults);
 startup_agent.simulationCount++;
@@ -102,16 +105,19 @@ this.deleteSelf();</ActionCode>
 		<ShowLabel>false</ShowLabel>
 		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
 		<AutoUpdate>false</AutoUpdate>
-		<OccurrenceAtTime>true</OccurrenceAtTime>
-		<OccurrenceDate>1746000000000</OccurrenceDate>
-		<OccurrenceTime Class="CodeUnitValue">
-			<Code><![CDATA[0]]></Code>
-			<Unit Class="TimeUnits">MINUTE</Unit>
-		</OccurrenceTime>
-		<RecurrenceCode Class="CodeUnitValue">
-			<Code><![CDATA[1]]></Code>
-			<Unit Class="TimeUnits">MINUTE</Unit>
-		</RecurrenceCode>
+		<RecurrenceProperties>
+			<Id>1751443772787</Id>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1746000000000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">MINUTE</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">MINUTE</Unit>
+			</RecurrenceCode>
+		</RecurrenceProperties>
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Width>360</Width>
 		<Height>320</Height>
@@ -145,4 +151,572 @@ this.deleteSelf();</ActionCode>
 		<VerScaleType>AUTO</VerScaleType>
 		<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
 	</TimeStackChart>
+	<Histogram>
+		<Id>1752588345319</Id>
+		<Name><![CDATA[hs_norms_data]]></Name>
+		<X>1200</X>
+		<Y>20</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<AutoUpdate>false</AutoUpdate>
+		<RecurrenceProperties>
+			<Id>1752588345317</Id>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1752652800000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+		</RecurrenceProperties>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Width>260</Width>
+		<Height>210</Height>
+		<BackgroundColor/>
+		<BorderColor/>
+		<ChartArea>
+			<XOffset>50</XOffset>
+			<YOffset>30</YOffset>
+			<Width>180</Width>
+			<Height>120</Height>
+			<BackgroundColor>-1</BackgroundColor>
+			<BorderColor>-16777216</BorderColor>
+			<GridColor>-12566464</GridColor>
+		</ChartArea>
+		<Legend>
+			<Place>SOUTH</Place>
+			<TextColor>-16777216</TextColor>
+			<Size>30</Size>
+		</Legend>
+		<Labels>
+			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+			<TextColor>-12566464</TextColor>
+		</Labels>
+		<ShowLegend>true</ShowLegend>
+		<ShowPDF>true</ShowPDF>
+		<ShowCDF>false</ShowCDF>
+		<ShowMean>false</ShowMean>
+		<Bars>
+			<Direction>UP</Direction>
+			<RelativeWidth>0.8</RelativeWidth>
+		</Bars>
+		<HistogramDataExpression>
+			<Id>1752588349214</Id>
+			<Expression>hs_data_norms_data</Expression>
+			<ColorPDF>-2354116</ColorPDF>
+			<ColorCDF>-4565549</ColorCDF>
+			<ColorLowPercent>-12799119</ColorLowPercent>
+			<ColorHighPercent>-2987746</ColorHighPercent>
+			<ColorMean>-9404272</ColorMean>
+			<LineWidth>1</LineWidth>
+			<Title>Norms data</Title>
+		</HistogramDataExpression>
+	</Histogram>
+	<Histogram>
+		<Id>1752588358294</Id>
+		<Name><![CDATA[hs_trust_data]]></Name>
+		<X>1200</X>
+		<Y>260</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<AutoUpdate>false</AutoUpdate>
+		<RecurrenceProperties>
+			<Id>1752588358292</Id>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1752652800000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+		</RecurrenceProperties>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Width>260</Width>
+		<Height>210</Height>
+		<BackgroundColor/>
+		<BorderColor/>
+		<ChartArea>
+			<XOffset>50</XOffset>
+			<YOffset>30</YOffset>
+			<Width>180</Width>
+			<Height>120</Height>
+			<BackgroundColor>-1</BackgroundColor>
+			<BorderColor>-16777216</BorderColor>
+			<GridColor>-12566464</GridColor>
+		</ChartArea>
+		<Legend>
+			<Place>SOUTH</Place>
+			<TextColor>-16777216</TextColor>
+			<Size>30</Size>
+		</Legend>
+		<Labels>
+			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+			<TextColor>-12566464</TextColor>
+		</Labels>
+		<ShowLegend>true</ShowLegend>
+		<ShowPDF>true</ShowPDF>
+		<ShowCDF>false</ShowCDF>
+		<ShowMean>false</ShowMean>
+		<Bars>
+			<Direction>UP</Direction>
+			<RelativeWidth>0.8</RelativeWidth>
+		</Bars>
+		<HistogramDataExpression>
+			<Id>1752588360184</Id>
+			<Expression>hs_data_trust_data</Expression>
+			<ColorPDF>-32944</ColorPDF>
+			<ColorCDF>-2448096</ColorCDF>
+			<ColorLowPercent>-2448096</ColorLowPercent>
+			<ColorHighPercent>-10496</ColorHighPercent>
+			<ColorMean>-14774017</ColorMean>
+			<LineWidth>1</LineWidth>
+			<Title>Trust data</Title>
+		</HistogramDataExpression>
+	</Histogram>
+	<Histogram>
+		<Id>1752588362110</Id>
+		<Name><![CDATA[hs_rc_data]]></Name>
+		<X>1200</X>
+		<Y>500</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<AutoUpdate>false</AutoUpdate>
+		<RecurrenceProperties>
+			<Id>1752588362108</Id>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1752652800000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+		</RecurrenceProperties>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Width>260</Width>
+		<Height>210</Height>
+		<BackgroundColor/>
+		<BorderColor/>
+		<ChartArea>
+			<XOffset>50</XOffset>
+			<YOffset>30</YOffset>
+			<Width>180</Width>
+			<Height>120</Height>
+			<BackgroundColor>-1</BackgroundColor>
+			<BorderColor>-16777216</BorderColor>
+			<GridColor>-12566464</GridColor>
+		</ChartArea>
+		<Legend>
+			<Place>SOUTH</Place>
+			<TextColor>-16777216</TextColor>
+			<Size>30</Size>
+		</Legend>
+		<Labels>
+			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+			<TextColor>-12566464</TextColor>
+		</Labels>
+		<ShowLegend>true</ShowLegend>
+		<ShowPDF>true</ShowPDF>
+		<ShowCDF>false</ShowCDF>
+		<ShowMean>false</ShowMean>
+		<Bars>
+			<Direction>UP</Direction>
+			<RelativeWidth>0.8</RelativeWidth>
+		</Bars>
+		<HistogramDataExpression>
+			<Id>1752588364870</Id>
+			<Expression>hs_data_rc_data</Expression>
+			<ColorPDF>-4343957</ColorPDF>
+			<ColorCDF>-2448096</ColorCDF>
+			<ColorLowPercent>-7667573</ColorLowPercent>
+			<ColorHighPercent>-10496</ColorHighPercent>
+			<ColorMean>-3137392</ColorMean>
+			<LineWidth>1</LineWidth>
+			<Title>Reputational concern data</Title>
+		</HistogramDataExpression>
+	</Histogram>
+	<Histogram>
+		<Id>1752588369649</Id>
+		<Name><![CDATA[hs_psi_data]]></Name>
+		<X>1200</X>
+		<Y>740</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<AutoUpdate>false</AutoUpdate>
+		<RecurrenceProperties>
+			<Id>1752588369647</Id>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1752652800000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+		</RecurrenceProperties>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Width>260</Width>
+		<Height>210</Height>
+		<BackgroundColor/>
+		<BorderColor/>
+		<ChartArea>
+			<XOffset>50</XOffset>
+			<YOffset>30</YOffset>
+			<Width>180</Width>
+			<Height>120</Height>
+			<BackgroundColor>-1</BackgroundColor>
+			<BorderColor>-16777216</BorderColor>
+			<GridColor>-12566464</GridColor>
+		</ChartArea>
+		<Legend>
+			<Place>SOUTH</Place>
+			<TextColor>-16777216</TextColor>
+			<Size>30</Size>
+		</Legend>
+		<Labels>
+			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+			<TextColor>-12566464</TextColor>
+		</Labels>
+		<ShowLegend>true</ShowLegend>
+		<ShowPDF>true</ShowPDF>
+		<ShowCDF>false</ShowCDF>
+		<ShowMean>false</ShowMean>
+		<Bars>
+			<Direction>UP</Direction>
+			<RelativeWidth>0.8</RelativeWidth>
+		</Bars>
+		<HistogramDataExpression>
+			<Id>1752588371376</Id>
+			<Expression>hs_data_psi_data</Expression>
+			<ColorPDF>-2448096</ColorPDF>
+			<ColorCDF>-14774017</ColorCDF>
+			<ColorLowPercent>-29696</ColorLowPercent>
+			<ColorHighPercent>-9807155</ColorHighPercent>
+			<ColorMean>-13447886</ColorMean>
+			<LineWidth>1</LineWidth>
+			<Title>Perceived social interdependence data</Title>
+		</HistogramDataExpression>
+	</Histogram>
+	<Histogram>
+		<Id>1752588376606</Id>
+		<Name><![CDATA[hs_norms_pop]]></Name>
+		<X>1480</X>
+		<Y>20</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<AutoUpdate>false</AutoUpdate>
+		<RecurrenceProperties>
+			<Id>1752588376604</Id>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1752652800000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+		</RecurrenceProperties>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Width>260</Width>
+		<Height>210</Height>
+		<BackgroundColor/>
+		<BorderColor/>
+		<ChartArea>
+			<XOffset>50</XOffset>
+			<YOffset>30</YOffset>
+			<Width>180</Width>
+			<Height>120</Height>
+			<BackgroundColor>-1</BackgroundColor>
+			<BorderColor>-16777216</BorderColor>
+			<GridColor>-12566464</GridColor>
+		</ChartArea>
+		<Legend>
+			<Place>SOUTH</Place>
+			<TextColor>-16777216</TextColor>
+			<Size>30</Size>
+		</Legend>
+		<Labels>
+			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+			<TextColor>-12566464</TextColor>
+		</Labels>
+		<ShowLegend>true</ShowLegend>
+		<ShowPDF>true</ShowPDF>
+		<ShowCDF>false</ShowCDF>
+		<ShowMean>false</ShowMean>
+		<Bars>
+			<Direction>UP</Direction>
+			<RelativeWidth>0.8</RelativeWidth>
+		</Bars>
+		<HistogramDataExpression>
+			<Id>1752588376603</Id>
+			<Expression>hs_data_norms_pop</Expression>
+			<ColorPDF>-2354116</ColorPDF>
+			<ColorCDF>-4565549</ColorCDF>
+			<ColorLowPercent>-12799119</ColorLowPercent>
+			<ColorHighPercent>-2987746</ColorHighPercent>
+			<ColorMean>-9404272</ColorMean>
+			<LineWidth>1</LineWidth>
+			<Title>Norms population</Title>
+		</HistogramDataExpression>
+	</Histogram>
+	<Histogram>
+		<Id>1752588376611</Id>
+		<Name><![CDATA[hs_psi_pop]]></Name>
+		<X>1480</X>
+		<Y>740</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<AutoUpdate>false</AutoUpdate>
+		<RecurrenceProperties>
+			<Id>1752588376609</Id>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1752652800000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+		</RecurrenceProperties>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Width>260</Width>
+		<Height>210</Height>
+		<BackgroundColor/>
+		<BorderColor/>
+		<ChartArea>
+			<XOffset>50</XOffset>
+			<YOffset>30</YOffset>
+			<Width>180</Width>
+			<Height>120</Height>
+			<BackgroundColor>-1</BackgroundColor>
+			<BorderColor>-16777216</BorderColor>
+			<GridColor>-12566464</GridColor>
+		</ChartArea>
+		<Legend>
+			<Place>SOUTH</Place>
+			<TextColor>-16777216</TextColor>
+			<Size>30</Size>
+		</Legend>
+		<Labels>
+			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+			<TextColor>-12566464</TextColor>
+		</Labels>
+		<ShowLegend>true</ShowLegend>
+		<ShowPDF>true</ShowPDF>
+		<ShowCDF>false</ShowCDF>
+		<ShowMean>false</ShowMean>
+		<Bars>
+			<Direction>UP</Direction>
+			<RelativeWidth>0.8</RelativeWidth>
+		</Bars>
+		<HistogramDataExpression>
+			<Id>1752588376608</Id>
+			<Expression>hs_data_psi_pop</Expression>
+			<ColorPDF>-2448096</ColorPDF>
+			<ColorCDF>-14774017</ColorCDF>
+			<ColorLowPercent>-29696</ColorLowPercent>
+			<ColorHighPercent>-9807155</ColorHighPercent>
+			<ColorMean>-13447886</ColorMean>
+			<LineWidth>1</LineWidth>
+			<Title>Perceived social interdependence population</Title>
+		</HistogramDataExpression>
+	</Histogram>
+	<Histogram>
+		<Id>1752588376616</Id>
+		<Name><![CDATA[hs_trust_pop]]></Name>
+		<X>1480</X>
+		<Y>260</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<AutoUpdate>false</AutoUpdate>
+		<RecurrenceProperties>
+			<Id>1752588376614</Id>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1752652800000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+		</RecurrenceProperties>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Width>260</Width>
+		<Height>210</Height>
+		<BackgroundColor/>
+		<BorderColor/>
+		<ChartArea>
+			<XOffset>50</XOffset>
+			<YOffset>30</YOffset>
+			<Width>180</Width>
+			<Height>120</Height>
+			<BackgroundColor>-1</BackgroundColor>
+			<BorderColor>-16777216</BorderColor>
+			<GridColor>-12566464</GridColor>
+		</ChartArea>
+		<Legend>
+			<Place>SOUTH</Place>
+			<TextColor>-16777216</TextColor>
+			<Size>30</Size>
+		</Legend>
+		<Labels>
+			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+			<TextColor>-12566464</TextColor>
+		</Labels>
+		<ShowLegend>true</ShowLegend>
+		<ShowPDF>true</ShowPDF>
+		<ShowCDF>false</ShowCDF>
+		<ShowMean>false</ShowMean>
+		<Bars>
+			<Direction>UP</Direction>
+			<RelativeWidth>0.8</RelativeWidth>
+		</Bars>
+		<HistogramDataExpression>
+			<Id>1752588376613</Id>
+			<Expression>hs_data_trust_pop</Expression>
+			<ColorPDF>-32944</ColorPDF>
+			<ColorCDF>-2448096</ColorCDF>
+			<ColorLowPercent>-2448096</ColorLowPercent>
+			<ColorHighPercent>-10496</ColorHighPercent>
+			<ColorMean>-14774017</ColorMean>
+			<LineWidth>1</LineWidth>
+			<Title>Trust population</Title>
+		</HistogramDataExpression>
+	</Histogram>
+	<Histogram>
+		<Id>1752588376621</Id>
+		<Name><![CDATA[hs_rc_pop]]></Name>
+		<X>1480</X>
+		<Y>500</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<AutoUpdate>false</AutoUpdate>
+		<RecurrenceProperties>
+			<Id>1752588376619</Id>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1752652800000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+		</RecurrenceProperties>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Width>260</Width>
+		<Height>210</Height>
+		<BackgroundColor/>
+		<BorderColor/>
+		<ChartArea>
+			<XOffset>50</XOffset>
+			<YOffset>30</YOffset>
+			<Width>180</Width>
+			<Height>120</Height>
+			<BackgroundColor>-1</BackgroundColor>
+			<BorderColor>-16777216</BorderColor>
+			<GridColor>-12566464</GridColor>
+		</ChartArea>
+		<Legend>
+			<Place>SOUTH</Place>
+			<TextColor>-16777216</TextColor>
+			<Size>30</Size>
+		</Legend>
+		<Labels>
+			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+			<TextColor>-12566464</TextColor>
+		</Labels>
+		<ShowLegend>true</ShowLegend>
+		<ShowPDF>true</ShowPDF>
+		<ShowCDF>false</ShowCDF>
+		<ShowMean>false</ShowMean>
+		<Bars>
+			<Direction>UP</Direction>
+			<RelativeWidth>0.8</RelativeWidth>
+		</Bars>
+		<HistogramDataExpression>
+			<Id>1752588376618</Id>
+			<Expression>hs_data_rc_pop</Expression>
+			<ColorPDF>-4343957</ColorPDF>
+			<ColorCDF>-2448096</ColorCDF>
+			<ColorLowPercent>-7667573</ColorLowPercent>
+			<ColorHighPercent>-10496</ColorHighPercent>
+			<ColorMean>-3137392</ColorMean>
+			<LineWidth>1</LineWidth>
+			<Title>Reputational concern population</Title>
+		</HistogramDataExpression>
+	</Histogram>
 </Presentation>

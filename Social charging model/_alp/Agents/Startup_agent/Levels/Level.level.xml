@@ -16,7 +16,7 @@
 		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
 		<BasicProperties Width="250" Height="30">
 			<EmbeddedIcon>false</EmbeddedIcon>
-			<TextColor/>
+			<TextColor>-16777216</TextColor>
 			<Enabled>true</Enabled>
 			<ActionCode>f_initializeModel();</ActionCode>
 		</BasicProperties>
@@ -41,8 +41,8 @@
 		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
 		<BasicProperties Width="100" Height="30">
 			<EmbeddedIcon>false</EmbeddedIcon>
-			<FillColor/>
-			<TextColor/>
+			<FillColor>-1</FillColor>
+			<TextColor>-16777216</TextColor>
 			<Enabled>true</Enabled>
 		</BasicProperties>
 		<ExtendedProperties>
@@ -69,8 +69,8 @@
 		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
 		<BasicProperties Width="100" Height="30">
 			<EmbeddedIcon>false</EmbeddedIcon>
-			<FillColor/>
-			<TextColor/>
+			<FillColor>-1</FillColor>
+			<TextColor>-16777216</TextColor>
 			<Enabled>true</Enabled>
 		</BasicProperties>
 		<ExtendedProperties>
@@ -97,8 +97,8 @@
 		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
 		<BasicProperties Width="100" Height="30">
 			<EmbeddedIcon>false</EmbeddedIcon>
-			<FillColor/>
-			<TextColor/>
+			<FillColor>-1</FillColor>
+			<TextColor>-16777216</TextColor>
 			<Enabled>true</Enabled>
 		</BasicProperties>
 		<ExtendedProperties>
@@ -125,8 +125,8 @@
 		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
 		<BasicProperties Width="100" Height="30">
 			<EmbeddedIcon>false</EmbeddedIcon>
-			<FillColor/>
-			<TextColor/>
+			<FillColor>-1</FillColor>
+			<TextColor>-16777216</TextColor>
 			<Enabled>true</Enabled>
 		</BasicProperties>
 		<ExtendedProperties>
@@ -253,8 +253,8 @@
 		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
 		<BasicProperties Width="100" Height="30">
 			<EmbeddedIcon>false</EmbeddedIcon>
-			<FillColor/>
-			<TextColor/>
+			<FillColor>-1</FillColor>
+			<TextColor>-16777216</TextColor>
 			<Enabled>true</Enabled>
 			<ActionCode>f_setNbOfTimesteps();</ActionCode>
 		</BasicProperties>
@@ -282,8 +282,8 @@
 		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
 		<BasicProperties Width="100" Height="30">
 			<EmbeddedIcon>false</EmbeddedIcon>
-			<FillColor/>
-			<TextColor/>
+			<FillColor>-1</FillColor>
+			<TextColor>-16777216</TextColor>
 			<Enabled>true</Enabled>
 			<ActionCode>v_simulationPeriod = cb_simulationPeriod.getValue();
 
@@ -364,8 +364,8 @@ f_setNbOfTimesteps();</ActionCode>
 		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
 		<BasicProperties Width="250" Height="30">
 			<EmbeddedIcon>false</EmbeddedIcon>
-			<FillColor/>
-			<TextColor/>
+			<FillColor>-1</FillColor>
+			<TextColor>-16777216</TextColor>
 			<Enabled>false</Enabled>
 			<ActionCode>fileChooser_exportResults.setEnabled(false);</ActionCode>
 		</BasicProperties>
@@ -468,7 +468,7 @@ f_setNbOfTimesteps();</ActionCode>
 		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
 		<BasicProperties Width="40" Height="30">
 			<EmbeddedIcon>false</EmbeddedIcon>
-			<TextColor/>
+			<TextColor>-16777216</TextColor>
 			<Enabled>true</Enabled>
 		</BasicProperties>
 		<ExtendedProperties>
@@ -494,7 +494,7 @@ f_setNbOfTimesteps();</ActionCode>
 		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
 		<BasicProperties Width="40" Height="30">
 			<EmbeddedIcon>false</EmbeddedIcon>
-			<TextColor/>
+			<TextColor>-16777216</TextColor>
 			<Enabled>true</Enabled>
 		</BasicProperties>
 		<ExtendedProperties>
@@ -520,7 +520,7 @@ f_setNbOfTimesteps();</ActionCode>
 		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
 		<BasicProperties Width="40" Height="30">
 			<EmbeddedIcon>false</EmbeddedIcon>
-			<TextColor/>
+			<TextColor>-16777216</TextColor>
 			<Enabled>true</Enabled>
 		</BasicProperties>
 		<ExtendedProperties>

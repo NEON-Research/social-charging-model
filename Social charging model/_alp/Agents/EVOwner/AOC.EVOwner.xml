@@ -21,7 +21,7 @@
 	<ElementsLimitValue>100</ElementsLimitValue>
 	<MakeDefaultViewArea>true</MakeDefaultViewArea>
 	<SceneGridColor/>
-	<SceneBackgroundColor/>
+	<SceneBackgroundColor>-4144960</SceneBackgroundColor>
 	<SceneSkybox>null</SceneSkybox>
 	<AgentProperties>
 		<EnvironmentDefinesInitialLocation>true</EnvironmentDefinesInitialLocation>
@@ -66,6 +66,7 @@
 	</EnvironmentProperties>
 	<DatasetsCreationProperties>
 		<AutoCreate>true</AutoCreate>
+		<Id>1743154059995</Id>
 		<OccurrenceAtTime>true</OccurrenceAtTime>
 		<OccurrenceDate>1746000000000</OccurrenceDate>
 		<OccurrenceTime Class="CodeUnitValue">

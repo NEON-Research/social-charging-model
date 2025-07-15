@@ -61,6 +61,10 @@ if( v_soc < v_socChargingThreshold){
 if(main.v_chargePointAvailable > 0){
 	chargePointAvailable = true;
 }
+else{
+	//Behaviour 3: Request neighbor to move EV
+	f_b2_requestToMoveAVehicleFromChargePoint();
+}
 
 //Update status
 if(wantsToCharge && chargePointAvailable){
@@ -81,18 +85,29 @@ if(currentStatus == PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED && v_status == PAR
 */
 /*ALCODEEND*/}
 
-double f_requestToMoveAVehicleFromChargePoint()
+double f_b2_requestToMoveAVehicleFromChargePoint()
 {/*ALCODESTART::1748950054381*/
-
+//Utility
+double v_perceived_social_interdependence_b2 = v_norms * main.b2_norms_psi + v_trust * main.b2_trust_psi + v_reputational_concern * main.b2_rc_psi;
+double utility = v_perceived_social_interdependence_b2 * main.b2_psi_b2 + v_trust * main.b2_trust_b2;
 /*ALCODEEND*/}
 
-double f_notifyChargePointAvailable()
+double f_b3_notifyChargePointAvailable()
 {/*ALCODESTART::1748950054518*/
-
+//Utility
+double v_perceived_social_interdependence_b3 = v_norms * main.b3_norms_psi + v_trust * main.b3_trust_psi + v_reputational_concern * main.b3_rc_psi;
+double utility = v_perceived_social_interdependence_b3 * main.b3_psi_b3 + v_trust * main.b3_trust_b3;
 /*ALCODEEND*/}
 
-double f_movingVehicleFromChargePoint()
+double f_b1_movingVehicleFromChargePoint()
 {/*ALCODESTART::1748950054520*/
+//Utility
+v_perceived_social_interdependence = v_norms * main.b1_norms_psi + v_trust * main.b1_trust_psi + v_reputational_concern * main.b1_rc_psi;
+double utility = v_perceived_social_interdependence * main.b1_psi_b1;
+/*ALCODEEND*/}
+
+double f_b4_chargeOnlyNecessaryEnergy()
+{/*ALCODESTART::1751447497408*/
 
 /*ALCODEEND*/}
 
