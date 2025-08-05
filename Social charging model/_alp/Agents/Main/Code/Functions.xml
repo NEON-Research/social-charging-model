@@ -6,8 +6,8 @@
 		<Id>1745925425403</Id>
 		<Name><![CDATA[f_createEVOwners]]></Name>
 		<ExcludeFromBuild>true</ExcludeFromBuild>
-		<X>-140</X>
-		<Y>1020</Y>
+		<X>60</X>
+		<Y>900</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -148,7 +148,7 @@
 		<Id>1746089953946</Id>
 		<Name><![CDATA[f_updateChart]]></Name>
 		<X>70</X>
-		<Y>1400</Y>
+		<Y>1420</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -164,7 +164,7 @@
 		<Id>1746090357452</Id>
 		<Name><![CDATA[f_endSimulationPeriod]]></Name>
 		<X>60</X>
-		<Y>1380</Y>
+		<Y>1400</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -180,7 +180,7 @@
 		<Id>1746096423531</Id>
 		<Name><![CDATA[f_writeResultsToExcel]]></Name>
 		<X>60</X>
-		<Y>1420</Y>
+		<Y>1440</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -426,7 +426,7 @@
 		<Id>1752589029155</Id>
 		<Name><![CDATA[f_histogramsPopData]]></Name>
 		<X>-260</X>
-		<Y>440</Y>
+		<Y>460</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -442,7 +442,7 @@
 		<Id>1752592809828</Id>
 		<Name><![CDATA[f_mediationResultsQuery]]></Name>
 		<X>-250</X>
-		<Y>500</Y>
+		<Y>520</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -450,10 +450,6 @@
 		<PublicFlag>false</PublicFlag>
 		<PresentationFlag>true</PresentationFlag>
 		<ShowLabel>true</ShowLabel>
-		<Parameter>
-			<Name><![CDATA[behavior]]></Name>
-			<Type><![CDATA[String]]></Type>
-		</Parameter>
 		<Parameter>
 			<Name><![CDATA[var1]]></Name>
 			<Type><![CDATA[String]]></Type>
@@ -468,9 +464,90 @@
 		<ReturnModificator>VOID</ReturnModificator>
 		<ReturnType>double</ReturnType>
 		<Id>1752592809830</Id>
-		<Name><![CDATA[f_getVariableWeights]]></Name>
+		<Name><![CDATA[f_getRegressionCoefficients]]></Name>
 		<X>-260</X>
-		<Y>480</Y>
+		<Y>500</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>VOID</ReturnModificator>
+		<ReturnType>double</ReturnType>
+		<Id>1753176262070</Id>
+		<Name><![CDATA[f_setModelEffects]]></Name>
+		<X>-260</X>
+		<Y>920</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>VOID</ReturnModificator>
+		<ReturnType>double</ReturnType>
+		<Id>1753176527439</Id>
+		<Name><![CDATA[f_setThresholds]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
+		<X>-260</X>
+		<Y>1020</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>VOID</ReturnModificator>
+		<ReturnType>double</ReturnType>
+		<Id>1753184211075</Id>
+		<Name><![CDATA[f_normalizeFromLikert]]></Name>
+		<X>-250</X>
+		<Y>1380</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>VOID</ReturnModificator>
+		<ReturnType>double</ReturnType>
+		<Id>1753188219685</Id>
+		<Name><![CDATA[f_setHSUtilStart]]></Name>
+		<X>60</X>
+		<Y>1480</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>VOID</ReturnModificator>
+		<ReturnType>double</ReturnType>
+		<Id>1753188241182</Id>
+		<Name><![CDATA[f_setHSUtilEnd]]></Name>
+		<X>60</X>
+		<Y>1500</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>

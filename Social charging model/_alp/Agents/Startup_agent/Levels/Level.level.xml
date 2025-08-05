@@ -18,7 +18,8 @@
 			<EmbeddedIcon>false</EmbeddedIcon>
 			<TextColor>-16777216</TextColor>
 			<Enabled>true</Enabled>
-			<ActionCode>f_initializeModel();</ActionCode>
+			<ActionCode>traceln("Starting simulation");
+f_initializeModel();</ActionCode>
 		</BasicProperties>
 		<ExtendedProperties>
 			<Font Name="Dialog" Size="16" Style="0"/>
@@ -530,4 +531,188 @@ f_setNbOfTimesteps();</ActionCode>
 			<Link>v_cpInteraction</Link>
 		</ExtendedProperties>
 	</Control>
+	<Control Type="Slider">
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Id>1753187490752</Id>
+		<Name><![CDATA[slider]]></Name>
+		<X>660</X>
+		<Y>290</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<BasicProperties Width="170" Height="30">
+			<EmbeddedIcon>false</EmbeddedIcon>
+			<Enabled>true</Enabled>
+		</BasicProperties>
+		<ExtendedProperties>
+			<DefaultValueCode>0</DefaultValueCode>
+			<Orientation>HORIZONTAL</Orientation>
+			<MinValue>0</MinValue>
+			<MaxValue>1</MaxValue>
+			<Step>0.01</Step>
+			<LinkTo>true</LinkTo>
+			<Link>threshold_b1</Link>
+		</ExtendedProperties>
+	</Control>
+	<Control Type="Slider">
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Id>1753187526343</Id>
+		<Name><![CDATA[slider1]]></Name>
+		<X>660</X>
+		<Y>330</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<BasicProperties Width="170" Height="30">
+			<EmbeddedIcon>false</EmbeddedIcon>
+			<Enabled>true</Enabled>
+		</BasicProperties>
+		<ExtendedProperties>
+			<DefaultValueCode>0</DefaultValueCode>
+			<Orientation>HORIZONTAL</Orientation>
+			<MinValue>0</MinValue>
+			<MaxValue>1</MaxValue>
+			<Step>0.01</Step>
+			<LinkTo>true</LinkTo>
+			<Link>threshold_b2</Link>
+		</ExtendedProperties>
+	</Control>
+	<Control Type="Slider">
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Id>1753187530761</Id>
+		<Name><![CDATA[slider2]]></Name>
+		<X>660</X>
+		<Y>370</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<BasicProperties Width="170" Height="30">
+			<EmbeddedIcon>false</EmbeddedIcon>
+			<Enabled>true</Enabled>
+		</BasicProperties>
+		<ExtendedProperties>
+			<DefaultValueCode>0</DefaultValueCode>
+			<Orientation>HORIZONTAL</Orientation>
+			<MinValue>0</MinValue>
+			<MaxValue>1</MaxValue>
+			<Step>0.01</Step>
+			<LinkTo>true</LinkTo>
+			<Link>threshold_b3</Link>
+		</ExtendedProperties>
+	</Control>
+	<Text>
+		<Id>1753187545264</Id>
+		<Name><![CDATA[text9]]></Name>
+		<X>460</X>
+		<Y>293</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D</DrawMode>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Z>0</Z>
+		<Rotation>0.0</Rotation>
+		<Color>-16777216</Color>
+		<Text><![CDATA[B1: Move EV]]></Text>
+		<Font>
+			<Name><![CDATA[Dialog]]></Name>
+			<Size>16</Size>
+			<Style>0</Style>
+		</Font>
+		<Alignment>LEFT</Alignment>
+	</Text>
+	<Text>
+		<Id>1753187545266</Id>
+		<Name><![CDATA[text10]]></Name>
+		<X>460</X>
+		<Y>333</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D</DrawMode>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Z>0</Z>
+		<Rotation>0.0</Rotation>
+		<Color>-16777216</Color>
+		<Text><![CDATA[B2: Request move]]></Text>
+		<Font>
+			<Name><![CDATA[Dialog]]></Name>
+			<Size>16</Size>
+			<Style>0</Style>
+		</Font>
+		<Alignment>LEFT</Alignment>
+	</Text>
+	<Text>
+		<Id>1753187545268</Id>
+		<Name><![CDATA[text11]]></Name>
+		<X>460</X>
+		<Y>373</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D</DrawMode>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Z>0</Z>
+		<Rotation>0.0</Rotation>
+		<Color>-16777216</Color>
+		<Text><![CDATA[B3: Notify neighbor]]></Text>
+		<Font>
+			<Name><![CDATA[Dialog]]></Name>
+			<Size>16</Size>
+			<Style>0</Style>
+		</Font>
+		<Alignment>LEFT</Alignment>
+	</Text>
+	<Text>
+		<Id>1753187641657</Id>
+		<Name><![CDATA[text12]]></Name>
+		<X>460</X>
+		<Y>260</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D</DrawMode>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Z>0</Z>
+		<Rotation>0.0</Rotation>
+		<Color>-16777216</Color>
+		<Text><![CDATA[Thresholds]]></Text>
+		<Font>
+			<Name><![CDATA[Dialog]]></Name>
+			<Size>16</Size>
+			<Style>1</Style>
+		</Font>
+		<Alignment>LEFT</Alignment>
+	</Text>
 </Presentation>

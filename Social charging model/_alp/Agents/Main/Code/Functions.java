@@ -22,9 +22,12 @@ for(int i = 0; i < EVs; i++){
 double f_initializeModel()
 {/*ALCODESTART::1745928671433*/
 v_chargePointAvailable = p_chargePoints;
+v_parkingPlacesAvailable = 100;
 v_hourOfDay = 0;
 
-f_getVariableWeights();
+f_getRegressionCoefficients();
+f_setModelEffects();
+//f_setThresholds();
 
 //Get nb of trips in database
 nbOfInputTrips = (int) selectFirstValue(int.class,
@@ -33,6 +36,7 @@ nbOfInputTrips = (int) selectFirstValue(int.class,
 //Create ICEs and EVs
 f_createICECarOwners();
 f_generateSyntehticPopulationEVs();
+f_normalizeFromLikert();
 
 f_simulateFirstWeekToGetInitialLocationCars();
 /*ALCODEEND*/}
@@ -68,6 +72,7 @@ for(CarOwner x : c_carOwners){
 
 double f_countTotals()
 {/*ALCODESTART::1745939185407*/
+//COUNT CAR BEHAVIOR
 v_carsOnTrip = count(c_carOwners, x->x.v_status == ON_TRIP);
 v_ICECarsParkedNonCP = count(ICECarOwners, x->x.v_status == PARKED_NON_CHARGE_POINT_CHARGING_NOT_REQUIRED);
 v_EVsParkedNonCPChargingRequired = count(EVOwners, x->x.v_status == PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED);
@@ -85,6 +90,71 @@ data_EVsParkedAtCPIdle.add(v_timestep, v_EVsParkedAtCPIdle);
 data_CPAvailable.add(v_timestep, v_chargePointAvailable);
 data_CPOccupied.add(v_timestep, p_chargePoints - v_chargePointAvailable);
 
+if(v_chargePointAvailable < 0){
+	traceln("Error: cp available = " + v_chargePointAvailable + " at timestep " + v_timestep);
+}
+if((p_chargePoints - v_chargePointAvailable) < 0){
+	traceln("Error: cp occupied = " + (p_chargePoints - v_chargePointAvailable) + " at timestep " + v_timestep);
+}
+
+//SUCCES RATES and avg probabiliy
+count_b1_successful = 0;
+count_b2_successful = 0;
+count_b3_successful = 0;
+count_b1_notSuccessful = 0;
+count_b2_notSuccessful = 0;
+count_b3_notSuccessful = 0;
+
+double totalProb_b1 = 0.0;
+double totalProb_b2 = 0.0;
+double totalProb_b3 = 0.0;
+
+for (EVOwner x : EVOwners) {
+    count_b1_successful      += x.count_b1_successful;
+    count_b1_notSuccessful   += x.count_b1_notSuccessful;
+
+    count_b2_successful      += x.count_b2_successful;
+    count_b2_notSuccessful   += x.count_b2_notSuccessful;
+
+    count_b3_successful      += x.count_b3_successful;
+    count_b3_notSuccessful   += x.count_b3_notSuccessful;
+    
+    totalProb_b1 += x.v_prob_b1;
+	totalProb_b2 += x.v_prob_b2;
+	totalProb_b3 += x.v_prob_b3;
+}
+
+
+int total_b1 = count_b1_successful + count_b1_notSuccessful;
+successRate_b1 = (total_b1 != 0) ? ((double) count_b1_successful / total_b1) : 0;
+
+int total_b2 = count_b2_successful + count_b2_notSuccessful;
+successRate_b2 = (total_b2 != 0) ? ((double) count_b2_successful / total_b2) : 0;
+
+int total_b3 = count_b3_successful + count_b3_notSuccessful;
+successRate_b3 = (total_b3 != 0) ? ((double) count_b3_successful / total_b3) : 0;
+
+
+data_successRate_b1.add(v_timestep, successRate_b1);
+data_successful_b1.add(v_timestep, count_b1_successful);
+data_notSuccessful_b1.add(v_timestep, count_b1_notSuccessful);
+
+data_successRate_b2.add(v_timestep, successRate_b2);
+data_successful_b2.add(v_timestep, count_b2_successful);
+data_notSuccessful_b2.add(v_timestep, count_b2_notSuccessful);
+
+data_successRate_b3.add(v_timestep, successRate_b3);
+data_successful_b3.add(v_timestep, count_b3_successful);
+data_notSuccessful_b3.add(v_timestep, count_b3_notSuccessful);
+
+int EVs = EVOwners.size();
+double avgProb_b1 = totalProb_b1 / EVs;
+double avgProb_b2 = totalProb_b2 / EVs;
+double avgProb_b3 = totalProb_b3 / EVs;
+
+data_avgProbability_b1.add(v_timestep, avgProb_b1);
+data_avgProbability_b2.add(v_timestep, avgProb_b2);
+data_avgProbability_b3.add(v_timestep, avgProb_b3);
 /*ALCODEEND*/}
 
 double f_createICECarOwners()
@@ -129,7 +199,7 @@ double f_simulatePeriod(int nbOfTimesteps)
 {/*ALCODESTART::1746025438383*/
 v_timestep = 0;
 v_hourOfDay = 0;
-
+initializationMode = false;
 //Trigger over timesteps
 for(int i=0; i < nbOfTimesteps; i++){
 	
@@ -154,6 +224,14 @@ for(int i=0; i < nbOfTimesteps; i++){
 	*/
 	//4. Count totals
 	f_countTotals();
+	
+	if(i == 0){
+		f_setHSUtilStart();
+	}
+	if(i == nbOfTimesteps - 1){
+		f_setHSUtilEnd();
+	}
+	
 		
 	v_timestep++;
     v_hourOfDay = (v_timestep * p_timestep_minutes / 60.0) % 24;
@@ -179,6 +257,37 @@ ch_countEVs.addDataSet(data_EVsParkedAtCPIdle, "EVs parked at charge point and i
 ch_countCPs.removeAll();
 ch_countCPs.addDataSet(data_CPAvailable, "Charge points available", limeGreen);
 ch_countCPs.addDataSet(data_CPOccupied, "Charge points occupied", coral);
+
+//Appearance app1 = new Appearance(blue, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+
+pl_succesRate.removeAll();
+pl_succesRate.addDataSet(data_successRate_b1, "Behavior 1: move car", sandyBrown, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_succesRate.addDataSet(data_successRate_b2, "Behavior 2: request move", lightSeaGreen, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_succesRate.addDataSet(data_successRate_b3, "Behavior 3: notify neighbor", lightSlateBlue, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+
+pl_probability.removeAll();
+pl_probability.addDataSet(data_avgProbability_b1, "Behavior 1: move car", sandyBrown, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_probability.addDataSet(data_avgProbability_b2, "Behavior 2: request move", lightSeaGreen, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_probability.addDataSet(data_avgProbability_b3, "Behavior 3: notify neighbor", lightSlateBlue, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+
+ch_b1.removeAll();
+ch_b1.addDataSet(data_notSuccessful_b1, "Non successful interactions", red);
+ch_b1.addDataSet(data_successful_b1, "Successful interactions", green);
+
+ch_b2.removeAll();
+ch_b2.addDataSet(data_notSuccessful_b2, "Non successful interactions", red);
+ch_b2.addDataSet(data_successful_b2, "Successful interactions", green);
+
+ch_b3.removeAll();
+ch_b3.addDataSet(data_notSuccessful_b3, "Non successful interactions", red);
+ch_b3.addDataSet(data_successful_b3, "Successful interactions", green);
+
+hs_utility_b1_all.updateData();
+hs_utility_b2_all.updateData();
+hs_utility_b3_all.updateData();
+hs_b1_all.updateData();
+hs_b2_all.updateData();
+hs_b3_all.updateData();
 /*ALCODEEND*/}
 
 double f_endSimulationPeriod()
@@ -268,6 +377,7 @@ double f_simulateFirstWeekToGetInitialLocationCars()
 v_timestep = 0;
 int minutesPerWeek = 7 * 24 * 60;
 double timestepsInWeek = (double) minutesPerWeek / p_timestep_minutes;
+initializationMode = true;
 
 //Trigger over timesteps
 for(int i=0; i < timestepsInWeek; i++){
@@ -283,12 +393,6 @@ for(int i=0; i < timestepsInWeek; i++){
 		f_checkAvailableChargePoints();
 	}
 	
-	//4. prosocial charging behaviour
-	/*
-	if(p_hasProsocialChargingBehaviour){
-		f_prosocialChargingBehaviour();
-	}
-	*/
 	v_timestep++;
     v_hourOfDay = (v_timestep * p_timestep_minutes / 60.0) % 24;
 }
@@ -547,23 +651,52 @@ for(int rowIndex = 2; rowIndex < matrixSize + 1; rowIndex++){
 double f_getSortedSocialPsychologicalData()
 {/*ALCODESTART::1752585514702*/
 String sheetName = "frequency_list";
+ef_spvars.readFile();
 int size = ef_spvars.getLastRowNum(sheetName);
+/*
+List<Object> headers = ef_spvars.getRow(sheetName, 0);
+
+Map<String, Integer> columnIndexMap = new HashMap<>();
+
+for (Cell cell : headerRow) {
+    String header = cell.getStringCellValue().trim().toLowerCase();
+    columnIndexMap.put(header, cell.getColumnIndex());
+}
+
+// Now extract your needed indexes
+int col_norms = columnIndexMap.getOrDefault("norms", -1);
+int col_trust = columnIndexMap.getOrDefault("trust", -1);
+int col_rc    = columnIndexMap.getOrDefault("rc", -1);
+int col_psi   = columnIndexMap.getOrDefault("psi", -1);
+int col_b1    = columnIndexMap.getOrDefault("b1", -1);
+int col_b2    = columnIndexMap.getOrDefault("b2", -1);
+int col_b3    = columnIndexMap.getOrDefault("b3", -1);
+*/
 
 int col_norms = 1;
 int col_trust = 2;
 int col_rc = 3;
 int col_psi = 4;
+int col_b1 = 5;
+int col_b2 = 6;
+int col_b3 = 7;
 
 List<Double> norms = new ArrayList<>();
 List<Double> trust = new ArrayList<>();
 List<Double> rc = new ArrayList<>();
 List<Double> psi = new ArrayList<>();
+List<Double> b1 = new ArrayList<>();
+List<Double> b2 = new ArrayList<>();
+List<Double> b3 = new ArrayList<>();
 
 for(int rowIndex = 2; rowIndex < size + 1; rowIndex++){
 	norms.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_norms));
 	trust.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_trust));
 	rc.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_rc));
 	psi.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_psi));
+	b1.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_b1));
+	b2.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_b2));
+	b3.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_b3));
 }
 
 
@@ -571,8 +704,11 @@ Collections.sort(norms);
 Collections.sort(trust);
 Collections.sort(rc);
 Collections.sort(psi);
+Collections.sort(b1);
+Collections.sort(b2);
+Collections.sort(b3);
 
-sortedRealData = Arrays.asList(norms, trust, rc, psi);
+sortedRealData = Arrays.asList(norms, trust, rc, psi, b1, b2, b3);
 
 
 
@@ -589,6 +725,16 @@ for(double value : rc){
 for(double value : psi){
 	hs_data_psi_data.add(value);
 }
+for(double value : b1){
+	hs_data_b1_data.add(value);
+}
+for(double value : b2){
+	hs_data_b2_data.add(value);
+}
+for(double value : b3){
+	hs_data_b3_data.add(value);
+}
+
 /*ALCODEEND*/}
 
 double f_inverseECDF(List<Double> sortedData,double u)
@@ -622,6 +768,9 @@ x.v_norms = agentAttributes[0];
 x.v_trust = agentAttributes[1];
 x.v_reputational_concern = agentAttributes[2];
 x.v_perceived_social_interdependence = agentAttributes[3];
+x.v_prob_b1 = agentAttributes[4];
+x.v_prob_b2 = agentAttributes[5];
+x.v_prob_b3 = agentAttributes[6];
 
 x.v_type = EV;
 f_initializeTrips(x);
@@ -646,8 +795,13 @@ for(EVOwner x : EVOwners){
 	hs_data_trust_pop.add(x.v_trust);
 	hs_data_rc_pop.add(x.v_reputational_concern);
 	hs_data_psi_pop.add(x.v_perceived_social_interdependence);
+
+	hs_data_b1_pop.add(x.v_prob_b1);
+	hs_data_b2_pop.add(x.v_prob_b2);
+	hs_data_b3_pop.add(x.v_prob_b3);
 }
 
+/*
 String sheetName = "frequency_list";
 int size = ef_spvars.getLastRowNum(sheetName);
 
@@ -667,6 +821,7 @@ for(int rowIndex = 2; rowIndex < size + 1; rowIndex++){
 	rc.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_rc));
 	pci.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_pci));
 }
+*/
 /*
 hs_data_norms_data.update();
 hs_data_trust_data.update();
@@ -683,126 +838,198 @@ hs_psi_data.updateData();
 hs_norms_pop.updateData();
 hs_trust_pop.updateData();
 hs_rc_pop.updateData();
-hs_psi_pop.updateData();;
+hs_psi_pop.updateData();
+hs_b1_data.updateData();
+hs_b2_data.updateData();
+hs_b3_data.updateData();
+hs_b1_pop.updateData();
+hs_b2_pop.updateData();
+hs_b3_pop.updateData();
+
 /*ALCODEEND*/}
 
-double f_mediationResultsQuery(String behavior,String var1,String var2)
+double f_mediationResultsQuery(String var1,String var2)
 {/*ALCODESTART::1752592809828*/
-return (double) selectFirstValue(double.class,
+double value = (double) selectFirstValue(double.class,
 	"SELECT value FROM mediation_results WHERE " + 
-		"var_1 = ? AND " + 
-		"behavior = ? LIMIT 1;",
+		"var_1 = ? AND " +
+		"var_2 = ? LIMIT 1;",
 		var1,
-		behavior
+		var2
 );
+
+//traceln("var1 = " + var1 + " var2 = " + var2 + " value = " + value);
+return value;
+
 /*ALCODEEND*/}
 
-double f_getVariableWeights()
+double f_getRegressionCoefficients()
 {/*ALCODESTART::1752592809830*/
-//Behavior 2: Requesting to move
-String behavior = "b1_move_vehicle";
+//Norms, trust and RC to PSI
 String var1 = "norms";
 String var2 = "perceived_social_interdependence";
-
-String key = behavior+var1+var2;
-double value = f_mediationResultsQuery(behavior, var1, var2);
+String key = var1+var2;
+double value = f_mediationResultsQuery(var1, var2);
 c_variableWeights.put(key, value);
-b1_norms_psi = value;
+regCoef_norms_psi = value;
 
-var2 = "trust";
-key = behavior+var1+var2;
-value = f_mediationResultsQuery(behavior, var1, var2);
+var1 = "trust";
+key = var1+var2;
+value = f_mediationResultsQuery(var1, var2);
 c_variableWeights.put(key, value);
-b1_trust_psi = value;
+regCoef_trust_psi = value;
 
-var2 = "reputational_concern";
-key = behavior+var1+var2;
-value = f_mediationResultsQuery(behavior, var1, var2);
+var1 = "reputational_concern";
+key = var1+var2;
+value = f_mediationResultsQuery(var1, var2);
 c_variableWeights.put(key, value);
-b1_rc_psi = value;
+regCoef_rc_psi = value;
 
+//PSI to behavior
 var1 = "perceived_social_interdependence";
 var2 = "b1_move_vehicle";
-key = behavior+var1+var2;
-value = f_mediationResultsQuery(behavior, var1, var2);
+key = var1+var2;
+value = f_mediationResultsQuery(var1, var2);
 c_variableWeights.put(key, value);
-b1_psi_b1 = value;
+regCoef_psi_b1 = value;
 
-//Behavior 2: Requesting to move
-behavior = "b2_request_move";
-var1 = "norms";
-var2 = "perceived_social_interdependence";
-
-key = behavior+var1+var2;
-value = f_mediationResultsQuery(behavior, var1, var2);
-c_variableWeights.put(key, value);
-b2_norms_psi = value;
-
-var2 = "trust";
-key = behavior+var1+var2;
-value = f_mediationResultsQuery(behavior, var1, var2);
-c_variableWeights.put(key, value);
-b2_trust_psi = value;
-
-var2 = "reputational_concern";
-key = behavior+var1+var2;
-value = f_mediationResultsQuery(behavior, var1, var2);
-c_variableWeights.put(key, value);
-b2_rc_psi = value;
-
-var1 = "perceived_social_interdependence";
 var2 = "b2_request_move";
-key = behavior+var1+var2;
-value = f_mediationResultsQuery(behavior, var1, var2);
+key = var1+var2;
+value = f_mediationResultsQuery(var1, var2);
 c_variableWeights.put(key, value);
-b2_psi_b2 = value;
+regCoef_psi_b2 = value;
 
+var2 = "b3_notify_neighbor";
+key = var1+var2;
+value = f_mediationResultsQuery(var1, var2);
+c_variableWeights.put(key, value);
+regCoef_psi_b3 = value;
+
+//Trust to behavior
 var1 = "trust";
 var2 = "b2_request_move";
-key = behavior+var1+var2;
-value = f_mediationResultsQuery(behavior, var1, var2);
+key = var1+var2;
+value = f_mediationResultsQuery(var1, var2);
 c_variableWeights.put(key, value);
-b2_trust_b2 = value;
+regCoef_trust_b2 = value;
 
-//Behavior 3: Notify neighbour
-behavior = "b3_notify_neighbour";
-var1 = "norms";
-var2 = "perceived_social_interdependence";
-
-key = behavior+var1+var2;
-value = f_mediationResultsQuery(behavior, var1, var2);
+var2 = "b3_notify_neighbor";
+key = var1+var2;
+value = f_mediationResultsQuery(var1, var2);
 c_variableWeights.put(key, value);
-b3_norms_psi = value;
+regCoef_trust_b3 = value;
 
-var2 = "trust";
-key = behavior+var1+var2;
-value = f_mediationResultsQuery(behavior, var1, var2);
-c_variableWeights.put(key, value);
-b3_trust_psi = value;
+/*ALCODEEND*/}
 
-var2 = "reputational_concern";
-key = behavior+var1+var2;
-value = f_mediationResultsQuery(behavior, var1, var2);
-c_variableWeights.put(key, value);
-b3_rc_psi = value;
+double f_setModelEffects()
+{/*ALCODESTART::1753176262070*/
+//B1
+String b = "b1_move_vehicle";
+modelEffect_b1 = (double) selectFirstValue(double.class,
+	"SELECT fit_r2 FROM behavior_data WHERE " + 
+		"behavior = ? LIMIT 1;",
+		b
+);
 
-var1 = "perceived_social_interdependence";
-var2 = "b3_notify_neighbour";
-key = behavior+var1+var2;
-value = f_mediationResultsQuery(behavior, var1, var2);
-c_variableWeights.put(key, value);
-b3_psi_b3 = value;
+//B2
+b = "b2_request_move";
+modelEffect_b2 = (double) selectFirstValue(double.class,
+	"SELECT fit_r2 FROM behavior_data WHERE " + 
+		"behavior = ? LIMIT 1;",
+		b
+);
 
-var1 = "trust";
-var2 = "b3_notify_neighbour";
-key = behavior+var1+var2;
-value = f_mediationResultsQuery(behavior, var1, var2);
-c_variableWeights.put(key, value);
-b3_trust_b3 = value;
+//B3
+b = "b3_notify_neighbor";
+modelEffect_b3 = (double) selectFirstValue(double.class,
+	"SELECT fit_r2 FROM behavior_data WHERE " + 
+		"behavior = ? LIMIT 1;",
+		b
+);
+/*
+double modelEffectMultiplier_b1 = 6;
+double modelEffectMultiplier_b2 = 6;
+double modelEffectMultiplier_b3 = 6;
+*/
+double modelEffectMultiplier_b1 = 0;
+double modelEffectMultiplier_b2 = 0;
+double modelEffectMultiplier_b3 = 0;
 
-for (String key2 : c_variableWeights.keySet()) {
-    traceln(key2);
+modelEffect_b1 = modelEffect_b1 * modelEffectMultiplier_b1;
+modelEffect_b2 = modelEffect_b2 * modelEffectMultiplier_b2;
+modelEffect_b3 = modelEffect_b3 * modelEffectMultiplier_b3;
+/*ALCODEEND*/}
+
+double f_setThresholds()
+{/*ALCODESTART::1753176527439*/
+threshold_b1 = 0.5;
+threshold_b2 = 0.5;
+threshold_b3 = 0.5;
+
+/*ALCODEEND*/}
+
+double f_normalizeFromLikert()
+{/*ALCODESTART::1753184211075*/
+regCoef_trust_psi = regCoef_trust_psi/6;
+regCoef_norms_psi = regCoef_norms_psi/6;
+regCoef_rc_psi = regCoef_rc_psi/6;
+regCoef_psi_b1 = regCoef_psi_b1/6;
+regCoef_psi_b2 = regCoef_psi_b2/6;
+regCoef_psi_b3 = regCoef_psi_b3/6;
+regCoef_trust_b2 = regCoef_trust_b2/6;
+regCoef_trust_b3 = regCoef_trust_b3/6;
+
+for(EVOwner x : EVOwners){
+	x.v_norms = (x.v_norms - 1)/6;
+	x.v_trust = (x.v_trust - 1)/6;
+	x.v_reputational_concern = (x.v_reputational_concern - 1)/6;
+	x.v_perceived_social_interdependence = (x.v_perceived_social_interdependence - 1)/6;
+	x.v_prob_b1 = (x.v_prob_b1 - 1)/6;
+	x.v_prob_b2 = (x.v_prob_b2 - 1)/6;
+	x.v_prob_b3 = (x.v_prob_b3 - 1)/6;
 }
 
+for(EVOwner x : EVOwners){
+	hs_data_norms_pop1.add(x.v_norms);
+	hs_data_trust_pop1.add(x.v_trust);
+	hs_data_rc_pop1.add(x.v_reputational_concern);
+	hs_data_psi_pop1.add(x.v_perceived_social_interdependence);
+}
+
+hs_norms_pop1.updateData();
+hs_trust_pop1.updateData();
+hs_rc_pop1.updateData();
+hs_psi_pop1.updateData();
+/*ALCODEEND*/}
+
+double f_setHSUtilStart()
+{/*ALCODESTART::1753188219685*/
+for(EVOwner x : EVOwners){
+	hs_data_utility_b1_start.add(x.utility_b1);
+	hs_data_utility_b2_start.add(x.utility_b2);
+	hs_data_utility_b3_start.add(x.utility_b3);
+}
+hs_utility_b1_start.updateData();
+hs_utility_b2_start.updateData();
+hs_utility_b3_start.updateData();
+/*ALCODEEND*/}
+
+double f_setHSUtilEnd()
+{/*ALCODESTART::1753188241182*/
+for(EVOwner x : EVOwners){
+	hs_data_utility_b1_end.add(x.utility_b1);
+	hs_data_utility_b2_end.add(x.utility_b2);
+	hs_data_utility_b3_end.add(x.utility_b3);
+	
+	hs_data_b1_end.add(x.b1);
+	hs_data_b2_end.add(x.b2);
+	hs_data_b3_end.add(x.b3);
+}
+hs_utility_b1_end.updateData();
+hs_utility_b2_end.updateData();
+hs_utility_b3_end.updateData();
+hs_b1_end.updateData();
+hs_b2_end.updateData();
+hs_b3_end.updateData();
 /*ALCODEEND*/}
 

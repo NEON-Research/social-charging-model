@@ -12,6 +12,12 @@ Main m = add_mains(v_cars,
 	v_prosocialBehaviour,
 	v_cpInteraction
 	);
+
+m.threshold_b1 = threshold_b1;
+m.threshold_b2 = threshold_b2;
+m.threshold_b3 = threshold_b3;
+m.f_simulatePeriod(m.p_nbOfTimesteps);
+m.viewArea.navigateTo();
 /*ALCODEEND*/}
 
 double f_setDefaultValues()

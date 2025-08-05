@@ -72,9 +72,45 @@
 	<Function AccessType="default" StaticFunction="false">
 		<ReturnModificator>VOID</ReturnModificator>
 		<ReturnType>double</ReturnType>
-		<Id>1748950054381</Id>
-		<Name><![CDATA[f_b2_requestToMoveAVehicleFromChargePoint]]></Name>
-		<X>320</X>
+		<Id>1748950054520</Id>
+		<Name><![CDATA[f_b1_movingVehicle]]></Name>
+		<X>380</X>
+		<Y>440</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>VOID</ReturnModificator>
+		<ReturnType>double</ReturnType>
+		<Id>1753175296086</Id>
+		<Name><![CDATA[f_moveVehicle]]></Name>
+		<X>390</X>
+		<Y>460</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Parameter>
+			<Name><![CDATA[actBehavior]]></Name>
+			<Type><![CDATA[boolean]]></Type>
+		</Parameter>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>VOID</ReturnModificator>
+		<ReturnType>double</ReturnType>
+		<Id>1753175364935</Id>
+		<Name><![CDATA[f_b2_requestMove]]></Name>
+		<X>380</X>
 		<Y>500</Y>
 		<Label>
 			<X>10</X>
@@ -88,9 +124,9 @@
 	<Function AccessType="default" StaticFunction="false">
 		<ReturnModificator>VOID</ReturnModificator>
 		<ReturnType>double</ReturnType>
-		<Id>1748950054518</Id>
-		<Name><![CDATA[f_b3_notifyChargePointAvailable]]></Name>
-		<X>320</X>
+		<Id>1753175364937</Id>
+		<Name><![CDATA[f_requestMove]]></Name>
+		<X>390</X>
 		<Y>520</Y>
 		<Label>
 			<X>10</X>
@@ -99,15 +135,19 @@
 		<PublicFlag>false</PublicFlag>
 		<PresentationFlag>true</PresentationFlag>
 		<ShowLabel>true</ShowLabel>
+		<Parameter>
+			<Name><![CDATA[actBehavior]]></Name>
+			<Type><![CDATA[boolean]]></Type>
+		</Parameter>
 		<Body xmlns:al="http://anylogic.com"/>
 	</Function>
 	<Function AccessType="default" StaticFunction="false">
 		<ReturnModificator>VOID</ReturnModificator>
 		<ReturnType>double</ReturnType>
-		<Id>1748950054520</Id>
-		<Name><![CDATA[f_b1_movingVehicleFromChargePoint]]></Name>
-		<X>320</X>
-		<Y>470</Y>
+		<Id>1753175429703</Id>
+		<Name><![CDATA[f_b3_notifyNeighbor]]></Name>
+		<X>380</X>
+		<Y>580</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -120,11 +160,31 @@
 	<Function AccessType="default" StaticFunction="false">
 		<ReturnModificator>VOID</ReturnModificator>
 		<ReturnType>double</ReturnType>
-		<Id>1751447497408</Id>
-		<Name><![CDATA[f_b4_chargeOnlyNecessaryEnergy]]></Name>
+		<Id>1753175429706</Id>
+		<Name><![CDATA[f_notifyNeighbor]]></Name>
+		<X>390</X>
+		<Y>600</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Parameter>
+			<Name><![CDATA[actBehavior]]></Name>
+			<Type><![CDATA[boolean]]></Type>
+		</Parameter>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>VOID</ReturnModificator>
+		<ReturnType>double</ReturnType>
+		<Id>1753189354451</Id>
+		<Name><![CDATA[f_setInitialUtility]]></Name>
 		<ExcludeFromBuild>true</ExcludeFromBuild>
-		<X>320</X>
-		<Y>550</Y>
+		<X>790</X>
+		<Y>320</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -132,5 +192,98 @@
 		<PublicFlag>false</PublicFlag>
 		<PresentationFlag>true</PresentationFlag>
 		<ShowLabel>true</ShowLabel>
+		<Parameter>
+			<Name><![CDATA[modelEffect]]></Name>
+			<Type><![CDATA[double]]></Type>
+		</Parameter>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+		<ReturnType>boolean</ReturnType>
+		<Id>1754388708163</Id>
+		<Name><![CDATA[f_actBehavior]]></Name>
+		<X>380</X>
+		<Y>660</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Parameter>
+			<Name><![CDATA[probabilityBehavior]]></Name>
+			<Type><![CDATA[double]]></Type>
+		</Parameter>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>VOID</ReturnModificator>
+		<ReturnType>double</ReturnType>
+		<Id>1754388925560</Id>
+		<Name><![CDATA[f_socialLearning_b1]]></Name>
+		<X>390</X>
+		<Y>480</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+		<ReturnType>boolean</ReturnType>
+		<Id>1754391554916</Id>
+		<Name><![CDATA[f_successfulMoveRequest]]></Name>
+		<X>400</X>
+		<Y>540</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Parameter>
+			<Name><![CDATA[actBehavior]]></Name>
+			<Type><![CDATA[boolean]]></Type>
+		</Parameter>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>VOID</ReturnModificator>
+		<ReturnType>double</ReturnType>
+		<Id>1754404097901</Id>
+		<Name><![CDATA[f_socialLearning_b2]]></Name>
+		<X>390</X>
+		<Y>560</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>VOID</ReturnModificator>
+		<ReturnType>double</ReturnType>
+		<Id>1754404103304</Id>
+		<Name><![CDATA[f_socialLearning_b3]]></Name>
+		<X>390</X>
+		<Y>620</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Body xmlns:al="http://anylogic.com"/>
 	</Function>
 </Functions>

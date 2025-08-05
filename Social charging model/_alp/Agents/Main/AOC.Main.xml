@@ -8,8 +8,7 @@ import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.commons.math3.linear.*;
 import java.util.*;]]></Import>
 	<StartupCode><![CDATA[f_initializeModel();
-f_simulatePeriod(p_nbOfTimesteps);
-viewArea.navigateTo();]]></StartupCode>
+]]></StartupCode>
 	<Generic>false</Generic>
 	<GenericParameter>
 		<Id>1743154070899</Id>
@@ -364,11 +363,11 @@ viewArea.navigateTo();]]></StartupCode>
 				</RecurrenceCode>
 			</RecurrenceProperties>
 			<Value/>
-			<NumberOfIntervals>13</NumberOfIntervals>
+			<NumberOfIntervals>20</NumberOfIntervals>
 			<MinMaxAutodetect>true</MinMaxAutodetect>
 			<RangeMinExpression>0</RangeMinExpression>
 			<RangeMaxExpression>1</RangeMaxExpression>
-			<InitialIntervalSize>0.1</InitialIntervalSize>
+			<InitialIntervalSize>0.35</InitialIntervalSize>
 			<CalculateCDF>true</CalculateCDF>
 			<CalculatePercentiles>false</CalculatePercentiles>
 			<LowPercent>10</LowPercent>
@@ -402,11 +401,11 @@ viewArea.navigateTo();]]></StartupCode>
 				</RecurrenceCode>
 			</RecurrenceProperties>
 			<Value/>
-			<NumberOfIntervals>18</NumberOfIntervals>
+			<NumberOfIntervals>20</NumberOfIntervals>
 			<MinMaxAutodetect>true</MinMaxAutodetect>
 			<RangeMinExpression>0</RangeMinExpression>
 			<RangeMaxExpression>1</RangeMaxExpression>
-			<InitialIntervalSize>0.1</InitialIntervalSize>
+			<InitialIntervalSize>0.35</InitialIntervalSize>
 			<CalculateCDF>true</CalculateCDF>
 			<CalculatePercentiles>false</CalculatePercentiles>
 			<LowPercent>10</LowPercent>
@@ -440,11 +439,11 @@ viewArea.navigateTo();]]></StartupCode>
 				</RecurrenceCode>
 			</RecurrenceProperties>
 			<Value/>
-			<NumberOfIntervals>13</NumberOfIntervals>
+			<NumberOfIntervals>20</NumberOfIntervals>
 			<MinMaxAutodetect>true</MinMaxAutodetect>
 			<RangeMinExpression>0</RangeMinExpression>
 			<RangeMaxExpression>1</RangeMaxExpression>
-			<InitialIntervalSize>0.1</InitialIntervalSize>
+			<InitialIntervalSize>0.35</InitialIntervalSize>
 			<CalculateCDF>true</CalculateCDF>
 			<CalculatePercentiles>false</CalculatePercentiles>
 			<LowPercent>10</LowPercent>
@@ -478,11 +477,11 @@ viewArea.navigateTo();]]></StartupCode>
 				</RecurrenceCode>
 			</RecurrenceProperties>
 			<Value/>
-			<NumberOfIntervals>13</NumberOfIntervals>
+			<NumberOfIntervals>20</NumberOfIntervals>
 			<MinMaxAutodetect>true</MinMaxAutodetect>
 			<RangeMinExpression>0</RangeMinExpression>
 			<RangeMaxExpression>1</RangeMaxExpression>
-			<InitialIntervalSize>0.1</InitialIntervalSize>
+			<InitialIntervalSize>0.35</InitialIntervalSize>
 			<CalculateCDF>true</CalculateCDF>
 			<CalculatePercentiles>false</CalculatePercentiles>
 			<LowPercent>10</LowPercent>
@@ -516,11 +515,11 @@ viewArea.navigateTo();]]></StartupCode>
 				</RecurrenceCode>
 			</RecurrenceProperties>
 			<Value/>
-			<NumberOfIntervals>13</NumberOfIntervals>
+			<NumberOfIntervals>20</NumberOfIntervals>
 			<MinMaxAutodetect>true</MinMaxAutodetect>
 			<RangeMinExpression>0</RangeMinExpression>
 			<RangeMaxExpression>1</RangeMaxExpression>
-			<InitialIntervalSize>0.1</InitialIntervalSize>
+			<InitialIntervalSize>0.35</InitialIntervalSize>
 			<CalculateCDF>true</CalculateCDF>
 			<CalculatePercentiles>false</CalculatePercentiles>
 			<LowPercent>10</LowPercent>
@@ -554,11 +553,11 @@ viewArea.navigateTo();]]></StartupCode>
 				</RecurrenceCode>
 			</RecurrenceProperties>
 			<Value/>
-			<NumberOfIntervals>18</NumberOfIntervals>
+			<NumberOfIntervals>20</NumberOfIntervals>
 			<MinMaxAutodetect>true</MinMaxAutodetect>
 			<RangeMinExpression>0</RangeMinExpression>
 			<RangeMaxExpression>1</RangeMaxExpression>
-			<InitialIntervalSize>0.1</InitialIntervalSize>
+			<InitialIntervalSize>0.35</InitialIntervalSize>
 			<CalculateCDF>true</CalculateCDF>
 			<CalculatePercentiles>false</CalculatePercentiles>
 			<LowPercent>10</LowPercent>
@@ -592,11 +591,11 @@ viewArea.navigateTo();]]></StartupCode>
 				</RecurrenceCode>
 			</RecurrenceProperties>
 			<Value/>
-			<NumberOfIntervals>13</NumberOfIntervals>
+			<NumberOfIntervals>20</NumberOfIntervals>
 			<MinMaxAutodetect>true</MinMaxAutodetect>
 			<RangeMinExpression>0</RangeMinExpression>
 			<RangeMaxExpression>1</RangeMaxExpression>
-			<InitialIntervalSize>0.1</InitialIntervalSize>
+			<InitialIntervalSize>0.35</InitialIntervalSize>
 			<CalculateCDF>true</CalculateCDF>
 			<CalculatePercentiles>false</CalculatePercentiles>
 			<LowPercent>10</LowPercent>
@@ -630,6 +629,343 @@ viewArea.navigateTo();]]></StartupCode>
 				</RecurrenceCode>
 			</RecurrenceProperties>
 			<Value/>
+			<NumberOfIntervals>20</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.35</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<DataSet>
+			<Id>1753178567353</Id>
+			<Name><![CDATA[data_successRate_b1]]></Name>
+			<X>400</X>
+			<Y>1160</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>false</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753178567351</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1753257600000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<FreezeXAxis>true</FreezeXAxis>
+			<SamplesToKeep>525600</SamplesToKeep>
+		</DataSet>
+		<DataSet>
+			<Id>1753178598625</Id>
+			<Name><![CDATA[data_successRate_b2]]></Name>
+			<X>400</X>
+			<Y>1180</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>false</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753178598623</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1753257600000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<FreezeXAxis>true</FreezeXAxis>
+			<SamplesToKeep>525600</SamplesToKeep>
+		</DataSet>
+		<DataSet>
+			<Id>1753178601400</Id>
+			<Name><![CDATA[data_successRate_b3]]></Name>
+			<X>400</X>
+			<Y>1200</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>false</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753178601398</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1753257600000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<FreezeXAxis>true</FreezeXAxis>
+			<SamplesToKeep>525600</SamplesToKeep>
+		</DataSet>
+		<DataSet>
+			<Id>1753178604097</Id>
+			<Name><![CDATA[data_successful_b1]]></Name>
+			<X>400</X>
+			<Y>1240</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>false</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753178604095</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1753257600000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<FreezeXAxis>true</FreezeXAxis>
+			<SamplesToKeep>525600</SamplesToKeep>
+		</DataSet>
+		<DataSet>
+			<Id>1753178631969</Id>
+			<Name><![CDATA[data_successful_b2]]></Name>
+			<X>400</X>
+			<Y>1260</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>false</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753178631967</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1753257600000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<FreezeXAxis>true</FreezeXAxis>
+			<SamplesToKeep>525600</SamplesToKeep>
+		</DataSet>
+		<DataSet>
+			<Id>1753178634601</Id>
+			<Name><![CDATA[data_successful_b3]]></Name>
+			<X>400</X>
+			<Y>1280</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>false</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753178634599</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1753257600000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<FreezeXAxis>true</FreezeXAxis>
+			<SamplesToKeep>525600</SamplesToKeep>
+		</DataSet>
+		<DataSet>
+			<Id>1753178639319</Id>
+			<Name><![CDATA[data_notSuccessful_b1]]></Name>
+			<X>400</X>
+			<Y>1320</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>false</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753178639317</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1753257600000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<FreezeXAxis>true</FreezeXAxis>
+			<SamplesToKeep>525600</SamplesToKeep>
+		</DataSet>
+		<DataSet>
+			<Id>1753178652512</Id>
+			<Name><![CDATA[data_notSuccessful_b2]]></Name>
+			<X>400</X>
+			<Y>1340</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>false</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753178652510</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1753257600000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<FreezeXAxis>true</FreezeXAxis>
+			<SamplesToKeep>525600</SamplesToKeep>
+		</DataSet>
+		<DataSet>
+			<Id>1753178654768</Id>
+			<Name><![CDATA[data_notSuccessful_b3]]></Name>
+			<X>400</X>
+			<Y>1360</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>false</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753178654766</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1753257600000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<FreezeXAxis>true</FreezeXAxis>
+			<SamplesToKeep>525600</SamplesToKeep>
+		</DataSet>
+		<HistogramData>
+			<Id>1753187903917</Id>
+			<Name><![CDATA[hs_data_utility_b1_start]]></Name>
+			<X>700</X>
+			<Y>1060</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753187903915</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>20</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.05</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<HistogramData>
+			<Id>1753187942280</Id>
+			<Name><![CDATA[hs_data_utility_b2_start]]></Name>
+			<X>700</X>
+			<Y>1080</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753187942278</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
 			<NumberOfIntervals>13</NumberOfIntervals>
 			<MinMaxAutodetect>true</MinMaxAutodetect>
 			<RangeMinExpression>0</RangeMinExpression>
@@ -641,13 +977,1088 @@ viewArea.navigateTo();]]></StartupCode>
 			<HighPercent>10</HighPercent>
 			<Title/>
 		</HistogramData>
+		<HistogramData>
+			<Id>1753187944687</Id>
+			<Name><![CDATA[hs_data_utility_b3_start]]></Name>
+			<X>700</X>
+			<Y>1100</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753187944685</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>20</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.05</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<HistogramData>
+			<Id>1753187988628</Id>
+			<Name><![CDATA[hs_data_utility_b1_end]]></Name>
+			<X>700</X>
+			<Y>1130</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753187988626</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>13</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.01</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<HistogramData>
+			<Id>1753187988636</Id>
+			<Name><![CDATA[hs_data_utility_b2_end]]></Name>
+			<X>700</X>
+			<Y>1150</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753187988634</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>20</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.05</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<HistogramData>
+			<Id>1753187988644</Id>
+			<Name><![CDATA[hs_data_utility_b3_end]]></Name>
+			<X>700</X>
+			<Y>1170</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753187988642</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>20</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.05</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<HistogramData>
+			<Id>1753190890992</Id>
+			<Name><![CDATA[hs_data_norms_pop1]]></Name>
+			<X>670</X>
+			<Y>930</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753190890990</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>20</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.05</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<HistogramData>
+			<Id>1753190891001</Id>
+			<Name><![CDATA[hs_data_trust_pop1]]></Name>
+			<X>670</X>
+			<Y>950</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753190890999</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>20</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.05</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<HistogramData>
+			<Id>1753190891008</Id>
+			<Name><![CDATA[hs_data_rc_pop1]]></Name>
+			<X>670</X>
+			<Y>970</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753190891006</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>20</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.05</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<HistogramData>
+			<Id>1753190891015</Id>
+			<Name><![CDATA[hs_data_psi_pop1]]></Name>
+			<X>670</X>
+			<Y>990</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753190891013</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>20</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.05</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<HistogramData>
+			<Id>1753191542584</Id>
+			<Name><![CDATA[hs_data_utility_b1_all]]></Name>
+			<X>700</X>
+			<Y>1200</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753191542582</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>20</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.01</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<HistogramData>
+			<Id>1753191542593</Id>
+			<Name><![CDATA[hs_data_utility_b2_all]]></Name>
+			<X>700</X>
+			<Y>1220</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753191542591</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>20</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.05</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<HistogramData>
+			<Id>1753191542600</Id>
+			<Name><![CDATA[hs_data_utility_b3_all]]></Name>
+			<X>700</X>
+			<Y>1240</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753191542598</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>20</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.05</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<HistogramData>
+			<Id>1753195255529</Id>
+			<Name><![CDATA[hs_data_b1_start]]></Name>
+			<X>700</X>
+			<Y>1290</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753195255527</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>20</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.05</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<HistogramData>
+			<Id>1753195255536</Id>
+			<Name><![CDATA[hs_data_b2_start]]></Name>
+			<X>700</X>
+			<Y>1310</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753195255534</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>3</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<HistogramData>
+			<Id>1753195255543</Id>
+			<Name><![CDATA[hs_data_b3_start]]></Name>
+			<X>700</X>
+			<Y>1330</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753195255541</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>20</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.05</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<HistogramData>
+			<Id>1753195255550</Id>
+			<Name><![CDATA[hs_data_b1_end]]></Name>
+			<X>700</X>
+			<Y>1360</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753195255548</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>3</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.05</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<HistogramData>
+			<Id>1753195255556</Id>
+			<Name><![CDATA[hs_data_b2_end]]></Name>
+			<X>700</X>
+			<Y>1380</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753195255554</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>20</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.05</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<HistogramData>
+			<Id>1753195255563</Id>
+			<Name><![CDATA[hs_data_b3_end]]></Name>
+			<X>700</X>
+			<Y>1400</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753195255561</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>20</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.05</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<HistogramData>
+			<Id>1753195255569</Id>
+			<Name><![CDATA[hs_data_b1_all]]></Name>
+			<X>700</X>
+			<Y>1430</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753195255567</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>20</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.05</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<HistogramData>
+			<Id>1753195255574</Id>
+			<Name><![CDATA[hs_data_b2_all]]></Name>
+			<X>700</X>
+			<Y>1450</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753195255572</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>20</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.05</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<HistogramData>
+			<Id>1753195255579</Id>
+			<Name><![CDATA[hs_data_b3_all]]></Name>
+			<X>700</X>
+			<Y>1470</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1753195255577</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>20</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.05</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<HistogramData>
+			<Id>1754380888601</Id>
+			<Name><![CDATA[hs_data_b1_data]]></Name>
+			<X>400</X>
+			<Y>1400</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1754380888599</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>20</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.35</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<HistogramData>
+			<Id>1754380888612</Id>
+			<Name><![CDATA[hs_data_b2_data]]></Name>
+			<X>400</X>
+			<Y>1420</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1754380888610</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>20</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.35</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<HistogramData>
+			<Id>1754380888620</Id>
+			<Name><![CDATA[hs_data_b3_data]]></Name>
+			<X>400</X>
+			<Y>1440</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1754380888618</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>20</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.35</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<HistogramData>
+			<Id>1754380888648</Id>
+			<Name><![CDATA[hs_data_b1_pop]]></Name>
+			<X>400</X>
+			<Y>1480</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1754380888646</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>20</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.35</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<HistogramData>
+			<Id>1754380888652</Id>
+			<Name><![CDATA[hs_data_b2_pop]]></Name>
+			<X>400</X>
+			<Y>1500</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1754380888650</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>20</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.35</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<HistogramData>
+			<Id>1754380888671</Id>
+			<Name><![CDATA[hs_data_b3_pop]]></Name>
+			<X>400</X>
+			<Y>1520</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1754380888669</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1752652800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>20</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.35</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+		<DataSet>
+			<Id>1754404980410</Id>
+			<Name><![CDATA[data_avgProbability_b1]]></Name>
+			<X>400</X>
+			<Y>1560</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>false</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1754404980408</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1753257600000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<FreezeXAxis>true</FreezeXAxis>
+			<SamplesToKeep>525600</SamplesToKeep>
+		</DataSet>
+		<DataSet>
+			<Id>1754404980418</Id>
+			<Name><![CDATA[data_avgProbability_b2]]></Name>
+			<X>400</X>
+			<Y>1580</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>false</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1754404980416</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1753257600000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<FreezeXAxis>true</FreezeXAxis>
+			<SamplesToKeep>525600</SamplesToKeep>
+		</DataSet>
+		<DataSet>
+			<Id>1754404980426</Id>
+			<Name><![CDATA[data_avgProbability_b3]]></Name>
+			<X>400</X>
+			<Y>1600</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>false</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1754404980424</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1753257600000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<FreezeXAxis>true</FreezeXAxis>
+			<SamplesToKeep>525600</SamplesToKeep>
+		</DataSet>
 	</AnalysisData>
 	<Connectivity>
 		<ExcelFile>
-			<Id>1752584613292</Id>
+			<Id>1754383332051</Id>
 			<Name><![CDATA[ef_spvars]]></Name>
 			<X>-260</X>
-			<Y>370</Y>
+			<Y>390</Y>
 			<Label>
 				<X>10</X>
 				<Y>0</Y>
