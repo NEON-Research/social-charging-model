@@ -1,7 +1,7 @@
 double f_findChargePoint()
 {/*ALCODESTART::1746011747637*/
 //Charge car if below threshold
-if(main.v_chargePointAvailable > 0){
+if(main.f_checkAvailableChargePoints()){
 	f_chargeCar();
 }
 
@@ -13,87 +13,106 @@ if(v_soc < 0){
 
 double f_chargeCar()
 {/*ALCODESTART::1746011766273*/
-if(v_soc < 1){
-	double timestepsPerHour = 60 / main.p_timestep_minutes;
-	double charge_kWhperTimestep = main.p_chargingPower_kW / timestepsPerHour;
-	v_electricityInBattery_kWh += charge_kWhperTimestep;
-	//traceln("EV " + this.getIndex() + " is charging in status " + v_status + ", current charge " + charge_kWhperTimestep + " current bat cap "+ v_electricityInBattery_kWh + "kWh, cap " + v_batteryCapacity_kWh + "kwh and soc " + v_soc);
-	if( v_electricityInBattery_kWh >= v_batteryCapacity_kWh){
-		v_electricityInBattery_kWh = v_batteryCapacity_kWh;
-		v_status = PARKED_CHARGE_POINT_IDLE;
-		
-		if(main.initializationMode == false){
-			f_b1_movingVehicle();
-		}
-	}
-}
+if(v_chargePoint != null && v_status == PARKED_CHARGE_POINT_CHARGING){	
+	// Charging step
+    if (v_electricityInBattery_kWh < v_batteryCapacity_kWh) {
+        double timestepsPerHour = 60.0 / main.p_timestep_minutes;
+        double charge_kWhperTimestep = main.p_chargingPower_kW / timestepsPerHour;
 
-v_soc = v_electricityInBattery_kWh / v_batteryCapacity_kWh;
+        // How much space is left in the battery?
+        double needed_kWh = v_batteryCapacity_kWh - v_electricityInBattery_kWh;
+
+        // Charge only what fits
+        double actualCharge = Math.min(charge_kWhperTimestep, needed_kWh);
+        v_electricityInBattery_kWh += actualCharge;
+        v_totalElectricityCharged_kWh += actualCharge;
+    }
+
+    // Always update SOC
+    v_soc = v_electricityInBattery_kWh / v_batteryCapacity_kWh;
+
+    // Check for full battery *after* charging
+    if (v_electricityInBattery_kWh >= v_batteryCapacity_kWh) {
+        v_electricityInBattery_kWh = v_batteryCapacity_kWh;
+        v_status = PARKED_CHARGE_POINT_IDLE;
+
+        if (!main.initializationMode) {
+			f_b1_movingVehicle();
+        }
+    }
+}
 /*ALCODEEND*/}
 
 double f_updateSOC(double tripDistance_km)
 {/*ALCODESTART::1746011780748*/
 //Update SOC
-double electricityConsumed_kWh = tripDistance_km;
+double electricityConsumed_kWh = tripDistance_km * v_electricityConsumption_kWhperKm;
 v_electricityInBattery_kWh -= electricityConsumed_kWh;
-v_soc = v_electricityInBattery_kWh / v_batteryCapacity_kWh;
-if(v_soc < 0){
-	double outOfModelCharging_soc = abs(v_soc) + 0.1; //Cars charge to 10% when doing fast charging outside of model
-	v_outOfModelCharge_kWh += (outOfModelCharging_soc * v_batteryCapacity_kWh);
-	v_electricityInBattery_kWh += v_outOfModelCharge_kWh;
-	v_soc = v_electricityInBattery_kWh / v_batteryCapacity_kWh;
-	//traceln("ERROR - soc in car " + this.getIndex() + " is below 0 at " + v_soc);
+
+if(v_electricityInBattery_kWh < 0){
+	double outOfModelCharging_kWh = abs(v_electricityInBattery_kWh) + v_batteryCapacity_kWh*0.1; //Cars charge to 10% when doing fast charging outside of model
+	v_outOfModelCharge_kWh += outOfModelCharging_kWh;
+	v_totalElectricityCharged_kWh += outOfModelCharging_kWh;
+	v_electricityInBattery_kWh += outOfModelCharging_kWh;
+	
+	double soc = v_electricityInBattery_kWh / v_batteryCapacity_kWh;
+	if (Math.abs(soc - 0.10) > 0.005) {  // ±0.5% tolerance
+		traceln("ERROR: soc = " + roundToInt(v_electricityInBattery_kWh / v_batteryCapacity_kWh * 100) + "% after out of model charging, with OoMC = " + outOfModelCharging_kWh + "kWh, elec in bat = " + v_electricityInBattery_kWh + " bat cap " + v_batteryCapacity_kWh);
+	}
 }
 
+v_soc = v_electricityInBattery_kWh / v_batteryCapacity_kWh;
+if(v_soc < v_socChargingThreshold){
+	count_chargingRequired++;
+}
 
 
 /*ALCODEEND*/}
 
-double f_setParkingStatus()
+double f_setChargingStatus()
 {/*ALCODESTART::1747136105778*/
-Status currentStatus = v_status;
-
-boolean wantsToCharge = false;
-boolean chargePointAvailable = false;
-boolean foundCPThroughRequest = false;
-
-//Charge car if below threshold
-if( v_soc < v_socChargingThreshold){
-	wantsToCharge = true;
-}
-
-//Check available charge points
-if(main.v_chargePointAvailable > 0){
-	chargePointAvailable = true;
-}
-
-
-//Update status
-if(wantsToCharge){
-	if(chargePointAvailable){
-		v_status = PARKED_CHARGE_POINT_CHARGING;
-		main.v_chargePointAvailable--;
-		if(main.v_chargePointAvailable < 0){
-			traceln("CP available = " + main.v_chargePointAvailable + " after regular charging");
+if(v_status == ARRIVING){
+	boolean wantsToCharge = v_soc < v_socChargingThreshold;
+	Status currentStatus = v_status;
+	//boolean foundCPThroughRequest = false;
+	
+	if(wantsToCharge){
+		// Already charging
+		if(v_chargePoint != null){
+			v_status = PARKED_CHARGE_POINT_CHARGING;
+		}
+		// Not charging, trying to get CP
+		else if( f_tryAcquireChargePoint()){
+			v_status = PARKED_CHARGE_POINT_CHARGING;
+			count_chargingSessions++;
+		}
+		//Behaviour 2: Request neighbor to move EV
+		else if(main.initializationMode == false){
+			f_b2_requestMove();
+		}
+		//No CP available
+		else{
+			v_status = PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED;
 		}
 	}
-	else if(wantsToCharge && !chargePointAvailable && main.initializationMode == false){
-		//Behaviour 2: Request neighbor to move EV
-		f_b2_requestMove();
+	else {
+		//If somehow still holding CP
+		if( v_chargePoint != null) {
+			traceln("Holding CP which should not happen with status " + v_status);
+			f_leaveChargePoint();
+		}
+		v_status = PARKED_NON_CHARGE_POINT_CHARGING_NOT_REQUIRED;
 	}
-	else{
-		v_status = PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED;
+	
+	if( v_chargePoint != null && v_chargePoint.getCurrentEV() != this){
+		traceln("At EV " + this.getIndex() + " connected charge point is occupied by EV " + v_chargePoint.isOccupiedBy());
 	}
+	/*
+	if(currentStatus == PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED && v_status == PARKED_CHARGE_POINT_CHARGING){
+		traceln("EV " + this.getIndex() + " has moved from parking to charge point and started charging");
+	}
+	*/
 }
-else {
-	v_status = PARKED_NON_CHARGE_POINT_CHARGING_NOT_REQUIRED;
-}
-
-/*
-if(currentStatus == PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED && v_status == PARKED_CHARGE_POINT_CHARGING){
-	traceln("EV " + this.getIndex() + " has moved from parking to charge point and started charging");
-}
-*/
 /*ALCODEEND*/}
 
 double f_b1_movingVehicle()
@@ -107,10 +126,14 @@ f_moveVehicle(actBehavior);
 double f_moveVehicle(boolean actBehavior)
 {/*ALCODESTART::1753175296086*/
 //Move vehicle
+
 if( actBehavior && main.v_parkingPlacesAvailable > 0 ){
+	f_leaveChargePoint();
 	v_status = PARKED_NON_CHARGE_POINT_CHARGING_NOT_REQUIRED;
-	main.v_chargePointAvailable++;
 	count_b1_successful++;
+	
+	//If moved, notify neighbor
+	f_b3_notifyNeighbor();
 }
 else {
 	count_b1_notSuccessful++;
@@ -124,9 +147,6 @@ successRate_b1 = (total_b1 != 0) ? ((double) count_b1_successful / total_b1) : 0
 
 //Social learning after interaction
 f_socialLearning_b1();
-
-//If moved, notify neighbor
-f_b3_notifyNeighbor();
 
 /*ALCODEEND*/}
 
@@ -142,19 +162,25 @@ f_requestMove(actBehavior);
 
 double f_requestMove(boolean actBehavior)
 {/*ALCODESTART::1753175364937*/
-boolean succesfulMoveRequest = f_successfulMoveRequest(actBehavior);
+//Get moving EV if available
+EVOwner movingEV = f_successfulMoveRequest(actBehavior);
 
-if(succesfulMoveRequest){
-	//Get moving EV and change status
-	EVOwner movingEV = randomWhere(main.EVOwners, x->x.v_status == PARKED_CHARGE_POINT_IDLE);
+if(movingEV != null){
 	movingEV.v_status = PARKED_NON_CHARGE_POINT_CHARGING_NOT_REQUIRED;
+	J_ChargePoint freedCP = movingEV.v_chargePoint;
+	movingEV.f_leaveChargePoint();
 	movingEV.count_fulfilledMoveRequest++;
 			
 	//Change status of this EV
 	v_status = PARKED_CHARGE_POINT_CHARGING;
+	v_chargePoint = freedCP;
+	v_chargePoint.occupy(this);
+	
+	count_chargingSessions++;
 	count_b2_successful++;
 }
 else {
+	v_status = PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED;
 	count_b2_notSuccessful++;
 }
 
@@ -179,14 +205,20 @@ f_notifyNeighbor(actBehavior);
 
 double f_notifyNeighbor(boolean actBehavior)
 {/*ALCODESTART::1753175429706*/
-if( actBehavior && main.v_EVsParkedNonCPChargingRequired > 0 ){
+int EVsAwaitingCP = count(main.EVOwners, x->x.v_status == PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED);
+
+if( actBehavior && EVsAwaitingCP > 0 ){
 	//Get notified EV Owner
 	EVOwner EVNotified = randomWhere(main.EVOwners, x->x.v_status == PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED);
 	EVNotified.v_status = PARKED_CHARGE_POINT_CHARGING;
-	main.v_chargePointAvailable--;
+	
+	/*
+	if( main.f_checkCPA() ){
+		traceln("CPA ERROR after notify neighbor");
+	}
 	if(main.v_chargePointAvailable < 0){
 		traceln("CP available = " + main.v_chargePointAvailable + " after b3");
-	}
+	}*/
 	count_b3_successful++;
 }
 else {
@@ -235,9 +267,12 @@ double prob_b1_t0 = v_prob_b1;
 
 double norms_t1 = norms_t0 + main.learningRate_norms_b1 * (observedFraction - norms_t0);
 double trust_t1 = trust_t0 + main.learningRate_trust_b1 * (observedFraction - trust_t0);
-double psi_t1 = psi_t0 + main.regCoef_norms_psi * (norms_t1 - norms_t0) + main.regCoef_trust_psi * (trust_t1 - trust_t0);
+//double psi_t1 = psi_t0 + main.regCoef_norms_psi * (norms_t1 - norms_t0) + main.regCoef_trust_psi * (trust_t1 - trust_t0);
+//double prob_b1_t1 = prob_b1_t0 + main.regCoef_psi_b1 * (psi_t1 - psi_t0);
 
-double prob_b1_t1 = prob_b1_t0 + main.regCoef_psi_b1 * (psi_t1 - psi_t0);
+//test
+double psi_t1 = psi_t0 + (main.regCoef_norms_psi * 5) * (norms_t1 - norms_t0) + (main.regCoef_trust_psi*5) * (trust_t1 - trust_t0);
+double prob_b1_t1 = prob_b1_t0 + (main.regCoef_psi_b1*5) * (psi_t1 - psi_t0);
 
 v_norms = norms_t1;
 v_trust = trust_t1;
@@ -246,15 +281,54 @@ v_prob_b1 = prob_b1_t1;
 
 /*ALCODEEND*/}
 
-boolean f_successfulMoveRequest(boolean actBehavior)
+EVOwner f_successfulMoveRequest(boolean actBehavior)
 {/*ALCODESTART::1754391554916*/
+/**
+ * Attempts to find an EV to move based on actBehavior probability and availability.
+ * Returns the EV to move if successful, or null otherwise.
+ */
+if (!actBehavior) {
+	return null;  // Behavior not active, no move
+}
+
+// Check if any EV with idle CP available
+int idleCount = count(main.EVOwners, x -> x.v_status == PARKED_CHARGE_POINT_IDLE);
+if (idleCount == 0) {
+	count_b2_noIdleChargers++;
+	return null;
+}
+
+// Calculate sigmoid-based probability
+double scale = 10.0; // Steepness
+double x_shift = 0.5; // Center
+double sigmoid = 1.0 / (1.0 + Math.exp(-scale * (main.successRate_b2 - x_shift)));
+double probability = 0.2 + 0.4 * sigmoid;
+double rand = uniform();
+
+if (rand >= probability) {
+	count_b2_noMatchingRequest++;
+	return null;
+}
+
+// Passed probability check: select random EV with idle CP to move
+EVOwner selected = randomWhere(main.EVOwners, x->x.v_status == PARKED_CHARGE_POINT_IDLE);
+
+if (selected == null) {
+	// Defensive: no candidates despite count check earlier
+	traceln("Error no matching EV owner despite checl");
+	count_b2_noIdleChargers++;
+	return null;
+}
+
+return selected;
+
+
+/*
 boolean act = false;
 if( actBehavior ){
-	if(main.v_EVsParkedAtCPIdle > 0){
-		if(main.v_EVsParkedAtCPIdle != count(main.EVOwners, x->x.v_status == PARKED_CHARGE_POINT_IDLE)){
-			traceln("ERROR: v_EVsparkedAtCPIdle = " + main.v_EVsParkedAtCPIdle + " and v_status == PARKED_CHARGE_POINT_IDLE = " + count(main.EVOwners, x->x.v_status == PARKED_CHARGE_POINT_IDLE));
-		}
-		//S-shape curve y between 0.2 and 0.6, x between 0 - 1 based on succesRate
+	if(count(main.EVOwners, x->x.v_status == PARKED_CHARGE_POINT_IDLE) > 0){
+		
+		
 		double scale = 10.0; // Steepness of the S
 		double x_shift = 0.5; // Center point of the S
 		double sigmoid = 1.0 / (1.0 + Math.exp(-scale * (main.successRate_b2 - x_shift))); // Output in (0,1)
@@ -265,12 +339,22 @@ if( actBehavior ){
 		
 		if( rand < probability ){
 			act = true;
-		}	
+		}
+		else {
+			count_b2_noMatchingRequest++;
+		}
+	}
+	else{
+		//traceln("in act behavior 2 but without idle chargers");
+		count_b2_noIdleChargers++;
 	}
 }
 	
 
 return act;
+*/
+
+//S-shape curve y between 0.2 and 0.6, x between 0 - 1 based on succesRate
 /*ALCODEEND*/}
 
 double f_socialLearning_b2()
@@ -283,8 +367,8 @@ double trust_t0 = v_trust;
 double psi_t0 = v_perceived_social_interdependence;
 double prob_b2_t0 = v_prob_b2;
 
-double norms_t1 = norms_t0 + main.learningRate_norms_b2 * (observedFraction - norms_t0);
-double trust_t1 = trust_t0 + main.learningRate_trust_b2 * (observedFraction - trust_t0);
+double norms_t1 = norms_t0 + main.learningRate_norms_b2 * (1 - norms_t0);
+double trust_t1 = trust_t0 + main.learningRate_trust_b2 * (1 - trust_t0);
 double psi_t1 = psi_t0 + main.regCoef_norms_psi * (norms_t1 - norms_t0) + main.regCoef_trust_psi * (trust_t1 - trust_t0);
 
 double prob_b2_t1 = prob_b2_t0 + main.regCoef_psi_b2 * (psi_t1 - psi_t0);
@@ -306,8 +390,8 @@ double trust_t0 = v_trust;
 double psi_t0 = v_perceived_social_interdependence;
 double prob_b3_t0 = v_prob_b3;
 
-double norms_t1 = norms_t0 + main.learningRate_norms_b3 * (observedFraction - norms_t0);
-double trust_t1 = trust_t0 + main.learningRate_trust_b3 * (observedFraction - trust_t0);
+double norms_t1 = norms_t0 + main.learningRate_norms_b3 * (1 - norms_t0);
+double trust_t1 = trust_t0 + main.learningRate_trust_b3 * (1 - trust_t0);
 double psi_t1 = psi_t0 + main.regCoef_norms_psi * (norms_t1 - norms_t0) + main.regCoef_trust_psi * (trust_t1 - trust_t0);
 
 double prob_b3_t1 = prob_b3_t0 + main.regCoef_psi_b3 * (psi_t1 - psi_t0);
@@ -316,6 +400,30 @@ v_norms = norms_t1;
 v_trust = trust_t1;
 v_perceived_social_interdependence = psi_t1;
 v_prob_b3 = prob_b3_t1;
+
+/*ALCODEEND*/}
+
+double f_cleanUp()
+{/*ALCODESTART::1754493835269*/
+c_tripSchedule.clear();
+
+this.deleteSelf();
+/*ALCODEEND*/}
+
+boolean f_tryAcquireChargePoint()
+{/*ALCODESTART::1754908555295*/
+for (J_ChargePoint cp : main.c_chargePoints) {
+    if (!cp.isOccupied()) {
+        cp.occupy(this);
+        v_chargePoint = cp;
+        return true; //Succesfully acquired a CP
+    }
+}
+return false;
+/*ALCODEEND*/}
+
+double f_releaseChargePoint()
+{/*ALCODESTART::1754917221483*/
 
 /*ALCODEEND*/}
 

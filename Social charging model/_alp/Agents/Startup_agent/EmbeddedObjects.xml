@@ -58,6 +58,9 @@
 			<Parameter>
 				<Name><![CDATA[p_hasSocialInteractionBehaviour]]></Name>
 			</Parameter>
+			<Parameter>
+				<Name><![CDATA[p_days]]></Name>
+			</Parameter>
 		</Parameters>
 		<ReplicationFlag>true</ReplicationFlag>
 		<Replication Class="CodeValue">

@@ -100,6 +100,7 @@
 		<ExcelFile>
 			<Id>1746095456060</Id>
 			<Name><![CDATA[excel_exportResults]]></Name>
+			<ExcludeFromBuild>true</ExcludeFromBuild>
 			<X>-200</X>
 			<Y>560</Y>
 			<Label>
@@ -114,8 +115,8 @@
 				<ClassName>Export_ModelData.xlsx</ClassName>
 			</ResourceReference>
 			<SaveInSnapshot>false</SaveInSnapshot>
-			<LoadOnStartup>true</LoadOnStartup>
-			<SaveOnDispose>true</SaveOnDispose>
+			<LoadOnStartup>false</LoadOnStartup>
+			<SaveOnDispose>false</SaveOnDispose>
 		</ExcelFile>
 	</Connectivity>
 	<AgentLinks>

@@ -33,6 +33,10 @@
 					<Id>1745939345026</Id>
 					<Name><![CDATA[PARKED_CHARGE_POINT_IDLE]]></Name>
 				</Option>
+				<Option>
+					<Id>1754921952417</Id>
+					<Name><![CDATA[ARRIVING]]></Name>
+				</Option>
 			</OptionList>
 			<OptionList>
 				<Id>1746018242293</Id>

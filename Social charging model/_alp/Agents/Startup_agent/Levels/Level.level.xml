@@ -19,6 +19,7 @@
 			<TextColor>-16777216</TextColor>
 			<Enabled>true</Enabled>
 			<ActionCode>traceln("Starting simulation");
+v_rapidRun = false;
 f_initializeModel();</ActionCode>
 		</BasicProperties>
 		<ExtendedProperties>
@@ -135,7 +136,7 @@ f_initializeModel();</ActionCode>
 			<MinValue>0</MinValue>
 			<MaxValue>10000</MaxValue>
 			<LinkTo>true</LinkTo>
-			<Link>v_chargePoints</Link>
+			<Link>v_EVsPerCP</Link>
 		</ExtendedProperties>
 	</Control>
 	<Text>
@@ -230,7 +231,7 @@ f_initializeModel();</ActionCode>
 		<Z>0</Z>
 		<Rotation>0.0</Rotation>
 		<Color>-16777216</Color>
-		<Text><![CDATA[Charge points:]]></Text>
+		<Text><![CDATA[EVs per CP:]]></Text>
 		<Font>
 			<Name><![CDATA[Dialog]]></Name>
 			<Size>16</Size>
@@ -354,7 +355,7 @@ f_setNbOfTimesteps();</ActionCode>
 		<Id>1746095456056</Id>
 		<Name><![CDATA[fileChooser_exportResults]]></Name>
 		<X>150</X>
-		<Y>400</Y>
+		<Y>470</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -715,4 +716,37 @@ f_setNbOfTimesteps();</ActionCode>
 		</Font>
 		<Alignment>LEFT</Alignment>
 	</Text>
+	<Control Type="Button">
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Id>1754550230914</Id>
+		<Name><![CDATA[b_startSimualtion1]]></Name>
+		<X>150</X>
+		<Y>400</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<BasicProperties Width="250" Height="30">
+			<EmbeddedIcon>false</EmbeddedIcon>
+			<TextColor>-16777216</TextColor>
+			<Enabled>true</Enabled>
+			<ActionCode>traceln("Starting simulation");
+v_rapidRun = true;
+f_initializeModel();
+mains.get(0).f_cleanUp();
+
+System.gc();
+long usedMemory = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1024 * 1024);
+traceln("Used memory: " + usedMemory + " MB");
+</ActionCode>
+		</BasicProperties>
+		<ExtendedProperties>
+			<Font Name="Dialog" Size="16" Style="0"/>
+			<LabelText>Start rapid run</LabelText>
+		</ExtendedProperties>
+	</Control>
 </Presentation>

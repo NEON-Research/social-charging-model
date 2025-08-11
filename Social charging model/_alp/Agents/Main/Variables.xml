@@ -22,6 +22,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1745939158262</Id>
 		<Name><![CDATA[v_EVsParkedAtCPIdle]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>60</X>
 		<Y>850</Y>
 		<Label>
@@ -41,6 +42,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1745939168906</Id>
 		<Name><![CDATA[v_EVsParkedAtCPCharging]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>60</X>
 		<Y>830</Y>
 		<Label>
@@ -60,6 +62,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1745939173737</Id>
 		<Name><![CDATA[v_EVsParkedNonCPChargingRequired]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>60</X>
 		<Y>790</Y>
 		<Label>
@@ -79,6 +82,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1745939179719</Id>
 		<Name><![CDATA[v_carsOnTrip]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>60</X>
 		<Y>750</Y>
 		<Label>
@@ -96,27 +100,9 @@
 		</Properties>
 	</Variable>
 	<Variable Class="PlainVariable">
-		<Id>1746012695970</Id>
-		<Name><![CDATA[v_chargePointAvailable]]></Name>
-		<X>70</X>
-		<Y>1310</Y>
-		<Label>
-			<X>10</X>
-			<Y>0</Y>
-		</Label>
-		<PublicFlag>false</PublicFlag>
-		<PresentationFlag>true</PresentationFlag>
-		<ShowLabel>true</ShowLabel>
-		<Properties SaveInSnapshot="true"
-              Constant="false"
-              AccessType="public"
-              StaticVariable="false">
-			<Type><![CDATA[int]]></Type>
-		</Properties>
-	</Variable>
-	<Variable Class="PlainVariable">
 		<Id>1746015323562</Id>
 		<Name><![CDATA[v_EVsParkedNonCPChargingNotRequired]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>60</X>
 		<Y>810</Y>
 		<Label>
@@ -136,6 +122,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1746015441342</Id>
 		<Name><![CDATA[v_ICECarsParkedNonCP]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>60</X>
 		<Y>770</Y>
 		<Label>
@@ -721,7 +708,7 @@
               StaticVariable="false">
 			<Type><![CDATA[double]]></Type>
 			<InitialValue Class="CodeValue">
-				<Code><![CDATA[1]]></Code>
+				<Code><![CDATA[0.1]]></Code>
 			</InitialValue>
 		</Properties>
 	</Variable>
@@ -743,7 +730,7 @@
               StaticVariable="false">
 			<Type><![CDATA[double]]></Type>
 			<InitialValue Class="CodeValue">
-				<Code><![CDATA[1]]></Code>
+				<Code><![CDATA[0.3]]></Code>
 			</InitialValue>
 		</Properties>
 	</Variable>
@@ -765,7 +752,7 @@
               StaticVariable="false">
 			<Type><![CDATA[double]]></Type>
 			<InitialValue Class="CodeValue">
-				<Code><![CDATA[1]]></Code>
+				<Code><![CDATA[0.1]]></Code>
 			</InitialValue>
 		</Properties>
 	</Variable>
@@ -787,7 +774,7 @@
               StaticVariable="false">
 			<Type><![CDATA[double]]></Type>
 			<InitialValue Class="CodeValue">
-				<Code><![CDATA[1]]></Code>
+				<Code><![CDATA[0.3]]></Code>
 			</InitialValue>
 		</Properties>
 	</Variable>
@@ -809,7 +796,7 @@
               StaticVariable="false">
 			<Type><![CDATA[double]]></Type>
 			<InitialValue Class="CodeValue">
-				<Code><![CDATA[1]]></Code>
+				<Code><![CDATA[0.1]]></Code>
 			</InitialValue>
 		</Properties>
 	</Variable>
@@ -831,8 +818,166 @@
               StaticVariable="false">
 			<Type><![CDATA[double]]></Type>
 			<InitialValue Class="CodeValue">
-				<Code><![CDATA[1]]></Code>
+				<Code><![CDATA[0.3]]></Code>
 			</InitialValue>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1754484960132</Id>
+		<Name><![CDATA[count_b1_successfulPerDay]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
+		<X>-250</X>
+		<Y>1450</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[int]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1754484960134</Id>
+		<Name><![CDATA[count_b2_successfulPerDay]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
+		<X>-250</X>
+		<Y>1470</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[int]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1754484960136</Id>
+		<Name><![CDATA[count_b3_successfulPerDay]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
+		<X>-250</X>
+		<Y>1490</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[int]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1754484960138</Id>
+		<Name><![CDATA[count_b1_notSuccessfulPerDay]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
+		<X>-250</X>
+		<Y>1520</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[int]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1754484960140</Id>
+		<Name><![CDATA[count_b2_notSuccessfulPerDay]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
+		<X>-250</X>
+		<Y>1540</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[int]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1754484960142</Id>
+		<Name><![CDATA[count_b3_notSuccessfulPerDay]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
+		<X>-250</X>
+		<Y>1560</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[int]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1754925087783</Id>
+		<Name><![CDATA[countTripDepartures]]></Name>
+		<X>50</X>
+		<Y>530</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[int]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1754925101013</Id>
+		<Name><![CDATA[countTripArrivals]]></Name>
+		<X>50</X>
+		<Y>550</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[int]]></Type>
 		</Properties>
 	</Variable>
 	<Variable Class="Parameter">
@@ -1110,11 +1255,36 @@
 			</ParameterEditor>
 		</Properties>
 	</Variable>
+	<Variable Class="Parameter">
+		<Id>1754484508790</Id>
+		<Name><![CDATA[p_days]]></Name>
+		<X>50</X>
+		<Y>360</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+			<Type><![CDATA[int]]></Type>
+			<UnitType>NONE</UnitType>
+			<SdArray>false</SdArray>
+			<ParameterEditor>
+				<Id>1754484508788</Id>
+				<EditorContolType>TEXT_BOX</EditorContolType>
+				<MinSliderValue>0</MinSliderValue>
+				<MaxSliderValue>100</MaxSliderValue>
+				<DelimeterType>NO_DELIMETER</DelimeterType>
+			</ParameterEditor>
+		</Properties>
+	</Variable>
 	<Variable Class="CollectionVariable">
 		<Id>1746001520580</Id>
 		<Name><![CDATA[c_carOwners]]></Name>
 		<X>50</X>
-		<Y>370</Y>
+		<Y>390</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1132,7 +1302,7 @@
 		<Id>1746013636149</Id>
 		<Name><![CDATA[c_chargePoints]]></Name>
 		<X>50</X>
-		<Y>390</Y>
+		<Y>410</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1149,8 +1319,8 @@
 	<Variable Class="CollectionVariable">
 		<Id>1751455177188</Id>
 		<Name><![CDATA[c_EVsParkedNonCPChargingRequired]]></Name>
-		<X>800</X>
-		<Y>730</Y>
+		<X>460</X>
+		<Y>1650</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1167,8 +1337,8 @@
 	<Variable Class="CollectionVariable">
 		<Id>1751455218342</Id>
 		<Name><![CDATA[c_EVsParkedAtCPCharging]]></Name>
-		<X>800</X>
-		<Y>770</Y>
+		<X>460</X>
+		<Y>1690</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1185,8 +1355,8 @@
 	<Variable Class="CollectionVariable">
 		<Id>1751455281169</Id>
 		<Name><![CDATA[c_EVsParkedNonCPChargingNotRequired]]></Name>
-		<X>800</X>
-		<Y>750</Y>
+		<X>460</X>
+		<Y>1670</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1203,8 +1373,8 @@
 	<Variable Class="CollectionVariable">
 		<Id>1751455340454</Id>
 		<Name><![CDATA[c_EVsParkedAtCPIdle]]></Name>
-		<X>800</X>
-		<Y>790</Y>
+		<X>460</X>
+		<Y>1710</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>

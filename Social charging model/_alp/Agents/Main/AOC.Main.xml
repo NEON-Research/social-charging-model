@@ -107,8 +107,8 @@ import java.util.*;]]></Import>
 		<DataSet>
 			<Id>1746089839600</Id>
 			<Name><![CDATA[data_carsOnTrip]]></Name>
-			<X>400</X>
-			<Y>740</Y>
+			<X>60</X>
+			<Y>1660</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -136,8 +136,8 @@ import java.util.*;]]></Import>
 		<DataSet>
 			<Id>1746089852522</Id>
 			<Name><![CDATA[data_ICECarsParkedNonCP]]></Name>
-			<X>400</X>
-			<Y>760</Y>
+			<X>60</X>
+			<Y>1680</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -165,8 +165,8 @@ import java.util.*;]]></Import>
 		<DataSet>
 			<Id>1746089863759</Id>
 			<Name><![CDATA[data_EVsParkedNonCPChargingRequired]]></Name>
-			<X>400</X>
-			<Y>780</Y>
+			<X>60</X>
+			<Y>1700</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -194,8 +194,8 @@ import java.util.*;]]></Import>
 		<DataSet>
 			<Id>1746089877445</Id>
 			<Name><![CDATA[data_EVsParkedNonCPChargingNotRequired]]></Name>
-			<X>400</X>
-			<Y>800</Y>
+			<X>60</X>
+			<Y>1720</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -223,8 +223,8 @@ import java.util.*;]]></Import>
 		<DataSet>
 			<Id>1746089904125</Id>
 			<Name><![CDATA[data_EVsParkedAtCPCharging]]></Name>
-			<X>400</X>
-			<Y>820</Y>
+			<X>60</X>
+			<Y>1740</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -252,8 +252,8 @@ import java.util.*;]]></Import>
 		<DataSet>
 			<Id>1746089921755</Id>
 			<Name><![CDATA[data_EVsParkedAtCPIdle]]></Name>
-			<X>400</X>
-			<Y>840</Y>
+			<X>60</X>
+			<Y>1760</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -281,8 +281,8 @@ import java.util.*;]]></Import>
 		<DataSet>
 			<Id>1746092186888</Id>
 			<Name><![CDATA[data_CPOccupied]]></Name>
-			<X>400</X>
-			<Y>880</Y>
+			<X>60</X>
+			<Y>1800</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -310,8 +310,8 @@ import java.util.*;]]></Import>
 		<DataSet>
 			<Id>1746092200373</Id>
 			<Name><![CDATA[data_CPAvailable]]></Name>
-			<X>400</X>
-			<Y>900</Y>
+			<X>60</X>
+			<Y>1820</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -339,8 +339,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1752588949001</Id>
 			<Name><![CDATA[hs_data_norms_data]]></Name>
-			<X>400</X>
-			<Y>950</Y>
+			<X>60</X>
+			<Y>1870</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -377,8 +377,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1752588974825</Id>
 			<Name><![CDATA[hs_data_trust_data]]></Name>
-			<X>400</X>
-			<Y>970</Y>
+			<X>60</X>
+			<Y>1890</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -415,8 +415,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1752588982207</Id>
 			<Name><![CDATA[hs_data_rc_data]]></Name>
-			<X>400</X>
-			<Y>990</Y>
+			<X>60</X>
+			<Y>1910</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -453,8 +453,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1752588994558</Id>
 			<Name><![CDATA[hs_data_psi_data]]></Name>
-			<X>400</X>
-			<Y>1010</Y>
+			<X>60</X>
+			<Y>1930</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -491,8 +491,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1752589003308</Id>
 			<Name><![CDATA[hs_data_norms_pop]]></Name>
-			<X>400</X>
-			<Y>1050</Y>
+			<X>60</X>
+			<Y>1970</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -529,8 +529,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1752589003316</Id>
 			<Name><![CDATA[hs_data_trust_pop]]></Name>
-			<X>400</X>
-			<Y>1070</Y>
+			<X>60</X>
+			<Y>1990</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -567,8 +567,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1752589003322</Id>
 			<Name><![CDATA[hs_data_rc_pop]]></Name>
-			<X>400</X>
-			<Y>1090</Y>
+			<X>60</X>
+			<Y>2010</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -605,8 +605,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1752589003328</Id>
 			<Name><![CDATA[hs_data_psi_pop]]></Name>
-			<X>400</X>
-			<Y>1110</Y>
+			<X>60</X>
+			<Y>2030</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -643,8 +643,8 @@ import java.util.*;]]></Import>
 		<DataSet>
 			<Id>1753178567353</Id>
 			<Name><![CDATA[data_successRate_b1]]></Name>
-			<X>400</X>
-			<Y>1160</Y>
+			<X>60</X>
+			<Y>2080</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -672,8 +672,8 @@ import java.util.*;]]></Import>
 		<DataSet>
 			<Id>1753178598625</Id>
 			<Name><![CDATA[data_successRate_b2]]></Name>
-			<X>400</X>
-			<Y>1180</Y>
+			<X>60</X>
+			<Y>2100</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -701,8 +701,8 @@ import java.util.*;]]></Import>
 		<DataSet>
 			<Id>1753178601400</Id>
 			<Name><![CDATA[data_successRate_b3]]></Name>
-			<X>400</X>
-			<Y>1200</Y>
+			<X>60</X>
+			<Y>2120</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -730,8 +730,8 @@ import java.util.*;]]></Import>
 		<DataSet>
 			<Id>1753178604097</Id>
 			<Name><![CDATA[data_successful_b1]]></Name>
-			<X>400</X>
-			<Y>1240</Y>
+			<X>60</X>
+			<Y>2160</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -759,8 +759,8 @@ import java.util.*;]]></Import>
 		<DataSet>
 			<Id>1753178631969</Id>
 			<Name><![CDATA[data_successful_b2]]></Name>
-			<X>400</X>
-			<Y>1260</Y>
+			<X>60</X>
+			<Y>2180</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -788,8 +788,8 @@ import java.util.*;]]></Import>
 		<DataSet>
 			<Id>1753178634601</Id>
 			<Name><![CDATA[data_successful_b3]]></Name>
-			<X>400</X>
-			<Y>1280</Y>
+			<X>60</X>
+			<Y>2200</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -817,8 +817,8 @@ import java.util.*;]]></Import>
 		<DataSet>
 			<Id>1753178639319</Id>
 			<Name><![CDATA[data_notSuccessful_b1]]></Name>
-			<X>400</X>
-			<Y>1320</Y>
+			<X>60</X>
+			<Y>2240</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -846,8 +846,8 @@ import java.util.*;]]></Import>
 		<DataSet>
 			<Id>1753178652512</Id>
 			<Name><![CDATA[data_notSuccessful_b2]]></Name>
-			<X>400</X>
-			<Y>1340</Y>
+			<X>60</X>
+			<Y>2260</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -875,8 +875,8 @@ import java.util.*;]]></Import>
 		<DataSet>
 			<Id>1753178654768</Id>
 			<Name><![CDATA[data_notSuccessful_b3]]></Name>
-			<X>400</X>
-			<Y>1360</Y>
+			<X>60</X>
+			<Y>2280</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -904,8 +904,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1753187903917</Id>
 			<Name><![CDATA[hs_data_utility_b1_start]]></Name>
-			<X>700</X>
-			<Y>1060</Y>
+			<X>360</X>
+			<Y>1980</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -942,8 +942,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1753187942280</Id>
 			<Name><![CDATA[hs_data_utility_b2_start]]></Name>
-			<X>700</X>
-			<Y>1080</Y>
+			<X>360</X>
+			<Y>2000</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -980,8 +980,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1753187944687</Id>
 			<Name><![CDATA[hs_data_utility_b3_start]]></Name>
-			<X>700</X>
-			<Y>1100</Y>
+			<X>360</X>
+			<Y>2020</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1018,8 +1018,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1753187988628</Id>
 			<Name><![CDATA[hs_data_utility_b1_end]]></Name>
-			<X>700</X>
-			<Y>1130</Y>
+			<X>360</X>
+			<Y>2050</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1056,8 +1056,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1753187988636</Id>
 			<Name><![CDATA[hs_data_utility_b2_end]]></Name>
-			<X>700</X>
-			<Y>1150</Y>
+			<X>360</X>
+			<Y>2070</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1094,8 +1094,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1753187988644</Id>
 			<Name><![CDATA[hs_data_utility_b3_end]]></Name>
-			<X>700</X>
-			<Y>1170</Y>
+			<X>360</X>
+			<Y>2090</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1132,8 +1132,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1753190890992</Id>
 			<Name><![CDATA[hs_data_norms_pop1]]></Name>
-			<X>670</X>
-			<Y>930</Y>
+			<X>330</X>
+			<Y>1850</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1170,8 +1170,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1753190891001</Id>
 			<Name><![CDATA[hs_data_trust_pop1]]></Name>
-			<X>670</X>
-			<Y>950</Y>
+			<X>330</X>
+			<Y>1870</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1208,8 +1208,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1753190891008</Id>
 			<Name><![CDATA[hs_data_rc_pop1]]></Name>
-			<X>670</X>
-			<Y>970</Y>
+			<X>330</X>
+			<Y>1890</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1246,8 +1246,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1753190891015</Id>
 			<Name><![CDATA[hs_data_psi_pop1]]></Name>
-			<X>670</X>
-			<Y>990</Y>
+			<X>330</X>
+			<Y>1910</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1284,8 +1284,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1753191542584</Id>
 			<Name><![CDATA[hs_data_utility_b1_all]]></Name>
-			<X>700</X>
-			<Y>1200</Y>
+			<X>360</X>
+			<Y>2120</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1322,8 +1322,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1753191542593</Id>
 			<Name><![CDATA[hs_data_utility_b2_all]]></Name>
-			<X>700</X>
-			<Y>1220</Y>
+			<X>360</X>
+			<Y>2140</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1360,8 +1360,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1753191542600</Id>
 			<Name><![CDATA[hs_data_utility_b3_all]]></Name>
-			<X>700</X>
-			<Y>1240</Y>
+			<X>360</X>
+			<Y>2160</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1398,8 +1398,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1753195255529</Id>
 			<Name><![CDATA[hs_data_b1_start]]></Name>
-			<X>700</X>
-			<Y>1290</Y>
+			<X>360</X>
+			<Y>2210</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1436,8 +1436,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1753195255536</Id>
 			<Name><![CDATA[hs_data_b2_start]]></Name>
-			<X>700</X>
-			<Y>1310</Y>
+			<X>360</X>
+			<Y>2230</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1474,8 +1474,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1753195255543</Id>
 			<Name><![CDATA[hs_data_b3_start]]></Name>
-			<X>700</X>
-			<Y>1330</Y>
+			<X>360</X>
+			<Y>2250</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1512,8 +1512,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1753195255550</Id>
 			<Name><![CDATA[hs_data_b1_end]]></Name>
-			<X>700</X>
-			<Y>1360</Y>
+			<X>360</X>
+			<Y>2280</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1550,8 +1550,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1753195255556</Id>
 			<Name><![CDATA[hs_data_b2_end]]></Name>
-			<X>700</X>
-			<Y>1380</Y>
+			<X>360</X>
+			<Y>2300</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1588,8 +1588,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1753195255563</Id>
 			<Name><![CDATA[hs_data_b3_end]]></Name>
-			<X>700</X>
-			<Y>1400</Y>
+			<X>360</X>
+			<Y>2320</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1626,8 +1626,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1753195255569</Id>
 			<Name><![CDATA[hs_data_b1_all]]></Name>
-			<X>700</X>
-			<Y>1430</Y>
+			<X>360</X>
+			<Y>2350</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1664,8 +1664,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1753195255574</Id>
 			<Name><![CDATA[hs_data_b2_all]]></Name>
-			<X>700</X>
-			<Y>1450</Y>
+			<X>360</X>
+			<Y>2370</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1702,8 +1702,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1753195255579</Id>
 			<Name><![CDATA[hs_data_b3_all]]></Name>
-			<X>700</X>
-			<Y>1470</Y>
+			<X>360</X>
+			<Y>2390</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1740,8 +1740,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1754380888601</Id>
 			<Name><![CDATA[hs_data_b1_data]]></Name>
-			<X>400</X>
-			<Y>1400</Y>
+			<X>60</X>
+			<Y>2320</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1778,8 +1778,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1754380888612</Id>
 			<Name><![CDATA[hs_data_b2_data]]></Name>
-			<X>400</X>
-			<Y>1420</Y>
+			<X>60</X>
+			<Y>2340</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1816,8 +1816,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1754380888620</Id>
 			<Name><![CDATA[hs_data_b3_data]]></Name>
-			<X>400</X>
-			<Y>1440</Y>
+			<X>60</X>
+			<Y>2360</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1854,8 +1854,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1754380888648</Id>
 			<Name><![CDATA[hs_data_b1_pop]]></Name>
-			<X>400</X>
-			<Y>1480</Y>
+			<X>60</X>
+			<Y>2400</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1892,8 +1892,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1754380888652</Id>
 			<Name><![CDATA[hs_data_b2_pop]]></Name>
-			<X>400</X>
-			<Y>1500</Y>
+			<X>60</X>
+			<Y>2420</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1930,8 +1930,8 @@ import java.util.*;]]></Import>
 		<HistogramData>
 			<Id>1754380888671</Id>
 			<Name><![CDATA[hs_data_b3_pop]]></Name>
-			<X>400</X>
-			<Y>1520</Y>
+			<X>60</X>
+			<Y>2440</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1968,8 +1968,8 @@ import java.util.*;]]></Import>
 		<DataSet>
 			<Id>1754404980410</Id>
 			<Name><![CDATA[data_avgProbability_b1]]></Name>
-			<X>400</X>
-			<Y>1560</Y>
+			<X>60</X>
+			<Y>2480</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -1997,8 +1997,8 @@ import java.util.*;]]></Import>
 		<DataSet>
 			<Id>1754404980418</Id>
 			<Name><![CDATA[data_avgProbability_b2]]></Name>
-			<X>400</X>
-			<Y>1580</Y>
+			<X>60</X>
+			<Y>2500</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -2026,8 +2026,8 @@ import java.util.*;]]></Import>
 		<DataSet>
 			<Id>1754404980426</Id>
 			<Name><![CDATA[data_avgProbability_b3]]></Name>
-			<X>400</X>
-			<Y>1600</Y>
+			<X>60</X>
+			<Y>2520</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>
@@ -2038,6 +2038,122 @@ import java.util.*;]]></Import>
 			<AutoUpdate>false</AutoUpdate>
 			<RecurrenceProperties>
 				<Id>1754404980424</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1753257600000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<FreezeXAxis>true</FreezeXAxis>
+			<SamplesToKeep>525600</SamplesToKeep>
+		</DataSet>
+		<DataSet>
+			<Id>1754483444795</Id>
+			<Name><![CDATA[data_interactionsPerDay_b1]]></Name>
+			<X>50</X>
+			<Y>1550</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>false</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1754483444793</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1753257600000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<FreezeXAxis>true</FreezeXAxis>
+			<SamplesToKeep>525600</SamplesToKeep>
+		</DataSet>
+		<DataSet>
+			<Id>1754483444807</Id>
+			<Name><![CDATA[data_interactionsPerDay_b2]]></Name>
+			<X>50</X>
+			<Y>1570</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>false</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1754483444805</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1753257600000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<FreezeXAxis>true</FreezeXAxis>
+			<SamplesToKeep>525600</SamplesToKeep>
+		</DataSet>
+		<DataSet>
+			<Id>1754483444814</Id>
+			<Name><![CDATA[data_interactionsPerDay_b3]]></Name>
+			<X>50</X>
+			<Y>1590</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>false</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1754483444812</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1753257600000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<FreezeXAxis>true</FreezeXAxis>
+			<SamplesToKeep>525600</SamplesToKeep>
+		</DataSet>
+		<DataSet>
+			<Id>1754564860687</Id>
+			<Name><![CDATA[data_noIdleChargers_b2]]></Name>
+			<X>60</X>
+			<Y>2550</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>false</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1754564860685</Id>
 				<OccurrenceAtTime>true</OccurrenceAtTime>
 				<OccurrenceDate>1753257600000</OccurrenceDate>
 				<OccurrenceTime Class="CodeUnitValue">
@@ -2071,8 +2187,8 @@ import java.util.*;]]></Import>
 				<ClassName>social_psychological_variables.xlsx</ClassName>
 			</ResourceReference>
 			<SaveInSnapshot>false</SaveInSnapshot>
-			<LoadOnStartup>true</LoadOnStartup>
-			<SaveOnDispose>true</SaveOnDispose>
+			<LoadOnStartup>false</LoadOnStartup>
+			<SaveOnDispose>false</SaveOnDispose>
 		</ExcelFile>
 	</Connectivity>
 	<AgentLinks>
