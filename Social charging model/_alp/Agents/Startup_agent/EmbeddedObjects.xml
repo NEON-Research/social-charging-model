@@ -50,13 +50,13 @@
 				<Name><![CDATA[p_nbOfTimesteps]]></Name>
 			</Parameter>
 			<Parameter>
-				<Name><![CDATA[p_checkCPAvailability]]></Name>
+				<Name><![CDATA[p_b1_moveCar]]></Name>
 			</Parameter>
 			<Parameter>
-				<Name><![CDATA[p_hasProsocialChargingBehaviour]]></Name>
+				<Name><![CDATA[p_b2_requestMove]]></Name>
 			</Parameter>
 			<Parameter>
-				<Name><![CDATA[p_hasSocialInteractionBehaviour]]></Name>
+				<Name><![CDATA[p_b3_notifyNeighbor]]></Name>
 			</Parameter>
 			<Parameter>
 				<Name><![CDATA[p_days]]></Name>

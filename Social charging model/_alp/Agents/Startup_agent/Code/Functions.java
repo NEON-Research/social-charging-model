@@ -11,15 +11,17 @@ Main m = add_mains(v_cars,
 	v_chargingPower_kW,
 	v_timestep_minutes,
 	v_numberOfTimesteps,
-	v_checkCPAvailability,
-	v_prosocialBehaviour,
-	v_cpInteraction,
+	v_b1_moveCar,
+	v_b2_requestMove,
+	v_b3_notifyNeighbor,
 	v_days
 	);
 
-m.threshold_b1 = threshold_b1;
-m.threshold_b2 = threshold_b2;
-m.threshold_b3 = threshold_b3;
+m.v_socialChargingStartHour = v_socialChargingStartHour;
+m.v_socialChargingEndHour = v_socialChargingEndHour;
+m.v_socialChargingOnlyDaytime = v_socialChargingOnlyDaytime;
+m.v_recheckCPAvailability = v_recheckCPAvailability;
+
 m.f_simulatePeriod(m.p_nbOfTimesteps);
 if(v_rapidRun == false){
 	m.viewArea.navigateTo();
@@ -33,12 +35,15 @@ v_shareEVs = 1;
 v_EVsPerCP = 5;
 v_parkingPlaces = 100;
 
+v_socialChargingStartHour = 9;
+v_socialChargingEndHour = 22;
+
 v_chargingPower_kW = 11;
 v_EVEnergyConsumption_kWhperKm = 0.178;
 
 v_timestep_minutes = 15;
 v_simulationPeriod = "week";
-v_periods = 2;
+v_periods = 52;
 
 eb_cars.setText(v_cars);
 eb_shareElectric.setText(v_shareEVs);
@@ -47,9 +52,14 @@ eb_parkingPlaces.setText(v_parkingPlaces);
 cb_simulationPeriod.setValue(v_simulationPeriod);
 eb_nbOfPeriods.setText(v_periods, true);
 
-cb_checkCPAvailability.setSelected(true, true);
-cb_prosocialBehaviour.setSelected(false, true);
-cb_cpInteraction.setSelected(false, true);
+cb_b1.setSelected(true, true);
+cb_b2.setSelected(true, true);
+cb_b3.setSelected(true, true);
+cb_socialChargingOnlyDaytime.setSelected(true, true);
+cb_recheckCPAvailability.setSelected(true, true);
+
+cb_scSartHour.setText(v_socialChargingStartHour);
+cb_scEndHour.setText(v_socialChargingEndHour);
 
 /*ALCODEEND*/}
 

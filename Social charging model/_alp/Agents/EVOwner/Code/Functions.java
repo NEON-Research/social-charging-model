@@ -112,22 +112,35 @@ if(v_status == ARRIVING){
 		traceln("EV " + this.getIndex() + " has moved from parking to charge point and started charging");
 	}
 	*/
+	if(v_status == ARRIVING){
+		traceln("EV " + this.getIndex() + " with SOC " + v_soc + " and WtC " + wantsToCharge + " and CP " + v_chargePoint + " status is still arriving while end of set charging status");
+	}
+	
+	//For behavior recheck CP
+	if( v_status == PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED ){
+		lastCheckDayPart = main.f_getPartOfDay();
+		lastCheckDay = main.v_day;
+		firstCheckDone = false;
+	}
 }
 /*ALCODEEND*/}
 
 double f_b1_movingVehicle()
 {/*ALCODESTART::1748950054520*/
-boolean actBehavior = f_actBehavior(v_prob_b1);
-f_moveVehicle(actBehavior);
-
+//check if within daytime and selected in scenario
+if(main.p_b1_moveCar && main.v_withinSocialChargingTimes){
+	//act within probability
+	boolean actBehavior = f_actBehavior(v_prob_b1);
+	///act
+	f_moveVehicle(actBehavior);
+}
 
 /*ALCODEEND*/}
 
 double f_moveVehicle(boolean actBehavior)
 {/*ALCODESTART::1753175296086*/
 //Move vehicle
-
-if( actBehavior && main.v_parkingPlacesAvailable > 0 ){
+if( actBehavior ) {// && main.v_parkingPlacesAvailable > 0 ){
 	f_leaveChargePoint();
 	v_status = PARKED_NON_CHARGE_POINT_CHARGING_NOT_REQUIRED;
 	count_b1_successful++;
@@ -152,12 +165,16 @@ f_socialLearning_b1();
 
 double f_b2_requestMove()
 {/*ALCODESTART::1753175364935*/
-boolean actBehavior = f_actBehavior(v_prob_b2);
-f_requestMove(actBehavior);
-
-
-
-
+//check if within daytime and selected in scenario
+if(main.p_b2_requestMove && main.v_withinSocialChargingTimes){
+	//act within probability
+	boolean actBehavior = f_actBehavior(v_prob_b2);
+	///act
+	f_requestMove(actBehavior);
+}
+else {
+	v_status = PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED;
+}
 /*ALCODEEND*/}
 
 double f_requestMove(boolean actBehavior)
@@ -196,10 +213,13 @@ f_socialLearning_b2();
 
 double f_b3_notifyNeighbor()
 {/*ALCODESTART::1753175429703*/
-boolean actBehavior = f_actBehavior(v_prob_b3);
-f_notifyNeighbor(actBehavior);
-
-
+//check if within daytime and selected in scenario
+if(main.p_b3_notifyNeighbor && main.v_withinSocialChargingTimes){
+	//act within probability
+	boolean actBehavior = f_actBehavior(v_prob_b3);
+	///act
+	f_notifyNeighbor(actBehavior);
+}
 
 /*ALCODEEND*/}
 
@@ -211,14 +231,6 @@ if( actBehavior && EVsAwaitingCP > 0 ){
 	//Get notified EV Owner
 	EVOwner EVNotified = randomWhere(main.EVOwners, x->x.v_status == PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED);
 	EVNotified.v_status = PARKED_CHARGE_POINT_CHARGING;
-	
-	/*
-	if( main.f_checkCPA() ){
-		traceln("CPA ERROR after notify neighbor");
-	}
-	if(main.v_chargePointAvailable < 0){
-		traceln("CP available = " + main.v_chargePointAvailable + " after b3");
-	}*/
 	count_b3_successful++;
 }
 else {
@@ -425,5 +437,57 @@ return false;
 double f_releaseChargePoint()
 {/*ALCODESTART::1754917221483*/
 
+/*ALCODEEND*/}
+
+double f_recheckChargePoints()
+{/*ALCODESTART::1754997016641*/
+if(main.v_recheckCPAvailability && main.v_withinSocialChargingTimes){
+	//Get EVs waiting for CP
+	if(v_status == PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED){
+		
+		int currentPartOfDay = main.f_getPartOfDay();
+		int currentDay = main.v_day;
+		
+		//Day of arrival, check next part of day
+		if( !firstCheckDone && currentPartOfDay != lastCheckDayPart){	
+			lastCheckDay = currentDay;
+			lastCheckDayPart = currentPartOfDay;
+			firstCheckDone = true;
+			f_tryRecheck();
+		}
+		//Next days: once per preselected random part of day
+		else if( firstCheckDone && currentDay != lastCheckDay){
+			//If no chosen random part yet
+			if(plannedPartOfDay == -1){
+				plannedPartOfDay = (int) uniform(0,3);
+			}
+		
+			if(plannedPartOfDay == currentPartOfDay){		
+				lastCheckDay = currentDay;
+				lastCheckDayPart = currentPartOfDay;
+				plannedPartOfDay = -1; //reset
+				f_tryRecheck();
+			}
+		}
+        else if (!firstCheckDone && currentDay != lastCheckDay) {
+            traceln("WARNING: First day check skipped unexpectedly");
+        }
+	}
+}
+			
+
+/*ALCODEEND*/}
+
+double f_tryRecheck()
+{/*ALCODESTART::1754999113828*/
+//Check CP availability
+if( f_tryAcquireChargePoint()){
+	v_status = PARKED_CHARGE_POINT_CHARGING;
+	count_chargingSessions++;
+	count_successfulRechecks++;
+}
+else {
+	count_unsuccessfulRechecks++;
+}
 /*ALCODEEND*/}
 

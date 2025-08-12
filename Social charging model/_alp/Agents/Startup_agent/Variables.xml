@@ -214,7 +214,7 @@
 	</Variable>
 	<Variable Class="PlainVariable">
 		<Id>1747139962091</Id>
-		<Name><![CDATA[v_checkCPAvailability]]></Name>
+		<Name><![CDATA[v_b1_moveCar]]></Name>
 		<X>-200</X>
 		<Y>620</Y>
 		<Label>
@@ -233,7 +233,7 @@
 	</Variable>
 	<Variable Class="PlainVariable">
 		<Id>1747139972141</Id>
-		<Name><![CDATA[v_prosocialBehaviour]]></Name>
+		<Name><![CDATA[v_b2_requestMove]]></Name>
 		<X>-200</X>
 		<Y>640</Y>
 		<Label>
@@ -252,7 +252,7 @@
 	</Variable>
 	<Variable Class="PlainVariable">
 		<Id>1747139982251</Id>
-		<Name><![CDATA[v_cpInteraction]]></Name>
+		<Name><![CDATA[v_b3_notifyNeighbor]]></Name>
 		<X>-200</X>
 		<Y>660</Y>
 		<Label>
@@ -270,76 +270,86 @@
 		</Properties>
 	</Variable>
 	<Variable Class="PlainVariable">
-		<Id>1753187477545</Id>
-		<Name><![CDATA[threshold_b1]]></Name>
-		<X>-200</X>
-		<Y>700</Y>
-		<Label>
-			<X>10</X>
-			<Y>0</Y>
-		</Label>
-		<PublicFlag>false</PublicFlag>
-		<PresentationFlag>true</PresentationFlag>
-		<ShowLabel>true</ShowLabel>
-		<Properties SaveInSnapshot="true"
-              Constant="false"
-              AccessType="public"
-              StaticVariable="false">
-			<Type><![CDATA[double]]></Type>
-			<InitialValue Class="CodeValue">
-				<Code><![CDATA[0.3]]></Code>
-			</InitialValue>
-		</Properties>
-	</Variable>
-	<Variable Class="PlainVariable">
-		<Id>1753187477547</Id>
-		<Name><![CDATA[threshold_b2]]></Name>
-		<X>-200</X>
-		<Y>720</Y>
-		<Label>
-			<X>10</X>
-			<Y>0</Y>
-		</Label>
-		<PublicFlag>false</PublicFlag>
-		<PresentationFlag>true</PresentationFlag>
-		<ShowLabel>true</ShowLabel>
-		<Properties SaveInSnapshot="true"
-              Constant="false"
-              AccessType="public"
-              StaticVariable="false">
-			<Type><![CDATA[double]]></Type>
-			<InitialValue Class="CodeValue">
-				<Code><![CDATA[0.3]]></Code>
-			</InitialValue>
-		</Properties>
-	</Variable>
-	<Variable Class="PlainVariable">
-		<Id>1753187477549</Id>
-		<Name><![CDATA[threshold_b3]]></Name>
-		<X>-200</X>
-		<Y>740</Y>
-		<Label>
-			<X>10</X>
-			<Y>0</Y>
-		</Label>
-		<PublicFlag>false</PublicFlag>
-		<PresentationFlag>true</PresentationFlag>
-		<ShowLabel>true</ShowLabel>
-		<Properties SaveInSnapshot="true"
-              Constant="false"
-              AccessType="public"
-              StaticVariable="false">
-			<Type><![CDATA[double]]></Type>
-			<InitialValue Class="CodeValue">
-				<Code><![CDATA[0.3]]></Code>
-			</InitialValue>
-		</Properties>
-	</Variable>
-	<Variable Class="PlainVariable">
 		<Id>1754550269494</Id>
 		<Name><![CDATA[v_rapidRun]]></Name>
 		<X>-200</X>
 		<Y>150</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[boolean]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1754992157848</Id>
+		<Name><![CDATA[v_socialChargingStartHour]]></Name>
+		<X>-200</X>
+		<Y>730</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[int]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1754992157850</Id>
+		<Name><![CDATA[v_socialChargingEndHour]]></Name>
+		<X>-200</X>
+		<Y>750</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[int]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1754992833102</Id>
+		<Name><![CDATA[v_socialChargingOnlyDaytime]]></Name>
+		<X>-200</X>
+		<Y>680</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[boolean]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1754995372054</Id>
+		<Name><![CDATA[v_recheckCPAvailability]]></Name>
+		<X>-200</X>
+		<Y>700</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>

@@ -21,13 +21,12 @@ for(int i = 0; i < EVs; i++){
 
 double f_initializeModel()
 {/*ALCODESTART::1745928671433*/
-v_parkingPlacesAvailable = 100;
 v_hourOfDay = 0;
 
 ef_spvars.readFile();
 
 f_getRegressionCoefficients();
-f_setModelEffects();
+//f_setModelEffects();
 //f_setThresholds();
 
 //Get nb of trips in database
@@ -108,6 +107,8 @@ count_b3_successful = 0;
 count_b1_notSuccessful = 0;
 count_b2_notSuccessful = 0;
 count_b3_notSuccessful = 0;
+count_successfulRechecks = 0;
+count_unsuccessfulRechecks = 0;
 int count_b2_noIdleChargers = 0;
 
 double totalProb_b1 = 0.0;
@@ -125,6 +126,9 @@ for (EVOwner x : EVOwners) {
     count_b3_successful      += x.count_b3_successful;
     count_b3_notSuccessful   += x.count_b3_notSuccessful;
     
+    count_successfulRechecks += x.count_successfulRechecks;
+    count_unsuccessfulRechecks += x.count_unsuccessfulRechecks;
+    
     totalProb_b1 += x.v_prob_b1;
 	totalProb_b2 += x.v_prob_b2;
 	totalProb_b3 += x.v_prob_b3;
@@ -139,6 +143,9 @@ successRate_b2 = (total_b2 != 0) ? ((double) count_b2_successful / total_b2) : 0
 
 int total_b3 = count_b3_successful + count_b3_notSuccessful;
 successRate_b3 = (total_b3 != 0) ? ((double) count_b3_successful / total_b3) : 0;
+
+int total_rechecks = count_successfulRechecks + count_unsuccessfulRechecks;
+successRate_rechecks = (total_rechecks != 0) ? ((double) count_successfulRechecks / total_rechecks) : 0;
 
 
 
@@ -156,6 +163,8 @@ data_noIdleChargers_b2.add(v_timestep, count_b2_noIdleChargers);
 data_successRate_b3.add(v_timestep, successRate_b3);
 data_successful_b3.add(v_timestep, count_b3_successful);
 data_notSuccessful_b3.add(v_timestep, count_b3_notSuccessful);
+
+data_successRate_rechecks.add(v_timestep, successRate_rechecks);
 
 int EVs = EVOwners.size();
 double avgProb_b1 = totalProb_b1 / EVs;
@@ -243,6 +252,7 @@ pl_succesRate.removeAll();
 pl_succesRate.addDataSet(data_successRate_b1, "Behavior 1: move car", sandyBrown, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 pl_succesRate.addDataSet(data_successRate_b2, "Behavior 2: request move", lightSeaGreen, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 pl_succesRate.addDataSet(data_successRate_b3, "Behavior 3: notify neighbor", lightSlateBlue, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_succesRate.addDataSet(data_successRate_rechecks, "Rechecking CP availability", mediumOrchid, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 
 pl_probability.removeAll();
 pl_probability.addDataSet(data_avgProbability_b1, "Behavior 1: move car", sandyBrown, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
@@ -253,7 +263,7 @@ pl_interactionPerDay.removeAll();
 pl_interactionPerDay.addDataSet(data_interactionsPerDay_b1, "Behavior 1: move car", sandyBrown, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 pl_interactionPerDay.addDataSet(data_interactionsPerDay_b2, "Behavior 2: request move", lightSeaGreen, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 pl_interactionPerDay.addDataSet(data_interactionsPerDay_b3, "Behavior 3: notify neighbor", lightSlateBlue, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
-
+pl_interactionPerDay.addDataSet(data_rechecksPerDay, "Rechecking CP availability", mediumOrchid, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 
 ch_b1.removeAll();
 ch_b1.addDataSet(data_notSuccessful_b1, "Non successful interactions", red);
@@ -388,177 +398,6 @@ for(int i=0; i < timestepsInWeek; i++){
 }
 
 traceln("Finished initial week for division car location");
-/*ALCODEEND*/}
-
-double f_correlatedVariablesGenerator()
-{/*ALCODESTART::1752581980940*/
-//Get mean behavioral drivers
-double mean_WtP = selectFrom(behavioral_variables)
-	.where(behavioral_variables.variable.eq("willingness_to_participate"))
-	.firstResult(behavioral_variables.mean_norm);
-	
-double mean_environmentalConcern = selectFrom(behavioral_variables)
-	.where(behavioral_variables.variable.eq("environmental_concern"))
-	.firstResult(behavioral_variables.mean_norm);
-	
-double mean_renewablesAttitude = selectFrom(behavioral_variables)
-	.where(behavioral_variables.variable.eq("renewables_attitude"))
-	.firstResult(behavioral_variables.mean_norm);
-	
-double mean_financialAttitude = selectFrom(behavioral_variables)
-	.where(behavioral_variables.variable.eq("financial_attitude"))
-	.firstResult(behavioral_variables.mean_norm);
-/*	
-double mean_attitude = selectFrom(behavioral_variables)
-	.where(behavioral_variables.variable.eq("attitude"))
-	.firstResult(behavioral_variables.mean_norm);
-*/
-double mean_awarenessEC = selectFrom(behavioral_variables)
-	.where(behavioral_variables.variable.eq("awareness_EC"))
-	.firstResult(behavioral_variables.mean_norm);
-
-double mean_timeAvailability = selectFrom(behavioral_variables)
-	.where(behavioral_variables.variable.eq("time_available"))
-	.firstResult(behavioral_variables.mean_norm);
-
-//Get sd behavioral drivers
-double sd_WtP = selectFrom(behavioral_variables)
-	.where(behavioral_variables.variable.eq("willingness_to_participate"))
-	.firstResult(behavioral_variables.sd_norm);
-	
-double sd_environmentalConcern = selectFrom(behavioral_variables)
-	.where(behavioral_variables.variable.eq("environmental_concern"))
-	.firstResult(behavioral_variables.sd_norm);
-	
-double sd_renewablesAttitude = selectFrom(behavioral_variables)
-	.where(behavioral_variables.variable.eq("renewables_attitude"))
-	.firstResult(behavioral_variables.sd_norm);
-	
-double sd_financialAttitude = selectFrom(behavioral_variables)
-	.where(behavioral_variables.variable.eq("financial_attitude"))
-	.firstResult(behavioral_variables.sd_norm);
-/*	
-double sd_attitude = selectFrom(behavioral_variables)
-	.where(behavioral_variables.variable.eq("attitude"))
-	.firstResult(behavioral_variables.sd_norm);
-*/	
-double sd_awarenessEC = selectFrom(behavioral_variables)
-	.where(behavioral_variables.variable.eq("awareness_EC"))
-	.firstResult(behavioral_variables.sd_norm);
-
-double sd_timeAvailability = selectFrom(behavioral_variables)
-	.where(behavioral_variables.variable.eq("time_available"))
-	.firstResult(behavioral_variables.sd_norm);
-
-
-double mean1 = mean_environmentalConcern;
-double mean2 = mean_awarenessEC;
-double mean3 = mean_financialAttitude;
-double mean4 = mean_timeAvailability;
-double mean5 = mean_renewablesAttitude;
-
-double sd1 = sd_environmentalConcern;
-double sd2 = sd_awarenessEC;
-double sd3 = sd_financialAttitude;
-double sd4 = sd_timeAvailability;
-double sd5 = sd_renewablesAttitude;
-
-double rho12 = 0.4;
-double rho13 = 0.23;	//conr
-double rho14 = 0.4;		//conr
-double rho15 = 0.4;		//conr
-double rho23 = 0.4;
-double rho24 = 0.4;
-double rho25 = 0.4;
-double rho34 = 0.4;
-double rho35 = 0.26;	//conr
-double rho45 = 0.4;
-
-// Step 1: Covariance matrix
-double[][] covarianceMatrix = {
-		{sd1 * sd1, rho12 * sd1 * sd2, rho13 * sd1 * sd3, rho14 * sd1 * sd4, rho15 * sd1 * sd5},
-		{rho12 * sd1 * sd2, sd2 * sd2, rho23 * sd2 * sd3, rho24 * sd2 * sd4, rho25 * sd2 * sd5},
-		{rho13 * sd1 * sd3, rho23 * sd2 * sd3, sd3 * sd3, rho34 * sd3 * sd4, rho35 * sd3 * sd5},
-		{rho14 * sd1 * sd4, rho24 * sd2 * sd4, rho34 * sd3 * sd4, sd4 * sd4, rho45 * sd4 * sd5},
-		{rho15 * sd1 * sd5, rho25 * sd2 * sd5, rho35 * sd3 * sd5, rho45 * sd4 * sd5, sd5 * sd5},
-};
-
-// Step 2: Cholesky decomposition
-//RealMatrix matrix2 = new Array2DRowRealMatrix(covarianceMatrix);
-RealMatrix matrix = MatrixUtils.createRealMatrix(covarianceMatrix);
-CholeskyDecomposition choleskyDecomposition = new CholeskyDecomposition(matrix);
-RealMatrix L = choleskyDecomposition.getL();
-
-for(J_Household x : c_households){
-	f_setCorrelatedVariablesHousehold(x, L, mean1, mean2, mean3, mean4, mean5);
-}
-
-//To normalize values
-double min_aoc = min(c_households, x->x.awarenessOfConsequence);
-double min_att = min(c_households, x->x.attitude);
-double min_ta = min(c_households, x->x.timeAvailability);
-double min_pbc = min(c_households, x->x.pbc);
-
-double max_aoc = max(c_households, x->x.awarenessOfConsequence);
-double max_att = max(c_households, x->x.attitude);
-double max_ta = max(c_households, x->x.timeAvailability);
-double max_pbc = max(c_households, x->x.pbc);
-
-double diff_aoc = max_aoc - min_aoc;
-double diff_att = max_att - min_att;
-double diff_ta = max_ta - min_ta;
-double diff_pbc = max_pbc - min_pbc;
-for(J_Household x : c_households){
-	x.awarenessOfConsequence = (x.awarenessOfConsequence - min_aoc) / diff_aoc;
-	x.attitude = (x.attitude - min_att) / diff_att;
-	x.timeAvailability = (x.timeAvailability - min_ta) / diff_ta;
-	x.pbc = (x.pbc - min_pbc) / diff_pbc;
-	/*
-	if(x.id < 100){
-		traceln("Correlated input params " + x.awarenessOfConsequence + " AoC " + x.attitude + " att. " + x.timeAvailability + " ta " + x.pbc + " pbc");
-	}*/
-}
-
-/*ALCODEEND*/}
-
-double f_setCorrelatedVariablesHousehold(J_Household household,RealMatrix L,double mean1,double mean2,double mean3,double mean4,double mean5)
-{/*ALCODESTART::1752581980942*/
-// Step 3: Generate independent standard normal variables
-/*
-double z1 = normal(0,1);
-double z2 = normal(0,1);
-double z3 = normal(0,1);
-double z4 = normal(0,1);
-double z5 = normal(0,1);
-*/
-Random random = new Random();  // Ensure this generates different values each time
-double z1 = random.nextGaussian();
-double z2 = random.nextGaussian();
-double z3 = random.nextGaussian();
-double z4 = random.nextGaussian();
-double z5 = random.nextGaussian();
-
-// Step 4: Apply Cholesky transformation
-double Y1 = L.getEntry(0, 0) * z1;
-double Y2 = L.getEntry(1, 0) * z1 + L.getEntry(1, 1) * z2;
-double Y3 = L.getEntry(2, 0) * z1 + L.getEntry(2, 1) * z2 + L.getEntry(2, 2) * z3;
-double Y4 = L.getEntry(3, 0) * z1 + L.getEntry(3, 1) * z2 + L.getEntry(3, 2) * z3 + L.getEntry(3, 3) * z4; 
-double Y5 = L.getEntry(4, 0) * z1 + L.getEntry(4, 1) * z2 + L.getEntry(4, 2) * z3 + L.getEntry(4, 3) * z4 + L.getEntry(4, 4) * z5; 
-
-// Step 5: Add means to get the final correlated variables
-double X1 = Y1 + mean1;  // Adding mean of 10 to Y1
-double X2 = Y2 + mean2;  // Adding mean of 20 to Y2
-double X3 = Y3 + mean3;  // Adding mean of 30 to Y3
-double X4 = Y4 + mean4;
-double X5 = Y5 + mean5;
-
-double[] correlatedInputParams = {X1, X2, X3, X4, X5};
-/*
-if(household.householdIndex < 100){
-	//traceln("Correlated input params " + X1 + " ec " + X2 + " aew " + X3 + " fa " + X4 + " ta " + X5 + " ra ");
-}
-*/
-household.f_initializeCharacteristics(correlatedInputParams);
 /*ALCODEEND*/}
 
 double f_generateSyntheticAgents(int numAgents,List<List<Double>>  sortedRealData)
@@ -1026,17 +865,17 @@ hs_b3_end.updateData();
 
 double f_countBehavioursPerDay()
 {/*ALCODESTART::1754483086805*/
-int day = data_interactionsPerDay_b1.size() + 1;
-
 double interactions_b1 = 0.0;
 double interactions_b2 = 0.0;
 double interactions_b3 = 0.0;
+double rechecking = 0.0;
 
 
-if(day == 1){
+if(v_day == 1){
 	interactions_b1 = count_b1_successful + count_b1_notSuccessful;
 	interactions_b2 = count_b2_successful + count_b2_notSuccessful;
 	interactions_b3 = count_b3_successful + count_b3_notSuccessful;
+	rechecking = count_successfulRechecks + count_unsuccessfulRechecks;
 }
 
 
@@ -1045,32 +884,31 @@ else{
 	double sum_prev_b1 = 0.0;
 	double sum_prev_b2 = 0.0;
 	double sum_prev_b3 = 0.0;
+	double sum_prev_rechecks = 0.0;
 	
-	for (int i = 0; i < day - 1; i++) {
+	for (int i = 0; i < v_day - 1; i++) {
 	    sum_prev_b1 += data_interactionsPerDay_b1.getY(i);
 	    sum_prev_b2 += data_interactionsPerDay_b2.getY(i);
 	    sum_prev_b3 += data_interactionsPerDay_b3.getY(i);
+	    sum_prev_rechecks += data_rechecksPerDay.getY(i);
 	}	
 
 	interactions_b1 = count_b1_successful + count_b1_notSuccessful - sum_prev_b1;
 	interactions_b2 = count_b2_successful + count_b2_notSuccessful - sum_prev_b2;
 	interactions_b3 = count_b3_successful + count_b3_notSuccessful - sum_prev_b3;
+	rechecking = count_successfulRechecks + count_unsuccessfulRechecks - sum_prev_rechecks;
 }
 
-data_interactionsPerDay_b1.add(day, interactions_b1);
-data_interactionsPerDay_b2.add(day, interactions_b2);
-data_interactionsPerDay_b3.add(day, interactions_b3);
+data_interactionsPerDay_b1.add(v_day, interactions_b1);
+data_interactionsPerDay_b2.add(v_day, interactions_b2);
+data_interactionsPerDay_b3.add(v_day, interactions_b3);
+data_rechecksPerDay.add(v_day, rechecking);
 /*ALCODEEND*/}
 
 double f_cleanUp()
 {/*ALCODESTART::1754493563613*/
 c_carOwners.clear();
 c_chargePoints.clear();
-c_EVsParkedAtCPCharging.clear();
-c_EVsParkedAtCPIdle.clear();
-c_EVsParkedNonCPChargingNotRequired.clear();
-c_EVsParkedNonCPChargingRequired.clear();
-c_variableWeights.clear();
 
 data_avgProbability_b1.reset();
 data_avgProbability_b2.reset();
@@ -1089,6 +927,7 @@ data_CPAvailable.reset();
 data_interactionsPerDay_b1.reset();
 data_interactionsPerDay_b2.reset();
 data_interactionsPerDay_b3.reset();
+data_rechecksPerDay.reset();
 
 data_notSuccessful_b1.reset();
 data_notSuccessful_b2.reset();
@@ -1099,6 +938,7 @@ data_successful_b3.reset();
 data_successRate_b1.reset();
 data_successRate_b2.reset();
 data_successRate_b3.reset();
+data_successRate_rechecks.reset();
 
 hs_data_b1_all.reset();
 hs_data_b1_data.reset();
@@ -1155,6 +995,7 @@ data_CPAvailable = null;
 data_interactionsPerDay_b1 = null;
 data_interactionsPerDay_b2 = null;
 data_interactionsPerDay_b3 = null;
+data_rechecksPerDay = null;
 
 data_notSuccessful_b1 = null;
 data_notSuccessful_b2 = null;
@@ -1165,6 +1006,7 @@ data_successful_b3 = null;
 data_successRate_b1 = null;
 data_successRate_b2 = null;
 data_successRate_b3 = null;
+data_successRate_rechecks = null;
 
 hs_data_b1_all = null;
 hs_data_b1_data = null;
@@ -1301,6 +1143,8 @@ double f_simulateTimestep()
 double minutesPerTimestep = p_timestep_minutes;
 double timestepStartMinuteOfWeek = (v_timestep * minutesPerTimestep) % (7 * 24 * 60);
 
+v_withinSocialChargingTimes = f_setWithinSocialChargingTime();
+
 //1. Charging progress, add charge over this time step if it is connected
 for(EVOwner ev : EVOwners){
 	ev.f_chargeCar();
@@ -1320,22 +1164,16 @@ for(EVOwner ev : EVOwners){
 for(EVOwner ev : EVOwners){
 	ev.f_setChargingStatus();
 }
-/*
-//3. Release CP if fully charged (b2)
-for(EVOwner ev : EVOwners){
-	ev.f_realseChargePoint();
-}*/
 
-//4. Try and aquire if waiting for charge point
-/*
+//5. Try and aquire if waiting for charge point
 for (EVOwner ev : EVOwners) {
-	ev.tryAcquireChargePoint();
-}*/
+	ev.f_recheckChargePoints();
+}
 
 //5. Other vehicles	
-/*for(CarOwner ice : ICECarOwners){
+for(CarOwner ice : ICECarOwners){
 	ice.f_updateTripStatus(timestepStartMinuteOfWeek, minutesPerTimestep);
-}*/
+}
 
 //6. Count totals
 if(!initializationMode){
@@ -1357,9 +1195,34 @@ v_hourOfDay = (v_timestep * p_timestep_minutes / 60.0) % 24;
 if(!initializationMode){
 	// Check if day ended (hour wrapped around)
 	if (v_hourOfDay < prevHourOfDay) {
+		v_day++;
     	f_countBehavioursPerDay();
 	}
 }
+
+
+/*ALCODEEND*/}
+
+boolean f_setWithinSocialChargingTime()
+{/*ALCODESTART::1754991946385*/
+if(v_socialChargingOnlyDaytime){
+	if(v_hourOfDay >= v_socialChargingStartHour && v_hourOfDay < v_socialChargingEndHour){
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+else {
+	return true; //Set to always true so has no effect if not within daytime
+}
+/*ALCODEEND*/}
+
+int f_getPartOfDay()
+{/*ALCODESTART::1754997751929*/
+if (v_hourOfDay >= 6 && v_hourOfDay < 12) return 0; // Morning
+if (v_hourOfDay >= 12 && v_hourOfDay < 18) return 1; // Afternoon
+return 2; // Evening
 
 
 /*ALCODEEND*/}
