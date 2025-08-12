@@ -3,8 +3,9 @@
 	<Text>
 		<Id>1745940705446</Id>
 		<Name><![CDATA[text_nextTrip]]></Name>
-		<X>100</X>
-		<Y>410</Y>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
+		<X>50</X>
+		<Y>630</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>

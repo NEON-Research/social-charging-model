@@ -22,6 +22,13 @@ m.v_socialChargingEndHour = v_socialChargingEndHour;
 m.v_socialChargingOnlyDaytime = v_socialChargingOnlyDaytime;
 m.v_recheckCPAvailability = v_recheckCPAvailability;
 
+m.learningRate_norms_b1 = learningRate_norms_b1;
+m.learningRate_norms_b2 = learningRate_norms_b2;
+m.learningRate_norms_b3 = learningRate_norms_b3;
+m.learningRate_trust_b1 = learningRate_trust_b1;
+m.learningRate_trust_b2 = learningRate_trust_b2;
+m.learningRate_trust_b3 = learningRate_trust_b3;
+
 m.f_simulatePeriod(m.p_nbOfTimesteps);
 if(v_rapidRun == false){
 	m.viewArea.navigateTo();
@@ -75,5 +82,80 @@ if(v_simulationPeriod.equals("day")){
 }
 
 v_numberOfTimesteps = (int) (minutesPerPeriod * v_periods / v_timestep_minutes);
+/*ALCODEEND*/}
+
+double f_setGraphs()
+{/*ALCODESTART::1755013947834*/
+Main m = mains.get(0);
+int size = m.v_timestep;
+
+//SUCCES RATE	
+DataSet data_successRate_b1 = new DataSet(size);
+DataSet data_successRate_b2 = new DataSet(size);
+DataSet data_successRate_b3 = new DataSet(size);
+DataSet data_successRate_rechecks = new DataSet(size);
+for(int i=0; i < m.ar_succesRate_b1.length; i++){
+	data_successRate_b1.add(i, m.ar_succesRate_b1[i]);
+	data_successRate_b2.add(i, m.ar_succesRate_b2[i]);
+	data_successRate_b3.add(i, m.ar_succesRate_b3[i]);
+	data_successRate_b3.add(i, m.ar_succesRate_rechecks[i]);
+}
+pl_succesRate.removeAll();
+pl_succesRate.addDataSet(data_successRate_b1, "Behavior 1: move car", sandyBrown, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_succesRate.addDataSet(data_successRate_b2, "Behavior 2: request move", lightSeaGreen, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_succesRate.addDataSet(data_successRate_b3, "Behavior 3: notify neighbor", lightSlateBlue, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_succesRate.addDataSet(data_successRate_rechecks, "Rechecking CP availability", mediumOrchid, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+
+//PROBABILITY
+DataSet data_avgProbability_b1 = new DataSet(size);
+DataSet data_avgProbability_b2 = new DataSet(size);
+DataSet data_avgProbability_b3 = new DataSet(size);
+for(int i=0; i < m.ar_avgProbability_b1.length; i++){
+	data_avgProbability_b1.add(i, m.ar_avgProbability_b1[i]);
+	data_avgProbability_b2.add(i, m.ar_avgProbability_b2[i]);
+	data_avgProbability_b3.add(i, m.ar_avgProbability_b3[i]);
+}
+pl_probability.removeAll();
+pl_probability.addDataSet(data_avgProbability_b1, "Behavior 1: move car", sandyBrown, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_probability.addDataSet(data_avgProbability_b2, "Behavior 2: request move", lightSeaGreen, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_probability.addDataSet(data_avgProbability_b3, "Behavior 3: notify neighbor", lightSlateBlue, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+
+//AVG SOCIOPSYCHOLOGICAL VARIABLES
+DataSet data_avgNorms = new DataSet(size);
+DataSet data_avgTrust = new DataSet(size);
+DataSet data_avgPSI = new DataSet(size);
+for(int i=0; i < ar_avgNorms.length; i++){
+	data_avgNorms.add(i, ar_avgNorms[i]);
+	data_avgTrust.add(i, ar_avgTrust[i]);
+	data_avgPSI.add(i, ar_avgPSI[i]);
+}
+pl_socioPsychologicalLearning.removeAll();
+pl_socioPsychologicalLearning.addDataSet(data_avgNorms, "Average Norms", sandyBrown, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_socioPsychologicalLearning.addDataSet(data_avgTrust, "Average Trust", lightSeaGreen, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_socioPsychologicalLearning.addDataSet(data_avgPSI, "Average PSI", lightSlateBlue, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+
+//OCCURANCE
+DataSet data_successful_b1 = new DataSet(size);
+DataSet data_successful_b2 = new DataSet(size);
+DataSet data_successful_b3 = new DataSet(size);
+DataSet data_unsuccessful_b1 = new DataSet(size);
+DataSet data_unsuccessful_b2 = new DataSet(size);
+DataSet data_unsuccessful_b3 = new DataSet(size);
+for(int i=0; i < m.ar_successful_b1.length; i++){
+	data_successful_b1.add(i, m.ar_successful_b1[i]);
+	data_successful_b2.add(i, m.ar_successful_b2[i]);
+	data_successful_b3.add(i, m.ar_successful_b3[i]);
+	data_unsuccessful_b1.add(i, m.ar_unsuccessful_b1[i]);
+	data_unsuccessful_b2.add(i, m.ar_unsuccessful_b2[i]);
+	data_unsuccessful_b3.add(i, m.ar_unsuccessful_b3[i]);
+}
+pl_occurance.removeAll();
+pl_occurance.addDataSet(data_successful_b1, "Behavior 1: move car successful", sandyBrown, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_occurance.addDataSet(data_unsuccessful_b1, "Behavior 1: move car unsuccessful", peru, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_occurance.addDataSet(data_successful_b2, "Behavior 2: request move successful", lightSeaGreen, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_occurance.addDataSet(data_unsuccessful_b2, "Behavior 2: request move unsuccessful", darkSeaGreen, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_occurance.addDataSet(data_successful_b3, "Behavior 3: notify neighbor successful", lightSlateBlue, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_occurance.addDataSet(data_unsuccessful_b3, "Behavior 3: notify neighbor unsuccessful", darkSlateBlue, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+
 /*ALCODEEND*/}
 

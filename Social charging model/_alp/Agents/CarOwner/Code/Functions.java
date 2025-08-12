@@ -16,7 +16,7 @@ if (v_nextTrip == null && !c_tripSchedule.isEmpty()) {
     v_nextTrip = c_tripSchedule.get(0);
 }
 
-text_nextTrip.setText("Next trip = " + v_nextTrip.toString());
+//text_nextTrip.setText("Next trip = " + v_nextTrip.toString());
 
 f_initializeStatus();
 /*ALCODEEND*/}
@@ -73,7 +73,7 @@ int currentIndex = c_tripSchedule.indexOf(v_nextTrip);
 int nextIndex = (currentIndex + 1) % c_tripSchedule.size();
 v_nextTrip = c_tripSchedule.get(nextIndex);
 
-text_nextTrip.setText("Next trip = " + v_nextTrip.toString());
+//text_nextTrip.setText("Next trip = " + v_nextTrip.toString());
 /*ALCODEEND*/}
 
 double f_initializeStatus()

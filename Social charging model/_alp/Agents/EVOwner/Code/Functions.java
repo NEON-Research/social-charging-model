@@ -1,16 +1,3 @@
-double f_findChargePoint()
-{/*ALCODESTART::1746011747637*/
-//Charge car if below threshold
-if(main.f_checkAvailableChargePoints()){
-	f_chargeCar();
-}
-
-
-if(v_soc < 0){
-	traceln("ERROR - soc in car " + this.getIndex() + " is below 0 at " + v_soc);
-}
-/*ALCODEEND*/}
-
 double f_chargeCar()
 {/*ALCODESTART::1746011766273*/
 if(v_chargePoint != null && v_status == PARKED_CHARGE_POINT_CHARGING){	
@@ -35,10 +22,9 @@ if(v_chargePoint != null && v_status == PARKED_CHARGE_POINT_CHARGING){
     if (v_electricityInBattery_kWh >= v_batteryCapacity_kWh) {
         v_electricityInBattery_kWh = v_batteryCapacity_kWh;
         v_status = PARKED_CHARGE_POINT_IDLE;
-
-        if (!main.initializationMode) {
-			f_b1_movingVehicle();
-        }
+		
+		//Execute by after charging
+		f_b1_movingVehicle();
     }
 }
 /*ALCODEEND*/}
@@ -46,7 +32,7 @@ if(v_chargePoint != null && v_status == PARKED_CHARGE_POINT_CHARGING){
 double f_updateSOC(double tripDistance_km)
 {/*ALCODESTART::1746011780748*/
 //Update SOC
-double electricityConsumed_kWh = tripDistance_km * v_electricityConsumption_kWhperKm;
+double electricityConsumed_kWh = tripDistance_km * v_elecCons_kWhperKm;
 v_electricityInBattery_kWh -= electricityConsumed_kWh;
 
 if(v_electricityInBattery_kWh < 0){
@@ -87,12 +73,8 @@ if(v_status == ARRIVING){
 			count_chargingSessions++;
 		}
 		//Behaviour 2: Request neighbor to move EV
-		else if(main.initializationMode == false){
+		else {
 			f_b2_requestMove();
-		}
-		//No CP available
-		else{
-			v_status = PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED;
 		}
 	}
 	else {
@@ -133,6 +115,9 @@ if(main.p_b1_moveCar && main.v_withinSocialChargingTimes){
 	boolean actBehavior = f_actBehavior(v_prob_b1);
 	///act
 	f_moveVehicle(actBehavior);
+	
+	//Social learning after interaction
+	f_socialLearning_b1();
 }
 
 /*ALCODEEND*/}
@@ -158,8 +143,7 @@ successRate_b1 = (total_b1 != 0) ? ((double) count_b1_successful / total_b1) : 0
 //main.hs_data_utility_b1_all.add(utility_b1);
 //main.hs_data_b1_all.add(b1);
 
-//Social learning after interaction
-f_socialLearning_b1();
+
 
 /*ALCODEEND*/}
 
@@ -171,10 +155,16 @@ if(main.p_b2_requestMove && main.v_withinSocialChargingTimes){
 	boolean actBehavior = f_actBehavior(v_prob_b2);
 	///act
 	f_requestMove(actBehavior);
+	
+	//Social learning after interaction
+	f_socialLearning_b2();
 }
+//No CP available
 else {
 	v_status = PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED;
 }
+
+
 /*ALCODEEND*/}
 
 double f_requestMove(boolean actBehavior)
@@ -207,8 +197,6 @@ successRate_b2 = (total_b2 != 0) ? ((double) count_b2_successful / total_b2) : 0
 //main.hs_data_utility_b2_all.add(utility_b2);
 //main.hs_data_b2_all.add(b2);
 
-//Social learning after interaction
-f_socialLearning_b2();
 /*ALCODEEND*/}
 
 double f_b3_notifyNeighbor()
@@ -219,6 +207,9 @@ if(main.p_b3_notifyNeighbor && main.v_withinSocialChargingTimes){
 	boolean actBehavior = f_actBehavior(v_prob_b3);
 	///act
 	f_notifyNeighbor(actBehavior);
+	
+	//Social learning after interaction
+	f_socialLearning_b3();
 }
 
 /*ALCODEEND*/}
@@ -242,18 +233,6 @@ successRate_b3 = (total_b3 != 0) ? ((double) count_b3_successful / total_b3) : 0
 
 //main.hs_data_utility_b3_all.add(utility_b3);
 //main.hs_data_b3_all.add(b3);
-
-//Social learning after interaction
-f_socialLearning_b3();
-/*ALCODEEND*/}
-
-double f_setInitialUtility(double modelEffect)
-{/*ALCODESTART::1753189354451*/
-//Utility
-f_setPerceivedSocialInterdependence();
-
-double rand = uniform();
-utility_b1 = v_perceived_social_interdependence * modelEffect + rand * (1-modelEffect);
 /*ALCODEEND*/}
 
 boolean f_actBehavior(double probabilityBehavior)
@@ -274,21 +253,21 @@ double observedFraction = main.successRate_b1;
 
 double norms_t0 = v_norms;
 double trust_t0 = v_trust;
-double psi_t0 = v_perceived_social_interdependence;
+double psi_t0 = v_perc_social_interdep;
 double prob_b1_t0 = v_prob_b1;
 
-double norms_t1 = norms_t0 + main.learningRate_norms_b1 * (observedFraction - norms_t0);
-double trust_t1 = trust_t0 + main.learningRate_trust_b1 * (observedFraction - trust_t0);
+double norms_t1 = norms_t0 + main.learningRate_norms_b1 * (1 - norms_t0);
+double trust_t1 = trust_t0 + main.learningRate_trust_b1 * (1 - trust_t0);
 //double psi_t1 = psi_t0 + main.regCoef_norms_psi * (norms_t1 - norms_t0) + main.regCoef_trust_psi * (trust_t1 - trust_t0);
 //double prob_b1_t1 = prob_b1_t0 + main.regCoef_psi_b1 * (psi_t1 - psi_t0);
 
-//test
-double psi_t1 = psi_t0 + (main.regCoef_norms_psi * 5) * (norms_t1 - norms_t0) + (main.regCoef_trust_psi*5) * (trust_t1 - trust_t0);
-double prob_b1_t1 = prob_b1_t0 + (main.regCoef_psi_b1*5) * (psi_t1 - psi_t0);
+double psi_t1 = psi_t0 + (norms_t1 - norms_t0);// + main.regCoef_trust_psi /10 * (trust_t1 - trust_t0);
+double prob_b1_t1 = prob_b1_t0 + main.regCoef_psi_b1 * 5 * (psi_t1 - psi_t0);
+
 
 v_norms = norms_t1;
 v_trust = trust_t1;
-v_perceived_social_interdependence = psi_t1;
+v_perc_social_interdep = psi_t1;
 v_prob_b1 = prob_b1_t1;
 
 /*ALCODEEND*/}
@@ -372,11 +351,9 @@ return act;
 double f_socialLearning_b2()
 {/*ALCODESTART::1754404097901*/
 //Update social learning after b2 interaction (successful or unsuccessful)
-double observedFraction = main.successRate_b2;
-
 double norms_t0 = v_norms;
 double trust_t0 = v_trust;
-double psi_t0 = v_perceived_social_interdependence;
+double psi_t0 = v_perc_social_interdep;
 double prob_b2_t0 = v_prob_b2;
 
 double norms_t1 = norms_t0 + main.learningRate_norms_b2 * (1 - norms_t0);
@@ -387,7 +364,7 @@ double prob_b2_t1 = prob_b2_t0 + main.regCoef_psi_b2 * (psi_t1 - psi_t0);
 
 v_norms = norms_t1;
 v_trust = trust_t1;
-v_perceived_social_interdependence = psi_t1;
+v_perc_social_interdep = psi_t1;
 v_prob_b2 = prob_b2_t1;
 
 /*ALCODEEND*/}
@@ -395,11 +372,9 @@ v_prob_b2 = prob_b2_t1;
 double f_socialLearning_b3()
 {/*ALCODESTART::1754404103304*/
 //Update social learning after b3 interaction (successful or unsuccessful)
-double observedFraction = main.successRate_b3;
-
 double norms_t0 = v_norms;
 double trust_t0 = v_trust;
-double psi_t0 = v_perceived_social_interdependence;
+double psi_t0 = v_perc_social_interdep;
 double prob_b3_t0 = v_prob_b3;
 
 double norms_t1 = norms_t0 + main.learningRate_norms_b3 * (1 - norms_t0);
@@ -410,7 +385,7 @@ double prob_b3_t1 = prob_b3_t0 + main.regCoef_psi_b3 * (psi_t1 - psi_t0);
 
 v_norms = norms_t1;
 v_trust = trust_t1;
-v_perceived_social_interdependence = psi_t1;
+v_perc_social_interdep = psi_t1;
 v_prob_b3 = prob_b3_t1;
 
 /*ALCODEEND*/}
@@ -432,11 +407,6 @@ for (J_ChargePoint cp : main.c_chargePoints) {
     }
 }
 return false;
-/*ALCODEEND*/}
-
-double f_releaseChargePoint()
-{/*ALCODESTART::1754917221483*/
-
 /*ALCODEEND*/}
 
 double f_recheckChargePoints()

@@ -694,9 +694,6 @@
               AccessType="public"
               StaticVariable="false">
 			<Type><![CDATA[double]]></Type>
-			<InitialValue Class="CodeValue">
-				<Code><![CDATA[0.1]]></Code>
-			</InitialValue>
 		</Properties>
 	</Variable>
 	<Variable Class="PlainVariable">
@@ -716,9 +713,6 @@
               AccessType="public"
               StaticVariable="false">
 			<Type><![CDATA[double]]></Type>
-			<InitialValue Class="CodeValue">
-				<Code><![CDATA[0.3]]></Code>
-			</InitialValue>
 		</Properties>
 	</Variable>
 	<Variable Class="PlainVariable">
@@ -738,9 +732,6 @@
               AccessType="public"
               StaticVariable="false">
 			<Type><![CDATA[double]]></Type>
-			<InitialValue Class="CodeValue">
-				<Code><![CDATA[0.1]]></Code>
-			</InitialValue>
 		</Properties>
 	</Variable>
 	<Variable Class="PlainVariable">
@@ -760,9 +751,6 @@
               AccessType="public"
               StaticVariable="false">
 			<Type><![CDATA[double]]></Type>
-			<InitialValue Class="CodeValue">
-				<Code><![CDATA[0.3]]></Code>
-			</InitialValue>
 		</Properties>
 	</Variable>
 	<Variable Class="PlainVariable">
@@ -782,9 +770,6 @@
               AccessType="public"
               StaticVariable="false">
 			<Type><![CDATA[double]]></Type>
-			<InitialValue Class="CodeValue">
-				<Code><![CDATA[0.1]]></Code>
-			</InitialValue>
 		</Properties>
 	</Variable>
 	<Variable Class="PlainVariable">
@@ -804,9 +789,6 @@
               AccessType="public"
               StaticVariable="false">
 			<Type><![CDATA[double]]></Type>
-			<InitialValue Class="CodeValue">
-				<Code><![CDATA[0.3]]></Code>
-			</InitialValue>
 		</Properties>
 	</Variable>
 	<Variable Class="PlainVariable">
@@ -1136,6 +1118,63 @@
               AccessType="public"
               StaticVariable="false">
 			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1755011285638</Id>
+		<Name><![CDATA[ar_avgNorms]]></Name>
+		<X>400</X>
+		<Y>1590</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double[]]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1755011302558</Id>
+		<Name><![CDATA[ar_avgTrust]]></Name>
+		<X>400</X>
+		<Y>1610</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double[]]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1755011304697</Id>
+		<Name><![CDATA[ar_avgPSI]]></Name>
+		<X>400</X>
+		<Y>1630</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double[]]]></Type>
 		</Properties>
 	</Variable>
 	<Variable Class="Parameter">

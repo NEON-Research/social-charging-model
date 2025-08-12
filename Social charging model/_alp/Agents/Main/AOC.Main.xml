@@ -6,7 +6,8 @@
 
 import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.commons.math3.linear.*;
-import java.util.*;]]></Import>
+import java.util.*;
+]]></Import>
 	<StartupCode><![CDATA[f_initializeModel();
 ]]></StartupCode>
 	<Generic>false</Generic>

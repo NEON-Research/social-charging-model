@@ -3,8 +3,8 @@
 	<Variable Class="PlainVariable">
 		<Id>1745940705458</Id>
 		<Name><![CDATA[v_nextTrip]]></Name>
-		<X>100</X>
-		<Y>240</Y>
+		<X>50</X>
+		<Y>110</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -22,8 +22,8 @@
 	<Variable Class="PlainVariable">
 		<Id>1745940705460</Id>
 		<Name><![CDATA[v_status]]></Name>
-		<X>100</X>
-		<Y>310</Y>
+		<X>50</X>
+		<Y>60</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -41,8 +41,8 @@
 	<Variable Class="PlainVariable">
 		<Id>1745940705462</Id>
 		<Name><![CDATA[v_km_driven]]></Name>
-		<X>100</X>
-		<Y>280</Y>
+		<X>50</X>
+		<Y>130</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -60,8 +60,8 @@
 	<Variable Class="PlainVariable">
 		<Id>1746018217670</Id>
 		<Name><![CDATA[v_type]]></Name>
-		<X>100</X>
-		<Y>370</Y>
+		<X>50</X>
+		<Y>40</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -79,8 +79,8 @@
 	<Variable Class="PlainVariable">
 		<Id>1754492166829</Id>
 		<Name><![CDATA[count_leftUncharged]]></Name>
-		<X>100</X>
-		<Y>470</Y>
+		<X>50</X>
+		<Y>450</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -98,8 +98,8 @@
 	<Variable Class="PlainVariable">
 		<Id>1754492174360</Id>
 		<Name><![CDATA[count_leftWhileCharging]]></Name>
-		<X>100</X>
-		<Y>490</Y>
+		<X>50</X>
+		<Y>470</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -117,8 +117,8 @@
 	<Variable Class="PlainVariable">
 		<Id>1754903555739</Id>
 		<Name><![CDATA[v_chargePoint]]></Name>
-		<X>100</X>
-		<Y>220</Y>
+		<X>50</X>
+		<Y>160</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -136,8 +136,8 @@
 	<Variable Class="CollectionVariable">
 		<Id>1745940705450</Id>
 		<Name><![CDATA[c_tripSchedule]]></Name>
-		<X>100</X>
-		<Y>70</Y>
+		<X>50</X>
+		<Y>80</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>

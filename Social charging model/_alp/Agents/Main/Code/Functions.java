@@ -49,6 +49,10 @@ if (sortedRealData != null) {
 f_setChargePoints();
 
 f_simulateFirstWeekToGetInitialLocationCars();
+
+ar_avgNorms = new double [p_nbOfTimesteps];
+ar_avgTrust = new double [p_nbOfTimesteps];
+ar_avgPSI = new double [p_nbOfTimesteps];
 /*ALCODEEND*/}
 
 int f_initalizeMinuteOfWeek()
@@ -115,6 +119,10 @@ double totalProb_b1 = 0.0;
 double totalProb_b2 = 0.0;
 double totalProb_b3 = 0.0;
 
+double totalNorms = 0.0;
+double totalTrust = 0;
+double totalPSI = 0.0;
+
 for (EVOwner x : EVOwners) {
     count_b1_successful      += x.count_b1_successful;
     count_b1_notSuccessful   += x.count_b1_notSuccessful;
@@ -132,6 +140,10 @@ for (EVOwner x : EVOwners) {
     totalProb_b1 += x.v_prob_b1;
 	totalProb_b2 += x.v_prob_b2;
 	totalProb_b3 += x.v_prob_b3;
+	
+	totalNorms += x.v_norms;
+	totalTrust += x.v_trust;
+	totalPSI += x.v_perc_social_interdep;
 }
 
 
@@ -174,6 +186,15 @@ double avgProb_b3 = totalProb_b3 / EVs;
 data_avgProbability_b1.add(v_timestep, avgProb_b1);
 data_avgProbability_b2.add(v_timestep, avgProb_b2);
 data_avgProbability_b3.add(v_timestep, avgProb_b3);
+
+
+double avgNorms = totalNorms / EVs;
+double avgTrust = totalTrust / EVs;
+double avgPSI = totalPSI / EVs;
+ar_avgNorms[v_timestep] = avgNorms;
+ar_avgTrust[v_timestep] = avgTrust;
+ar_avgPSI[v_timestep] = avgPSI;
+
 /*ALCODEEND*/}
 
 double f_createICECarOwners()
@@ -218,6 +239,7 @@ double f_simulatePeriod(int nbOfTimesteps)
 {/*ALCODESTART::1746025438383*/
 v_timestep = 0;
 v_hourOfDay = 0;
+v_day = 0;
 initializationMode = false;
 
 //Trigger over timesteps
@@ -258,6 +280,22 @@ pl_probability.removeAll();
 pl_probability.addDataSet(data_avgProbability_b1, "Behavior 1: move car", sandyBrown, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 pl_probability.addDataSet(data_avgProbability_b2, "Behavior 2: request move", lightSeaGreen, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 pl_probability.addDataSet(data_avgProbability_b3, "Behavior 3: notify neighbor", lightSlateBlue, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+
+int size = v_timestep;
+DataSet data_avgNorms = new DataSet(size);
+DataSet data_avgTrust = new DataSet(size);
+DataSet data_avgPSI = new DataSet(size);
+for(int i=0; i < ar_avgNorms.length; i++){
+	data_avgNorms.add(i, ar_avgNorms[i]);
+	data_avgTrust.add(i, ar_avgTrust[i]);
+	data_avgPSI.add(i, ar_avgPSI[i]);
+}
+
+pl_socioPsychologicalLearning.removeAll();
+pl_socioPsychologicalLearning.addDataSet(data_avgNorms, "Average Norms", sandyBrown, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_socioPsychologicalLearning.addDataSet(data_avgTrust, "Average Trust", lightSeaGreen, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_socioPsychologicalLearning.addDataSet(data_avgPSI, "Average PSI", lightSlateBlue, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+
 
 pl_interactionPerDay.removeAll();
 pl_interactionPerDay.addDataSet(data_interactionsPerDay_b1, "Behavior 1: move car", sandyBrown, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
@@ -396,6 +434,8 @@ initializationMode = true;
 for(int i=0; i < timestepsInWeek; i++){
 	f_simulateTimestep();
 }
+
+f_clearCounts();
 
 traceln("Finished initial week for division car location");
 /*ALCODEEND*/}
@@ -597,7 +637,7 @@ EVOwner x = add_EVOwners();
 x.v_norms = agentAttributes[0];
 x.v_trust = agentAttributes[1];
 x.v_reputational_concern = agentAttributes[2];
-x.v_perceived_social_interdependence = agentAttributes[3];
+x.v_perc_social_interdep = agentAttributes[3];
 x.v_prob_b1 = agentAttributes[4];
 x.v_prob_b2 = agentAttributes[5];
 x.v_prob_b3 = agentAttributes[6];
@@ -624,7 +664,7 @@ for(EVOwner x : EVOwners){
 	hs_data_norms_pop.add(x.v_norms);
 	hs_data_trust_pop.add(x.v_trust);
 	hs_data_rc_pop.add(x.v_reputational_concern);
-	hs_data_psi_pop.add(x.v_perceived_social_interdependence);
+	hs_data_psi_pop.add(x.v_perc_social_interdep);
 
 	hs_data_b1_pop.add(x.v_prob_b1);
 	hs_data_b2_pop.add(x.v_prob_b2);
@@ -813,7 +853,7 @@ for(EVOwner x : EVOwners){
 	x.v_norms = (x.v_norms - 1)/6;
 	x.v_trust = (x.v_trust - 1)/6;
 	x.v_reputational_concern = (x.v_reputational_concern - 1)/6;
-	x.v_perceived_social_interdependence = (x.v_perceived_social_interdependence - 1)/6;
+	x.v_perc_social_interdep = (x.v_perc_social_interdep - 1)/6;
 	x.v_prob_b1 = (x.v_prob_b1 - 1)/6;
 	x.v_prob_b2 = (x.v_prob_b2 - 1)/6;
 	x.v_prob_b3 = (x.v_prob_b3 - 1)/6;
@@ -823,7 +863,7 @@ for(EVOwner x : EVOwners){
 	hs_data_norms_pop1.add(x.v_norms);
 	hs_data_trust_pop1.add(x.v_trust);
 	hs_data_rc_pop1.add(x.v_reputational_concern);
-	hs_data_psi_pop1.add(x.v_perceived_social_interdependence);
+	hs_data_psi_pop1.add(x.v_perc_social_interdep);
 }
 
 hs_norms_pop1.updateData();
@@ -1225,5 +1265,35 @@ if (v_hourOfDay >= 12 && v_hourOfDay < 18) return 1; // Afternoon
 return 2; // Evening
 
 
+/*ALCODEEND*/}
+
+double f_clearCounts()
+{/*ALCODESTART::1755005247461*/
+for(EVOwner ev : EVOwners){
+	ev.count_b1_notSuccessful = 0;
+	ev.count_b1_successful = 0;
+	ev.count_b2_noIdleChargers = 0;
+	ev.count_b2_noMatchingRequest = 0;
+	ev.count_b2_notSuccessful = 0;
+	ev.count_b2_successful = 0;
+	ev.count_b3_notSuccessful = 0;
+	ev.count_b3_successful = 0;
+	ev.count_chargingRequired = 0;
+	ev.count_chargingSessions = 0;
+	ev.count_chargingSessions = 0;
+	ev.count_fulfilledMoveRequest = 0;
+	ev.count_successfulRechecks = 0;
+	ev.count_unsuccessfulRechecks = 0;
+	ev.count_leftUncharged = 0;
+	ev.count_leftWhileCharging = 0;
+	ev.v_outOfModelCharge_kWh = 0.0;
+	ev.v_totalElectricityCharged_kWh = 0.0;
+	ev.v_km_driven = 0.0;
+}
+for(CarOwner ice : ICECarOwners){
+	ice.v_km_driven = 0.0;
+}
+countTripDepartures = 0;
+countTripArrivals = 0;
 /*ALCODEEND*/}
 
