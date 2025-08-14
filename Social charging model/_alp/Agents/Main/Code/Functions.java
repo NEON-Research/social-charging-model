@@ -24,7 +24,10 @@ double f_initializeModel()
 v_hourOfDay = 0;
 
 ef_spvars.readFile();
+f_setArrays();
 
+int evOwners = roundToInt(p_cars*p_shareEVs);
+f_setHistogramArrays(evOwners);
 f_getRegressionCoefficients();
 //f_setModelEffects();
 //f_setThresholds();
@@ -35,24 +38,21 @@ nbOfInputTrips = (int) selectFirstValue(int.class,
 );
 //Create ICEs and EVs
 f_createICECarOwners();
-f_generateSyntehticPopulationEVs();
+f_generateSyntehticPopulationEVs(evOwners);
 f_normalizeFromLikert();
 
 ef_spvars.close();
+/*
 if (sortedRealData != null) {
     for (List<Double> innerList : sortedRealData) {
         innerList.clear();  // Clear contents of inner list
     }
     //sortedRealData.clear();  // Then clear the outer list
-}
+}*/
 
 f_setChargePoints();
-
 f_simulateFirstWeekToGetInitialLocationCars();
 
-ar_avgNorms = new double [p_nbOfTimesteps];
-ar_avgTrust = new double [p_nbOfTimesteps];
-ar_avgPSI = new double [p_nbOfTimesteps];
 /*ALCODEEND*/}
 
 int f_initalizeMinuteOfWeek()
@@ -74,35 +74,24 @@ v_minuteOfWeek = (dayOfWeek * 24 * 60 + hourOfDay * 60 + minuteOfHour);
 
 double f_countTotals()
 {/*ALCODESTART::1745939185407*/
+int EVs = EVOwners.size();
+
 //COUNT CAR BEHAVIOR
-double v_carsOnTrip = count(c_carOwners, x->x.v_status == ON_TRIP);
-double v_ICECarsParkedNonCP = count(ICECarOwners, x->x.v_status == PARKED_NON_CHARGE_POINT_CHARGING_NOT_REQUIRED);
-double v_EVsParkedNonCPChargingRequired = count(EVOwners, x->x.v_status == PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED);
-double v_EVsParkedNonCPChargingNotRequired = count(EVOwners, x->x.v_status == PARKED_NON_CHARGE_POINT_CHARGING_NOT_REQUIRED);
-double v_EVsParkedAtCPCharging = count(EVOwners, x->x.v_status == PARKED_CHARGE_POINT_CHARGING);
-double v_EVsParkedAtCPIdle = count(EVOwners, x->x.v_status == PARKED_CHARGE_POINT_IDLE);
-double v_EVsArriving = count(EVOwners, x->x.v_status == ARRIVING);
+double carsOnTrip = count(c_carOwners, x->x.v_status == ON_TRIP);
+double ICECarsParkedNonCP = count(ICECarOwners, x->x.v_status == PARKED_NON_CHARGE_POINT_CHARGING_NOT_REQUIRED);
+double EVsParkedNonCPChargingRequired = count(EVOwners, x->x.v_status == PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED);
+double EVsParkedNonCPChargingNotRequired = count(EVOwners, x->x.v_status == PARKED_NON_CHARGE_POINT_CHARGING_NOT_REQUIRED);
+double EVsParkedAtCPCharging = count(EVOwners, x->x.v_status == PARKED_CHARGE_POINT_CHARGING);
+double EVsParkedAtCPIdle = count(EVOwners, x->x.v_status == PARKED_CHARGE_POINT_IDLE);
+double EVsArriving = count(EVOwners, x->x.v_status == ARRIVING);
 
-if(v_EVsArriving > 0){
-	traceln("Error: " + v_EVsArriving + " EVs arriving did not get a new stauts");
+if(EVsArriving > 0){
+	traceln("Error: " + EVsArriving + " EVs arriving did not get a new stauts");
 }
-data_carsOnTrip.add(v_timestep, v_carsOnTrip);
-data_ICECarsParkedNonCP.add(v_timestep, v_ICECarsParkedNonCP);
-data_EVsParkedNonCPChargingRequired.add(v_timestep, v_EVsParkedNonCPChargingRequired);
-data_EVsParkedNonCPChargingNotRequired.add(v_timestep, v_EVsParkedNonCPChargingNotRequired);
-data_EVsParkedAtCPCharging.add(v_timestep, v_EVsParkedAtCPCharging);
-data_EVsParkedAtCPIdle.add(v_timestep, v_EVsParkedAtCPIdle);
 
-int cpAvailable = count(c_chargePoints, x->x.isOccupied() == false);
-data_CPAvailable.add(v_timestep, cpAvailable);
-data_CPOccupied.add(v_timestep, p_chargePoints - cpAvailable);
-/*
-if(v_chargePointAvailable < 0){
-	traceln("Error: cp available = " + v_chargePointAvailable + " at timestep " + v_timestep);
-}
-if((p_chargePoints - v_chargePointAvailable) < 0){
-	traceln("Error: cp occupied = " + (p_chargePoints - v_chargePointAvailable) + " at timestep " + v_timestep);
-}*/
+// Charge Points
+int CPAvailable = count(c_chargePoints, x->x.isOccupied() == false);
+int CPOccupied = c_chargePoints.size() - CPAvailable;
 
 //SUCCES RATES and avg probabiliy
 count_b1_successful = 0;
@@ -159,41 +148,62 @@ successRate_b3 = (total_b3 != 0) ? ((double) count_b3_successful / total_b3) : 0
 int total_rechecks = count_successfulRechecks + count_unsuccessfulRechecks;
 successRate_rechecks = (total_rechecks != 0) ? ((double) count_successfulRechecks / total_rechecks) : 0;
 
-
-
-data_successRate_b1.add(v_timestep, successRate_b1);
-data_successful_b1.add(v_timestep, count_b1_successful);
-data_notSuccessful_b1.add(v_timestep, count_b1_notSuccessful);
-
-data_successRate_b2.add(v_timestep, successRate_b2);
-data_successful_b2.add(v_timestep, count_b2_successful);
 //Added no idle chargers category
 count_b2_notSuccessful -= count_b2_noIdleChargers;
-data_notSuccessful_b2.add(v_timestep, count_b2_notSuccessful);
-data_noIdleChargers_b2.add(v_timestep, count_b2_noIdleChargers);
 
-data_successRate_b3.add(v_timestep, successRate_b3);
-data_successful_b3.add(v_timestep, count_b3_successful);
-data_notSuccessful_b3.add(v_timestep, count_b3_notSuccessful);
-
-data_successRate_rechecks.add(v_timestep, successRate_rechecks);
-
-int EVs = EVOwners.size();
+//Probabilities
 double avgProb_b1 = totalProb_b1 / EVs;
 double avgProb_b2 = totalProb_b2 / EVs;
 double avgProb_b3 = totalProb_b3 / EVs;
 
-data_avgProbability_b1.add(v_timestep, avgProb_b1);
-data_avgProbability_b2.add(v_timestep, avgProb_b2);
-data_avgProbability_b3.add(v_timestep, avgProb_b3);
-
-
+//Norms, trust, PSI
 double avgNorms = totalNorms / EVs;
 double avgTrust = totalTrust / EVs;
 double avgPSI = totalPSI / EVs;
+
+//SETTING ARRAYS
+// Charge Points
+ar_CPOccupied[v_timestep] = CPOccupied;
+ar_CPAvailable[v_timestep] = CPAvailable;
+
+// Cars & Parking
+ar_carsOnTrip[v_timestep] = carsOnTrip;
+ar_ICECarsParkedNonCP[v_timestep] = ICECarsParkedNonCP;
+ar_EVsParkedNonCPChargingRequired[v_timestep] = EVsParkedNonCPChargingRequired;
+ar_EVsParkedNonCPChargingNotRequired[v_timestep] = EVsParkedNonCPChargingNotRequired;
+ar_EVsParkedAtCPCharging[v_timestep] = EVsParkedAtCPCharging;
+ar_EVsParkedAtCPIdle[v_timestep] = EVsParkedAtCPIdle;
+
+
+//Norms, trust, PSI
 ar_avgNorms[v_timestep] = avgNorms;
 ar_avgTrust[v_timestep] = avgTrust;
 ar_avgPSI[v_timestep] = avgPSI;
+
+//Success Rates
+ar_successRate_b1[v_timestep] = successRate_b1;
+ar_successRate_b2[v_timestep] = successRate_b2;
+ar_successRate_b3[v_timestep] = successRate_b3;
+ar_successRate_rechecks[v_timestep] = successRate_rechecks;
+
+//Probabilities
+ar_avgProbability_b1[v_timestep] = avgProb_b1;
+ar_avgProbability_b2[v_timestep] = avgProb_b2;
+ar_avgProbability_b3[v_timestep] = avgProb_b3;
+
+//Success/Not success
+ar_successful_b1[v_timestep] = count_b1_successful;
+ar_successful_b2[v_timestep] = count_b2_successful;
+ar_successful_b3[v_timestep] = count_b3_successful;
+ar_unsuccessful_b1[v_timestep] = count_b1_notSuccessful;
+ar_unsuccessful_b2[v_timestep] = count_b2_notSuccessful;
+ar_unsuccessful_b3[v_timestep] = count_b3_notSuccessful;
+ar_noIdleChargers_b2[v_timestep] = count_b2_noIdleChargers;
+
+
+
+
+
 
 /*ALCODEEND*/}
 
@@ -249,79 +259,68 @@ for(int i=0; i < nbOfTimesteps; i++){
 
 
 f_endSimulationPeriod();
-traceln("Simulation finished after " + v_timestep + " timesteps ");
+//traceln("Simulation finished after " + v_timestep + " timesteps ");
 
 	
 /*ALCODEEND*/}
 
 double f_updateChart()
 {/*ALCODESTART::1746089953946*/
+// Count EVs chart
 ch_countEVs.removeAll();
-ch_countEVs.addDataSet(data_carsOnTrip, "Cars on trip", coral);
-ch_countEVs.addDataSet(data_ICECarsParkedNonCP, "ICE cars parked", darkKhaki);
-ch_countEVs.addDataSet(data_EVsParkedNonCPChargingNotRequired, "EVs parked not at charge point charging not required", limeGreen);
-ch_countEVs.addDataSet(data_EVsParkedNonCPChargingRequired, "EVs parked not at charge point charging required", slateGray);
-ch_countEVs.addDataSet(data_EVsParkedAtCPCharging, "EVs parked at charge point and charging", darkMagenta);
-ch_countEVs.addDataSet(data_EVsParkedAtCPIdle, "EVs parked at charge point and idle", orange);
+ch_countEVs.addDataSet(f_arrayToDataSet(ar_carsOnTrip), "Cars on trip", coral);
+ch_countEVs.addDataSet(f_arrayToDataSet(ar_ICECarsParkedNonCP), "ICE cars parked", darkKhaki);
+ch_countEVs.addDataSet(f_arrayToDataSet(ar_EVsParkedNonCPChargingNotRequired), "EVs parked not at charge point charging not required", limeGreen);
+ch_countEVs.addDataSet(f_arrayToDataSet(ar_EVsParkedNonCPChargingRequired), "EVs parked not at charge point charging required", slateGray);
+ch_countEVs.addDataSet(f_arrayToDataSet(ar_EVsParkedAtCPCharging), "EVs parked at charge point and charging", darkMagenta);
+ch_countEVs.addDataSet(f_arrayToDataSet(ar_EVsParkedAtCPIdle), "EVs parked at charge point and idle", orange);
 
+// Charge points chart
 ch_countCPs.removeAll();
-ch_countCPs.addDataSet(data_CPAvailable, "Charge points available", limeGreen);
-ch_countCPs.addDataSet(data_CPOccupied, "Charge points occupied", coral);
+ch_countCPs.addDataSet(f_arrayToDataSet(ar_CPAvailable), "Charge points available", limeGreen);
+ch_countCPs.addDataSet(f_arrayToDataSet(ar_CPOccupied), "Charge points occupied", coral);
 
-//Appearance app1 = new Appearance(blue, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+// Success rate chart
+pl_successRate.removeAll();
+pl_successRate.addDataSet(f_arrayToDataSet(ar_successRate_b1), "Behavior 1: move car", sandyBrown, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_successRate.addDataSet(f_arrayToDataSet(ar_successRate_b2), "Behavior 2: request move", lightSeaGreen, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_successRate.addDataSet(f_arrayToDataSet(ar_successRate_b3), "Behavior 3: notify neighbor", lightSlateBlue, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_successRate.addDataSet(f_arrayToDataSet(ar_successRate_rechecks), "Rechecking CP availability", mediumOrchid, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 
-pl_succesRate.removeAll();
-pl_succesRate.addDataSet(data_successRate_b1, "Behavior 1: move car", sandyBrown, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
-pl_succesRate.addDataSet(data_successRate_b2, "Behavior 2: request move", lightSeaGreen, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
-pl_succesRate.addDataSet(data_successRate_b3, "Behavior 3: notify neighbor", lightSlateBlue, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
-pl_succesRate.addDataSet(data_successRate_rechecks, "Rechecking CP availability", mediumOrchid, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
-
+// Probability chart
 pl_probability.removeAll();
-pl_probability.addDataSet(data_avgProbability_b1, "Behavior 1: move car", sandyBrown, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
-pl_probability.addDataSet(data_avgProbability_b2, "Behavior 2: request move", lightSeaGreen, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
-pl_probability.addDataSet(data_avgProbability_b3, "Behavior 3: notify neighbor", lightSlateBlue, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_probability.addDataSet(f_arrayToDataSet(ar_avgProbability_b1), "Behavior 1: move car", sandyBrown, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_probability.addDataSet(f_arrayToDataSet(ar_avgProbability_b2), "Behavior 2: request move", lightSeaGreen, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_probability.addDataSet(f_arrayToDataSet(ar_avgProbability_b3), "Behavior 3: notify neighbor", lightSlateBlue, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 
-int size = v_timestep;
-DataSet data_avgNorms = new DataSet(size);
-DataSet data_avgTrust = new DataSet(size);
-DataSet data_avgPSI = new DataSet(size);
-for(int i=0; i < ar_avgNorms.length; i++){
-	data_avgNorms.add(i, ar_avgNorms[i]);
-	data_avgTrust.add(i, ar_avgTrust[i]);
-	data_avgPSI.add(i, ar_avgPSI[i]);
-}
-
+// Socio-psychological chart
 pl_socioPsychologicalLearning.removeAll();
-pl_socioPsychologicalLearning.addDataSet(data_avgNorms, "Average Norms", sandyBrown, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
-pl_socioPsychologicalLearning.addDataSet(data_avgTrust, "Average Trust", lightSeaGreen, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
-pl_socioPsychologicalLearning.addDataSet(data_avgPSI, "Average PSI", lightSlateBlue, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_socioPsychologicalLearning.addDataSet(f_arrayToDataSet(ar_avgNorms), "Average Norms", sandyBrown, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_socioPsychologicalLearning.addDataSet(f_arrayToDataSet(ar_avgTrust), "Average Trust", lightSeaGreen, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_socioPsychologicalLearning.addDataSet(f_arrayToDataSet(ar_avgPSI), "Average PSI", lightSlateBlue, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 
-
+// Interactions per day chart
 pl_interactionPerDay.removeAll();
-pl_interactionPerDay.addDataSet(data_interactionsPerDay_b1, "Behavior 1: move car", sandyBrown, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
-pl_interactionPerDay.addDataSet(data_interactionsPerDay_b2, "Behavior 2: request move", lightSeaGreen, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
-pl_interactionPerDay.addDataSet(data_interactionsPerDay_b3, "Behavior 3: notify neighbor", lightSlateBlue, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
-pl_interactionPerDay.addDataSet(data_rechecksPerDay, "Rechecking CP availability", mediumOrchid, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_interactionPerDay.addDataSet(f_arrayToDataSet(ar_interactionsPerDay_b1), "Behavior 1: move car", sandyBrown, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_interactionPerDay.addDataSet(f_arrayToDataSet(ar_interactionsPerDay_b2), "Behavior 2: request move", lightSeaGreen, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_interactionPerDay.addDataSet(f_arrayToDataSet(ar_interactionsPerDay_b3), "Behavior 3: notify neighbor", lightSlateBlue, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_interactionPerDay.addDataSet(f_arrayToDataSet(ar_rechecksPerDay), "Rechecking CP availability", mediumOrchid, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 
+// Behavior charts
 ch_b1.removeAll();
-ch_b1.addDataSet(data_notSuccessful_b1, "Non successful interactions", red);
-ch_b1.addDataSet(data_successful_b1, "Successful interactions", green);
+ch_b1.addDataSet(f_arrayToDataSet(ar_unsuccessful_b1), "Non successful interactions", red);
+ch_b1.addDataSet(f_arrayToDataSet(ar_successful_b1), "Successful interactions", green);
 
 ch_b2.removeAll();
-ch_b2.addDataSet(data_notSuccessful_b2, "Non successful interactions", red);
-ch_b2.addDataSet(data_noIdleChargers_b2, "No idle chargers", orange);
-ch_b2.addDataSet(data_successful_b2, "Successful interactions", green);
+ch_b2.addDataSet(f_arrayToDataSet(ar_unsuccessful_b2), "Non successful interactions", red);
+ch_b2.addDataSet(f_arrayToDataSet(ar_noIdleChargers_b2), "No idle chargers", orange);
+ch_b2.addDataSet(f_arrayToDataSet(ar_successful_b2), "Successful interactions", green);
 
 ch_b3.removeAll();
-ch_b3.addDataSet(data_notSuccessful_b3, "Non successful interactions", red);
-ch_b3.addDataSet(data_successful_b3, "Successful interactions", green);
+ch_b3.addDataSet(f_arrayToDataSet(ar_unsuccessful_b3), "Non successful interactions", red);
+ch_b3.addDataSet(f_arrayToDataSet(ar_successful_b3), "Successful interactions", green);
 
-hs_utility_b1_all.updateData();
-hs_utility_b2_all.updateData();
-hs_utility_b3_all.updateData();
-hs_b1_all.updateData();
-hs_b2_all.updateData();
-hs_b3_all.updateData();
+f_setHistograms();
 /*ALCODEEND*/}
 
 double f_endSimulationPeriod()
@@ -345,6 +344,9 @@ for(EVOwner x : EVOwners){
 	countTotalChargingSessions += x.count_chargingSessions;
 }
 double avgChargingSessionPerEVPerDay = roundToDecimal((double) countTotalChargingSessions / EVOwners.size() / p_days,3);
+
+v_unfulfilledChargingSessions_perc = (double) (countLeftUncharged + countUnfinishedCharging) / countTotalChargingSessions;
+v_outOfModelCharging_perc = outOfModelCharging/totalCharging;
 
 traceln("Total charging sessions = " + countTotalChargingSessions + ", is avg per EV per day " + avgChargingSessionPerEVPerDay);
 traceln("Unfinished charging = " + roundToInt((double) countUnfinishedCharging / countTotalChargingSessions * 100) + "% of charging sessions");
@@ -475,17 +477,17 @@ for(int i= 0; i < numAgents; i++){
 }
 /*ALCODEEND*/}
 
-double f_generateSyntehticPopulationEVs()
+double f_generateSyntehticPopulationEVs(int evOwners)
 {/*ALCODESTART::1752581980946*/
 //1. get correlation matrix
 f_getCorrelationMatrixFromExcel();
 
 //2. get sorter real values from data
-f_getSortedSocialPsychologicalData();
+List<List<Double>> sortedRealData = new ArrayList<>();
+sortedRealData = f_getSortedSocialPsychologicalData();
 
 //3. generate syntethic agents
-int EVs = roundToInt(p_cars*p_shareEVs);
-f_generateSyntheticAgents(EVs, sortedRealData);
+f_generateSyntheticAgents(evOwners, sortedRealData);
 
 /*
 // Optional: print a few samples
@@ -518,7 +520,7 @@ for(int rowIndex = 2; rowIndex < matrixSize + 1; rowIndex++){
 	
 /*ALCODEEND*/}
 
-double f_getSortedSocialPsychologicalData()
+List<List<Double>> f_getSortedSocialPsychologicalData()
 {/*ALCODESTART::1752585514702*/
 String sheetName = "frequency_list";
 int size = ef_spvars.getLastRowNum(sheetName);
@@ -549,7 +551,7 @@ int col_psi = 4;
 int col_b1 = 5;
 int col_b2 = 6;
 int col_b3 = 7;
-
+/*
 List<Double> norms = new ArrayList<>();
 List<Double> trust = new ArrayList<>();
 List<Double> rc = new ArrayList<>();
@@ -557,54 +559,29 @@ List<Double> psi = new ArrayList<>();
 List<Double> b1 = new ArrayList<>();
 List<Double> b2 = new ArrayList<>();
 List<Double> b3 = new ArrayList<>();
-
+*/
 for(int rowIndex = 2; rowIndex < size + 1; rowIndex++){
-	norms.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_norms));
-	trust.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_trust));
-	rc.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_rc));
-	psi.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_psi));
-	b1.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_b1));
-	b2.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_b2));
-	b3.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_b3));
+	c_norms.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_norms));
+	c_trust.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_trust));
+	c_rc.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_rc));
+	c_psi.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_psi));
+	c_b1.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_b1));
+	c_b2.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_b2));
+	c_b3.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_b3));
 }
 
 
-Collections.sort(norms);
-Collections.sort(trust);
-Collections.sort(rc);
-Collections.sort(psi);
-Collections.sort(b1);
-Collections.sort(b2);
-Collections.sort(b3);
+Collections.sort(c_norms);
+Collections.sort(c_trust);
+Collections.sort(c_rc);
+Collections.sort(c_psi);
+Collections.sort(c_b1);
+Collections.sort(c_b2);
+Collections.sort(c_b3);
 
-sortedRealData = Arrays.asList(norms, trust, rc, psi, b1, b2, b3);
+List<List<Double>> sortedRealData = new ArrayList<>();
+return sortedRealData = Arrays.asList(c_norms, c_trust, c_rc, c_psi, c_b1, c_b2, c_b3);
 
-
-
-//Add histograms to check
-if(startup_agent.v_rapidRun == false){
-	for(double value : norms){
-		hs_data_norms_data.add(value);
-	}
-	for(double value : trust){
-		hs_data_trust_data.add(value);
-	}
-	for(double value : rc){
-		hs_data_rc_data.add(value);
-	}
-	for(double value : psi){
-		hs_data_psi_data.add(value);
-	}
-	for(double value : b1){
-		hs_data_b1_data.add(value);
-	}
-	for(double value : b2){
-		hs_data_b2_data.add(value);
-	}
-	for(double value : b3){
-		hs_data_b3_data.add(value);
-	}
-}
 /*ALCODEEND*/}
 
 double f_inverseECDF(List<Double> sortedData,double u)
@@ -660,6 +637,22 @@ c_carOwners.add(x);
 
 double f_histogramsPopData()
 {/*ALCODESTART::1752589029155*/
+
+int nIntervals = 20;
+double initialIntervalWidth = 0.35;
+boolean calcCDF = true;
+boolean calcPercentiles = false;
+double lowPercent = 10;
+double highPercent = 10;
+
+HistogramSmartData hs_data_norms_pop = new HistogramSmartData(nIntervals, initialIntervalWidth, calcCDF, calcPercentiles, lowPercent, highPercent);
+HistogramSmartData hs_data_trust_pop = new HistogramSmartData(nIntervals, initialIntervalWidth, calcCDF, calcPercentiles, lowPercent, highPercent);
+HistogramSmartData hs_data_rc_pop = new HistogramSmartData(nIntervals, initialIntervalWidth, calcCDF, calcPercentiles, lowPercent, highPercent);
+HistogramSmartData hs_data_psi_pop = new HistogramSmartData(nIntervals, initialIntervalWidth, calcCDF, calcPercentiles, lowPercent, highPercent);
+HistogramSmartData hs_data_b1_pop = new HistogramSmartData(nIntervals, initialIntervalWidth, calcCDF, calcPercentiles, lowPercent, highPercent);
+HistogramSmartData hs_data_b2_pop = new HistogramSmartData(nIntervals, initialIntervalWidth, calcCDF, calcPercentiles, lowPercent, highPercent);
+HistogramSmartData hs_data_b3_pop = new HistogramSmartData(nIntervals, initialIntervalWidth, calcCDF, calcPercentiles, lowPercent, highPercent);
+
 for(EVOwner x : EVOwners){
 	hs_data_norms_pop.add(x.v_norms);
 	hs_data_trust_pop.add(x.v_trust);
@@ -670,6 +663,15 @@ for(EVOwner x : EVOwners){
 	hs_data_b2_pop.add(x.v_prob_b2);
 	hs_data_b3_pop.add(x.v_prob_b3);
 }
+
+Color colorLowPercent = green;
+Color colorHighPercent = green;
+Color colorPDF = crimson;
+Color colorCDF = green;
+float lineWidthCDF = 1;
+Color colorMean = green;
+
+hs_norms_data.addHistogram(hs_data_norms_pop, "Norms pop", colorLowPercent, colorHighPercent, colorPDF, colorCDF, lineWidthCDF, colorMean);
 
 /*
 String sheetName = "frequency_list";
@@ -700,7 +702,7 @@ hs_data_psi_data.update();
 hs_data_norms_pop.update();
 hs_data_trust_pop.update();
 hs_data_rc_pop.update();
-*/
+
 hs_norms_data.updateData();
 hs_trust_data.updateData();
 hs_rc_data.updateData();
@@ -715,7 +717,7 @@ hs_b3_data.updateData();
 hs_b1_pop.updateData();
 hs_b2_pop.updateData();
 hs_b3_pop.updateData();
-
+*/
 /*ALCODEEND*/}
 
 double f_mediationResultsQuery(String var1,String var2)
@@ -740,19 +742,19 @@ String var1 = "norms";
 String var2 = "perceived_social_interdependence";
 String key = var1+var2;
 double value = f_mediationResultsQuery(var1, var2);
-c_variableWeights.put(key, value);
+//c_variableWeights.put(key, value);
 regCoef_norms_psi = value;
 
 var1 = "trust";
 key = var1+var2;
 value = f_mediationResultsQuery(var1, var2);
-c_variableWeights.put(key, value);
+//c_variableWeights.put(key, value);
 regCoef_trust_psi = value;
 
 var1 = "reputational_concern";
 key = var1+var2;
 value = f_mediationResultsQuery(var1, var2);
-c_variableWeights.put(key, value);
+//c_variableWeights.put(key, value);
 regCoef_rc_psi = value;
 
 //PSI to behavior
@@ -760,19 +762,19 @@ var1 = "perceived_social_interdependence";
 var2 = "b1_move_vehicle";
 key = var1+var2;
 value = f_mediationResultsQuery(var1, var2);
-c_variableWeights.put(key, value);
+//c_variableWeights.put(key, value);
 regCoef_psi_b1 = value;
 
 var2 = "b2_request_move";
 key = var1+var2;
 value = f_mediationResultsQuery(var1, var2);
-c_variableWeights.put(key, value);
+//c_variableWeights.put(key, value);
 regCoef_psi_b2 = value;
 
 var2 = "b3_notify_neighbor";
 key = var1+var2;
 value = f_mediationResultsQuery(var1, var2);
-c_variableWeights.put(key, value);
+//c_variableWeights.put(key, value);
 regCoef_psi_b3 = value;
 
 //Trust to behavior
@@ -780,13 +782,13 @@ var1 = "trust";
 var2 = "b2_request_move";
 key = var1+var2;
 value = f_mediationResultsQuery(var1, var2);
-c_variableWeights.put(key, value);
+//c_variableWeights.put(key, value);
 regCoef_trust_b2 = value;
 
 var2 = "b3_notify_neighbor";
 key = var1+var2;
 value = f_mediationResultsQuery(var1, var2);
-c_variableWeights.put(key, value);
+//c_variableWeights.put(key, value);
 regCoef_trust_b3 = value;
 
 /*ALCODEEND*/}
@@ -858,7 +860,7 @@ for(EVOwner x : EVOwners){
 	x.v_prob_b2 = (x.v_prob_b2 - 1)/6;
 	x.v_prob_b3 = (x.v_prob_b3 - 1)/6;
 }
-
+/*
 for(EVOwner x : EVOwners){
 	hs_data_norms_pop1.add(x.v_norms);
 	hs_data_trust_pop1.add(x.v_trust);
@@ -870,6 +872,7 @@ hs_norms_pop1.updateData();
 hs_trust_pop1.updateData();
 hs_rc_pop1.updateData();
 hs_psi_pop1.updateData();
+*/
 /*ALCODEEND*/}
 
 double f_setHSUtilStart()
@@ -910,6 +913,7 @@ double interactions_b2 = 0.0;
 double interactions_b3 = 0.0;
 double rechecking = 0.0;
 
+int dayIndex = v_day-1;
 
 if(v_day == 1){
 	interactions_b1 = count_b1_successful + count_b1_notSuccessful;
@@ -926,11 +930,11 @@ else{
 	double sum_prev_b3 = 0.0;
 	double sum_prev_rechecks = 0.0;
 	
-	for (int i = 0; i < v_day - 1; i++) {
-	    sum_prev_b1 += data_interactionsPerDay_b1.getY(i);
-	    sum_prev_b2 += data_interactionsPerDay_b2.getY(i);
-	    sum_prev_b3 += data_interactionsPerDay_b3.getY(i);
-	    sum_prev_rechecks += data_rechecksPerDay.getY(i);
+	for (int i = 0; i < dayIndex; i++) {
+	    sum_prev_b1 += ar_interactionsPerDay_b1[i];
+	    sum_prev_b2 += ar_interactionsPerDay_b2[i];
+	    sum_prev_b3 += ar_interactionsPerDay_b3[i];
+	    sum_prev_rechecks += ar_rechecksPerDay[i];
 	}	
 
 	interactions_b1 = count_b1_successful + count_b1_notSuccessful - sum_prev_b1;
@@ -939,17 +943,26 @@ else{
 	rechecking = count_successfulRechecks + count_unsuccessfulRechecks - sum_prev_rechecks;
 }
 
-data_interactionsPerDay_b1.add(v_day, interactions_b1);
-data_interactionsPerDay_b2.add(v_day, interactions_b2);
-data_interactionsPerDay_b3.add(v_day, interactions_b3);
-data_rechecksPerDay.add(v_day, rechecking);
+ar_interactionsPerDay_b1[dayIndex] = interactions_b1;
+ar_interactionsPerDay_b2[dayIndex] = interactions_b2;
+ar_interactionsPerDay_b3[dayIndex] = interactions_b3;
+ar_rechecksPerDay[dayIndex] = rechecking;
+
 /*ALCODEEND*/}
 
 double f_cleanUp()
 {/*ALCODESTART::1754493563613*/
 c_carOwners.clear();
 c_chargePoints.clear();
+c_norms.clear();
+c_trust.clear();
+c_rc.clear();
+c_psi.clear();
+c_b1.clear();
+c_b2.clear();
+c_b3.clear();
 
+/*
 data_avgProbability_b1.reset();
 data_avgProbability_b2.reset();
 data_avgProbability_b3.reset();
@@ -1122,10 +1135,56 @@ hs_utility_b2_start.removeAll();
 hs_utility_b3_all.removeAll();
 hs_utility_b3_end.removeAll();
 hs_utility_b3_start.removeAll();
+*/
+
+// Interactions & rechecks
+ar_interactionsPerDay_b1 = null;
+ar_interactionsPerDay_b2 = null;
+ar_interactionsPerDay_b3 = null;
+ar_rechecksPerDay = null;
+
+// Cars on trip & parking states
+ar_carsOnTrip = null;
+ar_ICECarsParkedNonCP = null;
+ar_EVsParkedNonCPChargingRequired = null;
+ar_EVsParkedNonCPChargingNotRequired = null;
+ar_EVsParkedAtCPCharging = null;
+ar_EVsParkedAtCPIdle = null;
+
+// Charge points
+ar_CPOccupied = null;
+ar_CPAvailable = null;
+
+// Socio-psychological data
+ar_avgNorms = null;
+ar_avgTrust = null;
+ar_avgPSI = null;
+
+// Success rates
+ar_successRate_b1 = null;
+ar_successRate_b2 = null;
+ar_successRate_b3 = null;
+ar_successRate_rechecks = null;
+
+// Probabilities
+ar_avgProbability_b1 = null;
+ar_avgProbability_b2 = null;
+ar_avgProbability_b3 = null;
+
+// Successful & unsuccessful counts
+ar_successful_b1 = null;
+ar_successful_b2 = null;
+ar_successful_b3 = null;
+ar_unsuccessful_b1 = null;
+ar_unsuccessful_b2 = null;
+ar_unsuccessful_b3 = null;
+
+// Special cases
+ar_noIdleChargers_b2 = null;
 
 pl_interactionPerDay.removeAll();
 pl_probability.removeAll();
-pl_succesRate.removeAll();
+pl_successRate.removeAll();
 ch_b1.removeAll();
 ch_b2.removeAll();
 ch_b3.removeAll();
@@ -1135,12 +1194,9 @@ ch_countEVs.removeAll();
 for (int i = ICECarOwners.size() - 1; i >= 0; i--) {
 	ICECarOwners.get(i).f_cleanUp();
 }
-
 for (int i = EVOwners.size() - 1; i >= 0; i--) {
     EVOwners.get(i).f_cleanUp();
 }
-
-traceln("Memory should be cleaned up");
 
 this.deleteSelf();
 /*ALCODEEND*/}
@@ -1149,6 +1205,7 @@ double f_endRun()
 {/*ALCODESTART::1754550396944*/
 //f_writeResultsToExcel(startup_agent.excel_exportResults);
 startup_agent.simulationCount++;
+startup_agent.f_setGraphs();
 if(startup_agent.simulationCount == 1){
 	startup_agent.fileChooser_exportResults.setEnabled(true);
 }
@@ -1218,12 +1275,13 @@ for(CarOwner ice : ICECarOwners){
 //6. Count totals
 if(!initializationMode){
 	f_countTotals();
+	/*
 	if(v_timestep == 0){
 		f_setHSUtilStart();
 	}
 	if(v_timestep == p_nbOfTimesteps - 1){
 		f_setHSUtilEnd();
-	}
+	}*/
 }
 f_checkCPA();
 
@@ -1295,5 +1353,123 @@ for(CarOwner ice : ICECarOwners){
 }
 countTripDepartures = 0;
 countTripArrivals = 0;
+/*ALCODEEND*/}
+
+double f_setArrays()
+{/*ALCODESTART::1755074064798*/
+// Interactions & rechecks
+ar_interactionsPerDay_b1 = new double[p_days];
+ar_interactionsPerDay_b2 = new double[p_days];
+ar_interactionsPerDay_b3 = new double[p_days];
+ar_rechecksPerDay = new double[p_days];
+
+// Cars on trip & parking states
+ar_carsOnTrip = new double[p_nbOfTimesteps];
+ar_ICECarsParkedNonCP = new double[p_nbOfTimesteps];
+ar_EVsParkedNonCPChargingRequired = new double[p_nbOfTimesteps];
+ar_EVsParkedNonCPChargingNotRequired = new double[p_nbOfTimesteps];
+ar_EVsParkedAtCPCharging = new double[p_nbOfTimesteps];
+ar_EVsParkedAtCPIdle = new double[p_nbOfTimesteps];
+
+// Charge points
+ar_CPOccupied = new double[p_nbOfTimesteps];
+ar_CPAvailable = new double[p_nbOfTimesteps];
+
+// Socio-psychological data
+ar_avgNorms = new double[p_nbOfTimesteps];
+ar_avgTrust = new double[p_nbOfTimesteps];
+ar_avgPSI = new double[p_nbOfTimesteps];
+
+// Success rates
+ar_successRate_b1 = new double[p_nbOfTimesteps];
+ar_successRate_b2 = new double[p_nbOfTimesteps];
+ar_successRate_b3 = new double[p_nbOfTimesteps];
+ar_successRate_rechecks = new double[p_nbOfTimesteps];
+
+// Probabilities
+ar_avgProbability_b1 = new double[p_nbOfTimesteps];
+ar_avgProbability_b2 = new double[p_nbOfTimesteps];
+ar_avgProbability_b3 = new double[p_nbOfTimesteps];
+
+// Successful & unsuccessful counts
+ar_successful_b1 = new double[p_nbOfTimesteps];
+ar_successful_b2 = new double[p_nbOfTimesteps];
+ar_successful_b3 = new double[p_nbOfTimesteps];
+ar_unsuccessful_b1 = new double[p_nbOfTimesteps];
+ar_unsuccessful_b2 = new double[p_nbOfTimesteps];
+ar_unsuccessful_b3 = new double[p_nbOfTimesteps];
+
+// Special cases
+ar_noIdleChargers_b2 = new double[p_nbOfTimesteps];
+
+
+
+/*ALCODEEND*/}
+
+DataSet f_arrayToDataSet(double[] arr)
+{/*ALCODESTART::1755167089452*/
+DataSet ds = new DataSet(arr.length);
+for (int i = 0; i < arr.length; i++) {
+	ds.add(i, arr[i]);
+}
+return ds;
+/*ALCODEEND*/}
+
+double f_setHistogramArrays(int nbOfAgents)
+{/*ALCODESTART::1755167696732*/
+//Histograms
+double[] ar_hs_data_norms_pop1 = new double[nbOfAgents]; 
+double[] ar_hs_data_trust_pop1 = new double[nbOfAgents];
+double[] ar_hs_data_psi_pop1 = new double[nbOfAgents];
+
+double[] ar_hs_data_utility_b1_start = new double[nbOfAgents];
+double[] ar_hs_data_utility_b2_start = new double[nbOfAgents];
+double[] ar_hs_data_utility_b3_start = new double[nbOfAgents];
+
+double[] ar_hs_data_utility_b1_end = new double[nbOfAgents];
+double[] ar_hs_data_utility_b2_end = new double[nbOfAgents];
+double[] ar_hs_data_utility_b3_end = new double[nbOfAgents];
+
+double[] ar_hs_data_utility_b1_all = new double[nbOfAgents];
+double[] ar_hs_data_utility_b2_all = new double[nbOfAgents];
+double[] ar_hs_data_utility_b3_all = new double[nbOfAgents];
+
+double[] ar_hs_data_b1_start = new double[nbOfAgents];
+double[] ar_hs_data_b2_start = new double[nbOfAgents];
+double[] ar_hs_data_b3_start = new double[nbOfAgents];
+
+double[] ar_hs_data_b1_end = new double[nbOfAgents];
+double[] ar_hs_data_b2_end = new double[nbOfAgents];
+double[] ar_hs_data_b3_end = new double[nbOfAgents];
+
+double[] ar_hs_data_b1_all = new double[nbOfAgents];
+double[] ar_hs_data_b2_all = new double[nbOfAgents];
+double[] ar_hs_data_b3_all = new double[nbOfAgents];
+
+
+/*ALCODEEND*/}
+
+double f_setHistograms()
+{/*ALCODESTART::1755168571342*/
+int nIntervals = 20;
+double initialIntervalWidth = 0.35;
+boolean calcCDF = true;
+boolean calcPercentiles = false;
+double lowPercent = 10;
+double highPercent = 10;
+
+HistogramSmartData hs_data = new HistogramSmartData(nIntervals, initialIntervalWidth, calcCDF, calcPercentiles, lowPercent, highPercent);
+for(double value : c_norms){
+	hs_data.add(value);
+}
+
+/*
+hs_utility_b1_all.updateData();
+hs_utility_b2_all.updateData();
+hs_utility_b3_all.updateData();
+hs_b1_all.updateData();
+hs_b2_all.updateData();
+hs_b3_all.updateData();
+*/
 /*ALCODEEND*/}
 

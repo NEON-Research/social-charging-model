@@ -345,7 +345,7 @@ if( actBehavior ){
 return act;
 */
 
-//S-shape curve y between 0.2 and 0.6, x between 0 - 1 based on succesRate
+//S-shape curve y between 0.2 and 0.6, x between 0 - 1 based on successRate
 /*ALCODEEND*/}
 
 double f_socialLearning_b2()
@@ -392,6 +392,8 @@ v_prob_b3 = prob_b3_t1;
 
 double f_cleanUp()
 {/*ALCODESTART::1754493835269*/
+v_nextTrip = null;
+v_chargePoint = null;
 c_tripSchedule.clear();
 
 this.deleteSelf();

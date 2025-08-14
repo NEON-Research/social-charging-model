@@ -98,6 +98,8 @@ if (timestepStartMinuteOfWeek <= timestepEndMinuteOfWeek) {
 
 double f_cleanUp()
 {/*ALCODESTART::1754493803320*/
+v_nextTrip = null;
+v_chargePoint = null;
 c_tripSchedule.clear();
 
 this.deleteSelf();

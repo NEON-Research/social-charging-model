@@ -205,21 +205,11 @@ f_cleanUp();</ActionCode>
 			<Direction>UP</Direction>
 			<RelativeWidth>0.8</RelativeWidth>
 		</Bars>
-		<HistogramDataExpression>
-			<Id>1752588349214</Id>
-			<Expression>hs_data_norms_data</Expression>
-			<ColorPDF>-2354116</ColorPDF>
-			<ColorCDF>-4565549</ColorCDF>
-			<ColorLowPercent>-12799119</ColorLowPercent>
-			<ColorHighPercent>-2987746</ColorHighPercent>
-			<ColorMean>-9404272</ColorMean>
-			<LineWidth>1</LineWidth>
-			<Title>Norms data</Title>
-		</HistogramDataExpression>
 	</Histogram>
 	<Histogram>
 		<Id>1752588358294</Id>
 		<Name><![CDATA[hs_trust_data]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>2440</X>
 		<Y>240</Y>
 		<Label>
@@ -291,6 +281,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1752588362110</Id>
 		<Name><![CDATA[hs_rc_data]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>2440</X>
 		<Y>480</Y>
 		<Label>
@@ -362,6 +353,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1752588369649</Id>
 		<Name><![CDATA[hs_psi_data]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>2440</X>
 		<Y>720</Y>
 		<Label>
@@ -433,6 +425,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1752588376606</Id>
 		<Name><![CDATA[hs_norms_pop]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>2720</X>
 		<Y>0</Y>
 		<Label>
@@ -504,6 +497,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1752588376611</Id>
 		<Name><![CDATA[hs_psi_pop]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>2720</X>
 		<Y>720</Y>
 		<Label>
@@ -575,6 +569,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1752588376616</Id>
 		<Name><![CDATA[hs_trust_pop]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>2720</X>
 		<Y>240</Y>
 		<Label>
@@ -646,6 +641,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1752588376621</Id>
 		<Name><![CDATA[hs_rc_pop]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>2720</X>
 		<Y>480</Y>
 		<Label>
@@ -716,7 +712,7 @@ f_cleanUp();</ActionCode>
 	</Histogram>
 	<TimePlot>
 		<Id>1753178418318</Id>
-		<Name><![CDATA[pl_succesRate]]></Name>
+		<Name><![CDATA[pl_successRate]]></Name>
 		<X>340</X>
 		<Y>360</Y>
 		<Label>
@@ -727,7 +723,7 @@ f_cleanUp();</ActionCode>
 		<PresentationFlag>true</PresentationFlag>
 		<ShowLabel>false</ShowLabel>
 		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-		<AutoUpdate>true</AutoUpdate>
+		<AutoUpdate>false</AutoUpdate>
 		<RecurrenceProperties>
 			<Id>1753178418316</Id>
 			<OccurrenceAtTime>true</OccurrenceAtTime>
@@ -791,7 +787,7 @@ f_cleanUp();</ActionCode>
 		<PresentationFlag>true</PresentationFlag>
 		<ShowLabel>false</ShowLabel>
 		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-		<AutoUpdate>true</AutoUpdate>
+		<AutoUpdate>false</AutoUpdate>
 		<RecurrenceProperties>
 			<Id>1753178478586</Id>
 			<OccurrenceAtTime>true</OccurrenceAtTime>
@@ -851,7 +847,7 @@ f_cleanUp();</ActionCode>
 		<PresentationFlag>true</PresentationFlag>
 		<ShowLabel>false</ShowLabel>
 		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-		<AutoUpdate>true</AutoUpdate>
+		<AutoUpdate>false</AutoUpdate>
 		<RecurrenceProperties>
 			<Id>1753178887247</Id>
 			<OccurrenceAtTime>true</OccurrenceAtTime>
@@ -911,7 +907,7 @@ f_cleanUp();</ActionCode>
 		<PresentationFlag>true</PresentationFlag>
 		<ShowLabel>false</ShowLabel>
 		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-		<AutoUpdate>true</AutoUpdate>
+		<AutoUpdate>false</AutoUpdate>
 		<RecurrenceProperties>
 			<Id>1753178889806</Id>
 			<OccurrenceAtTime>true</OccurrenceAtTime>
@@ -961,6 +957,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1753188034896</Id>
 		<Name><![CDATA[hs_utility_b1_end]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>2160</X>
 		<Y>720</Y>
 		<Label>
@@ -1032,6 +1029,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1753188034901</Id>
 		<Name><![CDATA[hs_utility_b2_end]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>2160</X>
 		<Y>960</Y>
 		<Label>
@@ -1103,6 +1101,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1753188034906</Id>
 		<Name><![CDATA[hs_utility_b3_start]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>1880</X>
 		<Y>1200</Y>
 		<Label>
@@ -1174,6 +1173,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1753188034911</Id>
 		<Name><![CDATA[hs_utility_b3_end]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>2160</X>
 		<Y>1200</Y>
 		<Label>
@@ -1245,6 +1245,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1753188034916</Id>
 		<Name><![CDATA[hs_utility_b2_start]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>1880</X>
 		<Y>960</Y>
 		<Label>
@@ -1316,6 +1317,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1753188034921</Id>
 		<Name><![CDATA[hs_utility_b1_start]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>1880</X>
 		<Y>720</Y>
 		<Label>
@@ -1387,6 +1389,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1753190861584</Id>
 		<Name><![CDATA[hs_norms_pop1]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>3000</X>
 		<Y>0</Y>
 		<Label>
@@ -1458,6 +1461,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1753190861589</Id>
 		<Name><![CDATA[hs_psi_pop1]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>3000</X>
 		<Y>720</Y>
 		<Label>
@@ -1529,6 +1533,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1753190861594</Id>
 		<Name><![CDATA[hs_trust_pop1]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>3000</X>
 		<Y>240</Y>
 		<Label>
@@ -1600,6 +1605,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1753190861599</Id>
 		<Name><![CDATA[hs_rc_pop1]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>3000</X>
 		<Y>480</Y>
 		<Label>
@@ -1671,6 +1677,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1753191673277</Id>
 		<Name><![CDATA[hs_utility_b1_all]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>1600</X>
 		<Y>720</Y>
 		<Label>
@@ -1742,6 +1749,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1753191673282</Id>
 		<Name><![CDATA[hs_utility_b3_all]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>1600</X>
 		<Y>1200</Y>
 		<Label>
@@ -1813,6 +1821,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1753191673287</Id>
 		<Name><![CDATA[hs_utility_b2_all]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>1600</X>
 		<Y>960</Y>
 		<Label>
@@ -1884,6 +1893,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1753195098345</Id>
 		<Name><![CDATA[hs_b2_end]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>2160</X>
 		<Y>240</Y>
 		<Label>
@@ -1955,6 +1965,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1753195098350</Id>
 		<Name><![CDATA[hs_b2_all]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>1600</X>
 		<Y>240</Y>
 		<Label>
@@ -2026,6 +2037,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1753195098355</Id>
 		<Name><![CDATA[hs_b3_end]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>2160</X>
 		<Y>480</Y>
 		<Label>
@@ -2097,6 +2109,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1753195098360</Id>
 		<Name><![CDATA[hs_b1_end]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>2160</X>
 		<Y>0</Y>
 		<Label>
@@ -2168,6 +2181,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1753195098365</Id>
 		<Name><![CDATA[hs_b1_start]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>1880</X>
 		<Y>0</Y>
 		<Label>
@@ -2239,6 +2253,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1753195098370</Id>
 		<Name><![CDATA[hs_b3_start]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>1880</X>
 		<Y>480</Y>
 		<Label>
@@ -2310,6 +2325,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1753195098375</Id>
 		<Name><![CDATA[hs_b1_all]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>1600</X>
 		<Y>0</Y>
 		<Label>
@@ -2381,6 +2397,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1753195098380</Id>
 		<Name><![CDATA[hs_b2_start]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>1880</X>
 		<Y>240</Y>
 		<Label>
@@ -2452,6 +2469,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1753195098385</Id>
 		<Name><![CDATA[hs_b3_all]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>1600</X>
 		<Y>480</Y>
 		<Label>
@@ -2523,6 +2541,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1754380516840</Id>
 		<Name><![CDATA[hs_b1_data]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>2440</X>
 		<Y>960</Y>
 		<Label>
@@ -2594,6 +2613,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1754380516845</Id>
 		<Name><![CDATA[hs_b1_pop]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>2720</X>
 		<Y>960</Y>
 		<Label>
@@ -2737,6 +2757,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1754380544228</Id>
 		<Name><![CDATA[hs_b2_data]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>2440</X>
 		<Y>1200</Y>
 		<Label>
@@ -2808,6 +2829,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1754380544233</Id>
 		<Name><![CDATA[hs_b2_pop]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>2720</X>
 		<Y>1200</Y>
 		<Label>
@@ -2951,6 +2973,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1754380555595</Id>
 		<Name><![CDATA[hs_b3_data]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>2440</X>
 		<Y>1440</Y>
 		<Label>
@@ -3022,6 +3045,7 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1754380555600</Id>
 		<Name><![CDATA[hs_b3_pop]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>2720</X>
 		<Y>1440</Y>
 		<Label>
@@ -3175,7 +3199,7 @@ f_cleanUp();</ActionCode>
 		<PresentationFlag>true</PresentationFlag>
 		<ShowLabel>false</ShowLabel>
 		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-		<AutoUpdate>true</AutoUpdate>
+		<AutoUpdate>false</AutoUpdate>
 		<RecurrenceProperties>
 			<Id>1754404841087</Id>
 			<OccurrenceAtTime>true</OccurrenceAtTime>
@@ -3289,7 +3313,7 @@ f_cleanUp();</ActionCode>
 		<PresentationFlag>true</PresentationFlag>
 		<ShowLabel>false</ShowLabel>
 		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-		<AutoUpdate>true</AutoUpdate>
+		<AutoUpdate>false</AutoUpdate>
 		<RecurrenceProperties>
 			<Id>1754483973107</Id>
 			<OccurrenceAtTime>true</OccurrenceAtTime>
@@ -3394,7 +3418,7 @@ f_cleanUp();</ActionCode>
 		<Id>1754993718339</Id>
 		<Name><![CDATA[text5]]></Name>
 		<X>30</X>
-		<Y>960</Y>
+		<Y>1020</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -3419,7 +3443,7 @@ f_cleanUp();</ActionCode>
 		<Id>1754993740446</Id>
 		<Name><![CDATA[text6]]></Name>
 		<X>30</X>
-		<Y>1190</Y>
+		<Y>1250</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -3453,7 +3477,7 @@ f_cleanUp();</ActionCode>
 		<PresentationFlag>true</PresentationFlag>
 		<ShowLabel>false</ShowLabel>
 		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-		<AutoUpdate>true</AutoUpdate>
+		<AutoUpdate>false</AutoUpdate>
 		<RecurrenceProperties>
 			<Id>1755010769277</Id>
 			<OccurrenceAtTime>true</OccurrenceAtTime>

@@ -4,8 +4,8 @@
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Id>1746024488760</Id>
 		<Name><![CDATA[b_startSimualtion]]></Name>
-		<X>150</X>
-		<Y>340</Y>
+		<X>90</X>
+		<Y>70</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -20,6 +20,7 @@
 			<Enabled>true</Enabled>
 			<ActionCode>traceln("Starting simulation");
 v_rapidRun = false;
+monteCarlo = false;
 f_initializeModel();</ActionCode>
 		</BasicProperties>
 		<ExtendedProperties>
@@ -31,8 +32,8 @@ f_initializeModel();</ActionCode>
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Id>1746024775863</Id>
 		<Name><![CDATA[eb_cars]]></Name>
-		<X>300</X>
-		<Y>70</Y>
+		<X>220</X>
+		<Y>340</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -59,8 +60,8 @@ f_initializeModel();</ActionCode>
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Id>1746024861888</Id>
 		<Name><![CDATA[eb_shareElectric]]></Name>
-		<X>300</X>
-		<Y>110</Y>
+		<X>220</X>
+		<Y>380</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -87,8 +88,8 @@ f_initializeModel();</ActionCode>
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Id>1746025318595</Id>
 		<Name><![CDATA[eb_parkingPlaces]]></Name>
-		<X>300</X>
-		<Y>150</Y>
+		<X>220</X>
+		<Y>420</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -101,7 +102,7 @@ f_initializeModel();</ActionCode>
 			<EmbeddedIcon>false</EmbeddedIcon>
 			<FillColor>-1</FillColor>
 			<TextColor>-16777216</TextColor>
-			<Enabled>true</Enabled>
+			<Enabled>false</Enabled>
 		</BasicProperties>
 		<ExtendedProperties>
 			<Font Name="Dialog" Size="16" Style="0"/>
@@ -115,8 +116,8 @@ f_initializeModel();</ActionCode>
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Id>1746028080824</Id>
 		<Name><![CDATA[eb_chargePoints]]></Name>
-		<X>300</X>
-		<Y>190</Y>
+		<X>220</X>
+		<Y>460</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -142,8 +143,8 @@ f_initializeModel();</ActionCode>
 	<Text>
 		<Id>1746086719488</Id>
 		<Name><![CDATA[text]]></Name>
-		<X>150</X>
-		<Y>75</Y>
+		<X>70</X>
+		<Y>345</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -167,8 +168,8 @@ f_initializeModel();</ActionCode>
 	<Text>
 		<Id>1746086785619</Id>
 		<Name><![CDATA[text1]]></Name>
-		<X>150</X>
-		<Y>115</Y>
+		<X>70</X>
+		<Y>385</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -192,8 +193,8 @@ f_initializeModel();</ActionCode>
 	<Text>
 		<Id>1746086837341</Id>
 		<Name><![CDATA[text2]]></Name>
-		<X>150</X>
-		<Y>155</Y>
+		<X>70</X>
+		<Y>425</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -217,8 +218,8 @@ f_initializeModel();</ActionCode>
 	<Text>
 		<Id>1746086837346</Id>
 		<Name><![CDATA[text3]]></Name>
-		<X>150</X>
-		<Y>195</Y>
+		<X>70</X>
+		<Y>465</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -243,8 +244,8 @@ f_initializeModel();</ActionCode>
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Id>1746087694918</Id>
 		<Name><![CDATA[eb_nbOfPeriods]]></Name>
-		<X>300</X>
-		<Y>290</Y>
+		<X>220</X>
+		<Y>560</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -272,8 +273,8 @@ f_initializeModel();</ActionCode>
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Id>1746087719786</Id>
 		<Name><![CDATA[cb_simulationPeriod]]></Name>
-		<X>300</X>
-		<Y>250</Y>
+		<X>220</X>
+		<Y>520</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -303,8 +304,8 @@ f_setNbOfTimesteps();</ActionCode>
 	<Text>
 		<Id>1746087753443</Id>
 		<Name><![CDATA[text4]]></Name>
-		<X>150</X>
-		<Y>255</Y>
+		<X>70</X>
+		<Y>525</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -328,8 +329,8 @@ f_setNbOfTimesteps();</ActionCode>
 	<Text>
 		<Id>1746087777286</Id>
 		<Name><![CDATA[text5]]></Name>
-		<X>150</X>
-		<Y>295</Y>
+		<X>70</X>
+		<Y>565</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -354,8 +355,8 @@ f_setNbOfTimesteps();</ActionCode>
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Id>1746095456056</Id>
 		<Name><![CDATA[fileChooser_exportResults]]></Name>
-		<X>150</X>
-		<Y>530</Y>
+		<X>90</X>
+		<Y>260</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -382,7 +383,7 @@ f_setNbOfTimesteps();</ActionCode>
 	<Text>
 		<Id>1747139674326</Id>
 		<Name><![CDATA[text6]]></Name>
-		<X>460</X>
+		<X>400</X>
 		<Y>70</Y>
 		<Label>
 			<X>0</X>
@@ -407,7 +408,7 @@ f_setNbOfTimesteps();</ActionCode>
 	<Text>
 		<Id>1747139674605</Id>
 		<Name><![CDATA[text7]]></Name>
-		<X>460</X>
+		<X>400</X>
 		<Y>110</Y>
 		<Label>
 			<X>0</X>
@@ -432,7 +433,7 @@ f_setNbOfTimesteps();</ActionCode>
 	<Text>
 		<Id>1747139674607</Id>
 		<Name><![CDATA[text8]]></Name>
-		<X>460</X>
+		<X>400</X>
 		<Y>150</Y>
 		<Label>
 			<X>0</X>
@@ -458,7 +459,7 @@ f_setNbOfTimesteps();</ActionCode>
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Id>1747139796746</Id>
 		<Name><![CDATA[cb_b1]]></Name>
-		<X>765</X>
+		<X>705</X>
 		<Y>65</Y>
 		<Label>
 			<X>0</X>
@@ -484,7 +485,7 @@ f_setNbOfTimesteps();</ActionCode>
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Id>1747139860479</Id>
 		<Name><![CDATA[cb_b2]]></Name>
-		<X>765</X>
+		<X>705</X>
 		<Y>105</Y>
 		<Label>
 			<X>0</X>
@@ -510,7 +511,7 @@ f_setNbOfTimesteps();</ActionCode>
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Id>1747139876862</Id>
 		<Name><![CDATA[cb_b3]]></Name>
-		<X>765</X>
+		<X>705</X>
 		<Y>145</Y>
 		<Label>
 			<X>0</X>
@@ -536,8 +537,8 @@ f_setNbOfTimesteps();</ActionCode>
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Id>1754550230914</Id>
 		<Name><![CDATA[b_startSimualtion1]]></Name>
-		<X>150</X>
-		<Y>380</Y>
+		<X>90</X>
+		<Y>110</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -552,12 +553,17 @@ f_setNbOfTimesteps();</ActionCode>
 			<Enabled>true</Enabled>
 			<ActionCode>traceln("Starting simulation");
 v_rapidRun = true;
+double time = System.currentTimeMillis();
+monteCarlo = false;
 f_initializeModel();
 mains.get(0).f_cleanUp();
 
 System.gc();
 long usedMemory = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1024 * 1024);
 traceln("Used memory: " + usedMemory + " MB");
+
+double runTime = (System.currentTimeMillis() - time) / 1000.0;
+traceln("Finished run " + simulationCount + " in " + runTime + " seconds");
 </ActionCode>
 		</BasicProperties>
 		<ExtendedProperties>
@@ -569,8 +575,8 @@ traceln("Used memory: " + usedMemory + " MB");
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Id>1754992178636</Id>
 		<Name><![CDATA[cb_scSartHour]]></Name>
-		<X>300</X>
-		<Y>625</Y>
+		<X>220</X>
+		<Y>605</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -597,8 +603,8 @@ traceln("Used memory: " + usedMemory + " MB");
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Id>1754992178638</Id>
 		<Name><![CDATA[cb_scEndHour]]></Name>
-		<X>300</X>
-		<Y>665</Y>
+		<X>220</X>
+		<Y>645</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -624,8 +630,8 @@ traceln("Used memory: " + usedMemory + " MB");
 	<Text>
 		<Id>1754992178640</Id>
 		<Name><![CDATA[text9]]></Name>
-		<X>150</X>
-		<Y>630</Y>
+		<X>70</X>
+		<Y>610</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -649,8 +655,8 @@ traceln("Used memory: " + usedMemory + " MB");
 	<Text>
 		<Id>1754992178642</Id>
 		<Name><![CDATA[text10]]></Name>
-		<X>150</X>
-		<Y>670</Y>
+		<X>70</X>
+		<Y>650</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -674,7 +680,7 @@ traceln("Used memory: " + usedMemory + " MB");
 	<Text>
 		<Id>1754992809226</Id>
 		<Name><![CDATA[text11]]></Name>
-		<X>460</X>
+		<X>400</X>
 		<Y>190</Y>
 		<Label>
 			<X>0</X>
@@ -700,7 +706,7 @@ traceln("Used memory: " + usedMemory + " MB");
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Id>1754992809228</Id>
 		<Name><![CDATA[cb_socialChargingOnlyDaytime]]></Name>
-		<X>765</X>
+		<X>705</X>
 		<Y>185</Y>
 		<Label>
 			<X>0</X>
@@ -725,7 +731,7 @@ traceln("Used memory: " + usedMemory + " MB");
 	<Text>
 		<Id>1754995327054</Id>
 		<Name><![CDATA[text12]]></Name>
-		<X>460</X>
+		<X>400</X>
 		<Y>230</Y>
 		<Label>
 			<X>0</X>
@@ -751,7 +757,7 @@ traceln("Used memory: " + usedMemory + " MB");
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Id>1754995327056</Id>
 		<Name><![CDATA[cb_recheckCPAvailability]]></Name>
-		<X>765</X>
+		<X>705</X>
 		<Y>225</Y>
 		<Label>
 			<X>0</X>
@@ -777,7 +783,7 @@ traceln("Used memory: " + usedMemory + " MB");
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Id>1755006117149</Id>
 		<Name><![CDATA[sl_lr_norms_b1]]></Name>
-		<X>590</X>
+		<X>530</X>
 		<Y>265</Y>
 		<Label>
 			<X>0</X>
@@ -804,7 +810,7 @@ traceln("Used memory: " + usedMemory + " MB");
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Id>1755006170884</Id>
 		<Name><![CDATA[sl_lr_trust_b1]]></Name>
-		<X>590</X>
+		<X>530</X>
 		<Y>295</Y>
 		<Label>
 			<X>0</X>
@@ -831,7 +837,7 @@ traceln("Used memory: " + usedMemory + " MB");
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Id>1755006198581</Id>
 		<Name><![CDATA[sl_lr_norms_b2]]></Name>
-		<X>590</X>
+		<X>530</X>
 		<Y>325</Y>
 		<Label>
 			<X>0</X>
@@ -858,7 +864,7 @@ traceln("Used memory: " + usedMemory + " MB");
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Id>1755006206343</Id>
 		<Name><![CDATA[sl_lr_trust_b2]]></Name>
-		<X>590</X>
+		<X>530</X>
 		<Y>355</Y>
 		<Label>
 			<X>0</X>
@@ -885,7 +891,7 @@ traceln("Used memory: " + usedMemory + " MB");
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Id>1755006213228</Id>
 		<Name><![CDATA[sl_lr_norms_b3]]></Name>
-		<X>590</X>
+		<X>530</X>
 		<Y>385</Y>
 		<Label>
 			<X>0</X>
@@ -912,7 +918,7 @@ traceln("Used memory: " + usedMemory + " MB");
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Id>1755006222544</Id>
 		<Name><![CDATA[sl_lr_trust_b3]]></Name>
-		<X>590</X>
+		<X>530</X>
 		<Y>415</Y>
 		<Label>
 			<X>0</X>
@@ -938,7 +944,7 @@ traceln("Used memory: " + usedMemory + " MB");
 	<Text>
 		<Id>1755006230823</Id>
 		<Name><![CDATA[text13]]></Name>
-		<X>460</X>
+		<X>400</X>
 		<Y>270</Y>
 		<Label>
 			<X>0</X>
@@ -963,7 +969,7 @@ traceln("Used memory: " + usedMemory + " MB");
 	<Text>
 		<Id>1755006265250</Id>
 		<Name><![CDATA[text14]]></Name>
-		<X>460</X>
+		<X>400</X>
 		<Y>300</Y>
 		<Label>
 			<X>0</X>
@@ -988,7 +994,7 @@ traceln("Used memory: " + usedMemory + " MB");
 	<Text>
 		<Id>1755006277289</Id>
 		<Name><![CDATA[text15]]></Name>
-		<X>460</X>
+		<X>400</X>
 		<Y>360</Y>
 		<Label>
 			<X>0</X>
@@ -1013,7 +1019,7 @@ traceln("Used memory: " + usedMemory + " MB");
 	<Text>
 		<Id>1755006277291</Id>
 		<Name><![CDATA[text16]]></Name>
-		<X>460</X>
+		<X>400</X>
 		<Y>330</Y>
 		<Label>
 			<X>0</X>
@@ -1038,7 +1044,7 @@ traceln("Used memory: " + usedMemory + " MB");
 	<Text>
 		<Id>1755006295716</Id>
 		<Name><![CDATA[text17]]></Name>
-		<X>460</X>
+		<X>400</X>
 		<Y>390</Y>
 		<Label>
 			<X>0</X>
@@ -1063,7 +1069,7 @@ traceln("Used memory: " + usedMemory + " MB");
 	<Text>
 		<Id>1755006295718</Id>
 		<Name><![CDATA[text18]]></Name>
-		<X>460</X>
+		<X>400</X>
 		<Y>420</Y>
 		<Label>
 			<X>0</X>
@@ -1089,8 +1095,8 @@ traceln("Used memory: " + usedMemory + " MB");
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Id>1755013493203</Id>
 		<Name><![CDATA[b_startSimualtion2]]></Name>
-		<X>150</X>
-		<Y>420</Y>
+		<X>90</X>
+		<Y>150</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -1105,10 +1111,11 @@ traceln("Used memory: " + usedMemory + " MB");
 			<Enabled>true</Enabled>
 			<ActionCode>traceln("Starting monte carlo simulation");
 v_rapidRun = true;
+double time = System.currentTimeMillis();
+monteCarlo = true;
 
 for(int i = 0; i &lt; iterations; i++){
 	f_initializeModel();
-	f_setGraphs();
 	mains.get(0).f_cleanUp();
 }
 
@@ -1116,6 +1123,9 @@ for(int i = 0; i &lt; iterations; i++){
 System.gc();
 long usedMemory = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1024 * 1024);
 traceln("Used memory: " + usedMemory + " MB");
+
+double runTime = (System.currentTimeMillis() - time) / 1000.0;
+traceln("Finished run " + simulationCount + " in " + runTime + " seconds");
 </ActionCode>
 		</BasicProperties>
 		<ExtendedProperties>
@@ -1127,8 +1137,8 @@ traceln("Used memory: " + usedMemory + " MB");
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Id>1755013510617</Id>
 		<Name><![CDATA[b_startSimualtion3]]></Name>
-		<X>150</X>
-		<Y>460</Y>
+		<X>90</X>
+		<Y>190</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -1142,6 +1152,8 @@ traceln("Used memory: " + usedMemory + " MB");
 			<TextColor>-16777216</TextColor>
 			<Enabled>true</Enabled>
 			<ActionCode>traceln("Starting simulation");
+double time = System.currentTimeMillis();
+monteCarlo = false;
 v_rapidRun = true;
 f_initializeModel();
 mains.get(0).f_cleanUp();
@@ -1149,6 +1161,9 @@ mains.get(0).f_cleanUp();
 System.gc();
 long usedMemory = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1024 * 1024);
 traceln("Used memory: " + usedMemory + " MB");
+
+double runTime = (System.currentTimeMillis() - time) / 1000.0;
+traceln("Finished run " + simulationCount + " in " + runTime + " seconds");
 </ActionCode>
 		</BasicProperties>
 		<ExtendedProperties>
@@ -1159,8 +1174,8 @@ traceln("Used memory: " + usedMemory + " MB");
 	<Text>
 		<Id>1755013720623</Id>
 		<Name><![CDATA[text19]]></Name>
-		<X>1090</X>
-		<Y>40</Y>
+		<X>2120</X>
+		<Y>30</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -1181,139 +1196,11 @@ traceln("Used memory: " + usedMemory + " MB");
 		</Font>
 		<Alignment>LEFT</Alignment>
 	</Text>
-	<TimePlot>
-		<Id>1755013720627</Id>
-		<Name><![CDATA[pl_probability]]></Name>
-		<X>1400</X>
-		<Y>50</Y>
-		<Label>
-			<X>0</X>
-			<Y>-10</Y>
-		</Label>
-		<PublicFlag>true</PublicFlag>
-		<PresentationFlag>true</PresentationFlag>
-		<ShowLabel>false</ShowLabel>
-		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-		<AutoUpdate>true</AutoUpdate>
-		<RecurrenceProperties>
-			<Id>1755013720625</Id>
-			<OccurrenceAtTime>true</OccurrenceAtTime>
-			<OccurrenceDate>1753257600000</OccurrenceDate>
-			<OccurrenceTime Class="CodeUnitValue">
-				<Code><![CDATA[0]]></Code>
-				<Unit Class="TimeUnits">HOUR</Unit>
-			</OccurrenceTime>
-			<RecurrenceCode Class="CodeUnitValue">
-				<Code><![CDATA[1]]></Code>
-				<Unit Class="TimeUnits">HOUR</Unit>
-			</RecurrenceCode>
-		</RecurrenceProperties>
-		<EmbeddedIcon>false</EmbeddedIcon>
-		<Width>360</Width>
-		<Height>240</Height>
-		<BackgroundColor/>
-		<BorderColor/>
-		<ChartArea>
-			<XOffset>50</XOffset>
-			<YOffset>30</YOffset>
-			<Width>280</Width>
-			<Height>150</Height>
-			<BackgroundColor>-1</BackgroundColor>
-			<BorderColor>-16777216</BorderColor>
-			<GridColor>-12566464</GridColor>
-		</ChartArea>
-		<Legend>
-			<Place>SOUTH</Place>
-			<TextColor>-16777216</TextColor>
-			<Size>30</Size>
-		</Legend>
-		<Labels>
-			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
-			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
-			<TextColor>-12566464</TextColor>
-		</Labels>
-		<ShowLegend>true</ShowLegend>
-		<TimeWindowsMovementType>MOVEMENT_WITH_TIME</TimeWindowsMovementType>
-		<TimeWindowUnits>MODEL_TIME_UNIT</TimeWindowUnits>
-		<VerScaleFromExpression>0</VerScaleFromExpression>
-		<VerScaleToExpression>1</VerScaleToExpression>
-		<VerScaleType>FIXED</VerScaleType>
-		<DrawLine>true</DrawLine>
-		<Interpolation>LINEAR</Interpolation>
-		<SamplesToKeep>100</SamplesToKeep>
-		<TimeWindowExpression>v_numberOfTimesteps</TimeWindowExpression>
-		<FillAreaUnderLine>false</FillAreaUnderLine>
-		<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
-	</TimePlot>
-	<TimePlot>
-		<Id>1755013720631</Id>
-		<Name><![CDATA[pl_succesRate]]></Name>
-		<X>1050</X>
-		<Y>50</Y>
-		<Label>
-			<X>0</X>
-			<Y>-10</Y>
-		</Label>
-		<PublicFlag>true</PublicFlag>
-		<PresentationFlag>true</PresentationFlag>
-		<ShowLabel>false</ShowLabel>
-		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-		<AutoUpdate>true</AutoUpdate>
-		<RecurrenceProperties>
-			<Id>1755013720629</Id>
-			<OccurrenceAtTime>true</OccurrenceAtTime>
-			<OccurrenceDate>1753257600000</OccurrenceDate>
-			<OccurrenceTime Class="CodeUnitValue">
-				<Code><![CDATA[0]]></Code>
-				<Unit Class="TimeUnits">HOUR</Unit>
-			</OccurrenceTime>
-			<RecurrenceCode Class="CodeUnitValue">
-				<Code><![CDATA[1]]></Code>
-				<Unit Class="TimeUnits">HOUR</Unit>
-			</RecurrenceCode>
-		</RecurrenceProperties>
-		<EmbeddedIcon>false</EmbeddedIcon>
-		<Width>360</Width>
-		<Height>240</Height>
-		<BackgroundColor/>
-		<BorderColor/>
-		<ChartArea>
-			<XOffset>50</XOffset>
-			<YOffset>30</YOffset>
-			<Width>280</Width>
-			<Height>150</Height>
-			<BackgroundColor>-1</BackgroundColor>
-			<BorderColor>-16777216</BorderColor>
-			<GridColor>-12566464</GridColor>
-		</ChartArea>
-		<Legend>
-			<Place>SOUTH</Place>
-			<TextColor>-16777216</TextColor>
-			<Size>30</Size>
-		</Legend>
-		<Labels>
-			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
-			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
-			<TextColor>-12566464</TextColor>
-		</Labels>
-		<ShowLegend>true</ShowLegend>
-		<TimeWindowsMovementType>MOVEMENT_WITH_TIME</TimeWindowsMovementType>
-		<TimeWindowUnits>MODEL_TIME_UNIT</TimeWindowUnits>
-		<VerScaleFromExpression>0</VerScaleFromExpression>
-		<VerScaleToExpression>1</VerScaleToExpression>
-		<VerScaleType>AUTO</VerScaleType>
-		<DrawLine>true</DrawLine>
-		<Interpolation>LINEAR</Interpolation>
-		<SamplesToKeep>100</SamplesToKeep>
-		<TimeWindowExpression>v_numberOfTimesteps</TimeWindowExpression>
-		<FillAreaUnderLine>false</FillAreaUnderLine>
-		<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
-	</TimePlot>
 	<Text>
 		<Id>1755013720633</Id>
 		<Name><![CDATA[text20]]></Name>
-		<X>1440</X>
-		<Y>40</Y>
+		<X>2470</X>
+		<Y>30</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -1337,8 +1224,8 @@ traceln("Used memory: " + usedMemory + " MB");
 	<Text>
 		<Id>1755013769133</Id>
 		<Name><![CDATA[text21]]></Name>
-		<X>1090</X>
-		<Y>340</Y>
+		<X>2120</X>
+		<Y>360</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -1351,7 +1238,7 @@ traceln("Used memory: " + usedMemory + " MB");
 		<Z>0</Z>
 		<Rotation>0.0</Rotation>
 		<Color>-16777216</Color>
-		<Text><![CDATA[Occurance per day per behavior]]></Text>
+		<Text><![CDATA[Occurances per behavior]]></Text>
 		<Font>
 			<Name><![CDATA[SansSerif]]></Name>
 			<Size>20</Size>
@@ -1359,75 +1246,12 @@ traceln("Used memory: " + usedMemory + " MB");
 		</Font>
 		<Alignment>LEFT</Alignment>
 	</Text>
-	<TimePlot>
-		<Id>1755013769137</Id>
-		<Name><![CDATA[pl_occurance]]></Name>
-		<X>1050</X>
-		<Y>350</Y>
-		<Label>
-			<X>0</X>
-			<Y>-10</Y>
-		</Label>
-		<PublicFlag>true</PublicFlag>
-		<PresentationFlag>true</PresentationFlag>
-		<ShowLabel>false</ShowLabel>
-		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-		<AutoUpdate>true</AutoUpdate>
-		<RecurrenceProperties>
-			<Id>1755013769135</Id>
-			<OccurrenceAtTime>true</OccurrenceAtTime>
-			<OccurrenceDate>1753257600000</OccurrenceDate>
-			<OccurrenceTime Class="CodeUnitValue">
-				<Code><![CDATA[0]]></Code>
-				<Unit Class="TimeUnits">HOUR</Unit>
-			</OccurrenceTime>
-			<RecurrenceCode Class="CodeUnitValue">
-				<Code><![CDATA[1]]></Code>
-				<Unit Class="TimeUnits">HOUR</Unit>
-			</RecurrenceCode>
-		</RecurrenceProperties>
-		<EmbeddedIcon>false</EmbeddedIcon>
-		<Width>360</Width>
-		<Height>240</Height>
-		<BackgroundColor/>
-		<BorderColor/>
-		<ChartArea>
-			<XOffset>50</XOffset>
-			<YOffset>30</YOffset>
-			<Width>280</Width>
-			<Height>150</Height>
-			<BackgroundColor>-1</BackgroundColor>
-			<BorderColor>-16777216</BorderColor>
-			<GridColor>-12566464</GridColor>
-		</ChartArea>
-		<Legend>
-			<Place>SOUTH</Place>
-			<TextColor>-16777216</TextColor>
-			<Size>30</Size>
-		</Legend>
-		<Labels>
-			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
-			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
-			<TextColor>-12566464</TextColor>
-		</Labels>
-		<ShowLegend>true</ShowLegend>
-		<TimeWindowsMovementType>MOVEMENT_WITH_TIME</TimeWindowsMovementType>
-		<TimeWindowUnits>MODEL_TIME_UNIT</TimeWindowUnits>
-		<VerScaleFromExpression>0</VerScaleFromExpression>
-		<VerScaleToExpression>1</VerScaleToExpression>
-		<VerScaleType>AUTO</VerScaleType>
-		<DrawLine>true</DrawLine>
-		<Interpolation>LINEAR</Interpolation>
-		<SamplesToKeep>100</SamplesToKeep>
-		<TimeWindowExpression>v_numberOfTimesteps</TimeWindowExpression>
-		<FillAreaUnderLine>false</FillAreaUnderLine>
-		<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
-	</TimePlot>
 	<Text>
 		<Id>1755013822346</Id>
 		<Name><![CDATA[text22]]></Name>
-		<X>1441</X>
-		<Y>335</Y>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
+		<X>2481</X>
+		<Y>355</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -1448,139 +1272,11 @@ traceln("Used memory: " + usedMemory + " MB");
 		</Font>
 		<Alignment>LEFT</Alignment>
 	</Text>
-	<TimePlot>
-		<Id>1755013822350</Id>
-		<Name><![CDATA[pl_unfulfilledChargingSession]]></Name>
-		<X>1401</X>
-		<Y>345</Y>
-		<Label>
-			<X>0</X>
-			<Y>-10</Y>
-		</Label>
-		<PublicFlag>true</PublicFlag>
-		<PresentationFlag>true</PresentationFlag>
-		<ShowLabel>false</ShowLabel>
-		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-		<AutoUpdate>true</AutoUpdate>
-		<RecurrenceProperties>
-			<Id>1755013822348</Id>
-			<OccurrenceAtTime>true</OccurrenceAtTime>
-			<OccurrenceDate>1753257600000</OccurrenceDate>
-			<OccurrenceTime Class="CodeUnitValue">
-				<Code><![CDATA[0]]></Code>
-				<Unit Class="TimeUnits">HOUR</Unit>
-			</OccurrenceTime>
-			<RecurrenceCode Class="CodeUnitValue">
-				<Code><![CDATA[1]]></Code>
-				<Unit Class="TimeUnits">HOUR</Unit>
-			</RecurrenceCode>
-		</RecurrenceProperties>
-		<EmbeddedIcon>false</EmbeddedIcon>
-		<Width>360</Width>
-		<Height>240</Height>
-		<BackgroundColor/>
-		<BorderColor/>
-		<ChartArea>
-			<XOffset>50</XOffset>
-			<YOffset>30</YOffset>
-			<Width>280</Width>
-			<Height>150</Height>
-			<BackgroundColor>-1</BackgroundColor>
-			<BorderColor>-16777216</BorderColor>
-			<GridColor>-12566464</GridColor>
-		</ChartArea>
-		<Legend>
-			<Place>SOUTH</Place>
-			<TextColor>-16777216</TextColor>
-			<Size>30</Size>
-		</Legend>
-		<Labels>
-			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
-			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
-			<TextColor>-12566464</TextColor>
-		</Labels>
-		<ShowLegend>true</ShowLegend>
-		<TimeWindowsMovementType>MOVEMENT_WITH_TIME</TimeWindowsMovementType>
-		<TimeWindowUnits>MODEL_TIME_UNIT</TimeWindowUnits>
-		<VerScaleFromExpression>0</VerScaleFromExpression>
-		<VerScaleToExpression>1</VerScaleToExpression>
-		<VerScaleType>AUTO</VerScaleType>
-		<DrawLine>true</DrawLine>
-		<Interpolation>LINEAR</Interpolation>
-		<SamplesToKeep>100</SamplesToKeep>
-		<TimeWindowExpression>v_numberOfTimesteps</TimeWindowExpression>
-		<FillAreaUnderLine>false</FillAreaUnderLine>
-		<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
-	</TimePlot>
-	<TimePlot>
-		<Id>1755014287338</Id>
-		<Name><![CDATA[pl_socioPsychologicalLearning]]></Name>
-		<X>1740</X>
-		<Y>50</Y>
-		<Label>
-			<X>0</X>
-			<Y>-10</Y>
-		</Label>
-		<PublicFlag>true</PublicFlag>
-		<PresentationFlag>true</PresentationFlag>
-		<ShowLabel>false</ShowLabel>
-		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-		<AutoUpdate>true</AutoUpdate>
-		<RecurrenceProperties>
-			<Id>1755014287336</Id>
-			<OccurrenceAtTime>true</OccurrenceAtTime>
-			<OccurrenceDate>1753257600000</OccurrenceDate>
-			<OccurrenceTime Class="CodeUnitValue">
-				<Code><![CDATA[0]]></Code>
-				<Unit Class="TimeUnits">HOUR</Unit>
-			</OccurrenceTime>
-			<RecurrenceCode Class="CodeUnitValue">
-				<Code><![CDATA[1]]></Code>
-				<Unit Class="TimeUnits">HOUR</Unit>
-			</RecurrenceCode>
-		</RecurrenceProperties>
-		<EmbeddedIcon>false</EmbeddedIcon>
-		<Width>360</Width>
-		<Height>240</Height>
-		<BackgroundColor/>
-		<BorderColor/>
-		<ChartArea>
-			<XOffset>50</XOffset>
-			<YOffset>30</YOffset>
-			<Width>280</Width>
-			<Height>150</Height>
-			<BackgroundColor>-1</BackgroundColor>
-			<BorderColor>-16777216</BorderColor>
-			<GridColor>-12566464</GridColor>
-		</ChartArea>
-		<Legend>
-			<Place>SOUTH</Place>
-			<TextColor>-16777216</TextColor>
-			<Size>30</Size>
-		</Legend>
-		<Labels>
-			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
-			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
-			<TextColor>-12566464</TextColor>
-		</Labels>
-		<ShowLegend>true</ShowLegend>
-		<TimeWindowsMovementType>MOVEMENT_WITH_TIME</TimeWindowsMovementType>
-		<TimeWindowUnits>MODEL_TIME_UNIT</TimeWindowUnits>
-		<VerScaleFromExpression>0</VerScaleFromExpression>
-		<VerScaleToExpression>1</VerScaleToExpression>
-		<VerScaleType>FIXED</VerScaleType>
-		<DrawLine>true</DrawLine>
-		<Interpolation>LINEAR</Interpolation>
-		<SamplesToKeep>100</SamplesToKeep>
-		<TimeWindowExpression>v_numberOfTimesteps</TimeWindowExpression>
-		<FillAreaUnderLine>false</FillAreaUnderLine>
-		<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
-	</TimePlot>
 	<Text>
 		<Id>1755014287340</Id>
 		<Name><![CDATA[text23]]></Name>
-		<X>1780</X>
-		<Y>40</Y>
+		<X>2830</X>
+		<Y>30</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -1601,4 +1297,1120 @@ traceln("Used memory: " + usedMemory + " MB");
 		</Font>
 		<Alignment>LEFT</Alignment>
 	</Text>
+	<Plot>
+		<Id>1755089036864</Id>
+		<Name><![CDATA[pl_probability]]></Name>
+		<X>2430</X>
+		<Y>40</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<AutoUpdate>false</AutoUpdate>
+		<RecurrenceProperties>
+			<Id>1755089036862</Id>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1755158400000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+		</RecurrenceProperties>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Width>360</Width>
+		<Height>240</Height>
+		<BackgroundColor/>
+		<BorderColor/>
+		<ChartArea>
+			<XOffset>50</XOffset>
+			<YOffset>30</YOffset>
+			<Width>280</Width>
+			<Height>150</Height>
+			<BackgroundColor>-1</BackgroundColor>
+			<BorderColor>-16777216</BorderColor>
+			<GridColor>-12566464</GridColor>
+		</ChartArea>
+		<Legend>
+			<Place>SOUTH</Place>
+			<TextColor>-16777216</TextColor>
+			<Size>30</Size>
+		</Legend>
+		<Labels>
+			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+			<TextColor>-12566464</TextColor>
+		</Labels>
+		<ShowLegend>true</ShowLegend>
+		<VerScaleFromExpression>0</VerScaleFromExpression>
+		<VerScaleToExpression>1</VerScaleToExpression>
+		<VerScaleType>FIXED</VerScaleType>
+		<DrawLine>true</DrawLine>
+		<Interpolation>LINEAR</Interpolation>
+		<SamplesToKeep>34944</SamplesToKeep>
+		<HorScaleFromExpression>0</HorScaleFromExpression>
+		<HorScaleToExpression>1</HorScaleToExpression>
+		<HorScaleType>AUTO</HorScaleType>
+	</Plot>
+	<Plot>
+		<Id>1755089785854</Id>
+		<Name><![CDATA[pl_probability2]]></Name>
+		<X>651</X>
+		<Y>1965</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<AutoUpdate>false</AutoUpdate>
+		<RecurrenceProperties>
+			<Id>1755089785852</Id>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1755158400000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+		</RecurrenceProperties>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Width>360</Width>
+		<Height>240</Height>
+		<BackgroundColor/>
+		<BorderColor/>
+		<ChartArea>
+			<XOffset>50</XOffset>
+			<YOffset>30</YOffset>
+			<Width>280</Width>
+			<Height>150</Height>
+			<BackgroundColor>-1</BackgroundColor>
+			<BorderColor>-16777216</BorderColor>
+			<GridColor>-12566464</GridColor>
+		</ChartArea>
+		<Legend>
+			<Place>SOUTH</Place>
+			<TextColor>-16777216</TextColor>
+			<Size>30</Size>
+		</Legend>
+		<Labels>
+			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+			<TextColor>-12566464</TextColor>
+		</Labels>
+		<ShowLegend>true</ShowLegend>
+		<VerScaleFromExpression>0</VerScaleFromExpression>
+		<VerScaleToExpression>1</VerScaleToExpression>
+		<VerScaleType>AUTO</VerScaleType>
+		<DrawLine>true</DrawLine>
+		<Interpolation>LINEAR</Interpolation>
+		<SamplesToKeep>34944</SamplesToKeep>
+		<HorScaleFromExpression>0</HorScaleFromExpression>
+		<HorScaleToExpression>1</HorScaleToExpression>
+		<HorScaleType>AUTO</HorScaleType>
+	</Plot>
+	<Plot>
+		<Id>1755089811506</Id>
+		<Name><![CDATA[pl_successRate]]></Name>
+		<X>2080</X>
+		<Y>40</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<AutoUpdate>false</AutoUpdate>
+		<RecurrenceProperties>
+			<Id>1755089811504</Id>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1755158400000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+		</RecurrenceProperties>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Width>360</Width>
+		<Height>240</Height>
+		<BackgroundColor/>
+		<BorderColor/>
+		<ChartArea>
+			<XOffset>50</XOffset>
+			<YOffset>30</YOffset>
+			<Width>280</Width>
+			<Height>150</Height>
+			<BackgroundColor>-1</BackgroundColor>
+			<BorderColor>-16777216</BorderColor>
+			<GridColor>-12566464</GridColor>
+		</ChartArea>
+		<Legend>
+			<Place>SOUTH</Place>
+			<TextColor>-16777216</TextColor>
+			<Size>30</Size>
+		</Legend>
+		<Labels>
+			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+			<TextColor>-12566464</TextColor>
+		</Labels>
+		<ShowLegend>true</ShowLegend>
+		<VerScaleFromExpression>0</VerScaleFromExpression>
+		<VerScaleToExpression>1</VerScaleToExpression>
+		<VerScaleType>FIXED</VerScaleType>
+		<DrawLine>true</DrawLine>
+		<Interpolation>LINEAR</Interpolation>
+		<SamplesToKeep>34944</SamplesToKeep>
+		<HorScaleFromExpression>0</HorScaleFromExpression>
+		<HorScaleToExpression>1</HorScaleToExpression>
+		<HorScaleType>AUTO</HorScaleType>
+	</Plot>
+	<Plot>
+		<Id>1755089857338</Id>
+		<Name><![CDATA[pl_occurance]]></Name>
+		<X>2080</X>
+		<Y>370</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<AutoUpdate>false</AutoUpdate>
+		<RecurrenceProperties>
+			<Id>1755089857336</Id>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1755158400000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+		</RecurrenceProperties>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Width>360</Width>
+		<Height>240</Height>
+		<BackgroundColor/>
+		<BorderColor/>
+		<ChartArea>
+			<XOffset>50</XOffset>
+			<YOffset>30</YOffset>
+			<Width>280</Width>
+			<Height>150</Height>
+			<BackgroundColor>-1</BackgroundColor>
+			<BorderColor>-16777216</BorderColor>
+			<GridColor>-12566464</GridColor>
+		</ChartArea>
+		<Legend>
+			<Place>SOUTH</Place>
+			<TextColor>-16777216</TextColor>
+			<Size>30</Size>
+		</Legend>
+		<Labels>
+			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+			<TextColor>-12566464</TextColor>
+		</Labels>
+		<ShowLegend>true</ShowLegend>
+		<VerScaleFromExpression>0</VerScaleFromExpression>
+		<VerScaleToExpression>1</VerScaleToExpression>
+		<VerScaleType>AUTO</VerScaleType>
+		<DrawLine>true</DrawLine>
+		<Interpolation>LINEAR</Interpolation>
+		<SamplesToKeep>34944</SamplesToKeep>
+		<HorScaleFromExpression>0</HorScaleFromExpression>
+		<HorScaleToExpression>1</HorScaleToExpression>
+		<HorScaleType>AUTO</HorScaleType>
+	</Plot>
+	<Plot>
+		<Id>1755089880512</Id>
+		<Name><![CDATA[pl_unfulfilledChargingSession]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
+		<X>2430</X>
+		<Y>370</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<AutoUpdate>false</AutoUpdate>
+		<RecurrenceProperties>
+			<Id>1755089880510</Id>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1755158400000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+		</RecurrenceProperties>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Width>360</Width>
+		<Height>240</Height>
+		<BackgroundColor/>
+		<BorderColor/>
+		<ChartArea>
+			<XOffset>50</XOffset>
+			<YOffset>30</YOffset>
+			<Width>280</Width>
+			<Height>150</Height>
+			<BackgroundColor>-1</BackgroundColor>
+			<BorderColor>-16777216</BorderColor>
+			<GridColor>-12566464</GridColor>
+		</ChartArea>
+		<Legend>
+			<Place>SOUTH</Place>
+			<TextColor>-16777216</TextColor>
+			<Size>30</Size>
+		</Legend>
+		<Labels>
+			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+			<TextColor>-12566464</TextColor>
+		</Labels>
+		<ShowLegend>true</ShowLegend>
+		<VerScaleFromExpression>0</VerScaleFromExpression>
+		<VerScaleToExpression>1</VerScaleToExpression>
+		<VerScaleType>AUTO</VerScaleType>
+		<DrawLine>true</DrawLine>
+		<Interpolation>LINEAR</Interpolation>
+		<SamplesToKeep>34944</SamplesToKeep>
+		<HorScaleFromExpression>0</HorScaleFromExpression>
+		<HorScaleToExpression>1</HorScaleToExpression>
+		<HorScaleType>AUTO</HorScaleType>
+	</Plot>
+	<Plot>
+		<Id>1755089904361</Id>
+		<Name><![CDATA[pl_socioPsychologicalLearning]]></Name>
+		<X>2790</X>
+		<Y>40</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<AutoUpdate>false</AutoUpdate>
+		<RecurrenceProperties>
+			<Id>1755089904359</Id>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1755158400000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+		</RecurrenceProperties>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Width>360</Width>
+		<Height>240</Height>
+		<BackgroundColor/>
+		<BorderColor/>
+		<ChartArea>
+			<XOffset>50</XOffset>
+			<YOffset>30</YOffset>
+			<Width>280</Width>
+			<Height>150</Height>
+			<BackgroundColor>-1</BackgroundColor>
+			<BorderColor>-16777216</BorderColor>
+			<GridColor>-12566464</GridColor>
+		</ChartArea>
+		<Legend>
+			<Place>SOUTH</Place>
+			<TextColor>-16777216</TextColor>
+			<Size>30</Size>
+		</Legend>
+		<Labels>
+			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+			<TextColor>-12566464</TextColor>
+		</Labels>
+		<ShowLegend>true</ShowLegend>
+		<VerScaleFromExpression>0</VerScaleFromExpression>
+		<VerScaleToExpression>1</VerScaleToExpression>
+		<VerScaleType>FIXED</VerScaleType>
+		<DrawLine>true</DrawLine>
+		<Interpolation>LINEAR</Interpolation>
+		<SamplesToKeep>34944</SamplesToKeep>
+		<HorScaleFromExpression>0</HorScaleFromExpression>
+		<HorScaleToExpression>1</HorScaleToExpression>
+		<HorScaleType>AUTO</HorScaleType>
+	</Plot>
+	<Text>
+		<Id>1755093626568</Id>
+		<Name><![CDATA[text24]]></Name>
+		<X>870</X>
+		<Y>40</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D</DrawMode>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Z>0</Z>
+		<Rotation>0.0</Rotation>
+		<Color>-16777216</Color>
+		<Text><![CDATA[Succes rate b1]]></Text>
+		<Font>
+			<Name><![CDATA[SansSerif]]></Name>
+			<Size>20</Size>
+			<Style>0</Style>
+		</Font>
+		<Alignment>LEFT</Alignment>
+	</Text>
+	<Plot>
+		<Id>1755093626572</Id>
+		<Name><![CDATA[pl_successRate1]]></Name>
+		<X>830</X>
+		<Y>50</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<AutoUpdate>false</AutoUpdate>
+		<RecurrenceProperties>
+			<Id>1755093626570</Id>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1755158400000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+		</RecurrenceProperties>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Width>360</Width>
+		<Height>210</Height>
+		<BackgroundColor/>
+		<BorderColor/>
+		<ChartArea>
+			<XOffset>50</XOffset>
+			<YOffset>30</YOffset>
+			<Width>280</Width>
+			<Height>150</Height>
+			<BackgroundColor>-1</BackgroundColor>
+			<BorderColor>-16777216</BorderColor>
+			<GridColor>-12566464</GridColor>
+		</ChartArea>
+		<Legend>
+			<Place>SOUTH</Place>
+			<TextColor>-16777216</TextColor>
+			<Size>30</Size>
+		</Legend>
+		<Labels>
+			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+			<TextColor>-12566464</TextColor>
+		</Labels>
+		<ShowLegend>false</ShowLegend>
+		<VerScaleFromExpression>0</VerScaleFromExpression>
+		<VerScaleToExpression>1</VerScaleToExpression>
+		<VerScaleType>FIXED</VerScaleType>
+		<DrawLine>true</DrawLine>
+		<Interpolation>LINEAR</Interpolation>
+		<SamplesToKeep>34944</SamplesToKeep>
+		<HorScaleFromExpression>0</HorScaleFromExpression>
+		<HorScaleToExpression>1</HorScaleToExpression>
+		<HorScaleType>AUTO</HorScaleType>
+	</Plot>
+	<Text>
+		<Id>1755093661983</Id>
+		<Name><![CDATA[text25]]></Name>
+		<X>1190</X>
+		<Y>40</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D</DrawMode>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Z>0</Z>
+		<Rotation>0.0</Rotation>
+		<Color>-16777216</Color>
+		<Text><![CDATA[Succes rate b2]]></Text>
+		<Font>
+			<Name><![CDATA[SansSerif]]></Name>
+			<Size>20</Size>
+			<Style>0</Style>
+		</Font>
+		<Alignment>LEFT</Alignment>
+	</Text>
+	<Plot>
+		<Id>1755093661987</Id>
+		<Name><![CDATA[pl_successRate2]]></Name>
+		<X>1150</X>
+		<Y>50</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<AutoUpdate>false</AutoUpdate>
+		<RecurrenceProperties>
+			<Id>1755093661985</Id>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1755158400000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+		</RecurrenceProperties>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Width>360</Width>
+		<Height>210</Height>
+		<BackgroundColor/>
+		<BorderColor/>
+		<ChartArea>
+			<XOffset>50</XOffset>
+			<YOffset>30</YOffset>
+			<Width>280</Width>
+			<Height>150</Height>
+			<BackgroundColor>-1</BackgroundColor>
+			<BorderColor>-16777216</BorderColor>
+			<GridColor>-12566464</GridColor>
+		</ChartArea>
+		<Legend>
+			<Place>SOUTH</Place>
+			<TextColor>-16777216</TextColor>
+			<Size>30</Size>
+		</Legend>
+		<Labels>
+			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+			<TextColor>-12566464</TextColor>
+		</Labels>
+		<ShowLegend>false</ShowLegend>
+		<VerScaleFromExpression>0</VerScaleFromExpression>
+		<VerScaleToExpression>1</VerScaleToExpression>
+		<VerScaleType>FIXED</VerScaleType>
+		<DrawLine>true</DrawLine>
+		<Interpolation>LINEAR</Interpolation>
+		<SamplesToKeep>34944</SamplesToKeep>
+		<HorScaleFromExpression>0</HorScaleFromExpression>
+		<HorScaleToExpression>1</HorScaleToExpression>
+		<HorScaleType>AUTO</HorScaleType>
+	</Plot>
+	<Text>
+		<Id>1755093789873</Id>
+		<Name><![CDATA[text26]]></Name>
+		<X>1510</X>
+		<Y>40</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D</DrawMode>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Z>0</Z>
+		<Rotation>0.0</Rotation>
+		<Color>-16777216</Color>
+		<Text><![CDATA[Succes rate b3]]></Text>
+		<Font>
+			<Name><![CDATA[SansSerif]]></Name>
+			<Size>20</Size>
+			<Style>0</Style>
+		</Font>
+		<Alignment>LEFT</Alignment>
+	</Text>
+	<Plot>
+		<Id>1755093789879</Id>
+		<Name><![CDATA[pl_successRate3]]></Name>
+		<X>1470</X>
+		<Y>50</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<AutoUpdate>false</AutoUpdate>
+		<RecurrenceProperties>
+			<Id>1755093789877</Id>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1755158400000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+		</RecurrenceProperties>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Width>360</Width>
+		<Height>210</Height>
+		<BackgroundColor/>
+		<BorderColor/>
+		<ChartArea>
+			<XOffset>50</XOffset>
+			<YOffset>30</YOffset>
+			<Width>280</Width>
+			<Height>150</Height>
+			<BackgroundColor>-1</BackgroundColor>
+			<BorderColor>-16777216</BorderColor>
+			<GridColor>-12566464</GridColor>
+		</ChartArea>
+		<Legend>
+			<Place>SOUTH</Place>
+			<TextColor>-16777216</TextColor>
+			<Size>30</Size>
+		</Legend>
+		<Labels>
+			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+			<TextColor>-12566464</TextColor>
+		</Labels>
+		<ShowLegend>false</ShowLegend>
+		<VerScaleFromExpression>0</VerScaleFromExpression>
+		<VerScaleToExpression>1</VerScaleToExpression>
+		<VerScaleType>FIXED</VerScaleType>
+		<DrawLine>true</DrawLine>
+		<Interpolation>LINEAR</Interpolation>
+		<SamplesToKeep>34944</SamplesToKeep>
+		<HorScaleFromExpression>0</HorScaleFromExpression>
+		<HorScaleToExpression>1</HorScaleToExpression>
+		<HorScaleType>AUTO</HorScaleType>
+	</Plot>
+	<Text>
+		<Id>1755093823422</Id>
+		<Name><![CDATA[text27]]></Name>
+		<X>872</X>
+		<Y>296</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D</DrawMode>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Z>0</Z>
+		<Rotation>0.0</Rotation>
+		<Color>-16777216</Color>
+		<Text><![CDATA[Avg prob b1]]></Text>
+		<Font>
+			<Name><![CDATA[SansSerif]]></Name>
+			<Size>20</Size>
+			<Style>0</Style>
+		</Font>
+		<Alignment>LEFT</Alignment>
+	</Text>
+	<Plot>
+		<Id>1755093823426</Id>
+		<Name><![CDATA[pl_avgProb1]]></Name>
+		<X>832</X>
+		<Y>306</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<AutoUpdate>false</AutoUpdate>
+		<RecurrenceProperties>
+			<Id>1755093823424</Id>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1755158400000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+		</RecurrenceProperties>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Width>360</Width>
+		<Height>210</Height>
+		<BackgroundColor/>
+		<BorderColor/>
+		<ChartArea>
+			<XOffset>50</XOffset>
+			<YOffset>30</YOffset>
+			<Width>280</Width>
+			<Height>150</Height>
+			<BackgroundColor>-1</BackgroundColor>
+			<BorderColor>-16777216</BorderColor>
+			<GridColor>-12566464</GridColor>
+		</ChartArea>
+		<Legend>
+			<Place>SOUTH</Place>
+			<TextColor>-16777216</TextColor>
+			<Size>30</Size>
+		</Legend>
+		<Labels>
+			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+			<TextColor>-12566464</TextColor>
+		</Labels>
+		<ShowLegend>false</ShowLegend>
+		<VerScaleFromExpression>0</VerScaleFromExpression>
+		<VerScaleToExpression>1</VerScaleToExpression>
+		<VerScaleType>FIXED</VerScaleType>
+		<DrawLine>true</DrawLine>
+		<Interpolation>LINEAR</Interpolation>
+		<SamplesToKeep>34944</SamplesToKeep>
+		<HorScaleFromExpression>0</HorScaleFromExpression>
+		<HorScaleToExpression>1</HorScaleToExpression>
+		<HorScaleType>AUTO</HorScaleType>
+	</Plot>
+	<Plot>
+		<Id>1755093823430</Id>
+		<Name><![CDATA[pl_avgProb2]]></Name>
+		<X>1152</X>
+		<Y>306</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<AutoUpdate>false</AutoUpdate>
+		<RecurrenceProperties>
+			<Id>1755093823428</Id>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1755158400000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+		</RecurrenceProperties>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Width>360</Width>
+		<Height>210</Height>
+		<BackgroundColor/>
+		<BorderColor/>
+		<ChartArea>
+			<XOffset>50</XOffset>
+			<YOffset>30</YOffset>
+			<Width>280</Width>
+			<Height>150</Height>
+			<BackgroundColor>-1</BackgroundColor>
+			<BorderColor>-16777216</BorderColor>
+			<GridColor>-12566464</GridColor>
+		</ChartArea>
+		<Legend>
+			<Place>SOUTH</Place>
+			<TextColor>-16777216</TextColor>
+			<Size>30</Size>
+		</Legend>
+		<Labels>
+			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+			<TextColor>-12566464</TextColor>
+		</Labels>
+		<ShowLegend>false</ShowLegend>
+		<VerScaleFromExpression>0</VerScaleFromExpression>
+		<VerScaleToExpression>1</VerScaleToExpression>
+		<VerScaleType>FIXED</VerScaleType>
+		<DrawLine>true</DrawLine>
+		<Interpolation>LINEAR</Interpolation>
+		<SamplesToKeep>34944</SamplesToKeep>
+		<HorScaleFromExpression>0</HorScaleFromExpression>
+		<HorScaleToExpression>1</HorScaleToExpression>
+		<HorScaleType>AUTO</HorScaleType>
+	</Plot>
+	<Text>
+		<Id>1755093823432</Id>
+		<Name><![CDATA[text28]]></Name>
+		<X>1192</X>
+		<Y>296</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D</DrawMode>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Z>0</Z>
+		<Rotation>0.0</Rotation>
+		<Color>-16777216</Color>
+		<Text><![CDATA[Avg prob b2]]></Text>
+		<Font>
+			<Name><![CDATA[SansSerif]]></Name>
+			<Size>20</Size>
+			<Style>0</Style>
+		</Font>
+		<Alignment>LEFT</Alignment>
+	</Text>
+	<Plot>
+		<Id>1755093823436</Id>
+		<Name><![CDATA[pl_avgProb3]]></Name>
+		<X>1472</X>
+		<Y>306</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<AutoUpdate>false</AutoUpdate>
+		<RecurrenceProperties>
+			<Id>1755093823434</Id>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1755158400000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+		</RecurrenceProperties>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Width>360</Width>
+		<Height>210</Height>
+		<BackgroundColor/>
+		<BorderColor/>
+		<ChartArea>
+			<XOffset>50</XOffset>
+			<YOffset>30</YOffset>
+			<Width>280</Width>
+			<Height>150</Height>
+			<BackgroundColor>-1</BackgroundColor>
+			<BorderColor>-16777216</BorderColor>
+			<GridColor>-12566464</GridColor>
+		</ChartArea>
+		<Legend>
+			<Place>SOUTH</Place>
+			<TextColor>-16777216</TextColor>
+			<Size>30</Size>
+		</Legend>
+		<Labels>
+			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+			<TextColor>-12566464</TextColor>
+		</Labels>
+		<ShowLegend>false</ShowLegend>
+		<VerScaleFromExpression>0</VerScaleFromExpression>
+		<VerScaleToExpression>1</VerScaleToExpression>
+		<VerScaleType>FIXED</VerScaleType>
+		<DrawLine>true</DrawLine>
+		<Interpolation>LINEAR</Interpolation>
+		<SamplesToKeep>34944</SamplesToKeep>
+		<HorScaleFromExpression>0</HorScaleFromExpression>
+		<HorScaleToExpression>1</HorScaleToExpression>
+		<HorScaleType>AUTO</HorScaleType>
+	</Plot>
+	<Text>
+		<Id>1755093823438</Id>
+		<Name><![CDATA[text29]]></Name>
+		<X>1512</X>
+		<Y>296</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D</DrawMode>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Z>0</Z>
+		<Rotation>0.0</Rotation>
+		<Color>-16777216</Color>
+		<Text><![CDATA[Avg prob b3]]></Text>
+		<Font>
+			<Name><![CDATA[SansSerif]]></Name>
+			<Size>20</Size>
+			<Style>0</Style>
+		</Font>
+		<Alignment>LEFT</Alignment>
+	</Text>
+	<BarChart>
+		<Id>1755157763808</Id>
+		<Name><![CDATA[ch_percOutOfModelCharge]]></Name>
+		<X>830</X>
+		<Y>570</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<AutoUpdate>false</AutoUpdate>
+		<RecurrenceProperties>
+			<Id>1755157763806</Id>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1755158400000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+		</RecurrenceProperties>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Width>260</Width>
+		<Height>180</Height>
+		<BackgroundColor/>
+		<BorderColor/>
+		<ChartArea>
+			<XOffset>50</XOffset>
+			<YOffset>30</YOffset>
+			<Width>180</Width>
+			<Height>120</Height>
+			<BackgroundColor>-1</BackgroundColor>
+			<BorderColor>-16777216</BorderColor>
+			<GridColor>-12566464</GridColor>
+		</ChartArea>
+		<Legend>
+			<Place>SOUTH</Place>
+			<TextColor>-16777216</TextColor>
+			<Size>30</Size>
+		</Legend>
+		<Labels>
+			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+			<TextColor>-12566464</TextColor>
+		</Labels>
+		<ShowLegend>false</ShowLegend>
+		<ScaleFromExpression>0</ScaleFromExpression>
+		<ScaleToExpression>1</ScaleToExpression>
+		<ScaleType>FIXED</ScaleType>
+		<Bars>
+			<Direction>UP</Direction>
+			<RelativeWidth>0.8</RelativeWidth>
+		</Bars>
+	</BarChart>
+	<BarChart>
+		<Id>1755157785863</Id>
+		<Name><![CDATA[ch_percUnfulfilledChargingSessions]]></Name>
+		<X>1150</X>
+		<Y>570</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<AutoUpdate>false</AutoUpdate>
+		<RecurrenceProperties>
+			<Id>1755157785861</Id>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1755158400000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">HOUR</Unit>
+			</RecurrenceCode>
+		</RecurrenceProperties>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Width>260</Width>
+		<Height>180</Height>
+		<BackgroundColor/>
+		<BorderColor/>
+		<ChartArea>
+			<XOffset>50</XOffset>
+			<YOffset>30</YOffset>
+			<Width>180</Width>
+			<Height>120</Height>
+			<BackgroundColor>-1</BackgroundColor>
+			<BorderColor>-16777216</BorderColor>
+			<GridColor>-12566464</GridColor>
+		</ChartArea>
+		<Legend>
+			<Place>SOUTH</Place>
+			<TextColor>-16777216</TextColor>
+			<Size>30</Size>
+		</Legend>
+		<Labels>
+			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+			<TextColor>-12566464</TextColor>
+		</Labels>
+		<ShowLegend>false</ShowLegend>
+		<ScaleFromExpression>0</ScaleFromExpression>
+		<ScaleToExpression>1</ScaleToExpression>
+		<ScaleType>FIXED</ScaleType>
+		<Bars>
+			<Direction>UP</Direction>
+			<RelativeWidth>0.8</RelativeWidth>
+		</Bars>
+	</BarChart>
+	<Text>
+		<Id>1755181376698</Id>
+		<Name><![CDATA[text30]]></Name>
+		<X>870</X>
+		<Y>560</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D</DrawMode>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Z>0</Z>
+		<Rotation>0.0</Rotation>
+		<Color>-16777216</Color>
+		<Text><![CDATA[Out of model charge %]]></Text>
+		<Font>
+			<Name><![CDATA[SansSerif]]></Name>
+			<Size>20</Size>
+			<Style>0</Style>
+		</Font>
+		<Alignment>LEFT</Alignment>
+	</Text>
+	<Text>
+		<Id>1755181394294</Id>
+		<Name><![CDATA[text31]]></Name>
+		<X>1180</X>
+		<Y>560</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D</DrawMode>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Z>0</Z>
+		<Rotation>0.0</Rotation>
+		<Color>-16777216</Color>
+		<Text><![CDATA[Unfinished charging sessions %]]></Text>
+		<Font>
+			<Name><![CDATA[SansSerif]]></Name>
+			<Size>20</Size>
+			<Style>0</Style>
+		</Font>
+		<Alignment>LEFT</Alignment>
+	</Text>
+	<Text>
+		<Id>1755181550760</Id>
+		<Name><![CDATA[text32]]></Name>
+		<X>70</X>
+		<Y>690</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D</DrawMode>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Z>0</Z>
+		<Rotation>0.0</Rotation>
+		<Color>-16777216</Color>
+		<Text><![CDATA[Detailed graphs]]></Text>
+		<Font>
+			<Name><![CDATA[Dialog]]></Name>
+			<Size>16</Size>
+			<Style>0</Style>
+		</Font>
+		<Alignment>LEFT</Alignment>
+	</Text>
+	<Control Type="CheckBox">
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Id>1755181550762</Id>
+		<Name><![CDATA[cb_setDetailedGraphs]]></Name>
+		<X>220</X>
+		<Y>685</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<BasicProperties Width="40" Height="30">
+			<EmbeddedIcon>false</EmbeddedIcon>
+			<TextColor>-16777216</TextColor>
+			<Enabled>true</Enabled>
+		</BasicProperties>
+		<ExtendedProperties>
+			<Font Name="Dialog" Size="12" Style="0"/>
+			<LabelText/>
+			<LinkTo>true</LinkTo>
+			<Link>setDetailedGraphs</Link>
+		</ExtendedProperties>
+	</Control>
 </Presentation>

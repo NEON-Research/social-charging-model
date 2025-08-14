@@ -2,6 +2,7 @@
 <ActiveObjectClass>
 	<Id>1746024451522</Id>
 	<Name><![CDATA[Startup_agent]]></Name>
+	<StartupCode><![CDATA[f_setColorPalette();]]></StartupCode>
 	<Generic>false</Generic>
 	<GenericParameter>
 		<Id>1746024451528</Id>
@@ -96,12 +97,42 @@
 	<Variables xmlns:al="http://anylogic.com"/>
 	<Events xmlns:al="http://anylogic.com"/>
 	<Functions xmlns:al="http://anylogic.com"/>
+	<AnalysisData>
+		<DataSet>
+			<Id>1755182856397</Id>
+			<Name><![CDATA[MCData_succesRate_b1]]></Name>
+			<X>-380</X>
+			<Y>1120</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>false</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1755182856395</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1755244800000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<FreezeXAxis>false</FreezeXAxis>
+			<SamplesToKeep>100</SamplesToKeep>
+		</DataSet>
+	</AnalysisData>
 	<Connectivity>
 		<ExcelFile>
 			<Id>1746095456060</Id>
 			<Name><![CDATA[excel_exportResults]]></Name>
-			<ExcludeFromBuild>true</ExcludeFromBuild>
-			<X>-200</X>
+			<X>-380</X>
 			<Y>560</Y>
 			<Label>
 				<X>10</X>
@@ -112,7 +143,7 @@
 			<ShowLabel>true</ShowLabel>
 			<ResourceReference>
 				<PackageName>social_charging_model</PackageName>
-				<ClassName>Export_ModelData.xlsx</ClassName>
+				<ClassName>SCM_export_results.xlsx</ClassName>
 			</ResourceReference>
 			<SaveInSnapshot>false</SaveInSnapshot>
 			<LoadOnStartup>false</LoadOnStartup>
@@ -167,7 +198,7 @@
 			<Id>1746024643043</Id>
 			<Name><![CDATA[mains_presentation]]></Name>
 			<X>0</X>
-			<Y>850</Y>
+			<Y>1430</Y>
 			<Label>
 				<X>10</X>
 				<Y>0</Y>
@@ -200,8 +231,8 @@
 			<PresentationFlag>true</PresentationFlag>
 			<ShowLabel>false</ShowLabel>
 			<Title/>
-			<Width>1000</Width>
-			<Height>600</Height>
+			<Width>1920</Width>
+			<Height>980</Height>
 		</Area>
 	</Areas>
 </ActiveObjectClass>

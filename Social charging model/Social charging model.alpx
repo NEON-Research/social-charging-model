@@ -62,8 +62,8 @@
 		<TimeAccuracy>1.0E-5</TimeAccuracy>
 		<Frame>
 			<Id>1743154059997</Id>
-			<Width>1000</Width>
-			<Height>600</Height>
+			<Width>1920</Width>
+			<Height>980</Height>
 		</Frame>
 		<Database>
 			<Id>1743154059987</Id>

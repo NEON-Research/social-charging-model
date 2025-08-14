@@ -3,7 +3,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1746024803989</Id>
 		<Name><![CDATA[v_cars]]></Name>
-		<X>-200</X>
+		<X>-380</X>
 		<Y>320</Y>
 		<Label>
 			<X>10</X>
@@ -22,7 +22,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1746024850145</Id>
 		<Name><![CDATA[v_shareEVs]]></Name>
-		<X>-200</X>
+		<X>-380</X>
 		<Y>340</Y>
 		<Label>
 			<X>10</X>
@@ -41,7 +41,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1746025253111</Id>
 		<Name><![CDATA[v_parkingPlaces]]></Name>
-		<X>-200</X>
+		<X>-380</X>
 		<Y>380</Y>
 		<Label>
 			<X>10</X>
@@ -60,7 +60,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1746025260574</Id>
 		<Name><![CDATA[v_EVEnergyConsumption_kWhperKm]]></Name>
-		<X>-200</X>
+		<X>-380</X>
 		<Y>400</Y>
 		<Label>
 			<X>10</X>
@@ -79,7 +79,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1746025267406</Id>
 		<Name><![CDATA[v_chargingPower_kW]]></Name>
-		<X>-200</X>
+		<X>-380</X>
 		<Y>420</Y>
 		<Label>
 			<X>10</X>
@@ -98,7 +98,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1746025272926</Id>
 		<Name><![CDATA[v_timestep_minutes]]></Name>
-		<X>-200</X>
+		<X>-380</X>
 		<Y>440</Y>
 		<Label>
 			<X>10</X>
@@ -117,7 +117,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1746028072239</Id>
 		<Name><![CDATA[v_EVsPerCP]]></Name>
-		<X>-200</X>
+		<X>-380</X>
 		<Y>360</Y>
 		<Label>
 			<X>10</X>
@@ -136,7 +136,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1746087803170</Id>
 		<Name><![CDATA[v_periods]]></Name>
-		<X>-200</X>
+		<X>-380</X>
 		<Y>480</Y>
 		<Label>
 			<X>10</X>
@@ -155,7 +155,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1746087857865</Id>
 		<Name><![CDATA[v_simulationPeriod]]></Name>
-		<X>-200</X>
+		<X>-380</X>
 		<Y>460</Y>
 		<Label>
 			<X>10</X>
@@ -174,7 +174,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1746096478941</Id>
 		<Name><![CDATA[simulationCount]]></Name>
-		<X>-200</X>
+		<X>-380</X>
 		<Y>590</Y>
 		<Label>
 			<X>10</X>
@@ -196,7 +196,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1747139962091</Id>
 		<Name><![CDATA[v_b1_moveCar]]></Name>
-		<X>-200</X>
+		<X>-380</X>
 		<Y>620</Y>
 		<Label>
 			<X>10</X>
@@ -215,7 +215,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1747139972141</Id>
 		<Name><![CDATA[v_b2_requestMove]]></Name>
-		<X>-200</X>
+		<X>-380</X>
 		<Y>640</Y>
 		<Label>
 			<X>10</X>
@@ -234,7 +234,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1747139982251</Id>
 		<Name><![CDATA[v_b3_notifyNeighbor]]></Name>
-		<X>-200</X>
+		<X>-380</X>
 		<Y>660</Y>
 		<Label>
 			<X>10</X>
@@ -253,7 +253,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1754550269494</Id>
 		<Name><![CDATA[v_rapidRun]]></Name>
-		<X>-200</X>
+		<X>-380</X>
 		<Y>150</Y>
 		<Label>
 			<X>10</X>
@@ -272,7 +272,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1754992157848</Id>
 		<Name><![CDATA[v_socialChargingStartHour]]></Name>
-		<X>-200</X>
+		<X>-380</X>
 		<Y>730</Y>
 		<Label>
 			<X>10</X>
@@ -291,7 +291,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1754992157850</Id>
 		<Name><![CDATA[v_socialChargingEndHour]]></Name>
-		<X>-200</X>
+		<X>-380</X>
 		<Y>750</Y>
 		<Label>
 			<X>10</X>
@@ -310,7 +310,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1754992833102</Id>
 		<Name><![CDATA[v_socialChargingOnlyDaytime]]></Name>
-		<X>-200</X>
+		<X>-380</X>
 		<Y>680</Y>
 		<Label>
 			<X>10</X>
@@ -329,7 +329,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1754995372054</Id>
 		<Name><![CDATA[v_recheckCPAvailability]]></Name>
-		<X>-200</X>
+		<X>-380</X>
 		<Y>700</Y>
 		<Label>
 			<X>10</X>
@@ -348,7 +348,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1755006089972</Id>
 		<Name><![CDATA[learningRate_norms_b1]]></Name>
-		<X>-200</X>
+		<X>-380</X>
 		<Y>780</Y>
 		<Label>
 			<X>10</X>
@@ -370,7 +370,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1755006089975</Id>
 		<Name><![CDATA[learningRate_trust_b1]]></Name>
-		<X>-200</X>
+		<X>-380</X>
 		<Y>800</Y>
 		<Label>
 			<X>10</X>
@@ -392,7 +392,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1755006089977</Id>
 		<Name><![CDATA[learningRate_norms_b2]]></Name>
-		<X>-200</X>
+		<X>-380</X>
 		<Y>820</Y>
 		<Label>
 			<X>10</X>
@@ -414,7 +414,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1755006089979</Id>
 		<Name><![CDATA[learningRate_trust_b2]]></Name>
-		<X>-200</X>
+		<X>-380</X>
 		<Y>840</Y>
 		<Label>
 			<X>10</X>
@@ -436,7 +436,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1755006089981</Id>
 		<Name><![CDATA[learningRate_norms_b3]]></Name>
-		<X>-200</X>
+		<X>-380</X>
 		<Y>860</Y>
 		<Label>
 			<X>10</X>
@@ -458,7 +458,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1755006089983</Id>
 		<Name><![CDATA[learningRate_trust_b3]]></Name>
-		<X>-200</X>
+		<X>-380</X>
 		<Y>880</Y>
 		<Label>
 			<X>10</X>
@@ -480,7 +480,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1755014824196</Id>
 		<Name><![CDATA[iterations]]></Name>
-		<X>-200</X>
+		<X>-380</X>
 		<Y>930</Y>
 		<Label>
 			<X>10</X>
@@ -502,7 +502,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1755014964270</Id>
 		<Name><![CDATA[v_numberOfTimesteps]]></Name>
-		<X>-200</X>
+		<X>-380</X>
 		<Y>510</Y>
 		<Label>
 			<X>10</X>
@@ -516,12 +516,53 @@
               AccessType="public"
               StaticVariable="false">
 			<Type><![CDATA[int]]></Type>
+			<InitialValue Class="CodeValue">
+				<Code><![CDATA[34944]]></Code>
+			</InitialValue>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1755181532823</Id>
+		<Name><![CDATA[setDetailedGraphs]]></Name>
+		<X>-380</X>
+		<Y>950</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[boolean]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1755183010176</Id>
+		<Name><![CDATA[monteCarlo]]></Name>
+		<X>-380</X>
+		<Y>970</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[boolean]]></Type>
 		</Properties>
 	</Variable>
 	<Variable Class="Parameter">
 		<Id>1755014914224</Id>
 		<Name><![CDATA[p_nbOfTimesteps]]></Name>
-		<X>-390</X>
+		<X>-570</X>
 		<Y>420</Y>
 		<Label>
 			<X>10</X>
@@ -534,6 +575,9 @@
 			<Type><![CDATA[double]]></Type>
 			<UnitType>NONE</UnitType>
 			<SdArray>false</SdArray>
+			<DefaultValue Class="CodeValue">
+				<Code><![CDATA[100]]></Code>
+			</DefaultValue>
 			<ParameterEditor>
 				<Id>1755014914222</Id>
 				<EditorContolType>TEXT_BOX</EditorContolType>
@@ -541,6 +585,42 @@
 				<MaxSliderValue>100</MaxSliderValue>
 				<DelimeterType>NO_DELIMETER</DelimeterType>
 			</ParameterEditor>
+		</Properties>
+	</Variable>
+	<Variable Class="CollectionVariable">
+		<Id>1755180600309</Id>
+		<Name><![CDATA[c_colorPalette]]></Name>
+		<X>-570</X>
+		<Y>350</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+			<CollectionClass>ArrayList</CollectionClass>
+			<ElementClass>Color</ElementClass>
+			<ValueElementClass>String</ValueElementClass>
+		</Properties>
+	</Variable>
+	<Variable Class="CollectionVariable">
+		<Id>1755182942984</Id>
+		<Name><![CDATA[c_succesRate_b1_MC]]></Name>
+		<X>-380</X>
+		<Y>1080</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+			<CollectionClass>ArrayList</CollectionClass>
+			<ElementClass>double[]</ElementClass>
+			<ValueElementClass>String</ValueElementClass>
 		</Properties>
 	</Variable>
 </Variables>
