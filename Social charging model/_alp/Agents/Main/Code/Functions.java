@@ -104,6 +104,10 @@ count_successfulRechecks = 0;
 count_unsuccessfulRechecks = 0;
 int count_b2_noIdleChargers = 0;
 
+outOfModelCharge_kWh = 0.0;
+count_leftWhileCharging = 0;
+count_leftUncharged = 0;
+
 double totalProb_b1 = 0.0;
 double totalProb_b2 = 0.0;
 double totalProb_b3 = 0.0;
@@ -133,6 +137,10 @@ for (EVOwner x : EVOwners) {
 	totalNorms += x.v_norms;
 	totalTrust += x.v_trust;
 	totalPSI += x.v_perc_social_interdep;
+	
+	outOfModelCharge_kWh += x.v_outOfModelCharge_kWh;
+	count_leftWhileCharging += x.count_leftWhileCharging;
+	count_leftUncharged += x.count_leftUncharged;
 }
 
 
@@ -199,6 +207,8 @@ ar_unsuccessful_b1[v_timestep] = count_b1_notSuccessful;
 ar_unsuccessful_b2[v_timestep] = count_b2_notSuccessful;
 ar_unsuccessful_b3[v_timestep] = count_b3_notSuccessful;
 ar_noIdleChargers_b2[v_timestep] = count_b2_noIdleChargers;
+
+
 
 
 
@@ -347,11 +357,12 @@ double avgChargingSessionPerEVPerDay = roundToDecimal((double) countTotalChargin
 
 v_unfulfilledChargingSessions_perc = (double) (countLeftUncharged + countUnfinishedCharging) / countTotalChargingSessions;
 v_outOfModelCharging_perc = outOfModelCharging/totalCharging;
-
+/*
 traceln("Total charging sessions = " + countTotalChargingSessions + ", is avg per EV per day " + avgChargingSessionPerEVPerDay);
 traceln("Unfinished charging = " + roundToInt((double) countUnfinishedCharging / countTotalChargingSessions * 100) + "% of charging sessions");
 traceln("Left without charging = " + roundToInt((double) countLeftUncharged / countTotalRequiredCharging * 100) + "% of required charging sessions");
 traceln("Out of model charging = " + roundToInt((double) outOfModelCharging/totalCharging * 100) + "% of total charging");
+*/
 /*ALCODEEND*/}
 
 double f_writeResultsToExcel(ExcelFile excel_exportResults)
@@ -439,7 +450,7 @@ for(int i=0; i < timestepsInWeek; i++){
 
 f_clearCounts();
 
-traceln("Finished initial week for division car location");
+//traceln("Finished initial week for division car location");
 /*ALCODEEND*/}
 
 double f_generateSyntheticAgents(int numAgents,List<List<Double>>  sortedRealData)
@@ -913,6 +924,10 @@ double interactions_b2 = 0.0;
 double interactions_b3 = 0.0;
 double rechecking = 0.0;
 
+double outOfModelCharge_kWhperDay = 0.0;
+int count_leftWhileChargingDay = 0;
+int count_leftUnchargedDay = 0;
+
 int dayIndex = v_day-1;
 
 if(v_day == 1){
@@ -920,6 +935,10 @@ if(v_day == 1){
 	interactions_b2 = count_b2_successful + count_b2_notSuccessful;
 	interactions_b3 = count_b3_successful + count_b3_notSuccessful;
 	rechecking = count_successfulRechecks + count_unsuccessfulRechecks;
+	
+	outOfModelCharge_kWhperDay = outOfModelCharge_kWh;
+	count_leftWhileChargingDay = count_leftWhileCharging;
+	count_leftUnchargedDay = count_leftUncharged;
 }
 
 
@@ -930,23 +949,40 @@ else{
 	double sum_prev_b3 = 0.0;
 	double sum_prev_rechecks = 0.0;
 	
+	double sum_prev_OoMC = 0.0;
+	int sum_prev_LWC = 0;
+	int sum_prev_LU = 0;
+	
 	for (int i = 0; i < dayIndex; i++) {
 	    sum_prev_b1 += ar_interactionsPerDay_b1[i];
 	    sum_prev_b2 += ar_interactionsPerDay_b2[i];
 	    sum_prev_b3 += ar_interactionsPerDay_b3[i];
 	    sum_prev_rechecks += ar_rechecksPerDay[i];
+	    
+	    sum_prev_OoMC += ar_outOfModelCharging[i];
+	    sum_prev_LWC += ar_leftWhileCharging[i];
+	    sum_prev_LU += ar_leftUncharged[i];
 	}	
 
 	interactions_b1 = count_b1_successful + count_b1_notSuccessful - sum_prev_b1;
 	interactions_b2 = count_b2_successful + count_b2_notSuccessful - sum_prev_b2;
 	interactions_b3 = count_b3_successful + count_b3_notSuccessful - sum_prev_b3;
 	rechecking = count_successfulRechecks + count_unsuccessfulRechecks - sum_prev_rechecks;
+
+	outOfModelCharge_kWhperDay = outOfModelCharge_kWh - sum_prev_OoMC;
+	count_leftWhileChargingDay = count_leftWhileCharging - sum_prev_LWC; 
+	count_leftUnchargedDay = count_leftUncharged - sum_prev_LU;
 }
 
 ar_interactionsPerDay_b1[dayIndex] = interactions_b1;
 ar_interactionsPerDay_b2[dayIndex] = interactions_b2;
 ar_interactionsPerDay_b3[dayIndex] = interactions_b3;
 ar_rechecksPerDay[dayIndex] = rechecking;
+
+ar_outOfModelCharging[dayIndex] = outOfModelCharge_kWhperDay;
+ar_leftWhileCharging[dayIndex] = count_leftWhileChargingDay;
+ar_leftUncharged[dayIndex] = count_leftUnchargedDay;
+
 
 /*ALCODEEND*/}
 
@@ -1201,19 +1237,6 @@ for (int i = EVOwners.size() - 1; i >= 0; i--) {
 this.deleteSelf();
 /*ALCODEEND*/}
 
-double f_endRun()
-{/*ALCODESTART::1754550396944*/
-//f_writeResultsToExcel(startup_agent.excel_exportResults);
-startup_agent.simulationCount++;
-startup_agent.f_setGraphs();
-if(startup_agent.simulationCount == 1){
-	startup_agent.fileChooser_exportResults.setEnabled(true);
-}
-if(startup_agent.v_rapidRun == false){
-	startup_agent.viewArea.navigateTo();
-}
-/*ALCODEEND*/}
-
 boolean f_checkCPA()
 {/*ALCODESTART::1754579781080*/
 
@@ -1402,7 +1425,10 @@ ar_unsuccessful_b3 = new double[p_nbOfTimesteps];
 // Special cases
 ar_noIdleChargers_b2 = new double[p_nbOfTimesteps];
 
-
+//out of model and uncharged
+ar_outOfModelCharging = new double[p_days];
+ar_leftWhileCharging = new double[p_days];
+ar_leftUncharged = new double[p_days];
 
 /*ALCODEEND*/}
 

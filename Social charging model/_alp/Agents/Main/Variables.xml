@@ -1486,7 +1486,7 @@
 		<Id>1755169677447</Id>
 		<Name><![CDATA[color_b3]]></Name>
 		<X>-250</X>
-		<Y>1050</Y>
+		<Y>1140</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1718,6 +1718,120 @@
 		<Name><![CDATA[ar_CPOccupied]]></Name>
 		<X>50</X>
 		<Y>2320</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double[]]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1755520696731</Id>
+		<Name><![CDATA[ar_outOfModelCharging]]></Name>
+		<X>50</X>
+		<Y>2350</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double[]]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1755520696733</Id>
+		<Name><![CDATA[ar_leftWhileCharging]]></Name>
+		<X>50</X>
+		<Y>2370</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double[]]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1755527370127</Id>
+		<Name><![CDATA[outOfModelCharge_kWh]]></Name>
+		<X>-250</X>
+		<Y>840</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1755527396258</Id>
+		<Name><![CDATA[count_leftWhileCharging]]></Name>
+		<X>-250</X>
+		<Y>860</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[int]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1755527410823</Id>
+		<Name><![CDATA[count_leftUncharged]]></Name>
+		<X>-250</X>
+		<Y>880</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[int]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1755528041234</Id>
+		<Name><![CDATA[ar_leftUncharged]]></Name>
+		<X>50</X>
+		<Y>2390</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -2072,7 +2186,7 @@
 		<Id>1755168217231</Id>
 		<Name><![CDATA[c_norms]]></Name>
 		<X>-250</X>
-		<Y>850</Y>
+		<Y>940</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -2090,7 +2204,7 @@
 		<Id>1755168235417</Id>
 		<Name><![CDATA[c_trust]]></Name>
 		<X>-250</X>
-		<Y>870</Y>
+		<Y>960</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -2108,7 +2222,7 @@
 		<Id>1755168245347</Id>
 		<Name><![CDATA[c_rc]]></Name>
 		<X>-250</X>
-		<Y>890</Y>
+		<Y>980</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -2126,7 +2240,7 @@
 		<Id>1755168257222</Id>
 		<Name><![CDATA[c_psi]]></Name>
 		<X>-250</X>
-		<Y>910</Y>
+		<Y>1000</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -2144,7 +2258,7 @@
 		<Id>1755168266433</Id>
 		<Name><![CDATA[c_b1]]></Name>
 		<X>-250</X>
-		<Y>930</Y>
+		<Y>1020</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -2162,7 +2276,7 @@
 		<Id>1755168266435</Id>
 		<Name><![CDATA[c_b2]]></Name>
 		<X>-250</X>
-		<Y>950</Y>
+		<Y>1040</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -2180,7 +2294,7 @@
 		<Id>1755168266437</Id>
 		<Name><![CDATA[c_b3]]></Name>
 		<X>-250</X>
-		<Y>970</Y>
+		<Y>1060</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>

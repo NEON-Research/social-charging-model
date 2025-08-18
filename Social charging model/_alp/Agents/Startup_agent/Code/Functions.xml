@@ -69,8 +69,9 @@
 		<ReturnType>double</ReturnType>
 		<Id>1755157664950</Id>
 		<Name><![CDATA[f_setGraphsPerRun]]></Name>
-		<X>-380</X>
-		<Y>1020</Y>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
+		<X>-210</X>
+		<Y>1000</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -124,7 +125,63 @@
 		<ReturnModificator>VOID</ReturnModificator>
 		<ReturnType>double</ReturnType>
 		<Id>1755183201656</Id>
-		<Name><![CDATA[f_exportMCResults]]></Name>
+		<Name><![CDATA[f_setMCGraphs]]></Name>
+		<X>-210</X>
+		<Y>1120</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Parameter>
+			<Name><![CDATA[results]]></Name>
+			<Type><![CDATA[J_MCResult]]></Type>
+		</Parameter>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>VOID</ReturnModificator>
+		<ReturnType>DataSet</ReturnType>
+		<Id>1755518313240</Id>
+		<Name><![CDATA[f_writeMCToExcel]]></Name>
+		<X>-210</X>
+		<Y>1100</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+		<ReturnType>ArrayList&lt;double[]&gt;</ReturnType>
+		<Id>1755521234175</Id>
+		<Name><![CDATA[f_getUncertaintyBounds]]></Name>
+		<X>-210</X>
+		<Y>1060</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Parameter>
+			<Name><![CDATA[resultsCollection]]></Name>
+			<Type><![CDATA[ArrayList<double[]>]]></Type>
+		</Parameter>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>VOID</ReturnModificator>
+		<ReturnType>DataSet</ReturnType>
+		<Id>1755521331481</Id>
+		<Name><![CDATA[f_storeMCResults]]></Name>
 		<X>-380</X>
 		<Y>1060</Y>
 		<Label>
@@ -134,6 +191,98 @@
 		<PublicFlag>false</PublicFlag>
 		<PresentationFlag>true</PresentationFlag>
 		<ShowLabel>true</ShowLabel>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>VOID</ReturnModificator>
+		<ReturnType>double</ReturnType>
+		<Id>1755529642761</Id>
+		<Name><![CDATA[f_setRunText]]></Name>
+		<X>-370</X>
+		<Y>1020</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Parameter>
+			<Name><![CDATA[color]]></Name>
+			<Type><![CDATA[Color]]></Type>
+		</Parameter>
+		<Parameter>
+			<Name><![CDATA[title]]></Name>
+			<Type><![CDATA[String]]></Type>
+		</Parameter>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>VOID</ReturnModificator>
+		<ReturnType>double</ReturnType>
+		<Id>1755530416903</Id>
+		<Name><![CDATA[f_endRun]]></Name>
+		<X>-210</X>
+		<Y>270</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>VOID</ReturnModificator>
+		<ReturnType>double</ReturnType>
+		<Id>1755531687092</Id>
+		<Name><![CDATA[f_clearResultsCollections]]></Name>
+		<X>-380</X>
+		<Y>1320</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>VOID</ReturnModificator>
+		<ReturnType>double</ReturnType>
+		<Id>1755532153792</Id>
+		<Name><![CDATA[f_excelClearSheets]]></Name>
+		<X>-210</X>
+		<Y>1150</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+		<ReturnType>int</ReturnType>
+		<Id>1755534050897</Id>
+		<Name><![CDATA[f_getTrueLastRow]]></Name>
+		<X>-200</X>
+		<Y>1170</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Parameter>
+			<Name><![CDATA[sheetIndex]]></Name>
+			<Type><![CDATA[int]]></Type>
+		</Parameter>
 		<Body xmlns:al="http://anylogic.com"/>
 	</Function>
 </Functions>

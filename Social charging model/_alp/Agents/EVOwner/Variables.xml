@@ -797,4 +797,61 @@
 			<Type><![CDATA[int]]></Type>
 		</Properties>
 	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1755526979943</Id>
+		<Name><![CDATA[v_dailyOutOfModelCharge_kWh]]></Name>
+		<X>510</X>
+		<Y>480</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1755526994816</Id>
+		<Name><![CDATA[v_dailyMissedChargingSessions]]></Name>
+		<X>510</X>
+		<Y>500</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[int]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1755527028123</Id>
+		<Name><![CDATA[v_dailyUnfinishedChargingSessions]]></Name>
+		<X>510</X>
+		<Y>520</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
 </Variables>

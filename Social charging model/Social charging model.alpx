@@ -215,6 +215,10 @@
 				<Id>1746011695816</Id>
 				<Name><![CDATA[J_ChargePoint]]></Name>
 			</JavaClass>
+			<JavaClass>
+				<Id>1755520151226</Id>
+				<Name><![CDATA[J_MCResult]]></Name>
+			</JavaClass>
 		</JavaClasses>
 		<RequiredLibraryReference>
 			<LibraryName>com.anylogic.libraries.modules.markup_descriptors</LibraryName>

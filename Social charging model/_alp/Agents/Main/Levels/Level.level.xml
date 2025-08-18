@@ -78,7 +78,7 @@
 			<EmbeddedIcon>false</EmbeddedIcon>
 			<TextColor>-16777216</TextColor>
 			<Enabled>true</Enabled>
-			<ActionCode>f_endRun();
+			<ActionCode>startup_agent.f_endRun();
 f_cleanUp();</ActionCode>
 		</BasicProperties>
 		<ExtendedProperties>
