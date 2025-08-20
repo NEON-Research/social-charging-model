@@ -254,6 +254,7 @@
 		<ReturnType>double</ReturnType>
 		<Id>1755532153792</Id>
 		<Name><![CDATA[f_excelClearSheets]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>-210</X>
 		<Y>1150</Y>
 		<Label>

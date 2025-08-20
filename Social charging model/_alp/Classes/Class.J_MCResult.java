@@ -4,6 +4,7 @@
 public class J_MCResult {
 
 	int iterations;
+	int scenarioIndex;
 	
 	ArrayList<double[]> successRate_b1;
 	ArrayList<double[]> successRate_b2;
@@ -25,6 +26,10 @@ public class J_MCResult {
     // --- Getters ---
     public int getIterations() {
         return iterations;
+    }
+    
+    public int getScenarioIndex() {
+    	return scenarioIndex;
     }
 
     public ArrayList<double[]> getSuccessRate_b1() {
@@ -66,6 +71,10 @@ public class J_MCResult {
     // --- Setters ---
     public void setIterations(int iterations) {
         this.iterations = iterations;
+    }
+    
+    public void setScenarioIndex(int scenIndex) {
+    	this.scenarioIndex = scenIndex;
     }
     
     public void setSuccessRate_b1( ArrayList<double[]> uncertaintyBounds ) {

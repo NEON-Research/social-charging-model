@@ -2540,6 +2540,7 @@ traceln("Finished writing to excel " + simulationCount + " in " + runTime + " se
 		<EmbeddedIcon>false</EmbeddedIcon>
 		<Id>1755532664780</Id>
 		<Name><![CDATA[b_startSimualtion5]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>90</X>
 		<Y>200</Y>
 		<Label>

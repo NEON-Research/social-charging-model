@@ -376,11 +376,13 @@ DataSet f_writeMCToExcel()
 //Get excel file and indexes
 excel_exportResults.readFile();
 
-int scenarioIndex = simulationCount;
+
 int sheetIndex = 1;
 int sheetIndexPerDay = 2;
 
 for(J_MCResult r : c_MCResults){
+
+	int scenarioIndex = r.getScenarioIndex();
 	int rowIndex = f_getTrueLastRow(sheetIndex) + 1;
 	int nTimePoints = r.getSuccessRate_b1().get(0).length;
 	
@@ -397,6 +399,18 @@ for(J_MCResult r : c_MCResults){
 		double meanSRB3 = r.getSuccessRate_b3().get(0)[t];
 		double lowerSRB3 = r.getSuccessRate_b3().get(1)[t];
 		double upperSRB3 = r.getSuccessRate_b3().get(2)[t];
+		
+		double meanAPB1 = r.getAvgProb_b1().get(0)[t];
+		double lowerAPB1 = r.getAvgProb_b1().get(1)[t];
+		double upperAPB1 = r.getAvgProb_b1().get(2)[t];
+		
+		double meanAPB2 = r.getAvgProb_b2().get(0)[t];
+		double lowerAPB2 = r.getAvgProb_b2().get(1)[t];
+		double upperAPB2 = r.getAvgProb_b2().get(2)[t];
+		
+		double meanAPB3 = r.getAvgProb_b3().get(0)[t];
+		double lowerAPB3 = r.getAvgProb_b3().get(1)[t];
+		double upperAPB3 = r.getAvgProb_b3().get(2)[t];
 				
 		excel_exportResults.setCellValue(scenarioIndex, sheetIndex, rowIndex, 1);
 		excel_exportResults.setCellValue(t, sheetIndex, rowIndex, 2);
@@ -412,6 +426,18 @@ for(J_MCResult r : c_MCResults){
 		excel_exportResults.setCellValue(meanSRB3, sheetIndex, rowIndex, 9);
 		excel_exportResults.setCellValue(lowerSRB3, sheetIndex, rowIndex, 10);
 		excel_exportResults.setCellValue(upperSRB3, sheetIndex, rowIndex, 11);
+		
+		excel_exportResults.setCellValue(meanAPB1, sheetIndex, rowIndex, 12);
+		excel_exportResults.setCellValue(lowerAPB1, sheetIndex, rowIndex, 13);
+		excel_exportResults.setCellValue(upperAPB1, sheetIndex, rowIndex, 14);
+		
+		excel_exportResults.setCellValue(meanAPB2, sheetIndex, rowIndex, 15);
+		excel_exportResults.setCellValue(lowerAPB2, sheetIndex, rowIndex, 16);
+		excel_exportResults.setCellValue(upperAPB2, sheetIndex, rowIndex, 17);
+		
+		excel_exportResults.setCellValue(meanAPB3, sheetIndex, rowIndex, 18);
+		excel_exportResults.setCellValue(lowerAPB3, sheetIndex, rowIndex, 19);
+		excel_exportResults.setCellValue(upperAPB3, sheetIndex, rowIndex, 20);
 		rowIndex++;
 	}
 	
@@ -497,6 +523,8 @@ return resultsList;
 DataSet f_storeMCResults()
 {/*ALCODESTART::1755521331481*/
 J_MCResult results = new J_MCResult();
+
+results.setScenarioIndex(simulationCount);
 
 ArrayList<double[]> unceraintyBounds_SR_b1 = f_getUncertaintyBounds(c_succesRate_b1_MC);
 ArrayList<double[]> unceraintyBounds_SR_b2 = f_getUncertaintyBounds(c_succesRate_b2_MC);
