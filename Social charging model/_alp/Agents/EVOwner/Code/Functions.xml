@@ -6,7 +6,7 @@
 		<Id>1746011766273</Id>
 		<Name><![CDATA[f_chargeCar]]></Name>
 		<X>250</X>
-		<Y>490</Y>
+		<Y>580</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -22,7 +22,7 @@
 		<Id>1746011780748</Id>
 		<Name><![CDATA[f_updateSOC]]></Name>
 		<X>250</X>
-		<Y>435</Y>
+		<Y>525</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -42,7 +42,7 @@
 		<Id>1747136105778</Id>
 		<Name><![CDATA[f_setChargingStatus]]></Name>
 		<X>250</X>
-		<Y>455</Y>
+		<Y>545</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -254,7 +254,7 @@
 		<Id>1754493835269</Id>
 		<Name><![CDATA[f_cleanUp]]></Name>
 		<X>250</X>
-		<Y>210</Y>
+		<Y>300</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -303,6 +303,46 @@
 		<Name><![CDATA[f_tryRecheck]]></Name>
 		<X>510</X>
 		<Y>340</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+		<ReturnType>double</ReturnType>
+		<Id>1756215755202</Id>
+		<Name><![CDATA[f_learnNorms]]></Name>
+		<X>510</X>
+		<Y>380</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Parameter>
+			<Name><![CDATA[globalSuccessRate]]></Name>
+			<Type><![CDATA[double]]></Type>
+		</Parameter>
+		<Parameter>
+			<Name><![CDATA[norms_t0]]></Name>
+			<Type><![CDATA[double]]></Type>
+		</Parameter>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>VOID</ReturnModificator>
+		<ReturnType>double</ReturnType>
+		<Id>1756980645328</Id>
+		<Name><![CDATA[f_getPerceivedChargePointPressure]]></Name>
+		<X>510</X>
+		<Y>620</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>

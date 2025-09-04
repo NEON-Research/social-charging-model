@@ -2613,7 +2613,6 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1754380516845</Id>
 		<Name><![CDATA[hs_b1_pop]]></Name>
-		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>2720</X>
 		<Y>960</Y>
 		<Label>
@@ -2670,17 +2669,6 @@ f_cleanUp();</ActionCode>
 			<Direction>UP</Direction>
 			<RelativeWidth>0.8</RelativeWidth>
 		</Bars>
-		<HistogramDataExpression>
-			<Id>1754380516842</Id>
-			<Expression>hs_data_b1_pop</Expression>
-			<ColorPDF>-14774017</ColorPDF>
-			<ColorCDF>-14774017</ColorCDF>
-			<ColorLowPercent>-29696</ColorLowPercent>
-			<ColorHighPercent>-9807155</ColorHighPercent>
-			<ColorMean>-13447886</ColorMean>
-			<LineWidth>1</LineWidth>
-			<Title>b1</Title>
-		</HistogramDataExpression>
 	</Histogram>
 	<Histogram>
 		<Id>1754380516850</Id>
@@ -2829,7 +2817,6 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1754380544233</Id>
 		<Name><![CDATA[hs_b2_pop]]></Name>
-		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>2720</X>
 		<Y>1200</Y>
 		<Label>
@@ -2886,17 +2873,6 @@ f_cleanUp();</ActionCode>
 			<Direction>UP</Direction>
 			<RelativeWidth>0.8</RelativeWidth>
 		</Bars>
-		<HistogramDataExpression>
-			<Id>1754380544230</Id>
-			<Expression>hs_data_b2_pop</Expression>
-			<ColorPDF>-3308225</ColorPDF>
-			<ColorCDF>-14774017</ColorCDF>
-			<ColorLowPercent>-29696</ColorLowPercent>
-			<ColorHighPercent>-9807155</ColorHighPercent>
-			<ColorMean>-13447886</ColorMean>
-			<LineWidth>1</LineWidth>
-			<Title>b2</Title>
-		</HistogramDataExpression>
 	</Histogram>
 	<Histogram>
 		<Id>1754380544238</Id>
@@ -3045,7 +3021,6 @@ f_cleanUp();</ActionCode>
 	<Histogram>
 		<Id>1754380555600</Id>
 		<Name><![CDATA[hs_b3_pop]]></Name>
-		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>2720</X>
 		<Y>1440</Y>
 		<Label>
@@ -3102,17 +3077,6 @@ f_cleanUp();</ActionCode>
 			<Direction>UP</Direction>
 			<RelativeWidth>0.8</RelativeWidth>
 		</Bars>
-		<HistogramDataExpression>
-			<Id>1754380555597</Id>
-			<Expression>hs_data_b3_pop</Expression>
-			<ColorPDF>-16744448</ColorPDF>
-			<ColorCDF>-14774017</ColorCDF>
-			<ColorLowPercent>-29696</ColorLowPercent>
-			<ColorHighPercent>-9807155</ColorHighPercent>
-			<ColorMean>-13447886</ColorMean>
-			<LineWidth>1</LineWidth>
-			<Title>b3</Title>
-		</HistogramDataExpression>
 	</Histogram>
 	<Histogram>
 		<Id>1754380555605</Id>

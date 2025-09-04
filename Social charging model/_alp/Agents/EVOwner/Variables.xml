@@ -4,7 +4,7 @@
 		<Id>1745940748198</Id>
 		<Name><![CDATA[v_EVType]]></Name>
 		<X>250</X>
-		<Y>245</Y>
+		<Y>335</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -23,7 +23,7 @@
 		<Id>1745940755041</Id>
 		<Name><![CDATA[v_batteryCapacity_kWh]]></Name>
 		<X>250</X>
-		<Y>275</Y>
+		<Y>365</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -42,7 +42,7 @@
 		<Id>1745940859598</Id>
 		<Name><![CDATA[v_soc]]></Name>
 		<X>250</X>
-		<Y>365</Y>
+		<Y>455</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -61,7 +61,7 @@
 		<Id>1745940872204</Id>
 		<Name><![CDATA[v_elecCons_kWhperKm]]></Name>
 		<X>250</X>
-		<Y>295</Y>
+		<Y>385</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -83,7 +83,7 @@
 		<Id>1746011357593</Id>
 		<Name><![CDATA[v_electricityInBattery_kWh]]></Name>
 		<X>250</X>
-		<Y>345</Y>
+		<Y>435</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -102,7 +102,7 @@
 		<Id>1746012725326</Id>
 		<Name><![CDATA[v_socChargingThreshold]]></Name>
 		<X>250</X>
-		<Y>315</Y>
+		<Y>405</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -124,7 +124,7 @@
 		<Id>1746022880949</Id>
 		<Name><![CDATA[v_outOfModelCharge_kWh]]></Name>
 		<X>250</X>
-		<Y>390</Y>
+		<Y>480</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -502,26 +502,7 @@
 	</Variable>
 	<Variable Class="PlainVariable">
 		<Id>1754380321023</Id>
-		<Name><![CDATA[v_prob_b1]]></Name>
-		<X>250</X>
-		<Y>130</Y>
-		<Label>
-			<X>10</X>
-			<Y>0</Y>
-		</Label>
-		<PublicFlag>false</PublicFlag>
-		<PresentationFlag>true</PresentationFlag>
-		<ShowLabel>true</ShowLabel>
-		<Properties SaveInSnapshot="true"
-              Constant="false"
-              AccessType="public"
-              StaticVariable="false">
-			<Type><![CDATA[double]]></Type>
-		</Properties>
-	</Variable>
-	<Variable Class="PlainVariable">
-		<Id>1754380325015</Id>
-		<Name><![CDATA[v_prob_b2]]></Name>
+		<Name><![CDATA[v_stand_prob_b1]]></Name>
 		<X>250</X>
 		<Y>150</Y>
 		<Label>
@@ -539,10 +520,29 @@
 		</Properties>
 	</Variable>
 	<Variable Class="PlainVariable">
-		<Id>1754380329814</Id>
-		<Name><![CDATA[v_prob_b3]]></Name>
+		<Id>1754380325015</Id>
+		<Name><![CDATA[v_stand_prob_b2]]></Name>
 		<X>250</X>
 		<Y>170</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1754380329814</Id>
+		<Name><![CDATA[v_stand_prob_b3]]></Name>
+		<X>250</X>
+		<Y>190</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -580,7 +580,7 @@
 		<Id>1754487073931</Id>
 		<Name><![CDATA[v_totalElectricityCharged_kWh]]></Name>
 		<X>250</X>
-		<Y>410</Y>
+		<Y>500</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -675,7 +675,7 @@
 		<Id>1754997684191</Id>
 		<Name><![CDATA[lastCheckDayPart]]></Name>
 		<X>510</X>
-		<Y>370</Y>
+		<Y>420</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -697,7 +697,7 @@
 		<Id>1754997693908</Id>
 		<Name><![CDATA[lastCheckDay]]></Name>
 		<X>510</X>
-		<Y>390</Y>
+		<Y>440</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -719,7 +719,7 @@
 		<Id>1754998744072</Id>
 		<Name><![CDATA[firstCheckDone]]></Name>
 		<X>510</X>
-		<Y>410</Y>
+		<Y>460</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -741,7 +741,7 @@
 		<Id>1754999683981</Id>
 		<Name><![CDATA[plannedPartOfDay]]></Name>
 		<X>510</X>
-		<Y>430</Y>
+		<Y>480</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -800,8 +800,9 @@
 	<Variable Class="PlainVariable">
 		<Id>1755526979943</Id>
 		<Name><![CDATA[v_dailyOutOfModelCharge_kWh]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>510</X>
-		<Y>480</Y>
+		<Y>530</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -819,8 +820,9 @@
 	<Variable Class="PlainVariable">
 		<Id>1755526994816</Id>
 		<Name><![CDATA[v_dailyMissedChargingSessions]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>510</X>
-		<Y>500</Y>
+		<Y>550</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -838,8 +840,85 @@
 	<Variable Class="PlainVariable">
 		<Id>1755527028123</Id>
 		<Name><![CDATA[v_dailyUnfinishedChargingSessions]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>510</X>
-		<Y>520</Y>
+		<Y>570</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1755779731913</Id>
+		<Name><![CDATA[v_perc_charging_pressure]]></Name>
+		<X>250</X>
+		<Y>120</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756912848656</Id>
+		<Name><![CDATA[v_prob_b1]]></Name>
+		<X>250</X>
+		<Y>220</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756912854424</Id>
+		<Name><![CDATA[v_prob_b2]]></Name>
+		<X>250</X>
+		<Y>240</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756912860348</Id>
+		<Name><![CDATA[v_prob_b3]]></Name>
+		<X>250</X>
+		<Y>260</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>

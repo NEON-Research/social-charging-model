@@ -36,13 +36,21 @@ double electricityConsumed_kWh = tripDistance_km * v_elecCons_kWhperKm;
 v_electricityInBattery_kWh -= electricityConsumed_kWh;
 
 if(v_electricityInBattery_kWh < 0){
-	double outOfModelCharging_kWh = abs(v_electricityInBattery_kWh) + v_batteryCapacity_kWh*0.1; //Cars charge to 10% when doing fast charging outside of model
+	double chargeToPercentage = 0.1; //If regular fast charging on route required to 0.1, if often out of model charging because shortage in CPs charge in other neighbrohood to 100
+	if( v_leftUnchargedStreak > 2 ){
+		chargeToPercentage = 1;
+		v_leftUnchargedStreak = 0;
+		//traceln("out of model charge to 100% for EV " + this.getIndex());
+	}
+	
+	double outOfModelCharging_kWh = abs(v_electricityInBattery_kWh) + v_batteryCapacity_kWh * chargeToPercentage;
 	v_outOfModelCharge_kWh += outOfModelCharging_kWh;
 	v_totalElectricityCharged_kWh += outOfModelCharging_kWh;
 	v_electricityInBattery_kWh += outOfModelCharging_kWh;
 	
 	double soc = v_electricityInBattery_kWh / v_batteryCapacity_kWh;
-	if (Math.abs(soc - 0.10) > 0.005) {  // ±0.5% tolerance
+	
+	if (!(Math.abs(soc - 0.10) <= 0.005 || Math.abs(soc - 1) <= 0.005)) {  // ±0.5% tolerance
 		traceln("ERROR: soc = " + roundToInt(v_electricityInBattery_kWh / v_batteryCapacity_kWh * 100) + "% after out of model charging, with OoMC = " + outOfModelCharging_kWh + "kWh, elec in bat = " + v_electricityInBattery_kWh + " bat cap " + v_batteryCapacity_kWh);
 	}
 }
@@ -162,6 +170,7 @@ if(main.p_b2_requestMove && main.v_withinSocialChargingTimes){
 //No CP available
 else {
 	v_status = PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED;
+	count_noCPAvailable++;
 }
 
 
@@ -222,6 +231,7 @@ if( actBehavior && EVsAwaitingCP > 0 ){
 	//Get notified EV Owner
 	EVOwner EVNotified = randomWhere(main.EVOwners, x->x.v_status == PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED);
 	EVNotified.v_status = PARKED_CHARGE_POINT_CHARGING;
+	EVNotified.v_delayedChargePointAccess = true;
 	count_b3_successful++;
 }
 else {
@@ -249,26 +259,61 @@ else {
 double f_socialLearning_b1()
 {/*ALCODESTART::1754388925560*/
 //Update social learning after b1 interaction (successful or unsuccessful)
-double observedFraction = main.successRate_b1;
+double alpha = 0.5;
+double beta = 0.5;
+
+double globalSuccessRate = main.successRate_b1;
+if( main.count_b1_notSuccessful + main.count_b1_successful == 0){
+	globalSuccessRate = main.avgProb_b1;
+}
+
+double personalSuccessRate = successRate_b1;
+if(count_b1_notSuccessful + count_b1_successful == 0){
+	personalSuccessRate = main.avgProb_b1;
+}
+
+double globalCPP = v_perc_charging_pressure;
+if(main.count_chargingSessions > 0 && main.count_requiredChargingSessions > 0){
+	globalCPP = (double) main.count_requiredChargingSessions / main.count_chargingSessions;
+}
+
+double personalCPP = v_perc_charging_pressure;
+if(count_chargingRequired > 0 && count_chargingSessions > 0){
+	personalCPP = (double) count_chargingRequired / count_chargingSessions;
+}
+
+if(globalCPP > 1) { globalCPP = 1; }
+if(personalCPP > 1) { personalCPP = 1; }
+
+double perceivedSuccesRate = personalSuccessRate * alpha + globalSuccessRate * (1-alpha);
+double chargePointPressure = personalCPP * beta + globalCPP * (1-beta);
 
 double norms_t0 = v_norms;
-double trust_t0 = v_trust;
+double rc_t0 = v_reputational_concern;
 double psi_t0 = v_perc_social_interdep;
-double prob_b1_t0 = v_prob_b1;
+double pcp_t0 = v_perc_charging_pressure; //perceived charge point pressure has prior!
+double stand_prob_b1_t0 = v_stand_prob_b1;
 
-double norms_t1 = norms_t0 + main.learningRate_norms_b1 * (1 - norms_t0);
-double trust_t1 = trust_t0 + main.learningRate_trust_b1 * (1 - trust_t0);
-//double psi_t1 = psi_t0 + main.regCoef_norms_psi * (norms_t1 - norms_t0) + main.regCoef_trust_psi * (trust_t1 - trust_t0);
-//double prob_b1_t1 = prob_b1_t0 + main.regCoef_psi_b1 * (psi_t1 - psi_t0);
+//learning independent variables
+double norms_t1 = f_learnNorms(globalSuccessRate, norms_t0); //double norms_t1 = norms_t0 + main.learningRate_norms_b1 * (perceivedSuccesRate - norms_t0);
+double pcp_t1 = pcp_t0 + main.learningRate_pcp_b1 * (chargePointPressure - pcp_t0); 
+double rc_t1 = rc_t0; //no learning in RC
 
-double psi_t1 = psi_t0 + (norms_t1 - norms_t0);// + main.regCoef_trust_psi /10 * (trust_t1 - trust_t0);
-double prob_b1_t1 = prob_b1_t0 + main.regCoef_psi_b1 * 5 * (psi_t1 - psi_t0);
+//update mediator
+double psi_t1 = psi_t0 + main.regCoef_norms_psi_b1 * (norms_t1 - norms_t0) + main.regCoef_pcp_psi_b1 * (pcp_t1 - pcp_t0) + main.regCoef_rc_psi_b1 * (rc_t1 - rc_t0);
 
+//update probability (standardized)
+v_stand_prob_b1 = stand_prob_b1_t0 + main.regCoef_psi_b1 * (psi_t1 - psi_t0) + main.regCoef_rc_b1 * (rc_t1 - rc_t0);
 
 v_norms = norms_t1;
-v_trust = trust_t1;
+v_perc_charging_pressure = pcp_t1;
+v_reputational_concern = rc_t1;
 v_perc_social_interdep = psi_t1;
-v_prob_b1 = prob_b1_t1;
+
+//update probability (normalized)
+v_prob_b1 = main.f_convertStandardizedToProb(v_stand_prob_b1, main.mean_b1, main.sd_b1, true);
+
+
 
 /*ALCODEEND*/}
 
@@ -350,43 +395,132 @@ return act;
 
 double f_socialLearning_b2()
 {/*ALCODESTART::1754404097901*/
-//Update social learning after b2 interaction (successful or unsuccessful)
+//Update social learning after b1 interaction (successful or unsuccessful)
+double alpha = 0.5;
+double beta = 0.5;
+
+//Success rate
+double globalSuccessRate = main.successRate_b2;
+if( main.count_b2_notSuccessful + main.count_b2_successful == 0){
+	globalSuccessRate = main.avgProb_b2;
+}
+
+double personalSuccessRate = successRate_b2;
+if(count_b2_notSuccessful + count_b2_successful == 0){
+	personalSuccessRate = main.avgProb_b2;
+}
+double perceivedSuccesRate = personalSuccessRate * alpha + globalSuccessRate * (1-alpha);
+
+//Charge point pressure
+/*
+double globalCPP = v_perc_charging_pressure;
+if(main.count_chargingSessions > 0 && main.count_requiredChargingSessions > 0){
+	globalCPP = (double) main.count_requiredChargingSessions / main.count_chargingSessions;
+}
+
+double personalCPP = v_perc_charging_pressure;
+if(count_chargingRequired > 0 && count_chargingSessions > 0){
+	personalCPP = (double) count_chargingRequired / count_chargingSessions;
+}
+
+if(globalCPP > 1) { globalCPP = 1; }
+if(personalCPP > 1) { personalCPP = 1; }
+
+double chargePointPressure = personalCPP * beta + globalCPP * (1-beta);
+double pcp_t1 = pcp_t0 + main.learningRate_pcp_b2 * (chargePointPressure - pcp_t0); 
+*/
+
 double norms_t0 = v_norms;
-double trust_t0 = v_trust;
+double rc_t0 = v_reputational_concern;
 double psi_t0 = v_perc_social_interdep;
-double prob_b2_t0 = v_prob_b2;
+double pcp_t0 = v_perc_charging_pressure; //perceived charge point pressure has prior!
+double stand_prob_b2_t0 = v_stand_prob_b2;
 
-double norms_t1 = norms_t0 + main.learningRate_norms_b2 * (1 - norms_t0);
-double trust_t1 = trust_t0 + main.learningRate_trust_b2 * (1 - trust_t0);
-double psi_t1 = psi_t0 + main.regCoef_norms_psi * (norms_t1 - norms_t0) + main.regCoef_trust_psi * (trust_t1 - trust_t0);
+//learning independent variables
+double norms_t1 = f_learnNorms(globalSuccessRate, norms_t0); //double norms_t1 = norms_t0 + main.learningRate_norms_b2 * (perceivedSuccesRate - norms_t0);
+double pcp_t1 = pcp_t0 + main.learningRate_pcp_b2 * (chargePointPressure - pcp_t0); 
+double rc_t1 = rc_t0; //no learning in RC
 
-double prob_b2_t1 = prob_b2_t0 + main.regCoef_psi_b2 * (psi_t1 - psi_t0);
+//update mediator
+double psi_t1 = psi_t0 + main.regCoef_norms_psi_b2b3 * (norms_t1 - norms_t0) + main.regCoef_pcp_psi_b2b3 * (pcp_t1 - pcp_t0) + main.regCoef_rc_psi_b2b3 * (rc_t1 - rc_t0);
+
+//update probability (standardized)
+v_stand_prob_b2 = stand_prob_b2_t0 + main.regCoef_psi_b2 * (psi_t1 - psi_t0) + main.regCoef_pcp_b2 * (pcp_t1 - pcp_t0);
 
 v_norms = norms_t1;
-v_trust = trust_t1;
+v_perc_charging_pressure = pcp_t1;
+v_reputational_concern = rc_t1;
 v_perc_social_interdep = psi_t1;
-v_prob_b2 = prob_b2_t1;
+
+//update probability (normalized)
+v_prob_b2 = main.f_convertStandardizedToProb(v_stand_prob_b2, main.mean_b2, main.sd_b2, false);
+
+//System.out.printf("val_stand_b2=%.4f, unstandardized val_b2=%.4f, prob_b2=%.4f\n", 
+ //   v_stand_prob_b2, main.mean_b2 + v_stand_prob_b2*main.sd_b2, v_prob_b2);
+
 
 /*ALCODEEND*/}
 
 double f_socialLearning_b3()
 {/*ALCODESTART::1754404103304*/
-//Update social learning after b3 interaction (successful or unsuccessful)
+//Update social learning after b1 interaction (successful or unsuccessful)
+double alpha = 0.5;
+double beta = 0.5;
+
+double globalSuccessRate = main.successRate_b3;
+if( main.count_b3_notSuccessful + main.count_b3_successful == 0){
+	globalSuccessRate = main.avgProb_b3;
+}
+
+double personalSuccessRate = successRate_b3;
+if(count_b3_notSuccessful + count_b3_successful == 0){
+	personalSuccessRate = main.avgProb_b3;
+}
+
+double globalCPP = v_perc_charging_pressure;
+if(main.count_chargingSessions > 0 && main.count_requiredChargingSessions > 0){
+	globalCPP = (double) main.count_requiredChargingSessions / main.count_chargingSessions;
+}
+
+double personalCPP = v_perc_charging_pressure;
+if(count_chargingRequired > 0 && count_chargingSessions > 0){
+	personalCPP = (double) count_chargingRequired / count_chargingSessions;
+}
+
+if(globalCPP > 1) { globalCPP = 1; }
+if(personalCPP > 1) { personalCPP = 1; }
+
+double perceivedSuccesRate = personalSuccessRate * alpha + globalSuccessRate * (1-alpha);
+double chargePointPressure = personalCPP * beta + globalCPP * (1-beta);
+
 double norms_t0 = v_norms;
-double trust_t0 = v_trust;
+double rc_t0 = v_reputational_concern;
 double psi_t0 = v_perc_social_interdep;
-double prob_b3_t0 = v_prob_b3;
+double pcp_t0 = v_perc_charging_pressure; //perceived charge point pressure has prior!
+double stand_prob_b3_t0 = v_stand_prob_b3;
 
-double norms_t1 = norms_t0 + main.learningRate_norms_b3 * (1 - norms_t0);
-double trust_t1 = trust_t0 + main.learningRate_trust_b3 * (1 - trust_t0);
-double psi_t1 = psi_t0 + main.regCoef_norms_psi * (norms_t1 - norms_t0) + main.regCoef_trust_psi * (trust_t1 - trust_t0);
+//learning independent variables
+double norms_t1 = f_learnNorms(globalSuccessRate, norms_t0); //double norms_t1 = norms_t0 + main.learningRate_norms_b3 * (perceivedSuccesRate - norms_t0);
+double pcp_t1 = pcp_t0 + main.learningRate_pcp_b3 * (chargePointPressure - pcp_t0); 
+double rc_t1 = rc_t0; //no learning in RC
 
-double prob_b3_t1 = prob_b3_t0 + main.regCoef_psi_b3 * (psi_t1 - psi_t0);
+//update mediator
+double psi_t1 = psi_t0 + main.regCoef_norms_psi_b2b3 * (norms_t1 - norms_t0) + main.regCoef_pcp_psi_b2b3 * (pcp_t1 - pcp_t0) + main.regCoef_rc_psi_b2b3 * (rc_t1 - rc_t0);
+
+//update probability (standardized)
+v_stand_prob_b3 = stand_prob_b3_t0 + main.regCoef_psi_b3 * (psi_t1 - psi_t0) + main.regCoef_pcp_b3 * (pcp_t1 - pcp_t0);
 
 v_norms = norms_t1;
-v_trust = trust_t1;
+v_perc_charging_pressure = pcp_t1;
+v_reputational_concern = rc_t1;
 v_perc_social_interdep = psi_t1;
-v_prob_b3 = prob_b3_t1;
+
+//update probability (normalized)
+v_prob_b3 = main.f_convertStandardizedToProb(v_stand_prob_b3, main.mean_b3, main.sd_b3, false);
+
+//System.out.printf("val_stand b3=%.4f, unstandardized val b3=%.4f, prob b3=%.4f\n", 
+    //v_stand_prob_b3, main.mean_b3 + v_stand_prob_b3*main.sd_b3, v_prob_b3);
+
 
 /*ALCODEEND*/}
 
@@ -457,9 +591,78 @@ if( f_tryAcquireChargePoint()){
 	v_status = PARKED_CHARGE_POINT_CHARGING;
 	count_chargingSessions++;
 	count_successfulRechecks++;
+	v_delayedChargePointAccess = true;
 }
 else {
 	count_unsuccessfulRechecks++;
 }
+/*ALCODEEND*/}
+
+double f_learnNorms(double globalSuccessRate,double norms_t0)
+{/*ALCODESTART::1756215755202*/
+// ---------- Parameters you can tweak ----------
+double s = 1.1;                // conformity exponent: >1 amplifies majorities (try 1.5..3.0)
+double lr_base_up = 0.3;       // base learning speed when adoption > norms (fast rise)
+double lr_base_down = 0.02;    // base learning speed when adoption < norms (slow decay)
+double time_decay_factor = 0.999; // optional: decay lr_up over time to stabilise (close to 1)
+double tiny = 1e-12;
+
+// ---------- Compute conformity / lagged adoption ----------
+double freq = globalSuccessRate; // in your model this equals adoption
+// Use a lag to avoid norms only mirroring instant adoption (initialize main.prev_global_adoption = -1.0)
+double laggedFreq = (main.prev_global_adoption >= 0.0) ? main.prev_global_adoption : main.avgProb_b1;
+
+// clamp laggedFreq to [0,1] to avoid NaN in pow
+if(laggedFreq < 0.0) laggedFreq = 0.0;
+if(laggedFreq > 1.0) laggedFreq = 1.0;
+
+// conformity amplification (optional)
+double numerator = Math.pow(laggedFreq, s);
+double denominator = numerator + Math.pow(1.0 - laggedFreq, s) + tiny;
+double conformitySignal = numerator / denominator; // in [0,1]
+
+// define delta = how norms should change this tick
+// positive if adoption high (reinforce norm), negative if low (norm decays)
+double delta = conformitySignal * lr_base_up - (1.0 - conformitySignal) * lr_base_down;
+
+// update norms directly, no fixed target
+double norms_t1 = norms_t0 + delta;
+
+// clamp to [0,1]
+if(norms_t1 < 0.0) norms_t1 = 0.0;
+if(norms_t1 > 1.0) norms_t1 = 1.0;
+
+// save lag
+main.prev_global_adoption = freq;
+
+// Assign back
+if (Double.isNaN(norms_t1)) {
+    traceln("Warning: norms_t1 is NaN at time " + time());
+    norms_t1 = norms_t0;  // fallback to previous value, or set to 0
+}
+
+return norms_t1;
+
+/*ALCODEEND*/}
+
+double f_getPerceivedChargePointPressure()
+{/*ALCODESTART::1756980645328*/
+
+/*
+double pcp_t0 = v_perc_charging_pressure;
+// missedThisSession: true if agent missed charging, false if succeeded
+double missed = missedThisSession ? 1.0 : 0.0;
+
+// EMA update
+double alpha = 0.8; // memory factor: high alpha = slow decay, low alpha = fast decay
+double pcp_t1 = alpha * pcp_t0 + (1 - alpha) * missed;
+
+// Optional: clip to [0,1] just in case
+pcp_t1 = Math.max(0.0, Math.min(1.0, pcp_t1));
+
+
+// Update state
+pcp_t0 = pcp_t1;
+*/
 /*ALCODEEND*/}
 

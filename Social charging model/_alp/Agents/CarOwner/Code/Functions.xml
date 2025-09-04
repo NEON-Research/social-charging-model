@@ -24,7 +24,7 @@
 		<ReturnModificator>VOID</ReturnModificator>
 		<ReturnType>double</ReturnType>
 		<Id>1745940705454</Id>
-		<Name><![CDATA[f_updateTripStatus]]></Name>
+		<Name><![CDATA[f_updateICETripStatus]]></Name>
 		<X>50</X>
 		<Y>250</Y>
 		<Label>

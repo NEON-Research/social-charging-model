@@ -21,7 +21,7 @@ if (v_nextTrip == null && !c_tripSchedule.isEmpty()) {
 f_initializeStatus();
 /*ALCODEEND*/}
 
-double f_updateTripStatus(double timestepStart,double minutesPerTimestep)
+double f_updateICETripStatus(double timestepStart,double minutesPerTimestep)
 {/*ALCODESTART::1745940705454*/
 //Start trip in timestep?
 int departureTime = (int) v_nextTrip.getDepartureTime();
@@ -29,19 +29,6 @@ boolean departureInTimestep = f_isInCurrentTimestep(departureTime, timestepStart
 
 //Start if in timestep
 if( departureInTimestep ){
-	//for EVs
-    if (v_type == EV) {
-    	if(v_status == PARKED_CHARGE_POINT_IDLE){
-    		f_leaveChargePoint();
-    	}
-    	else if(v_status == PARKED_CHARGE_POINT_CHARGING ){
-    		f_leaveChargePoint();
-    		count_leftWhileCharging++;
-    	}
-    	else if( v_status == PARKED_NON_CHARGE_POINT_CHARGING_NOT_REQUIRED){
-    		count_leftUncharged++;
-    	}
-    }
     v_status = ON_TRIP;
 }
 
@@ -50,16 +37,6 @@ int arrivalTime = (int) v_nextTrip.getArrivalTime();
 boolean arrivalInTimestep = f_isInCurrentTimestep(arrivalTime, timestepStart, minutesPerTimestep);
 if (arrivalInTimestep) {
     v_km_driven += v_nextTrip.getDistance_km();
-
-    //for EVs
-    if (v_type == EV) {
-    	//this.f_updateChargingStatus(v_nextTrip); // Cast and call the function
-        ((EVOwner) this).f_updateSOC(v_nextTrip.getDistance_km()); // Cast and call the function
-    	//((EVOwner) this).f_setParkingStatus();
-    }
-    else {
-    	v_status = PARKED_NON_CHARGE_POINT_CHARGING_NOT_REQUIRED;
-    }
 
 	//New next trip
     f_updateNextTrip();
@@ -108,6 +85,7 @@ this.deleteSelf();
 double f_leaveChargePoint()
 {/*ALCODESTART::1754909149408*/
 v_chargePoint.release();
+v_delayedChargePointAccess = false;
 v_chargePoint = null;
 /*ALCODEEND*/}
 
@@ -121,16 +99,21 @@ boolean departureInTimestep = f_isInCurrentTimestep(departureTime, timestepStart
 if( departureInTimestep ){
 	//for EVs
     if (v_type == EV) {
+    	//Count unfulfilled charging sessions
+    	if(v_status == PARKED_CHARGE_POINT_CHARGING) {
+    		count_leftWhileCharging++;
+    		if( v_delayedChargePointAccess ){
+    			count_leftWhileChargingWithDelayedAccess++;
+    		}
+    	}
+    	//Count missed charging sessions
+    	else if( v_status == PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED){
+    		count_leftUncharged++;
+    		v_leftUnchargedStreak++;
+    	}
     	//Leave CP
     	if(v_chargePoint != null){
     		f_leaveChargePoint();
-    	}
-    	//Count unfulfilled charging sessions
-    	if(v_status == PARKED_CHARGE_POINT_CHARGING ){
-    		count_leftWhileCharging++;
-    	}
-    	else if( v_status == PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED){
-    		count_leftUncharged++;
     	}
     }
     v_status = ON_TRIP;

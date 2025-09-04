@@ -25,13 +25,49 @@ m.v_recheckCPAvailability = v_recheckCPAvailability;
 m.learningRate_norms_b1 = learningRate_norms_b1;
 m.learningRate_norms_b2 = learningRate_norms_b2;
 m.learningRate_norms_b3 = learningRate_norms_b3;
-m.learningRate_trust_b1 = learningRate_trust_b1;
+m.learningRate_pcp_b1 = learningRate_pcp_b1;
+m.learningRate_pcp_b2 = learningRate_pcp_b2;
+m.learningRate_pcp_b3 = learningRate_pcp_b3;
 m.learningRate_trust_b2 = learningRate_trust_b2;
 m.learningRate_trust_b3 = learningRate_trust_b3;
 
+m.mean_norms = mean_norms;
+m.mean_pcp = mean_pcp;
+m.mean_rc = mean_rc;
+m.mean_psi = mean_psi;
+m.mean_b1 = mean_b1;
+m.mean_b2 = mean_b2;
+m.mean_b3 = mean_b3;
+
+m.sd_norms = sd_norms;
+m.sd_pcp = sd_pcp;
+m.sd_rc = sd_rc;
+m.sd_psi = sd_psi;
+m.sd_b1 = sd_b1;
+m.sd_b2 = sd_b2;
+m.sd_b3 = sd_b3;
+
+m.regCoef_norms_psi_b1 = regCoef_norms_psi_b1;
+m.regCoef_norms_psi_b2b3 = regCoef_norms_psi_b2b3;
+m.regCoef_pcp_b2 = regCoef_pcp_b2;
+m.regCoef_pcp_b3 = regCoef_pcp_b3;
+m.regCoef_pcp_psi_b1 = regCoef_pcp_psi_b1;
+m.regCoef_pcp_psi_b2b3 = regCoef_pcp_psi_b2b3;
+m.regCoef_psi_b1 = regCoef_psi_b1;
+m.regCoef_psi_b2 = regCoef_psi_b2;
+m.regCoef_psi_b3 = regCoef_psi_b3;
+m.regCoef_rc_b1 = regCoef_rc_b1;
+m.regCoef_rc_psi_b1 = regCoef_rc_psi_b1;
+m.regCoef_rc_psi_b2b3 = regCoef_rc_psi_b2b3;
+
+m.correlationMatrix = correlationMatrix;
+m.sortedRealData = sortedRealData;
+
+m.f_initializeModel();
 m.f_simulatePeriod(m.p_nbOfTimesteps);
-if(v_rapidRun = false){
+if(v_rapidRun == false){
 	m.viewArea.navigateTo();
+	//traceln("should have navigated to view area");
 }
 /*ALCODEEND*/}
 
@@ -122,12 +158,14 @@ else {
 	
 	//AVG SOCIOPSYCHOLOGICAL VARIABLES
 	DataSet data_avgNorms = new DataSet(size);
-	DataSet data_avgTrust = new DataSet(size);
+	DataSet data_avgRC = new DataSet(size);
 	DataSet data_avgPSI = new DataSet(size);
+	DataSet data_avgPCP = new DataSet(size);
 	for(int i=0; i < m.ar_avgNorms.length; i++){
 		data_avgNorms.add(i, m.ar_avgNorms[i]);
-		data_avgTrust.add(i, m.ar_avgTrust[i]);
+		data_avgRC.add(i, m.ar_avgRC[i]);
 		data_avgPSI.add(i, m.ar_avgPSI[i]);
+		data_avgPCP.add(i, m.ar_avgPCP[i]);
 	}
 		
 	pl_successRate1.setFixedHorizontalScale(0, v_numberOfTimesteps);
@@ -170,8 +208,9 @@ else {
 		//AVG SOCIOPSYCHOLOGICAL VARIABLES
 		pl_socioPsychologicalLearning.removeAll();
 		pl_socioPsychologicalLearning.addDataSet(data_avgNorms, "Average Norms", sandyBrown, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
-		pl_socioPsychologicalLearning.addDataSet(data_avgTrust, "Average Trust", lightSeaGreen, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+		pl_socioPsychologicalLearning.addDataSet(data_avgRC, "Average RC", lightSeaGreen, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 		pl_socioPsychologicalLearning.addDataSet(data_avgPSI, "Average PSI", lightSlateBlue, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+		pl_socioPsychologicalLearning.addDataSet(data_avgPCP, "Average PCP", orchid, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 		
 		//OCCURANCE
 		DataSet data_successful_b1 = new DataSet(size);
@@ -308,8 +347,12 @@ c_avgProb_b3_MC.add(m.ar_avgProbability_b3);
 
 c_outOfModelChargingPerDay.add(m.ar_outOfModelCharging);
 c_leftWhileChargingPerDay.add(m.ar_leftWhileCharging);
+c_leftWhileChargingWithDelayedAccessPerDay.add(m.ar_leftWhileChargingWithDelayedAccess);
 c_leftUnchargedPerDay.add(m.ar_leftUncharged);
+c_percSatisfiedChargingSessionsPerDay.add(m.ar_percSatisfiedChargingSessions);
 
+c_chargingSessionsPerDay.add(m.ar_chargingSessions);
+c_requiredChargingSessionsPerDay.add(m.ar_requiredChargingSessions);
 /*ALCODEEND*/}
 
 double f_setMCGraphs(J_MCResult results)
@@ -317,6 +360,7 @@ double f_setMCGraphs(J_MCResult results)
 //Create datasets
 int size = results.getSuccessRate_b1().get(0).length;
 int days = results.getLeftUnchargedPerDay().get(0).length;
+int weeks = results.getLeftUnchargedPerWeek().get(0).length;
 DataSet data_successRate_b1 = new DataSet(size);
 DataSet data_successRate_b2 = new DataSet(size);
 DataSet data_successRate_b3 = new DataSet(size);
@@ -326,6 +370,9 @@ DataSet data_avgProbability_b3 = new DataSet(size);
 DataSet data_outOfModelCharging = new DataSet(days);
 DataSet data_leftWhileCharging = new DataSet(days);
 DataSet data_leftUncharged = new DataSet(days);
+DataSet data_percSatisfiedChargingSessions = new DataSet(days);
+DataSet data_chargingSessions = new DataSet(days);
+DataSet data_requiredChargingSessions = new DataSet(days);
 //DataSet data_successRate_rechecks = new DataSet(size);
 
 for(int i = 0; i < size; i++){
@@ -339,9 +386,12 @@ for(int i = 0; i < size; i++){
 }
 
 for(int i = 0; i < days; i++){	
-	data_outOfModelCharging.add(i, results.getOutOfModelChargingPerDay().get(0)[i]);
-	data_leftUncharged.add(i, results.getLeftUnchargedPerDay().get(0)[i]);	
-	data_leftWhileCharging.add(i, results.getLeftWhileChargingPerDay().get(0)[i]);
+	data_outOfModelCharging.add(i, results.getOutOfModelChargingRollingAvg().get(0)[i]);
+	data_leftUncharged.add(i, results.getLeftUnchargedRollingAvg().get(0)[i]);	
+	data_leftWhileCharging.add(i, results.getLeftWhileChargingRollingAvg().get(0)[i]);
+	data_percSatisfiedChargingSessions.add(i, results.getPercSatisfiedChargingSessionsRollingAvg().get(0)[i]);
+	data_requiredChargingSessions.add(i, results.getRequiredChargingSessionsRollingAvg().get(0)[i]);
+	data_chargingSessions.add(i, results.getChargingSessionsRollingAvg().get(0)[i]);
 }
 
 Color color = randomFrom(c_colorPalette);
@@ -356,8 +406,11 @@ pl_avgProb2.setFixedHorizontalScale(0, size);
 pl_avgProb3.setFixedHorizontalScale(0, size);
 
 pl_outOfModelCharge.setFixedHorizontalScale(0, days);
+pl_chargingSatisfaction.setFixedHorizontalScale(0, days);
 pl_leftWhileCharging.setFixedHorizontalScale(0, days);
 pl_leftUncharged.setFixedHorizontalScale(0, days);
+pl_chargingSessions.setFixedHorizontalScale(0, days);
+pl_requiredChargingSessions.setFixedHorizontalScale(0, days);
 
 pl_successRate1.addDataSet(data_successRate_b1, title, color, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 pl_successRate2.addDataSet(data_successRate_b2, title, color, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
@@ -365,10 +418,14 @@ pl_successRate3.addDataSet(data_successRate_b3, title, color, true, Chart.INTERP
 pl_avgProb1.addDataSet(data_avgProbability_b1, title, color, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 pl_avgProb2.addDataSet(data_avgProbability_b2, title, color, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 pl_avgProb3.addDataSet(data_avgProbability_b3, title, color, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
-	
+
+pl_chargingSatisfaction.addDataSet(data_percSatisfiedChargingSessions, title, color, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 pl_outOfModelCharge.addDataSet(data_outOfModelCharging, title, color, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 pl_leftWhileCharging.addDataSet(data_leftWhileCharging, title, color, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 pl_leftUncharged.addDataSet(data_leftUncharged, title, color, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+
+pl_chargingSessions.addDataSet(data_chargingSessions, title, color, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_requiredChargingSessions.addDataSet(data_requiredChargingSessions, title, color, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 /*ALCODEEND*/}
 
 DataSet f_writeMCToExcel()
@@ -526,27 +583,36 @@ J_MCResult results = new J_MCResult();
 
 results.setScenarioIndex(simulationCount);
 
-ArrayList<double[]> unceraintyBounds_SR_b1 = f_getUncertaintyBounds(c_succesRate_b1_MC);
-ArrayList<double[]> unceraintyBounds_SR_b2 = f_getUncertaintyBounds(c_succesRate_b2_MC);
-ArrayList<double[]> unceraintyBounds_SR_b3 = f_getUncertaintyBounds(c_succesRate_b3_MC);
-ArrayList<double[]> unceraintyBounds_AP_b1 = f_getUncertaintyBounds(c_avgProb_b1_MC);
-ArrayList<double[]> unceraintyBounds_AP_b2 = f_getUncertaintyBounds(c_avgProb_b2_MC);
-ArrayList<double[]> unceraintyBounds_AP_b3 = f_getUncertaintyBounds(c_avgProb_b3_MC);
-ArrayList<double[]> unceraintyBounds_OoMC = f_getUncertaintyBounds(c_outOfModelChargingPerDay);
-ArrayList<double[]> unceraintyBounds_LWH = f_getUncertaintyBounds(c_leftWhileChargingPerDay);
-ArrayList<double[]> unceraintyBounds_LUC = f_getUncertaintyBounds(c_leftUnchargedPerDay);
+ArrayList<double[]> uncertaintyBounds_SR_b1 = f_getUncertaintyBounds(c_succesRate_b1_MC);
+ArrayList<double[]> uncertaintyBounds_SR_b2 = f_getUncertaintyBounds(c_succesRate_b2_MC);
+ArrayList<double[]> uncertaintyBounds_SR_b3 = f_getUncertaintyBounds(c_succesRate_b3_MC);
+ArrayList<double[]> uncertaintyBounds_AP_b1 = f_getUncertaintyBounds(c_avgProb_b1_MC);
+ArrayList<double[]> uncertaintyBounds_AP_b2 = f_getUncertaintyBounds(c_avgProb_b2_MC);
+ArrayList<double[]> uncertaintyBounds_AP_b3 = f_getUncertaintyBounds(c_avgProb_b3_MC);
+ArrayList<double[]> uncertaintyBounds_OoMC = f_getUncertaintyBounds(c_outOfModelChargingPerDay);
+ArrayList<double[]> uncertaintyBounds_LWC = f_getUncertaintyBounds(c_leftWhileChargingPerDay);
+ArrayList<double[]> uncertaintyBounds_LWCWDA = f_getUncertaintyBounds(c_leftWhileChargingWithDelayedAccessPerDay);
+ArrayList<double[]> uncertaintyBounds_LUC = f_getUncertaintyBounds(c_leftUnchargedPerDay);
+ArrayList<double[]> uncertaintyBounds_SCS = f_getUncertaintyBounds(c_percSatisfiedChargingSessionsPerDay);
+ArrayList<double[]> uncertaintyBounds_CS = f_getUncertaintyBounds(c_chargingSessionsPerDay);
+ArrayList<double[]> uncertaintyBounds_RCS = f_getUncertaintyBounds(c_requiredChargingSessionsPerDay);
 
-results.setSuccessRate_b1(unceraintyBounds_SR_b1);
-results.setSuccessRate_b2(unceraintyBounds_SR_b2);
-results.setSuccessRate_b3(unceraintyBounds_SR_b3);
+results.setSuccessRate_b1(uncertaintyBounds_SR_b1);
+results.setSuccessRate_b2(uncertaintyBounds_SR_b2);
+results.setSuccessRate_b3(uncertaintyBounds_SR_b3);
 
-results.setAvgProb_b1(unceraintyBounds_AP_b1);
-results.setAvgProb_b2(unceraintyBounds_AP_b2);
-results.setAvgProb_b3(unceraintyBounds_AP_b3);
+results.setAvgProb_b1(uncertaintyBounds_AP_b1);
+results.setAvgProb_b2(uncertaintyBounds_AP_b2);
+results.setAvgProb_b3(uncertaintyBounds_AP_b3);
 
-results.setOutOfModelChargingPerDay(unceraintyBounds_OoMC);
-results.setLeftWhileChargingPerDay(unceraintyBounds_LWH);
-results.setLeftUnchargedPerDay(unceraintyBounds_LUC);
+results.setOutOfModelChargingPerDay(uncertaintyBounds_OoMC);
+results.setLeftWhileChargingPerDay(uncertaintyBounds_LWC);
+results.setLeftWhileChargingWithDelayedAccessPerDay(uncertaintyBounds_LWCWDA);
+results.setLeftUnchargedPerDay(uncertaintyBounds_LUC);
+results.setPercSatisfiedChargingSessionsPerDay(uncertaintyBounds_SCS);
+
+results.setChargingSessionsPerDay(uncertaintyBounds_CS);
+results.setRequiredChargingSessionsPerDay(uncertaintyBounds_RCS);
 
 c_MCResults.add(results);
 
@@ -610,8 +676,11 @@ c_avgProb_b2_MC.clear();
 c_avgProb_b3_MC.clear();
 c_outOfModelChargingPerDay.clear();
 c_leftWhileChargingPerDay.clear();
+c_leftWhileChargingWithDelayedAccessPerDay.clear();
+c_percSatisfiedChargingSessionsPerDay.clear();
 c_leftUnchargedPerDay.clear();
-
+c_chargingSessionsPerDay.clear();
+c_requiredChargingSessionsPerDay.clear();
 /*ALCODEEND*/}
 
 double f_excelClearSheets()
@@ -669,5 +738,266 @@ for (int r = lastRow; r >= 3; r--) {
 	}
 }
 return 1; // assume header only
+/*ALCODEEND*/}
+
+double f_getRollingAverage(int days)
+{/*ALCODESTART::1755769439993*/
+int window = 7;
+
+// Temporary sums to build rolling averages
+double sum_out = 0;
+double sum_leftUncharged = 0;
+double sum_leftWhileCharging = 0;
+
+int size = (int) Math.round(days/window);
+DataSet data_outOfModelCharging_rolling = new DataSet(size);
+DataSet data_leftUncharged_rolling = new DataSet(size);
+DataSet data_leftWhileCharging_rolling = new DataSet(size);
+
+for (int i = 0; i < days; i++) {    
+    double out = results.getOutOfModelChargingPerDay().get(0)[i];
+    double uncharged = results.getLeftUnchargedPerDay().get(0)[i];
+    double whileCharging = results.getLeftWhileChargingPerDay().get(0)[i];
+
+    // --- Rolling average part ---
+    sum_out += out;
+    sum_leftUncharged += uncharged;
+    sum_leftWhileCharging += whileCharging;
+
+    // Once we have enough days in the window, subtract the trailing value
+    if (i >= window) {
+        sum_out -= results.getOutOfModelChargingPerDay().get(0)[i - window];
+        sum_leftUncharged -= results.getLeftUnchargedPerDay().get(0)[i - window];
+        sum_leftWhileCharging -= results.getLeftWhileChargingPerDay().get(0)[i - window];
+    }
+
+    // Only start adding rolling averages after first `window` days
+    if (i >= window - 1) {
+        double avg_out = sum_out / window;
+        double avg_uncharged = sum_leftUncharged / window;
+        double avg_whileCharging = sum_leftWhileCharging / window;
+
+        data_outOfModelCharging_rolling.add(i, avg_out);
+        data_leftUncharged_rolling.add(i, avg_uncharged);
+        data_leftWhileCharging_rolling.add(i, avg_whileCharging);
+    }
+}
+
+/*ALCODEEND*/}
+
+double f_getMeanAndSD()
+{/*ALCODESTART::1756909501612*/
+String sheetName = "mean_and_sd";
+
+int columnIndex = 2;
+mean_norms = ef_spvars.getCellNumericValue(sheetName, 2, columnIndex);
+mean_pcp = ef_spvars.getCellNumericValue(sheetName, 3, columnIndex);
+mean_rc = ef_spvars.getCellNumericValue(sheetName, 4, columnIndex);
+
+mean_psi = ef_spvars.getCellNumericValue(sheetName, 5, columnIndex);
+
+mean_b1 = ef_spvars.getCellNumericValue(sheetName, 6, columnIndex);
+mean_b2 = ef_spvars.getCellNumericValue(sheetName, 7, columnIndex);
+mean_b3 = ef_spvars.getCellNumericValue(sheetName, 8, columnIndex);
+
+columnIndex = 3;
+sd_norms = ef_spvars.getCellNumericValue(sheetName, 2, columnIndex);
+sd_pcp = ef_spvars.getCellNumericValue(sheetName, 3, columnIndex);
+sd_rc = ef_spvars.getCellNumericValue(sheetName, 4, columnIndex);
+
+sd_psi = ef_spvars.getCellNumericValue(sheetName, 5, columnIndex);
+
+sd_b1 = ef_spvars.getCellNumericValue(sheetName, 6, columnIndex);
+sd_b2 = ef_spvars.getCellNumericValue(sheetName, 7, columnIndex);
+sd_b3 = ef_spvars.getCellNumericValue(sheetName, 8, columnIndex);
+
+/*ALCODEEND*/}
+
+double f_getRegressionCoefficients()
+{/*ALCODESTART::1756910926316*/
+//--B1--
+ef_spvars.readFile();
+
+if( regCoefFromData ){
+	String var1 = "norms";
+	String var2 = "perceived_social_interdependence";
+	String var3 = "b1";
+	double value = f_mediationResultsQuery(var1, var2, var3);
+	regCoef_norms_psi_b1 = value;
+	
+	var1 = "perceived_charging_pressure";
+	value = f_mediationResultsQuery(var1, var2, var3);
+	regCoef_pcp_psi_b1 = value;
+	
+	var1 = "reputational_concern";
+	value = f_mediationResultsQuery(var1, var2, var3);
+	regCoef_rc_psi_b1 = value;
+	
+	var1 = "perceived_social_interdependence";
+	var2 = "b1_move_vehicle";
+	value = f_mediationResultsQuery(var1, var2, var3);
+	regCoef_psi_b1 = value;
+	
+	var1 = "reputational_concern";
+	var2 = "b1_move_vehicle";
+	value = f_mediationResultsQuery(var1, var2, var3);
+	regCoef_rc_b1 = value;
+	
+	//--B2B3--
+	var1 = "norms";
+	var2 = "perceived_social_interdependence";
+	var3 = "b2/b3";
+	value = f_mediationResultsQuery(var1, var2, var3);
+	regCoef_norms_psi_b2b3 = value;
+	
+	var1 = "perceived_charging_pressure";
+	value = f_mediationResultsQuery(var1, var2, var3);
+	regCoef_pcp_psi_b2b3 = value;
+	
+	var1 = "reputational_concern";
+	value = f_mediationResultsQuery(var1, var2, var3);
+	regCoef_rc_psi_b2b3 = value;
+	
+	//--B2--
+	var1 = "perceived_social_interdependence";
+	var2 = "b2_request_move";
+	var3 = "b2";
+	value = f_mediationResultsQuery(var1, var2, var3);
+	regCoef_psi_b2 = value;
+	
+	var1 = "perceived_charging_pressure";
+	var2 = "b2_request_move";
+	value = f_mediationResultsQuery(var1, var2, var3);
+	regCoef_pcp_b2 = value;
+	
+	//--B3--
+	var1 = "perceived_social_interdependence";
+	var2 = "b3_notify_neighbor";
+	var3 = "b3";
+	value = f_mediationResultsQuery(var1, var2, var3);
+	regCoef_psi_b3 = value;
+	
+	var1 = "perceived_charging_pressure";
+	var2 = "b3_notify_neighbor";
+	value = f_mediationResultsQuery(var1, var2, var3);
+	regCoef_pcp_b3 = value;
+}
+else {
+	regCoef_norms_psi_b1 = 0.3;
+	regCoef_norms_psi_b2b3 = 0.3;
+	regCoef_pcp_psi_b1 = 0.3;
+	regCoef_pcp_psi_b2b3 = 0.3;
+	regCoef_psi_b1 = 0.3;
+	regCoef_psi_b2 = 0.3;
+	regCoef_psi_b3 = 0.3;
+	regCoef_rc_b1 = 0.3;
+	regCoef_rc_psi_b1 = 0.3;
+	regCoef_rc_psi_b2b3 = 0.3;
+	regCoef_pcp_b2 = 0.3;
+	regCoef_pcp_b3 = 0.3;
+}
+/*ALCODEEND*/}
+
+double f_mediationResultsQuery(String var1,String var2,String var3)
+{/*ALCODESTART::1756911459525*/
+double value = (double) selectFirstValue(double.class,
+	"SELECT value FROM mediation_results WHERE " + 
+		"var_1 = ? AND " +
+		"var_2 = ? AND " + 
+		"behavior = ? LIMIT 1;",
+    	var1,
+    	var2,
+    	var3
+);
+
+//traceln("var1 = " + var1 + " var2 = " + var2 + " value = " + value);
+return value;
+
+/*ALCODEEND*/}
+
+double f_getCorrelationMatrixFromExcel()
+{/*ALCODESTART::1756911500687*/
+
+String sheetName = "correlation_matrix";
+int matrixSize = ef_spvars.getLastRowNum(sheetName) - 1; //-1 as i do not need both b2 and b3 as their correlation = 1, they are the same
+
+correlationMatrix = new double[matrixSize-1][matrixSize-1];
+
+for(int rowIndex = 2; rowIndex < matrixSize + 1; rowIndex++){
+	for(int columnIndex = 2; columnIndex < matrixSize + 1; columnIndex++){
+		double value = ef_spvars.getCellNumericValue(sheetName, rowIndex, columnIndex);
+		correlationMatrix[rowIndex-2][columnIndex-2] = value;
+	}
+}
+	
+/*ALCODEEND*/}
+
+List<List<Double>> f_getSortedSocialPsychologicalData()
+{/*ALCODESTART::1756911534006*/
+String sheetName = "frequency_list";
+int size = ef_spvars.getLastRowNum(sheetName);
+/*
+List<Object> headers = ef_spvars.getRow(sheetName, 0);
+
+Map<String, Integer> columnIndexMap = new HashMap<>();
+
+for (Cell cell : headerRow) {
+    String header = cell.getStringCellValue().trim().toLowerCase();
+    columnIndexMap.put(header, cell.getColumnIndex());
+}
+
+// Now extract your needed indexes
+int col_norms = columnIndexMap.getOrDefault("norms", -1);
+int col_trust = columnIndexMap.getOrDefault("trust", -1);
+int col_rc    = columnIndexMap.getOrDefault("rc", -1);
+int col_psi   = columnIndexMap.getOrDefault("psi", -1);
+int col_b1    = columnIndexMap.getOrDefault("b1", -1);
+int col_b2    = columnIndexMap.getOrDefault("b2", -1);
+int col_b3    = columnIndexMap.getOrDefault("b3", -1);
+*/
+
+int col_norms = 1;
+//int col_trust = 2;
+int col_rc = 2;
+int col_psi = 3;
+int col_pcp = 4;
+int col_b1 = 5;
+int col_b2 = 6;
+int col_b3 = 7;
+
+ArrayList<Double> c_norms = new ArrayList<>();
+//ArrayList<Double> c_trust = new ArrayList<>();
+ArrayList<Double> c_rc = new ArrayList<>();
+ArrayList<Double> c_psi = new ArrayList<>();
+ArrayList<Double> c_pcp = new ArrayList<>();
+ArrayList<Double> c_b1 = new ArrayList<>();
+ArrayList<Double> c_b2 = new ArrayList<>();
+ArrayList<Double> c_b3 = new ArrayList<>();
+
+for(int rowIndex = 2; rowIndex < size + 1; rowIndex++){
+	c_norms.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_norms));
+	//c_trust.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_trust));
+	c_rc.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_rc));
+	c_psi.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_psi));
+	c_pcp.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_pcp));
+	c_b1.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_b1));
+	c_b2.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_b2));
+	c_b3.add(ef_spvars.getCellNumericValue(sheetName, rowIndex, col_b3));
+}
+
+
+Collections.sort(c_norms);
+//Collections.sort(c_trust);
+Collections.sort(c_rc);
+Collections.sort(c_psi);
+Collections.sort(c_pcp);
+Collections.sort(c_b1);
+Collections.sort(c_b2);
+Collections.sort(c_b3);
+
+//List<List<Double>> sortedRealData = new ArrayList<>();
+//return sortedRealData = Arrays.asList(c_norms, c_trust, c_rc, c_psi, c_pcp, c_b1, c_b2, c_b3);
+sortedRealData = new ArrayList<>();
+sortedRealData = Arrays.asList(c_norms, c_rc, c_psi, c_pcp, c_b1, c_b2, c_b3);
 /*ALCODEEND*/}
 

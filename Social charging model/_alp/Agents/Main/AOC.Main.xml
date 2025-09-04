@@ -8,7 +8,7 @@ import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.commons.math3.linear.*;
 import java.util.*;
 ]]></Import>
-	<StartupCode><![CDATA[f_initializeModel();
+	<StartupCode><![CDATA[//f_initializeModel();
 ]]></StartupCode>
 	<Generic>false</Generic>
 	<GenericParameter>
@@ -107,8 +107,9 @@ import java.util.*;
 		<ExcelFile>
 			<Id>1754383332051</Id>
 			<Name><![CDATA[ef_spvars]]></Name>
+			<ExcludeFromBuild>true</ExcludeFromBuild>
 			<X>-250</X>
-			<Y>50</Y>
+			<Y>30</Y>
 			<Label>
 				<X>10</X>
 				<Y>0</Y>

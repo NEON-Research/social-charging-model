@@ -162,7 +162,7 @@
 		<Id>1752581980950</Id>
 		<Name><![CDATA[correlationMatrix]]></Name>
 		<X>-250</X>
-		<Y>70</Y>
+		<Y>50</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -180,9 +180,8 @@
 	<Variable Class="PlainVariable">
 		<Id>1752586180911</Id>
 		<Name><![CDATA[sortedRealData]]></Name>
-		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>-250</X>
-		<Y>90</Y>
+		<Y>70</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -218,9 +217,9 @@
 	</Variable>
 	<Variable Class="PlainVariable">
 		<Id>1752610499495</Id>
-		<Name><![CDATA[regCoef_trust_psi]]></Name>
+		<Name><![CDATA[regCoef_pcp_psi_b1]]></Name>
 		<X>-250</X>
-		<Y>160</Y>
+		<Y>150</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -237,9 +236,9 @@
 	</Variable>
 	<Variable Class="PlainVariable">
 		<Id>1752610528292</Id>
-		<Name><![CDATA[regCoef_norms_psi]]></Name>
+		<Name><![CDATA[regCoef_norms_psi_b1]]></Name>
 		<X>-250</X>
-		<Y>180</Y>
+		<Y>130</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -256,9 +255,9 @@
 	</Variable>
 	<Variable Class="PlainVariable">
 		<Id>1752610548760</Id>
-		<Name><![CDATA[regCoef_rc_psi]]></Name>
+		<Name><![CDATA[regCoef_rc_psi_b1]]></Name>
 		<X>-250</X>
-		<Y>200</Y>
+		<Y>170</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -277,7 +276,7 @@
 		<Id>1752610564954</Id>
 		<Name><![CDATA[regCoef_psi_b1]]></Name>
 		<X>-250</X>
-		<Y>220</Y>
+		<Y>270</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -296,7 +295,7 @@
 		<Id>1753174102326</Id>
 		<Name><![CDATA[regCoef_psi_b2]]></Name>
 		<X>-250</X>
-		<Y>240</Y>
+		<Y>310</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -315,7 +314,7 @@
 		<Id>1753174105580</Id>
 		<Name><![CDATA[regCoef_psi_b3]]></Name>
 		<X>-250</X>
-		<Y>260</Y>
+		<Y>350</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -332,9 +331,9 @@
 	</Variable>
 	<Variable Class="PlainVariable">
 		<Id>1753174114820</Id>
-		<Name><![CDATA[regCoef_trust_b2]]></Name>
+		<Name><![CDATA[regCoef_pcp_b2]]></Name>
 		<X>-250</X>
-		<Y>280</Y>
+		<Y>330</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -351,9 +350,9 @@
 	</Variable>
 	<Variable Class="PlainVariable">
 		<Id>1753174124333</Id>
-		<Name><![CDATA[regCoef_trust_b3]]></Name>
+		<Name><![CDATA[regCoef_pcp_b3]]></Name>
 		<X>-250</X>
-		<Y>300</Y>
+		<Y>370</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -511,7 +510,7 @@
 		<Id>1753178257999</Id>
 		<Name><![CDATA[count_b1_successful]]></Name>
 		<X>-250</X>
-		<Y>480</Y>
+		<Y>590</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -530,7 +529,7 @@
 		<Id>1753178258001</Id>
 		<Name><![CDATA[count_b2_successful]]></Name>
 		<X>-250</X>
-		<Y>500</Y>
+		<Y>610</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -549,7 +548,7 @@
 		<Id>1753178258003</Id>
 		<Name><![CDATA[count_b3_successful]]></Name>
 		<X>-250</X>
-		<Y>520</Y>
+		<Y>630</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -568,7 +567,7 @@
 		<Id>1753178258005</Id>
 		<Name><![CDATA[count_b1_notSuccessful]]></Name>
 		<X>-250</X>
-		<Y>550</Y>
+		<Y>660</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -587,7 +586,7 @@
 		<Id>1753178258007</Id>
 		<Name><![CDATA[count_b2_notSuccessful]]></Name>
 		<X>-250</X>
-		<Y>570</Y>
+		<Y>680</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -606,7 +605,7 @@
 		<Id>1753178258009</Id>
 		<Name><![CDATA[count_b3_notSuccessful]]></Name>
 		<X>-250</X>
-		<Y>590</Y>
+		<Y>700</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -625,7 +624,7 @@
 		<Id>1753178258011</Id>
 		<Name><![CDATA[successRate_b1]]></Name>
 		<X>-250</X>
-		<Y>620</Y>
+		<Y>730</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -644,7 +643,7 @@
 		<Id>1753178258013</Id>
 		<Name><![CDATA[successRate_b2]]></Name>
 		<X>-250</X>
-		<Y>640</Y>
+		<Y>750</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -663,7 +662,7 @@
 		<Id>1753178258015</Id>
 		<Name><![CDATA[successRate_b3]]></Name>
 		<X>-250</X>
-		<Y>660</Y>
+		<Y>770</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -682,7 +681,7 @@
 		<Id>1754403910921</Id>
 		<Name><![CDATA[learningRate_norms_b1]]></Name>
 		<X>-250</X>
-		<Y>340</Y>
+		<Y>410</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -699,9 +698,9 @@
 	</Variable>
 	<Variable Class="PlainVariable">
 		<Id>1754403916745</Id>
-		<Name><![CDATA[learningRate_trust_b1]]></Name>
+		<Name><![CDATA[learningRate_pcp_b1]]></Name>
 		<X>-250</X>
-		<Y>360</Y>
+		<Y>430</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -720,7 +719,7 @@
 		<Id>1754403956364</Id>
 		<Name><![CDATA[learningRate_norms_b2]]></Name>
 		<X>-250</X>
-		<Y>380</Y>
+		<Y>450</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -737,9 +736,9 @@
 	</Variable>
 	<Variable Class="PlainVariable">
 		<Id>1754403956366</Id>
-		<Name><![CDATA[learningRate_trust_b2]]></Name>
+		<Name><![CDATA[learningRate_pcp_b2]]></Name>
 		<X>-250</X>
-		<Y>400</Y>
+		<Y>470</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -758,7 +757,7 @@
 		<Id>1754403967986</Id>
 		<Name><![CDATA[learningRate_norms_b3]]></Name>
 		<X>-250</X>
-		<Y>420</Y>
+		<Y>490</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -775,9 +774,9 @@
 	</Variable>
 	<Variable Class="PlainVariable">
 		<Id>1754403967988</Id>
-		<Name><![CDATA[learningRate_trust_b3]]></Name>
+		<Name><![CDATA[learningRate_pcp_b3]]></Name>
 		<X>-250</X>
-		<Y>440</Y>
+		<Y>510</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -916,7 +915,7 @@
 		<Id>1754925087783</Id>
 		<Name><![CDATA[countTripDepartures]]></Name>
 		<X>-250</X>
-		<Y>720</Y>
+		<Y>830</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -935,7 +934,7 @@
 		<Id>1754925101013</Id>
 		<Name><![CDATA[countTripArrivals]]></Name>
 		<X>-250</X>
-		<Y>740</Y>
+		<Y>850</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1068,7 +1067,7 @@
 		<Id>1754999958196</Id>
 		<Name><![CDATA[count_successfulRechecks]]></Name>
 		<X>-250</X>
-		<Y>770</Y>
+		<Y>880</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1087,7 +1086,7 @@
 		<Id>1754999958198</Id>
 		<Name><![CDATA[count_unsuccessfulRechecks]]></Name>
 		<X>-250</X>
-		<Y>790</Y>
+		<Y>900</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1106,7 +1105,7 @@
 		<Id>1755000064620</Id>
 		<Name><![CDATA[successRate_rechecks]]></Name>
 		<X>-250</X>
-		<Y>680</Y>
+		<Y>790</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1142,7 +1141,7 @@
 	</Variable>
 	<Variable Class="PlainVariable">
 		<Id>1755011302558</Id>
-		<Name><![CDATA[ar_avgTrust]]></Name>
+		<Name><![CDATA[ar_avgRC]]></Name>
 		<X>50</X>
 		<Y>1640</Y>
 		<Label>
@@ -1486,7 +1485,7 @@
 		<Id>1755169677447</Id>
 		<Name><![CDATA[color_b3]]></Name>
 		<X>-250</X>
-		<Y>1140</Y>
+		<Y>1250</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1774,7 +1773,7 @@
 		<Id>1755527370127</Id>
 		<Name><![CDATA[outOfModelCharge_kWh]]></Name>
 		<X>-250</X>
-		<Y>840</Y>
+		<Y>950</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1793,7 +1792,7 @@
 		<Id>1755527396258</Id>
 		<Name><![CDATA[count_leftWhileCharging]]></Name>
 		<X>-250</X>
-		<Y>860</Y>
+		<Y>970</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1812,7 +1811,7 @@
 		<Id>1755527410823</Id>
 		<Name><![CDATA[count_leftUncharged]]></Name>
 		<X>-250</X>
-		<Y>880</Y>
+		<Y>990</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1844,6 +1843,614 @@
               AccessType="public"
               StaticVariable="false">
 			<Type><![CDATA[double[]]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1755782733688</Id>
+		<Name><![CDATA[regCoef_pcp_psi_b2b3]]></Name>
+		<X>-250</X>
+		<Y>220</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1755782733690</Id>
+		<Name><![CDATA[regCoef_norms_psi_b2b3]]></Name>
+		<X>-250</X>
+		<Y>200</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1755782733692</Id>
+		<Name><![CDATA[regCoef_rc_psi_b2b3]]></Name>
+		<X>-250</X>
+		<Y>240</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1755782787778</Id>
+		<Name><![CDATA[regCoef_rc_b1]]></Name>
+		<X>-250</X>
+		<Y>290</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1755785692671</Id>
+		<Name><![CDATA[learningRate_trust_b2]]></Name>
+		<X>-250</X>
+		<Y>530</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1755785692673</Id>
+		<Name><![CDATA[learningRate_trust_b3]]></Name>
+		<X>-250</X>
+		<Y>550</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756127618006</Id>
+		<Name><![CDATA[count_chargingSessions]]></Name>
+		<X>347</X>
+		<Y>1351</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[int]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756127618008</Id>
+		<Name><![CDATA[count_requiredChargingSessions]]></Name>
+		<X>347</X>
+		<Y>1371</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[int]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756129467469</Id>
+		<Name><![CDATA[avgProb_b3]]></Name>
+		<X>210</X>
+		<Y>1660</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756129479911</Id>
+		<Name><![CDATA[avgProb_b1]]></Name>
+		<X>210</X>
+		<Y>1620</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756129509261</Id>
+		<Name><![CDATA[avgProb_b2]]></Name>
+		<X>210</X>
+		<Y>1640</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756129881749</Id>
+		<Name><![CDATA[ar_avgPCP]]></Name>
+		<X>50</X>
+		<Y>1680</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double[]]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756218019840</Id>
+		<Name><![CDATA[prev_global_adoption]]></Name>
+		<X>210</X>
+		<Y>1590</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756814221050</Id>
+		<Name><![CDATA[count_leftWhileChargingWithDelayedAccess]]></Name>
+		<X>-250</X>
+		<Y>1010</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[int]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756814534122</Id>
+		<Name><![CDATA[ar_leftWhileChargingWithDelayedAccess]]></Name>
+		<X>50</X>
+		<Y>2410</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double[]]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756816659708</Id>
+		<Name><![CDATA[ar_percSatisfiedChargingSessions]]></Name>
+		<X>50</X>
+		<Y>2480</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double[]]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756817420853</Id>
+		<Name><![CDATA[ar_requiredChargingSessions]]></Name>
+		<X>50</X>
+		<Y>2460</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double[]]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756823875217</Id>
+		<Name><![CDATA[ar_chargingSessions]]></Name>
+		<X>50</X>
+		<Y>2440</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double[]]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756909344337</Id>
+		<Name><![CDATA[mean_norms]]></Name>
+		<X>-450</X>
+		<Y>280</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756909360387</Id>
+		<Name><![CDATA[mean_pcp]]></Name>
+		<X>-450</X>
+		<Y>300</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756909385535</Id>
+		<Name><![CDATA[mean_rc]]></Name>
+		<X>-450</X>
+		<Y>320</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756909392839</Id>
+		<Name><![CDATA[mean_psi]]></Name>
+		<X>-450</X>
+		<Y>350</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756909401127</Id>
+		<Name><![CDATA[mean_b1]]></Name>
+		<X>-450</X>
+		<Y>370</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756909416973</Id>
+		<Name><![CDATA[mean_b2]]></Name>
+		<X>-450</X>
+		<Y>390</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756909420361</Id>
+		<Name><![CDATA[mean_b3]]></Name>
+		<X>-450</X>
+		<Y>410</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756909425129</Id>
+		<Name><![CDATA[sd_norms]]></Name>
+		<X>-450</X>
+		<Y>450</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756909425131</Id>
+		<Name><![CDATA[sd_pcp]]></Name>
+		<X>-450</X>
+		<Y>470</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756909425133</Id>
+		<Name><![CDATA[sd_rc]]></Name>
+		<X>-450</X>
+		<Y>490</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756909425135</Id>
+		<Name><![CDATA[sd_psi]]></Name>
+		<X>-450</X>
+		<Y>520</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756909425137</Id>
+		<Name><![CDATA[sd_b1]]></Name>
+		<X>-450</X>
+		<Y>540</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756909425139</Id>
+		<Name><![CDATA[sd_b2]]></Name>
+		<X>-450</X>
+		<Y>560</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1756909425141</Id>
+		<Name><![CDATA[sd_b3]]></Name>
+		<X>-450</X>
+		<Y>580</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
 		</Properties>
 	</Variable>
 	<Variable Class="Parameter">
@@ -2185,8 +2792,9 @@
 	<Variable Class="CollectionVariable">
 		<Id>1755168217231</Id>
 		<Name><![CDATA[c_norms]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>-250</X>
-		<Y>940</Y>
+		<Y>1050</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -2203,8 +2811,9 @@
 	<Variable Class="CollectionVariable">
 		<Id>1755168235417</Id>
 		<Name><![CDATA[c_trust]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>-250</X>
-		<Y>960</Y>
+		<Y>1070</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -2221,8 +2830,9 @@
 	<Variable Class="CollectionVariable">
 		<Id>1755168245347</Id>
 		<Name><![CDATA[c_rc]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>-250</X>
-		<Y>980</Y>
+		<Y>1090</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -2239,8 +2849,9 @@
 	<Variable Class="CollectionVariable">
 		<Id>1755168257222</Id>
 		<Name><![CDATA[c_psi]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>-250</X>
-		<Y>1000</Y>
+		<Y>1110</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -2257,8 +2868,9 @@
 	<Variable Class="CollectionVariable">
 		<Id>1755168266433</Id>
 		<Name><![CDATA[c_b1]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>-250</X>
-		<Y>1020</Y>
+		<Y>1150</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -2275,8 +2887,9 @@
 	<Variable Class="CollectionVariable">
 		<Id>1755168266435</Id>
 		<Name><![CDATA[c_b2]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>-250</X>
-		<Y>1040</Y>
+		<Y>1170</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -2293,8 +2906,28 @@
 	<Variable Class="CollectionVariable">
 		<Id>1755168266437</Id>
 		<Name><![CDATA[c_b3]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>-250</X>
-		<Y>1060</Y>
+		<Y>1190</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+			<CollectionClass>ArrayList</CollectionClass>
+			<ElementClass>Double</ElementClass>
+			<ValueElementClass>String</ValueElementClass>
+		</Properties>
+	</Variable>
+	<Variable Class="CollectionVariable">
+		<Id>1755779948376</Id>
+		<Name><![CDATA[c_pcp]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
+		<X>-250</X>
+		<Y>1130</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>

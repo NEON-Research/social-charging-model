@@ -132,53 +132,13 @@
 					<AutoImport>false</AutoImport>
 				</TableImportSettings>
 				<TableImportSettings>
-					<Id>1753176876360</Id>
-					<TableReference>
-						<PackageName>social_charging_model</PackageName>
-						<ClassName>behavior_data</ClassName>
-					</TableReference>
-					<ConnectionIndex>1</ConnectionIndex>
-					<ExternalTableName>"behavior"</ExternalTableName>
-					<AutoImport>false</AutoImport>
-				</TableImportSettings>
-				<TableImportSettings>
-					<Id>1753176876363</Id>
-					<TableReference>
-						<PackageName>social_charging_model</PackageName>
-						<ClassName>correlation_matrix</ClassName>
-					</TableReference>
-					<ConnectionIndex>1</ConnectionIndex>
-					<ExternalTableName>"correlation_matrix"</ExternalTableName>
-					<AutoImport>false</AutoImport>
-				</TableImportSettings>
-				<TableImportSettings>
-					<Id>1753176876372</Id>
+					<Id>1756905448907</Id>
 					<TableReference>
 						<PackageName>social_charging_model</PackageName>
 						<ClassName>mediation_results</ClassName>
 					</TableReference>
 					<ConnectionIndex>1</ConnectionIndex>
 					<ExternalTableName>"mediation_results"</ExternalTableName>
-					<AutoImport>false</AutoImport>
-				</TableImportSettings>
-				<TableImportSettings>
-					<Id>1753176876369</Id>
-					<TableReference>
-						<PackageName>social_charging_model</PackageName>
-						<ClassName>frequency_list</ClassName>
-					</TableReference>
-					<ConnectionIndex>1</ConnectionIndex>
-					<ExternalTableName>"frequency_list"</ExternalTableName>
-					<AutoImport>false</AutoImport>
-				</TableImportSettings>
-				<TableImportSettings>
-					<Id>1753176876366</Id>
-					<TableReference>
-						<PackageName>social_charging_model</PackageName>
-						<ClassName>correlation</ClassName>
-					</TableReference>
-					<ConnectionIndex>1</ConnectionIndex>
-					<ExternalTableName>"correlation"</ExternalTableName>
 					<AutoImport>false</AutoImport>
 				</TableImportSettings>
 			</ImportSettings>
