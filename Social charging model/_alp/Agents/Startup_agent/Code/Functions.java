@@ -370,7 +370,7 @@ DataSet data_avgProbability_b3 = new DataSet(size);
 DataSet data_outOfModelCharging = new DataSet(days);
 DataSet data_leftWhileCharging = new DataSet(days);
 DataSet data_leftUncharged = new DataSet(days);
-DataSet data_percSatisfiedChargingSessions = new DataSet(days);
+DataSet data_percSatisfiedChargingSessions = new DataSet(weeks);
 DataSet data_chargingSessions = new DataSet(days);
 DataSet data_requiredChargingSessions = new DataSet(days);
 //DataSet data_successRate_rechecks = new DataSet(size);
@@ -389,9 +389,13 @@ for(int i = 0; i < days; i++){
 	data_outOfModelCharging.add(i, results.getOutOfModelChargingRollingAvg().get(0)[i]);
 	data_leftUncharged.add(i, results.getLeftUnchargedRollingAvg().get(0)[i]);	
 	data_leftWhileCharging.add(i, results.getLeftWhileChargingRollingAvg().get(0)[i]);
-	data_percSatisfiedChargingSessions.add(i, results.getPercSatisfiedChargingSessionsRollingAvg().get(0)[i]);
+	//data_percSatisfiedChargingSessions.add(i, results.getPercSatisfiedChargingSessionsRollingAvg().get(0)[i]);
 	data_requiredChargingSessions.add(i, results.getRequiredChargingSessionsRollingAvg().get(0)[i]);
 	data_chargingSessions.add(i, results.getChargingSessionsRollingAvg().get(0)[i]);
+}  
+
+for(int i = 0; i < weeks; i++){	
+	data_percSatisfiedChargingSessions.add(i, results.getPercSatisfiedChargingSessionsPerWeek().get(0)[i]);
 }
 
 Color color = randomFrom(c_colorPalette);
@@ -406,7 +410,7 @@ pl_avgProb2.setFixedHorizontalScale(0, size);
 pl_avgProb3.setFixedHorizontalScale(0, size);
 
 pl_outOfModelCharge.setFixedHorizontalScale(0, days);
-pl_chargingSatisfaction.setFixedHorizontalScale(0, days);
+pl_chargingSatisfaction.setFixedHorizontalScale(0, weeks);
 pl_leftWhileCharging.setFixedHorizontalScale(0, days);
 pl_leftUncharged.setFixedHorizontalScale(0, days);
 pl_chargingSessions.setFixedHorizontalScale(0, days);

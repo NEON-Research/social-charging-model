@@ -103,6 +103,8 @@ count_b3_notSuccessful = 0;
 count_successfulRechecks = 0;
 count_unsuccessfulRechecks = 0;
 int count_b2_noIdleChargers = 0;
+int count_b2_noMatchingRequests = 0;
+int count_b2_noProb = 0;
 
 outOfModelCharge_kWh = 0.0;
 count_leftWhileCharging = 0;
@@ -120,6 +122,10 @@ double totalRC = 0.0;
 double totalPSI = 0.0;
 double totalPCP = 0.0;
 
+double totalNorm_b1 = 0.0;
+double totalNorm_b2 = 0.0;
+double totalNorm_b3 = 0.0;
+
 for (EVOwner x : EVOwners) {
     count_b1_successful      += x.count_b1_successful;
     count_b1_notSuccessful   += x.count_b1_notSuccessful;
@@ -127,6 +133,8 @@ for (EVOwner x : EVOwners) {
     count_b2_successful      += x.count_b2_successful;
     count_b2_notSuccessful   += x.count_b2_notSuccessful;
     count_b2_noIdleChargers  += x.count_b2_noIdleChargers;
+    count_b2_noMatchingRequests += x.count_b2_noMatchingRequest;
+    count_b2_noProb			 += x.count_b2_noProb;
 
     count_b3_successful      += x.count_b3_successful;
     count_b3_notSuccessful   += x.count_b3_notSuccessful;
@@ -142,6 +150,10 @@ for (EVOwner x : EVOwners) {
 	totalRC += x.v_reputational_concern;
 	totalPSI += x.v_perc_social_interdep;
 	totalPCP += x.v_perc_charging_pressure;
+	
+	totalNorm_b1 += x.v_norm_b1;
+	totalNorm_b2 += x.v_norm_b2;
+	totalNorm_b3 += x.v_norm_b3;
 	
 	outOfModelCharge_kWh += x.v_outOfModelCharge_kWh;
 	count_leftWhileCharging += x.count_leftWhileCharging;
@@ -177,7 +189,11 @@ avgProb_b3 = totalProb_b3 / EVs;
 double avgNorms = totalNorms / EVs;
 double avgRC = totalRC / EVs;
 double avgPSI = totalPSI / EVs;
-double avgPCP = totalPCP / EVs;
+v_avgPCP = totalPCP / EVs;
+
+v_avgNorm_b1 = totalNorm_b1 / EVs;
+v_avgNorm_b2 = totalNorm_b2 / EVs;
+v_avgNorm_b3 = totalNorm_b3 / EVs;
 
 //SETTING ARRAYS
 // Charge Points
@@ -197,7 +213,11 @@ ar_EVsParkedAtCPIdle[v_timestep] = EVsParkedAtCPIdle;
 ar_avgNorms[v_timestep] = f_convertStandardizedToProb(avgNorms, mean_norms, sd_norms, true);
 ar_avgRC[v_timestep] = f_convertStandardizedToProb(avgRC, mean_rc, sd_rc, true);
 ar_avgPSI[v_timestep] = f_convertStandardizedToProb(avgPSI, mean_psi, sd_psi, true);
-ar_avgPCP[v_timestep] = f_convertStandardizedToProb(avgPCP, mean_pcp, sd_pcp, true);
+ar_avgPCP[v_timestep] = f_convertStandardizedToProb(v_avgPCP, mean_pcp, sd_pcp, true);
+
+ar_avgNorm_b1[v_timestep] = f_convertStandardizedToProb(v_avgNorm_b1, mean_b1, sd_b1, true);
+ar_avgNorm_b2[v_timestep] = f_convertStandardizedToProb(v_avgNorm_b2, mean_b2, sd_b2, false);
+ar_avgNorm_b3[v_timestep] = f_convertStandardizedToProb(v_avgNorm_b3, mean_b3, sd_b3, false);
 
 //Success Rates
 ar_successRate_b1[v_timestep] = successRate_b1;
@@ -217,8 +237,11 @@ ar_successful_b3[v_timestep] = count_b3_successful;
 ar_unsuccessful_b1[v_timestep] = count_b1_notSuccessful;
 ar_unsuccessful_b2[v_timestep] = count_b2_notSuccessful;
 ar_unsuccessful_b3[v_timestep] = count_b3_notSuccessful;
+ar_unsuccesfulDueToProb_b2[v_timestep] = count_b2_noProb;
 ar_noIdleChargers_b2[v_timestep] = count_b2_noIdleChargers;
+ar_noMatchingRequests_b2[v_timestep] = count_b2_noMatchingRequests;
 
+//if(ar_unsuccesfulDueToProb_b2[v_timestep] < 0){ traceln(ar_unsuccesfulDueToProb_b2[v_timestep] + " unssuccesful due to prob");}
 
 
 
@@ -323,7 +346,9 @@ pl_socioPsychologicalLearning.addDataSet(f_arrayToDataSet(ar_avgNorms), "Average
 pl_socioPsychologicalLearning.addDataSet(f_arrayToDataSet(ar_avgRC), "Average RC", lightSeaGreen, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 pl_socioPsychologicalLearning.addDataSet(f_arrayToDataSet(ar_avgPSI), "Average PSI", lightSlateBlue, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 pl_socioPsychologicalLearning.addDataSet(f_arrayToDataSet(ar_avgPCP), "Average PCP", orchid, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
-
+pl_socioPsychologicalLearning.addDataSet(f_arrayToDataSet(ar_avgNorm_b1), "Average norm B1", indianRed, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_socioPsychologicalLearning.addDataSet(f_arrayToDataSet(ar_avgNorm_b2), "Average norm B2", khaki, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
+pl_socioPsychologicalLearning.addDataSet(f_arrayToDataSet(ar_avgNorm_b3), "Average norm B3", darkTurquoise, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 
 // Interactions per day chart
 pl_interactionPerDay.removeAll();
@@ -338,8 +363,9 @@ ch_b1.addDataSet(f_arrayToDataSet(ar_unsuccessful_b1), "Non successful interacti
 ch_b1.addDataSet(f_arrayToDataSet(ar_successful_b1), "Successful interactions", green);
 
 ch_b2.removeAll();
-ch_b2.addDataSet(f_arrayToDataSet(ar_unsuccessful_b2), "Non successful interactions", red);
-ch_b2.addDataSet(f_arrayToDataSet(ar_noIdleChargers_b2), "No idle chargers", orange);
+ch_b2.addDataSet(f_arrayToDataSet(ar_unsuccesfulDueToProb_b2), "Non successful interactions", red);
+ch_b2.addDataSet(f_arrayToDataSet(ar_noIdleChargers_b2), "No idle chargers", khaki);
+ch_b2.addDataSet(f_arrayToDataSet(ar_noMatchingRequests_b2), "No matching requests", orange);
 ch_b2.addDataSet(f_arrayToDataSet(ar_successful_b2), "Successful interactions", green);
 
 ch_b3.removeAll();
@@ -379,6 +405,7 @@ traceln("Unfinished charging = " + roundToInt((double) countUnfinishedCharging /
 traceln("Left without charging = " + roundToInt((double) countLeftUncharged / countTotalRequiredCharging * 100) + "% of required charging sessions");
 traceln("Out of model charging = " + roundToInt((double) outOfModelCharging/totalCharging * 100) + "% of total charging");
 */
+
 /*ALCODEEND*/}
 
 double f_writeResultsToExcel(ExcelFile excel_exportResults)
@@ -571,6 +598,9 @@ x.v_perc_charging_pressure = agentAttributes[3];
 x.v_stand_prob_b1 = agentAttributes[4];
 x.v_stand_prob_b2 = agentAttributes[5];
 x.v_stand_prob_b3 = agentAttributes[5]; //prob_b3 = prob_b2
+x.v_norm_b1 = agentAttributes[4];
+x.v_norm_b2 = agentAttributes[5];
+x.v_norm_b3 = agentAttributes[5];
 
 x.v_prob_b1 = f_convertStandardizedToProb(x.v_stand_prob_b1, mean_b1, sd_b1, true);
 x.v_prob_b2 = f_convertStandardizedToProb(x.v_stand_prob_b2, mean_b2, sd_b2, false);
@@ -1110,6 +1140,8 @@ ar_unsuccessful_b3 = null;
 
 // Special cases
 ar_noIdleChargers_b2 = null;
+ar_noMatchingRequests_b2 = null;
+ar_unsuccesfulDueToProb_b2 = null;
 
 pl_interactionPerDay.removeAll();
 pl_probability.removeAll();
@@ -1249,6 +1281,7 @@ for(EVOwner ev : EVOwners){
 	ev.count_b2_noIdleChargers = 0;
 	ev.count_b2_noMatchingRequest = 0;
 	ev.count_b2_notSuccessful = 0;
+	ev.count_b2_noProb = 0;
 	ev.count_b2_successful = 0;
 	ev.count_b3_notSuccessful = 0;
 	ev.count_b3_successful = 0;
@@ -1299,6 +1332,10 @@ ar_avgRC = new double[p_nbOfTimesteps];
 ar_avgPSI = new double[p_nbOfTimesteps];
 ar_avgPCP = new double[p_nbOfTimesteps];
 
+ar_avgNorm_b1 = new double[p_nbOfTimesteps];
+ar_avgNorm_b2 = new double[p_nbOfTimesteps];
+ar_avgNorm_b3 = new double[p_nbOfTimesteps];
+
 // Success rates
 ar_successRate_b1 = new double[p_nbOfTimesteps];
 ar_successRate_b2 = new double[p_nbOfTimesteps];
@@ -1320,6 +1357,8 @@ ar_unsuccessful_b3 = new double[p_nbOfTimesteps];
 
 // Special cases
 ar_noIdleChargers_b2 = new double[p_nbOfTimesteps];
+ar_unsuccesfulDueToProb_b2 = new double[p_nbOfTimesteps];
+ar_noMatchingRequests_b2 = new double[p_nbOfTimesteps];
 
 //out of model and uncharged
 ar_outOfModelCharging = new double[p_days];

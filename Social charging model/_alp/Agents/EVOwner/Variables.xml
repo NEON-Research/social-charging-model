@@ -4,7 +4,7 @@
 		<Id>1745940748198</Id>
 		<Name><![CDATA[v_EVType]]></Name>
 		<X>250</X>
-		<Y>335</Y>
+		<Y>425</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -23,7 +23,7 @@
 		<Id>1745940755041</Id>
 		<Name><![CDATA[v_batteryCapacity_kWh]]></Name>
 		<X>250</X>
-		<Y>365</Y>
+		<Y>455</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -42,7 +42,7 @@
 		<Id>1745940859598</Id>
 		<Name><![CDATA[v_soc]]></Name>
 		<X>250</X>
-		<Y>455</Y>
+		<Y>545</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -61,7 +61,7 @@
 		<Id>1745940872204</Id>
 		<Name><![CDATA[v_elecCons_kWhperKm]]></Name>
 		<X>250</X>
-		<Y>385</Y>
+		<Y>475</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -83,7 +83,7 @@
 		<Id>1746011357593</Id>
 		<Name><![CDATA[v_electricityInBattery_kWh]]></Name>
 		<X>250</X>
-		<Y>435</Y>
+		<Y>525</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -102,7 +102,7 @@
 		<Id>1746012725326</Id>
 		<Name><![CDATA[v_socChargingThreshold]]></Name>
 		<X>250</X>
-		<Y>405</Y>
+		<Y>495</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -124,7 +124,7 @@
 		<Id>1746022880949</Id>
 		<Name><![CDATA[v_outOfModelCharge_kWh]]></Name>
 		<X>250</X>
-		<Y>480</Y>
+		<Y>570</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -580,7 +580,7 @@
 		<Id>1754487073931</Id>
 		<Name><![CDATA[v_totalElectricityCharged_kWh]]></Name>
 		<X>250</X>
-		<Y>500</Y>
+		<Y>590</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -763,7 +763,7 @@
 		<Id>1754999858630</Id>
 		<Name><![CDATA[count_successfulRechecks]]></Name>
 		<X>750</X>
-		<Y>530</Y>
+		<Y>550</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -782,7 +782,7 @@
 		<Id>1754999866588</Id>
 		<Name><![CDATA[count_unsuccessfulRechecks]]></Name>
 		<X>750</X>
-		<Y>550</Y>
+		<Y>570</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -931,6 +931,101 @@
               AccessType="public"
               StaticVariable="false">
 			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1757413881603</Id>
+		<Name><![CDATA[v_norm_b1]]></Name>
+		<X>250</X>
+		<Y>290</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1757413890697</Id>
+		<Name><![CDATA[v_norm_b2]]></Name>
+		<X>250</X>
+		<Y>310</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1757413892511</Id>
+		<Name><![CDATA[v_norm_b3]]></Name>
+		<X>250</X>
+		<Y>330</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1757422744594</Id>
+		<Name><![CDATA[hasUpdatedPCP]]></Name>
+		<X>250</X>
+		<Y>720</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[boolean]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1757584360726</Id>
+		<Name><![CDATA[count_b2_noProb]]></Name>
+		<X>750</X>
+		<Y>520</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[int]]></Type>
 		</Properties>
 	</Variable>
 </Variables>

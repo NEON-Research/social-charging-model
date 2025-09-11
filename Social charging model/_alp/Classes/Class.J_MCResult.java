@@ -36,7 +36,7 @@ public class J_MCResult {
 	ArrayList<double[]> leftWhileChargingWithDelayedAccess_perWeek;
 	ArrayList<double[]> percSatisfiedChargingSessions_perWeek;
 		
-	int window = 7;
+	int window = 14;
 	int days;
 	
     /**
@@ -125,6 +125,11 @@ public class J_MCResult {
     public ArrayList<double[]> getOutOfModelChargingPerWeek() {
         return outOfModelCharging_perWeek;
     }
+    
+    public ArrayList<double[]> getPercSatisfiedChargingSessionsPerWeek() {
+        return percSatisfiedChargingSessions_perWeek;
+    }
+
 
     // --- Setters ---
     public void setIterations(int iterations) {
