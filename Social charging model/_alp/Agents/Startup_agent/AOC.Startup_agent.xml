@@ -6,6 +6,10 @@
 	<StartupCode><![CDATA[f_setColorPalette();
 
 ef_spvars.readFile();
+excel_exportResults.readFile();
+excel_exportResultsSensitivity.readFile();
+excel_exportResultsBehaviours.readFile();
+
 f_getRegressionCoefficients();
 f_getMeanAndSD();
 f_getCorrelationMatrixFromExcel();
@@ -120,7 +124,7 @@ ef_spvars.close();]]></StartupCode>
 			<ShowLabel>true</ShowLabel>
 			<ResourceReference>
 				<PackageName>social_charging_model</PackageName>
-				<ClassName>SCM_export_results.xlsx</ClassName>
+				<ClassName>SCM_export_results_EVsperCP.xlsx</ClassName>
 			</ResourceReference>
 			<SaveInSnapshot>false</SaveInSnapshot>
 			<LoadOnStartup>false</LoadOnStartup>
@@ -141,6 +145,46 @@ ef_spvars.close();]]></StartupCode>
 			<ResourceReference>
 				<PackageName>social_charging_model</PackageName>
 				<ClassName>social_psychological_variables.xlsx</ClassName>
+			</ResourceReference>
+			<SaveInSnapshot>false</SaveInSnapshot>
+			<LoadOnStartup>false</LoadOnStartup>
+			<SaveOnDispose>false</SaveOnDispose>
+		</ExcelFile>
+		<ExcelFile>
+			<Id>1760003744967</Id>
+			<Name><![CDATA[excel_exportResultsSensitivity]]></Name>
+			<X>-220</X>
+			<Y>560</Y>
+			<Label>
+				<X>10</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<ResourceReference>
+				<PackageName>social_charging_model</PackageName>
+				<ClassName>SCM_export_results_sensitivity.xlsx</ClassName>
+			</ResourceReference>
+			<SaveInSnapshot>false</SaveInSnapshot>
+			<LoadOnStartup>false</LoadOnStartup>
+			<SaveOnDispose>false</SaveOnDispose>
+		</ExcelFile>
+		<ExcelFile>
+			<Id>1760014571217</Id>
+			<Name><![CDATA[excel_exportResultsBehaviours]]></Name>
+			<X>-220</X>
+			<Y>580</Y>
+			<Label>
+				<X>10</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<ResourceReference>
+				<PackageName>social_charging_model</PackageName>
+				<ClassName>SCM_export_results_behaviours.xlsx</ClassName>
 			</ResourceReference>
 			<SaveInSnapshot>false</SaveInSnapshot>
 			<LoadOnStartup>false</LoadOnStartup>

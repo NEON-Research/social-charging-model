@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <AnyLogicWorkspace splitVersion="1"
                    WorkspaceVersion="1.9"
-                   AnyLogicVersion="8.9.5.202506190548"
-                   AlpVersion="8.9.5">
+                   AnyLogicVersion="8.9.6.202509050524"
+                   AlpVersion="8.9.6">
 	<Model>
 		<Id>1743154070890</Id>
 		<Name><![CDATA[Social charging model]]></Name>
@@ -60,6 +60,7 @@
 		<FixedTimeStep>0.001</FixedTimeStep>
 		<RelativeAccuracy>1.0E-5</RelativeAccuracy>
 		<TimeAccuracy>1.0E-5</TimeAccuracy>
+		<InspectionWindowColorTheme>DEFAULT</InspectionWindowColorTheme>
 		<Frame>
 			<Id>1743154059997</Id>
 			<Width>1920</Width>
@@ -122,7 +123,7 @@
 					<Password/>
 				</ExternalConnection>
 				<TableImportSettings>
-					<Id>1743154059986</Id>
+					<Id>1759996192321</Id>
 					<TableReference>
 						<PackageName>social_charging_model</PackageName>
 						<ClassName>vehicle_trips</ClassName>
@@ -132,7 +133,7 @@
 					<AutoImport>false</AutoImport>
 				</TableImportSettings>
 				<TableImportSettings>
-					<Id>1756905448907</Id>
+					<Id>1759996181332</Id>
 					<TableReference>
 						<PackageName>social_charging_model</PackageName>
 						<ClassName>mediation_results</ClassName>
@@ -178,6 +179,10 @@
 			<JavaClass>
 				<Id>1755520151226</Id>
 				<Name><![CDATA[J_MCResult]]></Name>
+			</JavaClass>
+			<JavaClass>
+				<Id>1760003938877</Id>
+				<Name><![CDATA[J_SensitivityResult]]></Name>
 			</JavaClass>
 		</JavaClasses>
 		<RequiredLibraryReference>
@@ -245,5 +250,7 @@
 		<Uuid>e6625695-25a2-43d0-9056-1e9a1a594b1e</Uuid>
 		<Uuid>91990287-4edf-4e38-aa6c-66d0e906807b</Uuid>
 		<Uuid>2216cdd0-177c-5678-9e88-dd8b95312234</Uuid>
+		<Uuid>1737c8c6-b526-4dd8-589e-ee4e205b06f4</Uuid>
+		<Uuid>6a43bef6-8b70-4253-a828-82c3ab399655</Uuid>
 	</ConvertersApplied>
 </AnyLogicWorkspace>

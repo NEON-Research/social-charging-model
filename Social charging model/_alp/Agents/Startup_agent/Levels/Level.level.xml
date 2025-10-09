@@ -33,7 +33,7 @@ f_initializeModel();</ActionCode>
 		<Id>1746024775863</Id>
 		<Name><![CDATA[eb_cars]]></Name>
 		<X>220</X>
-		<Y>340</Y>
+		<Y>560</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -61,7 +61,7 @@ f_initializeModel();</ActionCode>
 		<Id>1746024861888</Id>
 		<Name><![CDATA[eb_shareElectric]]></Name>
 		<X>220</X>
-		<Y>380</Y>
+		<Y>600</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -89,7 +89,7 @@ f_initializeModel();</ActionCode>
 		<Id>1746025318595</Id>
 		<Name><![CDATA[eb_parkingPlaces]]></Name>
 		<X>220</X>
-		<Y>420</Y>
+		<Y>640</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -117,7 +117,7 @@ f_initializeModel();</ActionCode>
 		<Id>1746028080824</Id>
 		<Name><![CDATA[eb_chargePoints]]></Name>
 		<X>220</X>
-		<Y>460</Y>
+		<Y>680</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -144,7 +144,7 @@ f_initializeModel();</ActionCode>
 		<Id>1746086719488</Id>
 		<Name><![CDATA[text]]></Name>
 		<X>70</X>
-		<Y>345</Y>
+		<Y>565</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -169,7 +169,7 @@ f_initializeModel();</ActionCode>
 		<Id>1746086785619</Id>
 		<Name><![CDATA[text1]]></Name>
 		<X>70</X>
-		<Y>385</Y>
+		<Y>605</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -194,7 +194,7 @@ f_initializeModel();</ActionCode>
 		<Id>1746086837341</Id>
 		<Name><![CDATA[text2]]></Name>
 		<X>70</X>
-		<Y>425</Y>
+		<Y>645</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -219,7 +219,7 @@ f_initializeModel();</ActionCode>
 		<Id>1746086837346</Id>
 		<Name><![CDATA[text3]]></Name>
 		<X>70</X>
-		<Y>465</Y>
+		<Y>685</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -245,7 +245,7 @@ f_initializeModel();</ActionCode>
 		<Id>1746087694918</Id>
 		<Name><![CDATA[eb_nbOfPeriods]]></Name>
 		<X>220</X>
-		<Y>560</Y>
+		<Y>780</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -274,7 +274,7 @@ f_initializeModel();</ActionCode>
 		<Id>1746087719786</Id>
 		<Name><![CDATA[cb_simulationPeriod]]></Name>
 		<X>220</X>
-		<Y>520</Y>
+		<Y>740</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -305,7 +305,7 @@ f_setNbOfTimesteps();</ActionCode>
 		<Id>1746087753443</Id>
 		<Name><![CDATA[text4]]></Name>
 		<X>70</X>
-		<Y>525</Y>
+		<Y>745</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -330,7 +330,7 @@ f_setNbOfTimesteps();</ActionCode>
 		<Id>1746087777286</Id>
 		<Name><![CDATA[text5]]></Name>
 		<X>70</X>
-		<Y>565</Y>
+		<Y>785</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -356,7 +356,7 @@ f_setNbOfTimesteps();</ActionCode>
 		<Id>1746095456056</Id>
 		<Name><![CDATA[fileChooser_exportResults]]></Name>
 		<X>90</X>
-		<Y>280</Y>
+		<Y>500</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -575,7 +575,7 @@ traceln("Finished run " + simulationCount + " in " + runTime + " seconds, with u
 		<Id>1754992178636</Id>
 		<Name><![CDATA[cb_scSartHour]]></Name>
 		<X>220</X>
-		<Y>605</Y>
+		<Y>825</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -603,7 +603,7 @@ traceln("Finished run " + simulationCount + " in " + runTime + " seconds, with u
 		<Id>1754992178638</Id>
 		<Name><![CDATA[cb_scEndHour]]></Name>
 		<X>220</X>
-		<Y>645</Y>
+		<Y>865</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -630,7 +630,7 @@ traceln("Finished run " + simulationCount + " in " + runTime + " seconds, with u
 		<Id>1754992178640</Id>
 		<Name><![CDATA[text9]]></Name>
 		<X>70</X>
-		<Y>610</Y>
+		<Y>830</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -655,7 +655,7 @@ traceln("Finished run " + simulationCount + " in " + runTime + " seconds, with u
 		<Id>1754992178642</Id>
 		<Name><![CDATA[text10]]></Name>
 		<X>70</X>
-		<Y>650</Y>
+		<Y>870</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -2195,7 +2195,7 @@ traceln("Finished run " + simulationCount + " in " + runTime + " seconds, with u
 		<Id>1755181550760</Id>
 		<Name><![CDATA[text32]]></Name>
 		<X>70</X>
-		<Y>690</Y>
+		<Y>910</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -2221,7 +2221,7 @@ traceln("Finished run " + simulationCount + " in " + runTime + " seconds, with u
 		<Id>1755181550762</Id>
 		<Name><![CDATA[cb_setDetailedGraphs]]></Name>
 		<X>220</X>
-		<Y>685</Y>
+		<Y>905</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -2508,7 +2508,7 @@ traceln("Finished run " + simulationCount + " in " + runTime + " seconds, with u
 		<Id>1755529886369</Id>
 		<Name><![CDATA[b_startSimualtion4]]></Name>
 		<X>90</X>
-		<Y>240</Y>
+		<Y>460</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -2524,10 +2524,12 @@ traceln("Finished run " + simulationCount + " in " + runTime + " seconds, with u
 			<ActionCode>traceln("Start writing to excel");
 double time = System.currentTimeMillis();
 f_writeMCToExcel();
-fileChooser_exportResults.setEnabled(true);
+/*
+fileChooser_exportResults.setEnabled(true);*/
 System.gc();
 long usedMemory = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1024 * 1024);
 double runTime = (System.currentTimeMillis() - time) / 1000.0;
+
 traceln("Finished writing to excel " + simulationCount + " in " + runTime + " seconds, with used memory: " + usedMemory + " MB");
 </ActionCode>
 		</BasicProperties>
@@ -2542,7 +2544,7 @@ traceln("Finished writing to excel " + simulationCount + " in " + runTime + " se
 		<Name><![CDATA[b_startSimualtion5]]></Name>
 		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>90</X>
-		<Y>200</Y>
+		<Y>420</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -2934,4 +2936,175 @@ traceln("Finished writing to excel " + simulationCount + " in " + runTime + " se
 		<HorScaleToExpression>1</HorScaleToExpression>
 		<HorScaleType>AUTO</HorScaleType>
 	</Plot>
+	<Control Type="Button">
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Id>1759996814213</Id>
+		<Name><![CDATA[b_startSimualtion6]]></Name>
+		<X>90</X>
+		<Y>190</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<BasicProperties Width="250" Height="30">
+			<EmbeddedIcon>false</EmbeddedIcon>
+			<TextColor>-16777216</TextColor>
+			<Enabled>true</Enabled>
+			<ActionCode>traceln("Starting monte carlo simulation");
+v_rapidRun = true;
+double time = System.currentTimeMillis();
+monteCarlo = true;
+f_clearResultsCollections();
+
+iterations = 1000;
+
+for(int i = 0; i &lt; iterations; i++){
+	f_initializeModel();
+	f_endRun();
+	mains.get(0).f_cleanUp();
+	
+	if( iteration % 100 == 0){
+		v_EVsPerCP += 1;
+		simulationCount++;
+		f_storeMCResults();
+	}
+}
+traceln("Start writing to excel");
+f_writeMCToExcel();
+
+
+System.gc();
+long usedMemory = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1024 * 1024);
+double runTime = (System.currentTimeMillis() - time) / 1000.0;
+traceln("Finished increase EVs " + simulationCount + " in " + runTime + " seconds, with used memory: " + usedMemory + " MB");
+</ActionCode>
+		</BasicProperties>
+		<ExtendedProperties>
+			<Font Name="Dialog" Size="16" Style="0"/>
+			<LabelText>Start increase in EVs</LabelText>
+		</ExtendedProperties>
+	</Control>
+	<Control Type="Button">
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Id>1760003803604</Id>
+		<Name><![CDATA[b_startSimualtion7]]></Name>
+		<X>90</X>
+		<Y>280</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<BasicProperties Width="250" Height="30">
+			<EmbeddedIcon>false</EmbeddedIcon>
+			<TextColor>-16777216</TextColor>
+			<Enabled>true</Enabled>
+			<ActionCode>traceln("Starting monte carlo simulation");
+v_rapidRun = true;
+double time = System.currentTimeMillis();
+monteCarlo = true;
+sensitivity = true;
+f_clearResultsCollections();
+
+iterations = 1000;
+v_EVsPerCP = 10;
+
+for(int i = 0; i &lt; iterations; i++){
+	f_initializeModel();
+	f_endRun();
+	mains.get(0).f_cleanUp();
+}
+traceln("Start writing to excel");
+f_writeSensitivityResultsToExcel();
+
+
+System.gc();
+long usedMemory = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1024 * 1024);
+double runTime = (System.currentTimeMillis() - time) / 1000.0;
+traceln("Finished sensititivy " + simulationCount + " in " + runTime + " seconds, with used memory: " + usedMemory + " MB");
+</ActionCode>
+		</BasicProperties>
+		<ExtendedProperties>
+			<Font Name="Dialog" Size="16" Style="0"/>
+			<LabelText>Start sensitivity</LabelText>
+		</ExtendedProperties>
+	</Control>
+	<Control Type="Button">
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Id>1760014094862</Id>
+		<Name><![CDATA[b_startSimualtion8]]></Name>
+		<X>90</X>
+		<Y>240</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<BasicProperties Width="250" Height="30">
+			<EmbeddedIcon>false</EmbeddedIcon>
+			<TextColor>-16777216</TextColor>
+			<Enabled>true</Enabled>
+			<ActionCode>traceln("Starting monte carlo simulation");
+v_rapidRun = true;
+double time = System.currentTimeMillis();
+monteCarlo = true;
+f_clearResultsCollections();
+
+iterations = 100;
+v_EVsPerCP = 10;
+
+// List your checkboxes for easier iteration
+ShapeCheckBox[] checkBoxes = {
+    cb_b1,
+    cb_b2,
+    cb_b3,
+    cb_recheckCPAvailability
+};
+
+// Total combinations = 2^n
+int totalCombinations = 1 &lt;&lt; checkBoxes.length; // same as 2^n
+
+for (int combo = 0; combo &lt; totalCombinations; combo++) {
+    // Set checkboxes according to current bit pattern
+    for (int bit = 0; bit &lt; checkBoxes.length; bit++) {
+        boolean selected = (combo &amp; (1 &lt;&lt; bit)) != 0;
+        checkBoxes[bit].setSelected(selected);
+    }
+
+    // Now run your simulation for this combination
+    System.out.println("Running combination: " + Integer.toBinaryString(combo));
+    for (int i = 0; i &lt; iterations; i++) {
+        f_initializeModel();
+        f_endRun();
+        mains.get(0).f_cleanUp();
+	}
+	f_storeMCResults();
+	simulationCount++;
+}
+
+traceln("Start writing to excel");
+f_writeBehaviorScenariosToExcel();
+
+
+System.gc();
+long usedMemory = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1024 * 1024);
+double runTime = (System.currentTimeMillis() - time) / 1000.0;
+traceln("Finished behavior scenarios " + simulationCount + " in " + runTime + " seconds, with used memory: " + usedMemory + " MB");
+</ActionCode>
+		</BasicProperties>
+		<ExtendedProperties>
+			<Font Name="Dialog" Size="16" Style="0"/>
+			<LabelText>Start behavior selection</LabelText>
+		</ExtendedProperties>
+	</Control>
 </Presentation>

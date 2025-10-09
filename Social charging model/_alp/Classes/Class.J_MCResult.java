@@ -3,8 +3,9 @@
  */	
 public class J_MCResult {
 
-	int iterations;
-	int scenarioIndex;
+	private int iterations;
+	private int scenarioIndex;
+	private int simulationRun;
 	
 	ArrayList<double[]> successRate_b1;
 	ArrayList<double[]> successRate_b2;
@@ -52,6 +53,10 @@ public class J_MCResult {
     
     public int getScenarioIndex() {
     	return scenarioIndex;
+    }
+    
+    public int getSimulationRun() {
+    	return simulationRun;
     }
 
     public ArrayList<double[]> getSuccessRate_b1() {
@@ -106,12 +111,24 @@ public class J_MCResult {
         return percSatisfiedChargingSessions_rollingAvg;
     }
     
+    public ArrayList<double[]> getPercSatisfiedChargingSessionsPerDay() {
+        return percSatisfiedChargingSessions_perDay;
+    }
+    
     public ArrayList<double[]> getChargingSessionsRollingAvg() {
         return chargingSessions_rollingAvg;
     }
     
+    public ArrayList<double[]> getChargingSessionsPerDay() {
+        return chargingSessions_perDay;
+    }
+    
     public ArrayList<double[]> getRequiredChargingSessionsRollingAvg() {
         return requiredChargingSessions_rollingAvg;
+    }
+    
+    public ArrayList<double[]> getRequiredChargingSessionsPerDay() {
+        return requiredChargingSessions_perDay;
     }
     
     public ArrayList<double[]> getLeftWhileChargingPerWeek() {
@@ -138,6 +155,10 @@ public class J_MCResult {
     
     public void setScenarioIndex(int scenIndex) {
     	this.scenarioIndex = scenIndex;
+    }
+    
+    public void setSimulationRunt(int simRun) {
+    	this.simulationRun = simRun;
     }
     
     public void setSuccessRate_b1( ArrayList<double[]> uncertaintyBounds ) {
