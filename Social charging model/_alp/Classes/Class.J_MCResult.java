@@ -7,6 +7,12 @@ public class J_MCResult {
 	private int scenarioIndex;
 	private int simulationRun;
 	
+	private boolean b1;
+	private boolean b2;
+	private boolean b3;
+	private boolean b4;
+	private int EVsPerCP;
+	
 	ArrayList<double[]> successRate_b1;
 	ArrayList<double[]> successRate_b2;
 	ArrayList<double[]> successRate_b3;
@@ -36,6 +42,8 @@ public class J_MCResult {
 	ArrayList<double[]> outOfModelCharging_perWeek;
 	ArrayList<double[]> leftWhileChargingWithDelayedAccess_perWeek;
 	ArrayList<double[]> percSatisfiedChargingSessions_perWeek;
+	ArrayList<double[]> chargingSessions_perWeek;
+	ArrayList<double[]> requiredChargingSessions_perWeek;
 		
 	int window = 14;
 	int days;
@@ -58,7 +66,27 @@ public class J_MCResult {
     public int getSimulationRun() {
     	return simulationRun;
     }
+    
+    public boolean getB1() {
+    	return b1;
+    }
+    
+    public boolean getB2() {
+    	return b2;
+    }
 
+    public boolean getB3() {
+    	return b3;
+    }
+
+    public boolean getB4() {
+    	return b4;
+    }
+
+    public int getEVsPerCP() {
+    	return EVsPerCP;
+    }
+    
     public ArrayList<double[]> getSuccessRate_b1() {
         return successRate_b1;
     }
@@ -147,6 +175,13 @@ public class J_MCResult {
         return percSatisfiedChargingSessions_perWeek;
     }
 
+    public ArrayList<double[]> getChargingSessionsPerWeek() {
+        return chargingSessions_perWeek;
+    }
+    
+    public ArrayList<double[]> getRequiredChargingSessionsPerWeek() {
+        return requiredChargingSessions_perWeek;
+    }
 
     // --- Setters ---
     public void setIterations(int iterations) {
@@ -160,6 +195,28 @@ public class J_MCResult {
     public void setSimulationRunt(int simRun) {
     	this.simulationRun = simRun;
     }
+    
+    public void setB1(boolean val) {
+    	this.b1 = val;
+    }
+    
+    public void setB2(boolean val) {
+    	this.b2 = val;
+    }
+
+    public void setB3(boolean val) {
+    	this.b3 = val;
+    }
+    
+    public void setB4(boolean val) {
+    	this.b4 = val;
+    }
+    
+    public void setEVsPerCP(int val) {
+    	this.EVsPerCP = val;
+    }
+
+
     
     public void setSuccessRate_b1( ArrayList<double[]> uncertaintyBounds ) {
     	successRate_b1 = uncertaintyBounds;
@@ -189,14 +246,14 @@ public class J_MCResult {
     	chargingSessions_perDay = uncertaintyBounds;
     	days = chargingSessions_perDay.get(0).length;
     	chargingSessions_rollingAvg = getRollingAverage(window, days, uncertaintyBounds);
-    	//leftWhileCharging_perWeek = getStatsPerWeek(uncertaintyBounds);
+    	chargingSessions_perWeek = getStatsPerWeek(uncertaintyBounds);
     }
     
     public void setRequiredChargingSessionsPerDay( ArrayList<double[]> uncertaintyBounds ) {
     	requiredChargingSessions_perDay = uncertaintyBounds;
     	days = requiredChargingSessions_perDay.get(0).length;
     	requiredChargingSessions_rollingAvg = getRollingAverage(window, days, uncertaintyBounds);
-    	//leftWhileCharging_perWeek = getStatsPerWeek(uncertaintyBounds);
+    	requiredChargingSessions_perWeek = getStatsPerWeek(uncertaintyBounds);
     }
     
     public void setLeftWhileChargingPerDay( ArrayList<double[]> uncertaintyBounds ) {
@@ -281,12 +338,12 @@ public class J_MCResult {
     			sumWeek += timeseries[i];
     		
     			if((i + 1) % 7 == 0) {
-    				weekStat[w] = sumWeek;
+    				double weekAverage = sumWeek / 7;
+    				weekStat[w] = weekAverage;
     				sumWeek = 0;
     				w++;
     			}
     		}
-    		
     		perWeekStats.add(weekStat);
     	}
     	return perWeekStats;

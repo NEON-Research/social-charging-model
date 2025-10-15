@@ -3063,7 +3063,65 @@ f_clearResultsCollections();
 iterations = 100;
 v_EVsPerCP = 10;
 
+
+// Define your checkboxes for iteration
+ShapeCheckBox[] checkBoxes = {
+    cb_b1,  // corresponds to b1
+    cb_b2,  // corresponds to b2
+    cb_b3,  // corresponds to b3
+    cb_recheckCPAvailability // corresponds to b4
+};
+
+// Define only the desired combinations
+// Order of booleans: {b1, b2, b3, b4}
+boolean[][] subselection = {
+    {false, false, false, false}, // No behaviors
+    {false, false, false, true},  // No behaviors, self checking
+    {true,  false, false, false}, // Behavior 1
+    {false, true,  false, false}, // Behavior 2
+    {true,  false, true,  false}, // Behavior 1 and 3
+    {true,  true,  true,  false}  // All behaviors
+};
+
+// Corresponding labels
+String[] labels = {
+    "No behaviors",
+    "No behaviors, self checking",
+    "Behavior 1",
+    "Behavior 2",
+    "Behavior 1 and 3",
+    "All behaviors"
+};
+
+// Iterate only over these subselections
+//for( v_EVsPerCP = 5; v_EVsPerCP &lt;= 15; v_EVsPerCP++ ){
+	for (int s = 0; s &lt; subselection.length; s++) {
+	    boolean[] scenario = subselection[s];
+	    String label = labels[s];
+	
+	    // Apply the checkbox states
+	    for (int i = 0; i &lt; checkBoxes.length; i++) {
+	        checkBoxes[i].setSelected(scenario[i], true);
+	    }
+	
+	    // Log scenario info
+	    System.out.println("Running scenario " + simulationCount + " : " + label);
+	    traceln("B1=" + scenario[0] + ", B2=" + scenario[1] + ", B3=" + scenario[2] + ", B4=" + scenario[3]);
+	
+	    // Run simulation
+	    for (int i = 0; i &lt; iterations; i++) {
+	        f_initializeModel();
+	        f_endRun();
+	        mains.get(0).f_cleanUp();
+	    }
+	    f_storeMCResults();
+	    simulationCount++;
+	}
+//}
+
+
 // List your checkboxes for easier iteration
+/*
 ShapeCheckBox[] checkBoxes = {
     cb_b1,
     cb_b2,
@@ -3071,27 +3129,31 @@ ShapeCheckBox[] checkBoxes = {
     cb_recheckCPAvailability
 };
 
-// Total combinations = 2^n
-int totalCombinations = 1 &lt;&lt; checkBoxes.length; // same as 2^n
-
-for (int combo = 0; combo &lt; totalCombinations; combo++) {
-    // Set checkboxes according to current bit pattern
-    for (int bit = 0; bit &lt; checkBoxes.length; bit++) {
-        boolean selected = (combo &amp; (1 &lt;&lt; bit)) != 0;
-        checkBoxes[bit].setSelected(selected);
-    }
-
-    // Now run your simulation for this combination
-    System.out.println("Running combination: " + Integer.toBinaryString(combo));
-    for (int i = 0; i &lt; iterations; i++) {
-        f_initializeModel();
-        f_endRun();
-        mains.get(0).f_cleanUp();
+//Start with EVs perCP loop
+//for(v_EVsPerCP = 5; v_EVsPerCP &lt;= 20; v_EVsPerCP += 5){
+	// Total combinations = 2^n
+	int totalCombinations = 1 &lt;&lt; checkBoxes.length; // same as 2^n
+	
+	for (int combo = 0; combo &lt; totalCombinations; combo++) {
+	    // Set checkboxes according to current bit pattern
+	    for (int bit = 0; bit &lt; checkBoxes.length; bit++) {
+	        boolean selected = (combo &amp; (1 &lt;&lt; bit)) != 0;
+	        checkBoxes[bit].setSelected(selected, true);
+	        traceln("combo = " + combo + " bit " + bit + " selected " + selected);
+	    }
+	
+	    // Now run your simulation for this combination
+	    System.out.println("Running combination: " + Integer.toBinaryString(combo));
+	    traceln("B1 = " + v_b1_moveCar + ", B2 = " + v_b2_requestMove + ", B3 = " + v_b3_notifyNeighbor + ", check av. = " + v_recheckCPAvailability);
+	    for (int i = 0; i &lt; iterations; i++) {
+	        f_initializeModel();
+	        f_endRun();
+	        mains.get(0).f_cleanUp();
+		}
+		f_storeMCResults();
+		simulationCount++;
 	}
-	f_storeMCResults();
-	simulationCount++;
-}
-
+//}*/
 traceln("Start writing to excel");
 f_writeBehaviorScenariosToExcel();
 

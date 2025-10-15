@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ModelResources>
 	<Resource>
-		<Id>1759995670475</Id>
-		<Path>SCM_export_results.xlsx</Path>
-		<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		<Location>FILE_SYSTEM</Location>
-	</Resource>
-	<Resource>
 		<Id>1759996005554</Id>
 		<Path>social_psychological_variables.xlsx</Path>
 		<ReferencedFromUserCode>false</ReferencedFromUserCode>

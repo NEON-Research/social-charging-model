@@ -384,7 +384,7 @@ for(int i = 0; i < size; i++){
 	data_avgProbability_b2.add(i, results.getAvgProb_b2().get(0)[i]);
 	data_avgProbability_b3.add(i, results.getAvgProb_b3().get(0)[i]);
 }
-
+/*
 for(int i = 0; i < days; i++){	
 	data_outOfModelCharging.add(i, results.getOutOfModelChargingRollingAvg().get(0)[i]);
 	data_leftUncharged.add(i, results.getLeftUnchargedRollingAvg().get(0)[i]);	
@@ -393,9 +393,14 @@ for(int i = 0; i < days; i++){
 	data_requiredChargingSessions.add(i, results.getRequiredChargingSessionsRollingAvg().get(0)[i]);
 	data_chargingSessions.add(i, results.getChargingSessionsRollingAvg().get(0)[i]);
 }  
-
+*/
 for(int i = 0; i < weeks; i++){	
+	data_outOfModelCharging.add(i, results.getOutOfModelChargingPerWeek().get(0)[i]);
+	data_leftUncharged.add(i, results.getLeftUnchargedPerWeek().get(0)[i]);	
+	data_leftWhileCharging.add(i, results.getLeftWhileChargingPerWeek().get(0)[i]);
 	data_percSatisfiedChargingSessions.add(i, results.getPercSatisfiedChargingSessionsPerWeek().get(0)[i]);
+	data_requiredChargingSessions.add(i, results.getRequiredChargingSessionsPerWeek().get(0)[i]);
+	data_chargingSessions.add(i, results.getChargingSessionsPerWeek().get(0)[i]);
 }
 
 Color color = randomFrom(c_colorPalette);
@@ -409,12 +414,12 @@ pl_avgProb1.setFixedHorizontalScale(0, size);
 pl_avgProb2.setFixedHorizontalScale(0, size);
 pl_avgProb3.setFixedHorizontalScale(0, size);
 
-pl_outOfModelCharge.setFixedHorizontalScale(0, days);
+pl_outOfModelCharge.setFixedHorizontalScale(0, weeks);
 pl_chargingSatisfaction.setFixedHorizontalScale(0, weeks);
-pl_leftWhileCharging.setFixedHorizontalScale(0, days);
-pl_leftUncharged.setFixedHorizontalScale(0, days);
-pl_chargingSessions.setFixedHorizontalScale(0, days);
-pl_requiredChargingSessions.setFixedHorizontalScale(0, days);
+pl_leftWhileCharging.setFixedHorizontalScale(0, weeks);
+pl_leftUncharged.setFixedHorizontalScale(0, weeks);
+pl_chargingSessions.setFixedHorizontalScale(0, weeks);
+pl_requiredChargingSessions.setFixedHorizontalScale(0, weeks);
 
 pl_successRate1.addDataSet(data_successRate_b1, title, color, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 pl_successRate2.addDataSet(data_successRate_b2, title, color, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
@@ -615,6 +620,11 @@ DataSet f_storeMCResults()
 J_MCResult results = new J_MCResult();
 
 results.setScenarioIndex(simulationCount);
+results.setB1(v_b1_moveCar);
+results.setB2(v_b2_requestMove);
+results.setB3(v_b3_notifyNeighbor);
+results.setB4(v_recheckCPAvailability);
+results.setEVsPerCP(v_EVsPerCP);
 
 ArrayList<double[]> uncertaintyBounds_SR_b1 = f_getUncertaintyBounds(c_succesRate_b1_MC);
 ArrayList<double[]> uncertaintyBounds_SR_b2 = f_getUncertaintyBounds(c_succesRate_b2_MC);
@@ -1189,31 +1199,31 @@ for(J_MCResult r : c_MCResults){
 	*/
 	int days = r.getOutOfModelChargingPerDay().get(0).length;
 	rowIndex = f_getTrueLastRow(sheetIndexPerDay, excel_exportResultsBehaviours) + 1;
-	for( int t = 0; t < days; t++ ){
+	/*for( int t = 0; t < days; t++ ){
 		
-		double meanOoMC = r.getOutOfModelChargingPerDay().get(0)[t];
-		double lowerOoMC = r.getOutOfModelChargingPerDay().get(1)[t];
-		double upperOoMC = r.getOutOfModelChargingPerDay().get(2)[t];
+		double meanOoMC = r.getOutOfModelChargingRollingAvg().get(0)[t];
+		double lowerOoMC = r.getOutOfModelChargingRollingAvg().get(1)[t];
+		double upperOoMC = r.getOutOfModelChargingRollingAvg().get(2)[t];
 		
-		double meanLWC = r.getLeftWhileChargingPerDay().get(0)[t];
-		double lowerLWC = r.getLeftWhileChargingPerDay().get(1)[t];
-		double upperLWC = r.getLeftWhileChargingPerDay().get(2)[t];
+		double meanLWC = r.getLeftWhileChargingRollingAvg().get(0)[t];
+		double lowerLWC = r.getLeftWhileChargingRollingAvg().get(1)[t];
+		double upperLWC = r.getLeftWhileChargingRollingAvg().get(2)[t];
 		
-		double meanLUC = r.getLeftUnchargedPerDay().get(0)[t];
-		double lowerLUC = r.getLeftUnchargedPerDay().get(1)[t];
-		double upperLUC = r.getLeftUnchargedPerDay().get(2)[t];
+		double meanLUC = r.getLeftUnchargedRollingAvg().get(0)[t];
+		double lowerLUC = r.getLeftUnchargedRollingAvg().get(1)[t];
+		double upperLUC = r.getLeftUnchargedRollingAvg().get(2)[t];
 		
-		double meanCS = r.getPercSatisfiedChargingSessionsPerDay().get(0)[t];
-		double lowerCS = r.getPercSatisfiedChargingSessionsPerDay().get(1)[t];
-		double upperCS = r.getPercSatisfiedChargingSessionsPerDay().get(2)[t];
+		double meanCS = r.getPercSatisfiedChargingSessionsRollingAvg().get(0)[t];
+		double lowerCS = r.getPercSatisfiedChargingSessionsRollingAvg().get(1)[t];
+		double upperCS = r.getPercSatisfiedChargingSessionsRollingAvg().get(2)[t];
 		
-		double meanCSpD = r.getChargingSessionsPerDay().get(0)[t];
-		double lowerCSpD = r.getChargingSessionsPerDay().get(1)[t];
-		double upperCSpD = r.getChargingSessionsPerDay().get(2)[t];
+		double meanCSpD = r.getChargingSessionsRollingAvg().get(0)[t];
+		double lowerCSpD = r.getChargingSessionsRollingAvg().get(1)[t];
+		double upperCSpD = r.getChargingSessionsRollingAvg().get(2)[t];
 		
-		double meanRCSpD = r.getRequiredChargingSessionsPerDay().get(0)[t];
-		double lowerRCSpD = r.getRequiredChargingSessionsPerDay().get(1)[t];
-		double upperRCSpD = r.getRequiredChargingSessionsPerDay().get(2)[t];
+		double meanRCSpD = r.getRequiredChargingSessionsRollingAvg().get(0)[t];
+		double lowerRCSpD = r.getRequiredChargingSessionsRollingAvg().get(1)[t];
+		double upperRCSpD = r.getRequiredChargingSessionsRollingAvg().get(2)[t];
 
 		excel_exportResultsBehaviours.setCellValue(scenarioIndex, sheetIndexPerDay, rowIndex, 1);
 		excel_exportResultsBehaviours.setCellValue(t, sheetIndexPerDay, rowIndex, 2);
@@ -1241,8 +1251,78 @@ for(J_MCResult r : c_MCResults){
 		excel_exportResultsBehaviours.setCellValue(meanRCSpD, sheetIndexPerDay, rowIndex, 18);
 		excel_exportResultsBehaviours.setCellValue(lowerRCSpD, sheetIndexPerDay, rowIndex, 19);
 		excel_exportResultsBehaviours.setCellValue(upperRCSpD, sheetIndexPerDay, rowIndex, 20);
+		
+		excel_exportResultsBehaviours.setCellValue(r.getB1(), sheetIndexPerDay, rowIndex, 22);
+		excel_exportResultsBehaviours.setCellValue(r.getB2(), sheetIndexPerDay, rowIndex, 23);
+		excel_exportResultsBehaviours.setCellValue(r.getB3(), sheetIndexPerDay, rowIndex, 24);
+		excel_exportResultsBehaviours.setCellValue(r.getB4(), sheetIndexPerDay, rowIndex, 25);
+		excel_exportResultsBehaviours.setCellValue(r.getEVsPerCP(), sheetIndexPerDay, rowIndex, 26);
+		
 		rowIndex++;
-	}
+	}*/
+	int weeks = r.getOutOfModelChargingPerWeek().get(0).length;
+	rowIndex = f_getTrueLastRow(sheetIndexPerDay, excel_exportResultsBehaviours) + 1;
+	for( int t = 0; t < weeks; t++ ){
+		
+		double meanOoMC = r.getOutOfModelChargingPerWeek().get(0)[t];
+		double lowerOoMC = r.getOutOfModelChargingPerWeek().get(1)[t];
+		double upperOoMC = r.getOutOfModelChargingPerWeek().get(2)[t];
+		
+		double meanLWC = r.getLeftWhileChargingPerWeek().get(0)[t];
+		double lowerLWC = r.getLeftWhileChargingPerWeek().get(1)[t];
+		double upperLWC = r.getLeftWhileChargingPerWeek().get(2)[t];
+		
+		double meanLUC = r.getLeftUnchargedPerWeek().get(0)[t];
+		double lowerLUC = r.getLeftUnchargedPerWeek().get(1)[t];
+		double upperLUC = r.getLeftUnchargedPerWeek().get(2)[t];
+		
+		double meanCS = r.getPercSatisfiedChargingSessionsPerWeek().get(0)[t];
+		double lowerCS = r.getPercSatisfiedChargingSessionsPerWeek().get(1)[t];
+		double upperCS = r.getPercSatisfiedChargingSessionsPerWeek().get(2)[t];
+		
+		double meanCSpD = r.getChargingSessionsPerWeek().get(0)[t];
+		double lowerCSpD = r.getChargingSessionsPerWeek().get(1)[t];
+		double upperCSpD = r.getChargingSessionsPerWeek().get(2)[t];
+		
+		double meanRCSpD = r.getRequiredChargingSessionsPerWeek().get(0)[t];
+		double lowerRCSpD = r.getRequiredChargingSessionsPerWeek().get(1)[t];
+		double upperRCSpD = r.getRequiredChargingSessionsPerWeek().get(2)[t];
+
+		excel_exportResultsBehaviours.setCellValue(scenarioIndex, sheetIndexPerDay, rowIndex, 1);
+		excel_exportResultsBehaviours.setCellValue(t, sheetIndexPerDay, rowIndex, 2);
+	
+		excel_exportResultsBehaviours.setCellValue(meanOoMC, sheetIndexPerDay, rowIndex, 3);
+		excel_exportResultsBehaviours.setCellValue(lowerOoMC, sheetIndexPerDay, rowIndex, 4);
+		excel_exportResultsBehaviours.setCellValue(upperOoMC, sheetIndexPerDay, rowIndex, 5);
+		
+		excel_exportResultsBehaviours.setCellValue(meanLWC, sheetIndexPerDay, rowIndex, 6);
+		excel_exportResultsBehaviours.setCellValue(lowerLWC, sheetIndexPerDay, rowIndex, 7);
+		excel_exportResultsBehaviours.setCellValue(upperLWC, sheetIndexPerDay, rowIndex, 8);
+		
+		excel_exportResultsBehaviours.setCellValue(meanLUC, sheetIndexPerDay, rowIndex, 9);
+		excel_exportResultsBehaviours.setCellValue(lowerLUC, sheetIndexPerDay, rowIndex, 10);
+		excel_exportResultsBehaviours.setCellValue(upperLUC, sheetIndexPerDay, rowIndex, 11);
+		
+		excel_exportResultsBehaviours.setCellValue(meanCS, sheetIndexPerDay, rowIndex, 12);
+		excel_exportResultsBehaviours.setCellValue(lowerCS, sheetIndexPerDay, rowIndex, 13);
+		excel_exportResultsBehaviours.setCellValue(upperCS, sheetIndexPerDay, rowIndex, 14);
+		
+		excel_exportResultsBehaviours.setCellValue(meanCSpD, sheetIndexPerDay, rowIndex, 15);
+		excel_exportResultsBehaviours.setCellValue(lowerCSpD, sheetIndexPerDay, rowIndex, 16);
+		excel_exportResultsBehaviours.setCellValue(upperCSpD, sheetIndexPerDay, rowIndex, 17);
+		
+		excel_exportResultsBehaviours.setCellValue(meanRCSpD, sheetIndexPerDay, rowIndex, 18);
+		excel_exportResultsBehaviours.setCellValue(lowerRCSpD, sheetIndexPerDay, rowIndex, 19);
+		excel_exportResultsBehaviours.setCellValue(upperRCSpD, sheetIndexPerDay, rowIndex, 20);
+		
+		excel_exportResultsBehaviours.setCellValue(r.getB1(), sheetIndexPerDay, rowIndex, 22);
+		excel_exportResultsBehaviours.setCellValue(r.getB2(), sheetIndexPerDay, rowIndex, 23);
+		excel_exportResultsBehaviours.setCellValue(r.getB3(), sheetIndexPerDay, rowIndex, 24);
+		excel_exportResultsBehaviours.setCellValue(r.getB4(), sheetIndexPerDay, rowIndex, 25);
+		excel_exportResultsBehaviours.setCellValue(r.getEVsPerCP(), sheetIndexPerDay, rowIndex, 26);
+		
+		rowIndex++;
+	}	
 }
 
 //Write file
