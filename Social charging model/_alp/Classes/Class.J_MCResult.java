@@ -1,6 +1,10 @@
 /**
  * J_MCResult
  */	
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+
 public class J_MCResult {
 
 	private int iterations;
@@ -44,6 +48,18 @@ public class J_MCResult {
 	ArrayList<double[]> percSatisfiedChargingSessions_perWeek;
 	ArrayList<double[]> chargingSessions_perWeek;
 	ArrayList<double[]> requiredChargingSessions_perWeek;
+	
+	ArrayList<double[]> behaviour1_perWeek;
+	ArrayList<double[]> behaviour2_perWeek;
+	ArrayList<double[]> behaviour3_perWeek;
+	ArrayList<double[]> successfulBehaviour1_perWeek;
+	ArrayList<double[]> successfulBehaviour2_perWeek;
+	ArrayList<double[]> successfulBehaviour3_perWeek;
+	ArrayList<double[]> unsuccessfulBehaviour1_perWeek;
+	ArrayList<double[]> unsuccessfulBehaviour2_perWeek;
+	ArrayList<double[]> unsuccessfulBehaviour3_perWeek;
+	ArrayList<double[]> kmDriven_perWeek;
+	ArrayList<double[]> tripsPerWeek;
 		
 	int window = 14;
 	int days;
@@ -110,18 +126,18 @@ public class J_MCResult {
     public ArrayList<double[]> getAvgProb_b3() {
         return avgProb_b3;
     }
-
+    /*
     public ArrayList<double[]> getLeftWhileChargingPerDay() {
         return leftWhileCharging_perDay;
-    }
-    
+    }*/
+    /*
     public ArrayList<double[]> getLeftUnchargedPerDay() {
         return leftUncharged_perDay;
-    }
-
+    }*/
+    /*
     public ArrayList<double[]> getOutOfModelChargingPerDay() {
         return outOfModelCharging_perDay;
-    }
+    }*/
     
     public ArrayList<double[]> getLeftWhileChargingRollingAvg() {
         return leftWhileCharging_rollingAvg;
@@ -138,26 +154,26 @@ public class J_MCResult {
     public ArrayList<double[]> getPercSatisfiedChargingSessionsRollingAvg() {
         return percSatisfiedChargingSessions_rollingAvg;
     }
-    
+    /*
     public ArrayList<double[]> getPercSatisfiedChargingSessionsPerDay() {
         return percSatisfiedChargingSessions_perDay;
-    }
+    }*/
     
     public ArrayList<double[]> getChargingSessionsRollingAvg() {
         return chargingSessions_rollingAvg;
     }
-    
+    /*
     public ArrayList<double[]> getChargingSessionsPerDay() {
         return chargingSessions_perDay;
-    }
+    }*/
     
     public ArrayList<double[]> getRequiredChargingSessionsRollingAvg() {
         return requiredChargingSessions_rollingAvg;
     }
-    
+    /*
     public ArrayList<double[]> getRequiredChargingSessionsPerDay() {
         return requiredChargingSessions_perDay;
-    }
+    }*/
     
     public ArrayList<double[]> getLeftWhileChargingPerWeek() {
         return leftWhileCharging_perWeek;
@@ -242,57 +258,146 @@ public class J_MCResult {
     	avgProb_b3 = uncertaintyBounds;
     }
     
-    public void setChargingSessionsPerDay( ArrayList<double[]> uncertaintyBounds ) {
-    	chargingSessions_perDay = uncertaintyBounds;
-    	days = chargingSessions_perDay.get(0).length;
-    	chargingSessions_rollingAvg = getRollingAverage(window, days, uncertaintyBounds);
-    	chargingSessions_perWeek = getStatsPerWeek(uncertaintyBounds);
+    public void setChargingSessionsPerWeek( ArrayList<double[]> uncertaintyBounds ) {
+    	chargingSessions_perWeek = uncertaintyBounds;
+    	//days = chargingSessions_perDay.get(0).length;
+    	//chargingSessions_rollingAvg = getRollingAverage(window, days, uncertaintyBounds);
+    	//chargingSessions_perWeek = getStatsPerWeek(uncertaintyBounds);
     }
     
-    public void setRequiredChargingSessionsPerDay( ArrayList<double[]> uncertaintyBounds ) {
-    	requiredChargingSessions_perDay = uncertaintyBounds;
-    	days = requiredChargingSessions_perDay.get(0).length;
-    	requiredChargingSessions_rollingAvg = getRollingAverage(window, days, uncertaintyBounds);
-    	requiredChargingSessions_perWeek = getStatsPerWeek(uncertaintyBounds);
+    public void setRequiredChargingSessionsPerWeek( ArrayList<double[]> uncertaintyBounds ) {
+    	requiredChargingSessions_perWeek = uncertaintyBounds;
+    	//days = requiredChargingSessions_perDay.get(0).length;
+    	//requiredChargingSessions_rollingAvg = getRollingAverage(window, days, uncertaintyBounds);
+    	//requiredChargingSessions_perWeek = getStatsPerWeek(uncertaintyBounds);
     }
     
-    public void setLeftWhileChargingPerDay( ArrayList<double[]> uncertaintyBounds ) {
-    	leftWhileCharging_perDay = uncertaintyBounds;
-    	days = leftWhileCharging_perDay.get(0).length;
-    	leftWhileCharging_rollingAvg = getRollingAverage(window, days, uncertaintyBounds);
-    	leftWhileCharging_perWeek = getStatsPerWeek(uncertaintyBounds);
+    public void setLeftWhileChargingPerWeek( ArrayList<double[]> uncertaintyBounds ) {
+    	leftWhileCharging_perWeek = uncertaintyBounds;
+    	//days = leftWhileCharging_perDay.get(0).length;
+    	//leftWhileCharging_rollingAvg = getRollingAverage(window, days, uncertaintyBounds);
+    	//leftWhileCharging_perWeek = getStatsPerWeek(uncertaintyBounds);
     	
     }
     
-    public void setLeftWhileChargingWithDelayedAccessPerDay( ArrayList<double[]> uncertaintyBounds ) {
-    	leftWhileChargingWithDelayedAccess_perDay = uncertaintyBounds;
-    	days = leftWhileChargingWithDelayedAccess_perDay.get(0).length;
-    	leftWhileChargingWithDelayedAccess_rollingAvg = getRollingAverage(window, days, uncertaintyBounds);
-    	leftWhileChargingWithDelayedAccess_perWeek = getStatsPerWeek(uncertaintyBounds);
+    public void setLeftWhileChargingWithDelayedAccessPerWeek( ArrayList<double[]> uncertaintyBounds ) {
+    	leftWhileChargingWithDelayedAccess_perWeek = uncertaintyBounds;
+    	//days = leftWhileChargingWithDelayedAccess_perDay.get(0).length;
+    	//leftWhileChargingWithDelayedAccess_rollingAvg = getRollingAverage(window, days, uncertaintyBounds);
+    	//leftWhileChargingWithDelayedAccess_perWeek = getStatsPerWeek(uncertaintyBounds);
     	
     }
     
-    public void setLeftUnchargedPerDay( ArrayList<double[]> uncertaintyBounds ) {
-    	leftUncharged_perDay = uncertaintyBounds;
-    	days = uncertaintyBounds.get(0).length;
-    	leftUncharged_rollingAvg = getRollingAverage(window, days, uncertaintyBounds);
-    	leftUncharged_perWeek = getStatsPerWeek(uncertaintyBounds);
+    public void setLeftUnchargedPerWeek( ArrayList<double[]> uncertaintyBounds ) {
+    	leftUncharged_perWeek = uncertaintyBounds;
+    	//days = uncertaintyBounds.get(0).length;
+    	//leftUncharged_rollingAvg = getRollingAverage(window, days, uncertaintyBounds);
+    	//leftUncharged_perWeek = getStatsPerWeek(uncertaintyBounds);
     }
     
-    public void setOutOfModelChargingPerDay( ArrayList<double[]> uncertaintyBounds ) {
-    	outOfModelCharging_perDay = uncertaintyBounds;
-    	days = uncertaintyBounds.get(0).length;
-    	outOfModelCharging_rollingAvg = getRollingAverage(window, days, uncertaintyBounds);
-    	outOfModelCharging_perWeek = getStatsPerWeek(uncertaintyBounds);
+    public void setOutOfModelChargingPerWeek( ArrayList<double[]> uncertaintyBounds ) {
+    	outOfModelCharging_perWeek = uncertaintyBounds;
+    	//days = uncertaintyBounds.get(0).length;
+    	//outOfModelCharging_rollingAvg = getRollingAverage(window, days, uncertaintyBounds);
+    	//outOfModelCharging_perWeek = getStatsPerWeek(uncertaintyBounds);
     }
     
-    public void setPercSatisfiedChargingSessionsPerDay( ArrayList<double[]> uncertaintyBounds ) {
-    	percSatisfiedChargingSessions_perDay = uncertaintyBounds;
-    	days = percSatisfiedChargingSessions_perDay.get(0).length;
-    	percSatisfiedChargingSessions_rollingAvg = getRollingAverage(window, days, uncertaintyBounds);
-    	percSatisfiedChargingSessions_perWeek = getStatsPerWeek(uncertaintyBounds);
+    public void setPercSatisfiedChargingSessionsPerWeek( ArrayList<double[]> uncertaintyBounds ) {
+    	percSatisfiedChargingSessions_perWeek = uncertaintyBounds;
+    	//days = percSatisfiedChargingSessions_perDay.get(0).length;
+    	//percSatisfiedChargingSessions_rollingAvg = getRollingAverage(window, days, uncertaintyBounds);
+    	//percSatisfiedChargingSessions_perWeek = getStatsPerWeek(uncertaintyBounds);
     	
     }
+    
+    public ArrayList<double[]> getBehaviour1PerWeek() {
+        return behaviour1_perWeek;
+    }
+
+    public void setBehaviour1PerWeek(ArrayList<double[]> behaviour1_perWeek) {
+        this.behaviour1_perWeek = behaviour1_perWeek;
+    }
+
+    public ArrayList<double[]> getBehaviour2PerWeek() {
+        return behaviour2_perWeek;
+    }
+
+    public void setBehaviour2PerWeek(ArrayList<double[]> behaviour2_perWeek) {
+        this.behaviour2_perWeek = behaviour2_perWeek;
+    }
+
+    public ArrayList<double[]> getBehaviour3PerWeek() {
+        return behaviour3_perWeek;
+    }
+
+    public void setBehaviour3PerWeek(ArrayList<double[]> behaviour3_perWeek) {
+        this.behaviour3_perWeek = behaviour3_perWeek;
+    }
+
+    public ArrayList<double[]> getSuccessfulBehaviour1PerWeek() {
+        return successfulBehaviour1_perWeek;
+    }
+
+    public void setSuccessfulBehaviour1PerWeek(ArrayList<double[]> successfulBehaviour1_perWeek) {
+        this.successfulBehaviour1_perWeek = successfulBehaviour1_perWeek;
+    }
+
+    public ArrayList<double[]> getSuccessfulBehaviour2PerWeek() {
+        return successfulBehaviour2_perWeek;
+    }
+
+    public void setSuccessfulBehaviour2PerWeek(ArrayList<double[]> successfulBehaviour2_perWeek) {
+        this.successfulBehaviour2_perWeek = successfulBehaviour2_perWeek;
+    }
+
+    public ArrayList<double[]> getSuccessfulBehaviour3PerWeek() {
+        return successfulBehaviour3_perWeek;
+    }
+
+    public void setSuccessfulBehaviour3PerWeek(ArrayList<double[]> successfulBehaviour3_perWeek) {
+        this.successfulBehaviour3_perWeek = successfulBehaviour3_perWeek;
+    }
+    
+    public ArrayList<double[]> getUnsuccessfulBehaviour1PerWeek() {
+        return unsuccessfulBehaviour1_perWeek;
+    }
+
+    public void setUnsuccessfulBehaviour1PerWeek(ArrayList<double[]> unsuccessfulBehaviour1_perWeek) {
+        this.unsuccessfulBehaviour1_perWeek = unsuccessfulBehaviour1_perWeek;
+    }
+
+    public ArrayList<double[]> getUnsuccessfulBehaviour2PerWeek() {
+        return unsuccessfulBehaviour2_perWeek;
+    }
+
+    public void setUnsuccessfulBehaviour2PerWeek(ArrayList<double[]> unsuccessfulBehaviour2_perWeek) {
+        this.unsuccessfulBehaviour2_perWeek = unsuccessfulBehaviour2_perWeek;
+    }
+
+    public ArrayList<double[]> getUnsuccessfulBehaviour3PerWeek() {
+        return unsuccessfulBehaviour3_perWeek;
+    }
+
+    public void setUnsuccessfulBehaviour3PerWeek(ArrayList<double[]> unsuccessfulBehaviour3_perWeek) {
+        this.unsuccessfulBehaviour3_perWeek = unsuccessfulBehaviour3_perWeek;
+    }
+
+    public ArrayList<double[]> getKmDrivenPerWeek() {
+        return kmDriven_perWeek;
+    }
+
+    public void setKmDrivenPerWeek(ArrayList<double[]> kmDriven_perWeek) {
+        this.kmDriven_perWeek = kmDriven_perWeek;
+    }
+    
+    public ArrayList<double[]> getTripsPerWeek() {
+        return tripsPerWeek;
+    }
+
+    public void setTripsPerWeek(ArrayList<double[]> tripsPerWeek) {
+        this.tripsPerWeek = tripsPerWeek;
+    }    
+
        
     
     public ArrayList<double[]> getRollingAverage(int window, int days, ArrayList<double[]> timeseriesStats) {
@@ -323,7 +428,7 @@ public class J_MCResult {
     	
     return rollingAvgStats;
     }
-    
+    /*
     public ArrayList<double[]> getStatsPerWeek( ArrayList<double[]> timeseriesStats) {
     	ArrayList<double[] >perWeekStats = new ArrayList<double[]>();
     	int days = timeseriesStats.get(0).length;
@@ -347,9 +452,23 @@ public class J_MCResult {
     		perWeekStats.add(weekStat);
     	}
     	return perWeekStats;
-    }
+    }*/
     
+    public void clear() {
+        for (Field field : this.getClass().getDeclaredFields()) {
+            if (field.getType() == ArrayList.class) {
+                field.setAccessible(true);
+                try {
+                    field.set(this, null);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
+    
+    
 	@Override
 	public String toString() {
 		return super.toString();

@@ -127,7 +127,7 @@ int size = m.v_timestep;
 
 if( monteCarlo ){
 	f_storeMCArrays();
-}
+}/*
 else {
 	Color color = randomFrom(c_colorPalette);
 	String title = "run " + simulationCount;
@@ -235,7 +235,7 @@ else {
 		pl_occurance.addDataSet(data_successful_b3, "Behavior 3: notify neighbor successful", lightSlateBlue, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 		pl_occurance.addDataSet(data_unsuccessful_b3, "Behavior 3: notify neighbor unsuccessful", darkSlateBlue, true, Chart.INTERPOLATION_LINEAR, 1.0, Chart.POINT_NONE);
 	}
-}
+}*/
 /*ALCODEEND*/}
 
 double f_setGraphsPerRun(Color color,String title)
@@ -336,15 +336,27 @@ c_colorPalette.add(new Color(0xD68910));   // Amber
 double f_storeMCArrays()
 {/*ALCODESTART::1755183120871*/
 Main m = mains.get(0);
-int size = m.v_timestep;
 
-c_succesRate_b1_MC.add(m.ar_successRate_b1);
-c_succesRate_b2_MC.add(m.ar_successRate_b2);
-c_succesRate_b3_MC.add(m.ar_successRate_b3);
-c_avgProb_b1_MC.add(m.ar_avgProbability_b1);
-c_avgProb_b2_MC.add(m.ar_avgProbability_b2);
-c_avgProb_b3_MC.add(m.ar_avgProbability_b3);
+c_succesRate_b1_MC.add(f_dailyToWeekly(m.ar_successRate_b1));
+c_succesRate_b2_MC.add(f_dailyToWeekly(m.ar_successRate_b2));
+c_succesRate_b3_MC.add(f_dailyToWeekly(m.ar_successRate_b3));
+c_avgProb_b1_MC.add(f_dailyToWeekly(m.ar_avgProbability_b1));
+c_avgProb_b2_MC.add(f_dailyToWeekly(m.ar_avgProbability_b2));
+c_avgProb_b3_MC.add(f_dailyToWeekly(m.ar_avgProbability_b3));
 
+c_kmDrivenPerWeek.add(m.ar_kmDrivenPerWeek.clone());
+
+c_b1_perWeek.add(m.ar_interactionsPerWeek_b1.clone());
+c_b2_perWeek.add(m.ar_interactionsPerWeek_b2.clone());
+c_b3_perWeek.add(m.ar_interactionsPerWeek_b3.clone());
+c_b1Successful_perWeek.add(m.ar_successful_b1.clone());
+c_b2Successful_perWeek.add(m.ar_successful_b2.clone());
+c_b3Successful_perWeek.add(m.ar_successful_b3.clone());
+c_b1Unsuccessful_perWeek.add(m.ar_unsuccessful_b1.clone());
+c_b2Unsuccessful_perWeek.add(m.ar_unsuccessful_b2.clone());
+c_b3Unsuccessful_perWeek.add(m.ar_unsuccessful_b3.clone());
+
+/*
 c_outOfModelChargingPerDay.add(m.ar_outOfModelCharging);
 c_leftWhileChargingPerDay.add(m.ar_leftWhileCharging);
 c_leftWhileChargingWithDelayedAccessPerDay.add(m.ar_leftWhileChargingWithDelayedAccess);
@@ -353,13 +365,24 @@ c_percSatisfiedChargingSessionsPerDay.add(m.ar_percSatisfiedChargingSessions);
 
 c_chargingSessionsPerDay.add(m.ar_chargingSessions);
 c_requiredChargingSessionsPerDay.add(m.ar_requiredChargingSessions);
+*/
+
+c_outOfModelChargingPerWeek.add(m.ar_outOfModelCharging.clone());
+c_leftWhileChargingPerWeek.add(m.ar_leftWhileCharging.clone());
+c_leftWhileChargingWithDelayedAccessPerWeek.add(m.ar_leftWhileChargingWithDelayedAccess.clone());
+c_leftUnchargedPerWeek.add(m.ar_leftUncharged.clone());
+c_percSatisfiedChargingSessionsPerWeek.add(m.ar_percSatisfiedChargingSessions.clone());
+
+c_chargingSessionsPerWeek.add(m.ar_chargingSessions.clone());
+c_requiredChargingSessionsPerWeek.add(m.ar_requiredChargingSessions.clone());
+
+c_tripsPerWeek.add(m.ar_tripsPerWeek.clone());
 /*ALCODEEND*/}
 
 double f_setMCGraphs(J_MCResult results)
 {/*ALCODESTART::1755183201656*/
 //Create datasets
 int size = results.getSuccessRate_b1().get(0).length;
-int days = results.getLeftUnchargedPerDay().get(0).length;
 int weeks = results.getLeftUnchargedPerWeek().get(0).length;
 DataSet data_successRate_b1 = new DataSet(size);
 DataSet data_successRate_b2 = new DataSet(size);
@@ -367,12 +390,12 @@ DataSet data_successRate_b3 = new DataSet(size);
 DataSet data_avgProbability_b1 = new DataSet(size);
 DataSet data_avgProbability_b2 = new DataSet(size);
 DataSet data_avgProbability_b3 = new DataSet(size);
-DataSet data_outOfModelCharging = new DataSet(days);
-DataSet data_leftWhileCharging = new DataSet(days);
-DataSet data_leftUncharged = new DataSet(days);
+DataSet data_outOfModelCharging = new DataSet(weeks);
+DataSet data_leftWhileCharging = new DataSet(weeks);
+DataSet data_leftUncharged = new DataSet(weeks);
 DataSet data_percSatisfiedChargingSessions = new DataSet(weeks);
-DataSet data_chargingSessions = new DataSet(days);
-DataSet data_requiredChargingSessions = new DataSet(days);
+DataSet data_chargingSessions = new DataSet(weeks);
+DataSet data_requiredChargingSessions = new DataSet(weeks);
 //DataSet data_successRate_rechecks = new DataSet(size);
 
 for(int i = 0; i < size; i++){
@@ -444,7 +467,7 @@ DataSet f_writeMCToExcel()
 
 
 int sheetIndex = 1;
-int sheetIndexPerDay = 2;
+int sheetIndexPerWeek = 2;
 
 for(J_MCResult r : c_MCResults){
 
@@ -510,60 +533,60 @@ for(J_MCResult r : c_MCResults){
 		rowIndex++;
 	}
 	
-	int days = r.getOutOfModelChargingPerDay().get(0).length;
-	rowIndex = f_getTrueLastRow(sheetIndexPerDay, excel_exportResults) + 1;
+	int days = r.getOutOfModelChargingPerWeek().get(0).length;
+	rowIndex = f_getTrueLastRow(sheetIndexPerWeek, excel_exportResults) + 1;
 	for( int t = 0; t < days; t++ ){
 		
-		double meanOoMC = r.getOutOfModelChargingPerDay().get(0)[t];
-		double lowerOoMC = r.getOutOfModelChargingPerDay().get(1)[t];
-		double upperOoMC = r.getOutOfModelChargingPerDay().get(2)[t];
+		double meanOoMC = r.getOutOfModelChargingPerWeek().get(0)[t];
+		double lowerOoMC = r.getOutOfModelChargingPerWeek().get(1)[t];
+		double upperOoMC = r.getOutOfModelChargingPerWeek().get(2)[t];
 		
-		double meanLWC = r.getLeftWhileChargingPerDay().get(0)[t];
-		double lowerLWC = r.getLeftWhileChargingPerDay().get(1)[t];
-		double upperLWC = r.getLeftWhileChargingPerDay().get(2)[t];
+		double meanLWC = r.getLeftWhileChargingPerWeek().get(0)[t];
+		double lowerLWC = r.getLeftWhileChargingPerWeek().get(1)[t];
+		double upperLWC = r.getLeftWhileChargingPerWeek().get(2)[t];
 		
-		double meanLUC = r.getLeftUnchargedPerDay().get(0)[t];
-		double lowerLUC = r.getLeftUnchargedPerDay().get(1)[t];
-		double upperLUC = r.getLeftUnchargedPerDay().get(2)[t];
+		double meanLUC = r.getLeftUnchargedPerWeek().get(0)[t];
+		double lowerLUC = r.getLeftUnchargedPerWeek().get(1)[t];
+		double upperLUC = r.getLeftUnchargedPerWeek().get(2)[t];
 		
-		double meanCS = r.getPercSatisfiedChargingSessionsPerDay().get(0)[t];
-		double lowerCS = r.getPercSatisfiedChargingSessionsPerDay().get(1)[t];
-		double upperCS = r.getPercSatisfiedChargingSessionsPerDay().get(2)[t];
+		double meanCS = r.getPercSatisfiedChargingSessionsPerWeek().get(0)[t];
+		double lowerCS = r.getPercSatisfiedChargingSessionsPerWeek().get(1)[t];
+		double upperCS = r.getPercSatisfiedChargingSessionsPerWeek().get(2)[t];
 		
-		double meanCSpD = r.getChargingSessionsPerDay().get(0)[t];
-		double lowerCSpD = r.getChargingSessionsPerDay().get(1)[t];
-		double upperCSpD = r.getChargingSessionsPerDay().get(2)[t];
+		double meanCSpD = r.getChargingSessionsPerWeek().get(0)[t];
+		double lowerCSpD = r.getChargingSessionsPerWeek().get(1)[t];
+		double upperCSpD = r.getChargingSessionsPerWeek().get(2)[t];
 		
-		double meanRCSpD = r.getRequiredChargingSessionsPerDay().get(0)[t];
-		double lowerRCSpD = r.getRequiredChargingSessionsPerDay().get(1)[t];
-		double upperRCSpD = r.getRequiredChargingSessionsPerDay().get(2)[t];
+		double meanRCSpD = r.getRequiredChargingSessionsPerWeek().get(0)[t];
+		double lowerRCSpD = r.getRequiredChargingSessionsPerWeek().get(1)[t];
+		double upperRCSpD = r.getRequiredChargingSessionsPerWeek().get(2)[t];
 
-		excel_exportResults.setCellValue(scenarioIndex, sheetIndexPerDay, rowIndex, 1);
-		excel_exportResults.setCellValue(t, sheetIndexPerDay, rowIndex, 2);
+		excel_exportResults.setCellValue(scenarioIndex, sheetIndexPerWeek, rowIndex, 1);
+		excel_exportResults.setCellValue(t, sheetIndexPerWeek, rowIndex, 2);
 	
-		excel_exportResults.setCellValue(meanOoMC, sheetIndexPerDay, rowIndex, 3);
-		excel_exportResults.setCellValue(lowerOoMC, sheetIndexPerDay, rowIndex, 4);
-		excel_exportResults.setCellValue(upperOoMC, sheetIndexPerDay, rowIndex, 5);
+		excel_exportResults.setCellValue(meanOoMC, sheetIndexPerWeek, rowIndex, 3);
+		excel_exportResults.setCellValue(lowerOoMC, sheetIndexPerWeek, rowIndex, 4);
+		excel_exportResults.setCellValue(upperOoMC, sheetIndexPerWeek, rowIndex, 5);
 		
-		excel_exportResults.setCellValue(meanLWC, sheetIndexPerDay, rowIndex, 6);
-		excel_exportResults.setCellValue(lowerLWC, sheetIndexPerDay, rowIndex, 7);
-		excel_exportResults.setCellValue(upperLWC, sheetIndexPerDay, rowIndex, 8);
+		excel_exportResults.setCellValue(meanLWC, sheetIndexPerWeek, rowIndex, 6);
+		excel_exportResults.setCellValue(lowerLWC, sheetIndexPerWeek, rowIndex, 7);
+		excel_exportResults.setCellValue(upperLWC, sheetIndexPerWeek, rowIndex, 8);
 		
-		excel_exportResults.setCellValue(meanLUC, sheetIndexPerDay, rowIndex, 9);
-		excel_exportResults.setCellValue(lowerLUC, sheetIndexPerDay, rowIndex, 10);
-		excel_exportResults.setCellValue(upperLUC, sheetIndexPerDay, rowIndex, 11);
+		excel_exportResults.setCellValue(meanLUC, sheetIndexPerWeek, rowIndex, 9);
+		excel_exportResults.setCellValue(lowerLUC, sheetIndexPerWeek, rowIndex, 10);
+		excel_exportResults.setCellValue(upperLUC, sheetIndexPerWeek, rowIndex, 11);
 		
-		excel_exportResults.setCellValue(meanCS, sheetIndexPerDay, rowIndex, 12);
-		excel_exportResults.setCellValue(lowerCS, sheetIndexPerDay, rowIndex, 13);
-		excel_exportResults.setCellValue(upperCS, sheetIndexPerDay, rowIndex, 14);
+		excel_exportResults.setCellValue(meanCS, sheetIndexPerWeek, rowIndex, 12);
+		excel_exportResults.setCellValue(lowerCS, sheetIndexPerWeek, rowIndex, 13);
+		excel_exportResults.setCellValue(upperCS, sheetIndexPerWeek, rowIndex, 14);
 		
-		excel_exportResults.setCellValue(meanCSpD, sheetIndexPerDay, rowIndex, 15);
-		excel_exportResults.setCellValue(lowerCSpD, sheetIndexPerDay, rowIndex, 16);
-		excel_exportResults.setCellValue(upperCSpD, sheetIndexPerDay, rowIndex, 17);
+		excel_exportResults.setCellValue(meanCSpD, sheetIndexPerWeek, rowIndex, 15);
+		excel_exportResults.setCellValue(lowerCSpD, sheetIndexPerWeek, rowIndex, 16);
+		excel_exportResults.setCellValue(upperCSpD, sheetIndexPerWeek, rowIndex, 17);
 		
-		excel_exportResults.setCellValue(meanRCSpD, sheetIndexPerDay, rowIndex, 18);
-		excel_exportResults.setCellValue(lowerRCSpD, sheetIndexPerDay, rowIndex, 19);
-		excel_exportResults.setCellValue(upperRCSpD, sheetIndexPerDay, rowIndex, 20);
+		excel_exportResults.setCellValue(meanRCSpD, sheetIndexPerWeek, rowIndex, 18);
+		excel_exportResults.setCellValue(lowerRCSpD, sheetIndexPerWeek, rowIndex, 19);
+		excel_exportResults.setCellValue(upperRCSpD, sheetIndexPerWeek, rowIndex, 20);
 		rowIndex++;
 	}
 }
@@ -597,18 +620,15 @@ for (int t = 0; t < nTimePoints; t++) {
 	Arrays.sort(valuesAtTimeT);
 	
 	//mean
-	resultsList.get(0)[t] = Arrays.stream(valuesAtTimeT).average().getAsDouble();
-	//lower
-	int lowerIndex = (int) Math.floor(0.05 * (nRuns - 1));
-	resultsList.get(1)[t] = valuesAtTimeT[lowerIndex];  // 5th percentile
-	//upper
-	int upperIndex = (int) Math.floor(0.95 * (nRuns - 1));
-	resultsList.get(2)[t] = valuesAtTimeT[upperIndex];  // 95th percentile
-	/*
-	mean[t] = Arrays.stream(valuesAtTimeT).average().getAsDouble();
-	lower[t] = valuesAtTimeT[(int)(0.05 * nRuns)];  // 5th percentile
-	upper[t] = valuesAtTimeT[(int)(0.95 * nRuns)];  // 95th percentile
-    */    
+	double mean = Arrays.stream(valuesAtTimeT).average().orElse(Double.NaN);
+	
+	// Percentiles (linear interpolation)
+    double lower = f_percentile(valuesAtTimeT, 0.05);
+    double upper = f_percentile(valuesAtTimeT, 0.95);
+    
+    resultsList.get(0)[t] = mean;
+    resultsList.get(1)[t] = lower;
+    resultsList.get(2)[t] = upper;
 }
 
 return resultsList;
@@ -632,13 +652,30 @@ ArrayList<double[]> uncertaintyBounds_SR_b3 = f_getUncertaintyBounds(c_succesRat
 ArrayList<double[]> uncertaintyBounds_AP_b1 = f_getUncertaintyBounds(c_avgProb_b1_MC);
 ArrayList<double[]> uncertaintyBounds_AP_b2 = f_getUncertaintyBounds(c_avgProb_b2_MC);
 ArrayList<double[]> uncertaintyBounds_AP_b3 = f_getUncertaintyBounds(c_avgProb_b3_MC);
-ArrayList<double[]> uncertaintyBounds_OoMC = f_getUncertaintyBounds(c_outOfModelChargingPerDay);
-ArrayList<double[]> uncertaintyBounds_LWC = f_getUncertaintyBounds(c_leftWhileChargingPerDay);
-ArrayList<double[]> uncertaintyBounds_LWCWDA = f_getUncertaintyBounds(c_leftWhileChargingWithDelayedAccessPerDay);
-ArrayList<double[]> uncertaintyBounds_LUC = f_getUncertaintyBounds(c_leftUnchargedPerDay);
-ArrayList<double[]> uncertaintyBounds_SCS = f_getUncertaintyBounds(c_percSatisfiedChargingSessionsPerDay);
-ArrayList<double[]> uncertaintyBounds_CS = f_getUncertaintyBounds(c_chargingSessionsPerDay);
-ArrayList<double[]> uncertaintyBounds_RCS = f_getUncertaintyBounds(c_requiredChargingSessionsPerDay);
+ArrayList<double[]> uncertaintyBounds_OoMC = f_getUncertaintyBounds(c_outOfModelChargingPerWeek);
+ArrayList<double[]> uncertaintyBounds_LWC = f_getUncertaintyBounds(c_leftWhileChargingPerWeek);
+ArrayList<double[]> uncertaintyBounds_LWCWDA = f_getUncertaintyBounds(c_leftWhileChargingWithDelayedAccessPerWeek);
+ArrayList<double[]> uncertaintyBounds_LUC = f_getUncertaintyBounds(c_leftUnchargedPerWeek);
+ArrayList<double[]> uncertaintyBounds_SCS = f_getUncertaintyBounds(c_percSatisfiedChargingSessionsPerWeek);
+ArrayList<double[]> uncertaintyBounds_CS = f_getUncertaintyBounds(c_chargingSessionsPerWeek);
+ArrayList<double[]> uncertaintyBounds_RCS = f_getUncertaintyBounds(c_requiredChargingSessionsPerWeek);
+
+ArrayList<double[]> uncertaintyBounds_b1 = f_getUncertaintyBounds(c_b1_perWeek);
+ArrayList<double[]> uncertaintyBounds_b2 = f_getUncertaintyBounds(c_b2_perWeek);
+ArrayList<double[]> uncertaintyBounds_b3 = f_getUncertaintyBounds(c_b3_perWeek);
+ArrayList<double[]> uncertaintyBounds_b1s = f_getUncertaintyBounds(c_b1Successful_perWeek);
+ArrayList<double[]> uncertaintyBounds_b2s = f_getUncertaintyBounds(c_b2Successful_perWeek);
+ArrayList<double[]> uncertaintyBounds_b3s = f_getUncertaintyBounds(c_b3Successful_perWeek);
+ArrayList<double[]> uncertaintyBounds_b1us = f_getUncertaintyBounds(c_b1Unsuccessful_perWeek);
+ArrayList<double[]> uncertaintyBounds_b2us = f_getUncertaintyBounds(c_b2Unsuccessful_perWeek);
+ArrayList<double[]> uncertaintyBounds_b3us = f_getUncertaintyBounds(c_b3Unsuccessful_perWeek);
+ArrayList<double[]> uncertaintyBounds_kmd = f_getUncertaintyBounds(c_kmDrivenPerWeek);
+
+ArrayList<double[]> uncertaintyBounds_trips = f_getUncertaintyBounds(c_tripsPerWeek);
+
+//Charging satisfaction
+
+
 
 results.setSuccessRate_b1(uncertaintyBounds_SR_b1);
 results.setSuccessRate_b2(uncertaintyBounds_SR_b2);
@@ -648,18 +685,34 @@ results.setAvgProb_b1(uncertaintyBounds_AP_b1);
 results.setAvgProb_b2(uncertaintyBounds_AP_b2);
 results.setAvgProb_b3(uncertaintyBounds_AP_b3);
 
-results.setOutOfModelChargingPerDay(uncertaintyBounds_OoMC);
-results.setLeftWhileChargingPerDay(uncertaintyBounds_LWC);
-results.setLeftWhileChargingWithDelayedAccessPerDay(uncertaintyBounds_LWCWDA);
-results.setLeftUnchargedPerDay(uncertaintyBounds_LUC);
-results.setPercSatisfiedChargingSessionsPerDay(uncertaintyBounds_SCS);
+results.setOutOfModelChargingPerWeek(uncertaintyBounds_OoMC);
+results.setLeftWhileChargingPerWeek(uncertaintyBounds_LWC);
+results.setLeftWhileChargingWithDelayedAccessPerWeek(uncertaintyBounds_LWCWDA);
+results.setLeftUnchargedPerWeek(uncertaintyBounds_LUC);
+results.setPercSatisfiedChargingSessionsPerWeek(uncertaintyBounds_SCS);
 
-results.setChargingSessionsPerDay(uncertaintyBounds_CS);
-results.setRequiredChargingSessionsPerDay(uncertaintyBounds_RCS);
+results.setChargingSessionsPerWeek(uncertaintyBounds_CS);
+results.setRequiredChargingSessionsPerWeek(uncertaintyBounds_RCS);
+
+results.setBehaviour1PerWeek(uncertaintyBounds_b1);
+results.setBehaviour2PerWeek(uncertaintyBounds_b2);
+results.setBehaviour3PerWeek(uncertaintyBounds_b3);
+results.setSuccessfulBehaviour1PerWeek(uncertaintyBounds_b1s);
+results.setSuccessfulBehaviour2PerWeek(uncertaintyBounds_b2s);
+results.setSuccessfulBehaviour3PerWeek(uncertaintyBounds_b3s);
+
+results.setUnsuccessfulBehaviour1PerWeek(uncertaintyBounds_b1us);
+results.setUnsuccessfulBehaviour2PerWeek(uncertaintyBounds_b2us);
+results.setUnsuccessfulBehaviour3PerWeek(uncertaintyBounds_b3us);
+
+results.setKmDrivenPerWeek(uncertaintyBounds_kmd);
+results.setTripsPerWeek(uncertaintyBounds_trips);
 
 c_MCResults.add(results);
 
-f_setMCGraphs(results);
+
+
+//f_setMCGraphs(results);
 /*ALCODEEND*/}
 
 double f_setRunText(Color color,String title)
@@ -699,7 +752,7 @@ f_setGraphs();
 
 if(monteCarlo){
 	iteration++;
-	traceln("Finished MC iteration " + iteration);
+	//traceln("Finished MC iteration " + iteration);
 }
 else{
 	simulationCount++;
@@ -717,13 +770,31 @@ c_succesRate_b3_MC.clear();
 c_avgProb_b1_MC.clear();
 c_avgProb_b2_MC.clear();
 c_avgProb_b3_MC.clear();
-c_outOfModelChargingPerDay.clear();
-c_leftWhileChargingPerDay.clear();
-c_leftWhileChargingWithDelayedAccessPerDay.clear();
-c_percSatisfiedChargingSessionsPerDay.clear();
-c_leftUnchargedPerDay.clear();
-c_chargingSessionsPerDay.clear();
-c_requiredChargingSessionsPerDay.clear();
+c_outOfModelChargingPerWeek.clear();
+c_leftWhileChargingPerWeek.clear();
+c_leftWhileChargingWithDelayedAccessPerWeek.clear();
+c_percSatisfiedChargingSessionsPerWeek.clear();
+c_leftUnchargedPerWeek.clear();
+c_chargingSessionsPerWeek.clear();
+c_requiredChargingSessionsPerWeek.clear();
+
+c_b1_perWeek.clear();
+c_b2_perWeek.clear();
+c_b3_perWeek.clear();
+
+c_b1Successful_perWeek.clear();
+c_b2Successful_perWeek.clear();
+c_b3Successful_perWeek.clear();
+c_b1Unsuccessful_perWeek.clear();
+c_b2Unsuccessful_perWeek.clear();
+c_b3Unsuccessful_perWeek.clear();
+
+c_kmDrivenPerWeek.clear();
+
+for(J_MCResult rs : c_MCResults){
+	rs.clear();
+}
+c_MCResults.clear();
 /*ALCODEEND*/}
 
 double f_excelClearSheets()
@@ -763,7 +834,7 @@ for (int r = lastRow; r >= 3; r--) {
 	int lastCol = excel_file.getLastCellNum(sheetIndex, r);
 	for (int c = 1; c <= lastCol; c++) {
 	
-	traceln("row " + r + " col " + c + " sheet " + sheetIndex);
+	//traceln("row " + r + " col " + c + " sheet " + sheetIndex);
 	
 	if(excel_file.getCellType(sheetIndex, r, c) == CellType.NUMERIC){
 	
@@ -1095,7 +1166,7 @@ for(int run = 0; run < iteration; run++){
 		//rowIndex++;
 	}
 	
-	int days = c_outOfModelChargingPerDay.get(0).length;
+	int days = c_outOfModelChargingPerWeek.get(0).length;
 	//rowIndex = 2;
 	rowIndex = f_getTrueLastRow(sheetIndexPerDay, excel_exportResultsSensitivity) + 1;
 	for( int i = 0; i < days; i++ ){
@@ -1104,13 +1175,13 @@ for(int run = 0; run < iteration; run++){
 		excel_exportResultsSensitivity.setCellValue(run, sheetIndexPerDay, rowIndex, 2);
 		excel_exportResultsSensitivity.setCellValue(i, sheetIndexPerDay, rowIndex, 3);
 			
-		excel_exportResultsSensitivity.setCellValue(c_outOfModelChargingPerDay.get(run)[i], sheetIndexPerDay, rowIndex, 4);
-		excel_exportResultsSensitivity.setCellValue(c_leftWhileChargingPerDay.get(run)[i], sheetIndexPerDay, rowIndex, 5);
-		excel_exportResultsSensitivity.setCellValue(c_leftWhileChargingWithDelayedAccessPerDay.get(run)[i], sheetIndexPerDay, rowIndex, 6);
-		excel_exportResultsSensitivity.setCellValue(c_leftUnchargedPerDay.get(run)[i], sheetIndexPerDay, rowIndex, 7);
-		excel_exportResultsSensitivity.setCellValue(c_percSatisfiedChargingSessionsPerDay.get(run)[i], sheetIndexPerDay, rowIndex, 8);
-		excel_exportResultsSensitivity.setCellValue(c_chargingSessionsPerDay.get(run)[i], sheetIndexPerDay, rowIndex, 9);	
-		excel_exportResultsSensitivity.setCellValue(c_requiredChargingSessionsPerDay.get(run)[i], sheetIndexPerDay, rowIndex, 10);
+		excel_exportResultsSensitivity.setCellValue(c_outOfModelChargingPerWeek.get(run)[i], sheetIndexPerDay, rowIndex, 4);
+		excel_exportResultsSensitivity.setCellValue(c_leftWhileChargingPerWeek.get(run)[i], sheetIndexPerDay, rowIndex, 5);
+		excel_exportResultsSensitivity.setCellValue(c_leftWhileChargingWithDelayedAccessPerWeek.get(run)[i], sheetIndexPerDay, rowIndex, 6);
+		excel_exportResultsSensitivity.setCellValue(c_leftUnchargedPerWeek.get(run)[i], sheetIndexPerDay, rowIndex, 7);
+		excel_exportResultsSensitivity.setCellValue(c_percSatisfiedChargingSessionsPerWeek.get(run)[i], sheetIndexPerDay, rowIndex, 8);
+		excel_exportResultsSensitivity.setCellValue(c_chargingSessionsPerWeek.get(run)[i], sheetIndexPerDay, rowIndex, 9);	
+		excel_exportResultsSensitivity.setCellValue(c_requiredChargingSessionsPerWeek.get(run)[i], sheetIndexPerDay, rowIndex, 10);
 		
 		rowIndex++;
 		
@@ -1131,137 +1202,25 @@ DataSet f_writeBehaviorScenariosToExcel()
 
 
 int sheetIndex = 1;
-int sheetIndexPerDay = 2;
+int sheetIndexPerWeek = 2;
+
+excel_exportResultsBehaviours.readFile();
 
 for(J_MCResult r : c_MCResults){
 
 	int scenarioIndex = r.getScenarioIndex();
 	int rowIndex = f_getTrueLastRow(sheetIndex, excel_exportResultsBehaviours) + 1;
 	int nTimePoints = r.getSuccessRate_b1().get(0).length;
-	/*
+	
+	
 	for( int t = 0; t < nTimePoints; t++ ){
 		
 		double meanSRB1 = r.getSuccessRate_b1().get(0)[t];
 		double lowerSRB1 = r.getSuccessRate_b1().get(1)[t];
-		double upperSRB1 = r.getSuccessRate_b1().get(2)[t];
-		
-		double meanSRB2 = r.getSuccessRate_b2().get(0)[t];
-		double lowerSRB2 = r.getSuccessRate_b2().get(1)[t];
-		double upperSRB2 = r.getSuccessRate_b2().get(2)[t];
-		
-		double meanSRB3 = r.getSuccessRate_b3().get(0)[t];
-		double lowerSRB3 = r.getSuccessRate_b3().get(1)[t];
-		double upperSRB3 = r.getSuccessRate_b3().get(2)[t];
-		
-		double meanAPB1 = r.getAvgProb_b1().get(0)[t];
-		double lowerAPB1 = r.getAvgProb_b1().get(1)[t];
-		double upperAPB1 = r.getAvgProb_b1().get(2)[t];
-		
-		double meanAPB2 = r.getAvgProb_b2().get(0)[t];
-		double lowerAPB2 = r.getAvgProb_b2().get(1)[t];
-		double upperAPB2 = r.getAvgProb_b2().get(2)[t];
-		
-		double meanAPB3 = r.getAvgProb_b3().get(0)[t];
-		double lowerAPB3 = r.getAvgProb_b3().get(1)[t];
-		double upperAPB3 = r.getAvgProb_b3().get(2)[t];
-		
-		int day = t / 96;
-				
-		excel_exportResultsBehaviours.setCellValue(scenarioIndex, sheetIndex, rowIndex, 1);
-		excel_exportResultsBehaviours.setCellValue(t, sheetIndex, rowIndex, 2);
-		excel_exportResultsBehaviours.setCellValue(day, sheetIndex, rowIndex, 3);
-		
-		excel_exportResultsBehaviours.setCellValue(meanSRB1, sheetIndex, rowIndex, 4);
-		excel_exportResultsBehaviours.setCellValue(lowerSRB1, sheetIndex, rowIndex, 5);
-		excel_exportResultsBehaviours.setCellValue(upperSRB1, sheetIndex, rowIndex, 6);
-		
-		excel_exportResultsBehaviours.setCellValue(meanSRB2, sheetIndex, rowIndex, 7);
-		excel_exportResultsBehaviours.setCellValue(lowerSRB2, sheetIndex, rowIndex, 8);
-		excel_exportResultsBehaviours.setCellValue(upperSRB2, sheetIndex, rowIndex, 9);
-		
-		excel_exportResultsBehaviours.setCellValue(meanSRB3, sheetIndex, rowIndex, 10);
-		excel_exportResultsBehaviours.setCellValue(lowerSRB3, sheetIndex, rowIndex, 11);
-		excel_exportResultsBehaviours.setCellValue(upperSRB3, sheetIndex, rowIndex, 12);
-		
-		excel_exportResultsBehaviours.setCellValue(meanAPB1, sheetIndex, rowIndex, 13);
-		excel_exportResultsBehaviours.setCellValue(lowerAPB1, sheetIndex, rowIndex, 14);
-		excel_exportResultsBehaviours.setCellValue(upperAPB1, sheetIndex, rowIndex, 15);
-		
-		excel_exportResultsBehaviours.setCellValue(meanAPB2, sheetIndex, rowIndex, 16);
-		excel_exportResultsBehaviours.setCellValue(lowerAPB2, sheetIndex, rowIndex, 17);
-		excel_exportResultsBehaviours.setCellValue(upperAPB2, sheetIndex, rowIndex, 18);
-		
-		excel_exportResultsBehaviours.setCellValue(meanAPB3, sheetIndex, rowIndex, 19);
-		excel_exportResultsBehaviours.setCellValue(lowerAPB3, sheetIndex, rowIndex, 20);
-		excel_exportResultsBehaviours.setCellValue(upperAPB3, sheetIndex, rowIndex, 21);
-		rowIndex++;
 	}
-	*/
-	int days = r.getOutOfModelChargingPerDay().get(0).length;
-	rowIndex = f_getTrueLastRow(sheetIndexPerDay, excel_exportResultsBehaviours) + 1;
-	/*for( int t = 0; t < days; t++ ){
-		
-		double meanOoMC = r.getOutOfModelChargingRollingAvg().get(0)[t];
-		double lowerOoMC = r.getOutOfModelChargingRollingAvg().get(1)[t];
-		double upperOoMC = r.getOutOfModelChargingRollingAvg().get(2)[t];
-		
-		double meanLWC = r.getLeftWhileChargingRollingAvg().get(0)[t];
-		double lowerLWC = r.getLeftWhileChargingRollingAvg().get(1)[t];
-		double upperLWC = r.getLeftWhileChargingRollingAvg().get(2)[t];
-		
-		double meanLUC = r.getLeftUnchargedRollingAvg().get(0)[t];
-		double lowerLUC = r.getLeftUnchargedRollingAvg().get(1)[t];
-		double upperLUC = r.getLeftUnchargedRollingAvg().get(2)[t];
-		
-		double meanCS = r.getPercSatisfiedChargingSessionsRollingAvg().get(0)[t];
-		double lowerCS = r.getPercSatisfiedChargingSessionsRollingAvg().get(1)[t];
-		double upperCS = r.getPercSatisfiedChargingSessionsRollingAvg().get(2)[t];
-		
-		double meanCSpD = r.getChargingSessionsRollingAvg().get(0)[t];
-		double lowerCSpD = r.getChargingSessionsRollingAvg().get(1)[t];
-		double upperCSpD = r.getChargingSessionsRollingAvg().get(2)[t];
-		
-		double meanRCSpD = r.getRequiredChargingSessionsRollingAvg().get(0)[t];
-		double lowerRCSpD = r.getRequiredChargingSessionsRollingAvg().get(1)[t];
-		double upperRCSpD = r.getRequiredChargingSessionsRollingAvg().get(2)[t];
-
-		excel_exportResultsBehaviours.setCellValue(scenarioIndex, sheetIndexPerDay, rowIndex, 1);
-		excel_exportResultsBehaviours.setCellValue(t, sheetIndexPerDay, rowIndex, 2);
 	
-		excel_exportResultsBehaviours.setCellValue(meanOoMC, sheetIndexPerDay, rowIndex, 3);
-		excel_exportResultsBehaviours.setCellValue(lowerOoMC, sheetIndexPerDay, rowIndex, 4);
-		excel_exportResultsBehaviours.setCellValue(upperOoMC, sheetIndexPerDay, rowIndex, 5);
-		
-		excel_exportResultsBehaviours.setCellValue(meanLWC, sheetIndexPerDay, rowIndex, 6);
-		excel_exportResultsBehaviours.setCellValue(lowerLWC, sheetIndexPerDay, rowIndex, 7);
-		excel_exportResultsBehaviours.setCellValue(upperLWC, sheetIndexPerDay, rowIndex, 8);
-		
-		excel_exportResultsBehaviours.setCellValue(meanLUC, sheetIndexPerDay, rowIndex, 9);
-		excel_exportResultsBehaviours.setCellValue(lowerLUC, sheetIndexPerDay, rowIndex, 10);
-		excel_exportResultsBehaviours.setCellValue(upperLUC, sheetIndexPerDay, rowIndex, 11);
-		
-		excel_exportResultsBehaviours.setCellValue(meanCS, sheetIndexPerDay, rowIndex, 12);
-		excel_exportResultsBehaviours.setCellValue(lowerCS, sheetIndexPerDay, rowIndex, 13);
-		excel_exportResultsBehaviours.setCellValue(upperCS, sheetIndexPerDay, rowIndex, 14);
-		
-		excel_exportResultsBehaviours.setCellValue(meanCSpD, sheetIndexPerDay, rowIndex, 15);
-		excel_exportResultsBehaviours.setCellValue(lowerCSpD, sheetIndexPerDay, rowIndex, 16);
-		excel_exportResultsBehaviours.setCellValue(upperCSpD, sheetIndexPerDay, rowIndex, 17);
-		
-		excel_exportResultsBehaviours.setCellValue(meanRCSpD, sheetIndexPerDay, rowIndex, 18);
-		excel_exportResultsBehaviours.setCellValue(lowerRCSpD, sheetIndexPerDay, rowIndex, 19);
-		excel_exportResultsBehaviours.setCellValue(upperRCSpD, sheetIndexPerDay, rowIndex, 20);
-		
-		excel_exportResultsBehaviours.setCellValue(r.getB1(), sheetIndexPerDay, rowIndex, 22);
-		excel_exportResultsBehaviours.setCellValue(r.getB2(), sheetIndexPerDay, rowIndex, 23);
-		excel_exportResultsBehaviours.setCellValue(r.getB3(), sheetIndexPerDay, rowIndex, 24);
-		excel_exportResultsBehaviours.setCellValue(r.getB4(), sheetIndexPerDay, rowIndex, 25);
-		excel_exportResultsBehaviours.setCellValue(r.getEVsPerCP(), sheetIndexPerDay, rowIndex, 26);
-		
-		rowIndex++;
-	}*/
 	int weeks = r.getOutOfModelChargingPerWeek().get(0).length;
-	rowIndex = f_getTrueLastRow(sheetIndexPerDay, excel_exportResultsBehaviours) + 1;
+	rowIndex = f_getTrueLastRow(sheetIndexPerWeek, excel_exportResultsBehaviours) + 1;
 	for( int t = 0; t < weeks; t++ ){
 		
 		double meanOoMC = r.getOutOfModelChargingPerWeek().get(0)[t];
@@ -1287,39 +1246,127 @@ for(J_MCResult r : c_MCResults){
 		double meanRCSpD = r.getRequiredChargingSessionsPerWeek().get(0)[t];
 		double lowerRCSpD = r.getRequiredChargingSessionsPerWeek().get(1)[t];
 		double upperRCSpD = r.getRequiredChargingSessionsPerWeek().get(2)[t];
-
-		excel_exportResultsBehaviours.setCellValue(scenarioIndex, sheetIndexPerDay, rowIndex, 1);
-		excel_exportResultsBehaviours.setCellValue(t, sheetIndexPerDay, rowIndex, 2);
+		
+		double meanB1 = r.getBehaviour1PerWeek().get(0)[t];
+		double lowerB1 = r.getBehaviour1PerWeek().get(1)[t];
+		double upperB1 = r.getBehaviour1PerWeek().get(2)[t];
+		
+		double meanB2 = r.getBehaviour2PerWeek().get(0)[t];
+		double lowerB2 = r.getBehaviour2PerWeek().get(1)[t];
+		double upperB2 = r.getBehaviour2PerWeek().get(2)[t];
+		
+		double meanB3 = r.getBehaviour3PerWeek().get(0)[t];
+		double lowerB3 = r.getBehaviour3PerWeek().get(1)[t];
+		double upperB3 = r.getBehaviour3PerWeek().get(2)[t];
+		
+		double meansB1 = r.getSuccessfulBehaviour1PerWeek().get(0)[t];
+		double lowersB1 = r.getSuccessfulBehaviour1PerWeek().get(1)[t];
+		double uppersB1 = r.getSuccessfulBehaviour1PerWeek().get(2)[t];
+		
+		double meansB2 = r.getSuccessfulBehaviour2PerWeek().get(0)[t];
+		double lowersB2 = r.getSuccessfulBehaviour2PerWeek().get(1)[t];
+		double uppersB2 = r.getSuccessfulBehaviour2PerWeek().get(2)[t];
+		
+		double meansB3 = r.getSuccessfulBehaviour3PerWeek().get(0)[t];
+		double lowersB3 = r.getSuccessfulBehaviour3PerWeek().get(1)[t];
+		double uppersB3 = r.getSuccessfulBehaviour3PerWeek().get(2)[t];
+		
+		double meanusB1 = r.getUnsuccessfulBehaviour1PerWeek().get(0)[t];
+		double lowerusB1 = r.getUnsuccessfulBehaviour1PerWeek().get(1)[t];
+		double upperusB1 = r.getUnsuccessfulBehaviour1PerWeek().get(2)[t];
+		
+		double meanusB2 = r.getUnsuccessfulBehaviour2PerWeek().get(0)[t];
+		double lowerusB2 = r.getUnsuccessfulBehaviour2PerWeek().get(1)[t];
+		double upperusB2 = r.getUnsuccessfulBehaviour2PerWeek().get(2)[t];
+		
+		double meanusB3 = r.getUnsuccessfulBehaviour3PerWeek().get(0)[t];
+		double lowerusB3 = r.getUnsuccessfulBehaviour3PerWeek().get(1)[t];
+		double upperusB3 = r.getUnsuccessfulBehaviour3PerWeek().get(2)[t];
+		
+		double meankmd = r.getKmDrivenPerWeek().get(0)[t];
+		double lowerkmd = r.getKmDrivenPerWeek().get(1)[t];
+		double upperkmd = r.getKmDrivenPerWeek().get(2)[t];
+		
+		double meantrips = r.getTripsPerWeek().get(0)[t];
+		double lowertrips = r.getTripsPerWeek().get(1)[t];
+		double uppertrips = r.getTripsPerWeek().get(2)[t]; 
+		
+		excel_exportResultsBehaviours.setCellValue(scenarioIndex, sheetIndexPerWeek, rowIndex, 1);
+		excel_exportResultsBehaviours.setCellValue(t, sheetIndexPerWeek, rowIndex, 2);
 	
-		excel_exportResultsBehaviours.setCellValue(meanOoMC, sheetIndexPerDay, rowIndex, 3);
-		excel_exportResultsBehaviours.setCellValue(lowerOoMC, sheetIndexPerDay, rowIndex, 4);
-		excel_exportResultsBehaviours.setCellValue(upperOoMC, sheetIndexPerDay, rowIndex, 5);
+		excel_exportResultsBehaviours.setCellValue(meanOoMC, sheetIndexPerWeek, rowIndex, 3);
+		excel_exportResultsBehaviours.setCellValue(lowerOoMC, sheetIndexPerWeek, rowIndex, 4);
+		excel_exportResultsBehaviours.setCellValue(upperOoMC, sheetIndexPerWeek, rowIndex, 5);
 		
-		excel_exportResultsBehaviours.setCellValue(meanLWC, sheetIndexPerDay, rowIndex, 6);
-		excel_exportResultsBehaviours.setCellValue(lowerLWC, sheetIndexPerDay, rowIndex, 7);
-		excel_exportResultsBehaviours.setCellValue(upperLWC, sheetIndexPerDay, rowIndex, 8);
+		excel_exportResultsBehaviours.setCellValue(meanLWC, sheetIndexPerWeek, rowIndex, 6);
+		excel_exportResultsBehaviours.setCellValue(lowerLWC, sheetIndexPerWeek, rowIndex, 7);
+		excel_exportResultsBehaviours.setCellValue(upperLWC, sheetIndexPerWeek, rowIndex, 8);
 		
-		excel_exportResultsBehaviours.setCellValue(meanLUC, sheetIndexPerDay, rowIndex, 9);
-		excel_exportResultsBehaviours.setCellValue(lowerLUC, sheetIndexPerDay, rowIndex, 10);
-		excel_exportResultsBehaviours.setCellValue(upperLUC, sheetIndexPerDay, rowIndex, 11);
+		excel_exportResultsBehaviours.setCellValue(meanLUC, sheetIndexPerWeek, rowIndex, 9);
+		excel_exportResultsBehaviours.setCellValue(lowerLUC, sheetIndexPerWeek, rowIndex, 10);
+		excel_exportResultsBehaviours.setCellValue(upperLUC, sheetIndexPerWeek, rowIndex, 11);
 		
-		excel_exportResultsBehaviours.setCellValue(meanCS, sheetIndexPerDay, rowIndex, 12);
-		excel_exportResultsBehaviours.setCellValue(lowerCS, sheetIndexPerDay, rowIndex, 13);
-		excel_exportResultsBehaviours.setCellValue(upperCS, sheetIndexPerDay, rowIndex, 14);
+		excel_exportResultsBehaviours.setCellValue(meanCS, sheetIndexPerWeek, rowIndex, 12);
+		excel_exportResultsBehaviours.setCellValue(lowerCS, sheetIndexPerWeek, rowIndex, 13);
+		excel_exportResultsBehaviours.setCellValue(upperCS, sheetIndexPerWeek, rowIndex, 14);
 		
-		excel_exportResultsBehaviours.setCellValue(meanCSpD, sheetIndexPerDay, rowIndex, 15);
-		excel_exportResultsBehaviours.setCellValue(lowerCSpD, sheetIndexPerDay, rowIndex, 16);
-		excel_exportResultsBehaviours.setCellValue(upperCSpD, sheetIndexPerDay, rowIndex, 17);
+		excel_exportResultsBehaviours.setCellValue(meanCSpD, sheetIndexPerWeek, rowIndex, 15);
+		excel_exportResultsBehaviours.setCellValue(lowerCSpD, sheetIndexPerWeek, rowIndex, 16);
+		excel_exportResultsBehaviours.setCellValue(upperCSpD, sheetIndexPerWeek, rowIndex, 17);
 		
-		excel_exportResultsBehaviours.setCellValue(meanRCSpD, sheetIndexPerDay, rowIndex, 18);
-		excel_exportResultsBehaviours.setCellValue(lowerRCSpD, sheetIndexPerDay, rowIndex, 19);
-		excel_exportResultsBehaviours.setCellValue(upperRCSpD, sheetIndexPerDay, rowIndex, 20);
+		excel_exportResultsBehaviours.setCellValue(meanRCSpD, sheetIndexPerWeek, rowIndex, 18);
+		excel_exportResultsBehaviours.setCellValue(lowerRCSpD, sheetIndexPerWeek, rowIndex, 19);
+		excel_exportResultsBehaviours.setCellValue(upperRCSpD, sheetIndexPerWeek, rowIndex, 20);
 		
-		excel_exportResultsBehaviours.setCellValue(r.getB1(), sheetIndexPerDay, rowIndex, 22);
-		excel_exportResultsBehaviours.setCellValue(r.getB2(), sheetIndexPerDay, rowIndex, 23);
-		excel_exportResultsBehaviours.setCellValue(r.getB3(), sheetIndexPerDay, rowIndex, 24);
-		excel_exportResultsBehaviours.setCellValue(r.getB4(), sheetIndexPerDay, rowIndex, 25);
-		excel_exportResultsBehaviours.setCellValue(r.getEVsPerCP(), sheetIndexPerDay, rowIndex, 26);
+		excel_exportResultsBehaviours.setCellValue(meanB1, sheetIndexPerWeek, rowIndex, 21);
+		excel_exportResultsBehaviours.setCellValue(lowerB1, sheetIndexPerWeek, rowIndex, 22);
+		excel_exportResultsBehaviours.setCellValue(upperB1, sheetIndexPerWeek, rowIndex, 23);
+		
+		excel_exportResultsBehaviours.setCellValue(meanB2, sheetIndexPerWeek, rowIndex, 24);
+		excel_exportResultsBehaviours.setCellValue(lowerB2, sheetIndexPerWeek, rowIndex, 25);
+		excel_exportResultsBehaviours.setCellValue(upperB2, sheetIndexPerWeek, rowIndex, 26);
+		
+		excel_exportResultsBehaviours.setCellValue(meanB3, sheetIndexPerWeek, rowIndex, 27);
+		excel_exportResultsBehaviours.setCellValue(lowerB3, sheetIndexPerWeek, rowIndex, 28);
+		excel_exportResultsBehaviours.setCellValue(upperB3, sheetIndexPerWeek, rowIndex, 29);
+		
+		excel_exportResultsBehaviours.setCellValue(meansB1, sheetIndexPerWeek, rowIndex, 30);
+		excel_exportResultsBehaviours.setCellValue(lowersB1, sheetIndexPerWeek, rowIndex, 31);
+		excel_exportResultsBehaviours.setCellValue(uppersB1, sheetIndexPerWeek, rowIndex, 32);
+		
+		excel_exportResultsBehaviours.setCellValue(meansB2, sheetIndexPerWeek, rowIndex, 33);
+		excel_exportResultsBehaviours.setCellValue(lowersB2, sheetIndexPerWeek, rowIndex, 34);
+		excel_exportResultsBehaviours.setCellValue(uppersB2, sheetIndexPerWeek, rowIndex, 35);
+		
+		excel_exportResultsBehaviours.setCellValue(meansB3, sheetIndexPerWeek, rowIndex, 36);
+		excel_exportResultsBehaviours.setCellValue(lowersB3, sheetIndexPerWeek, rowIndex, 37);
+		excel_exportResultsBehaviours.setCellValue(uppersB3, sheetIndexPerWeek, rowIndex, 38);
+		
+		excel_exportResultsBehaviours.setCellValue(meanusB1, sheetIndexPerWeek, rowIndex, 39);
+		excel_exportResultsBehaviours.setCellValue(lowerusB1, sheetIndexPerWeek, rowIndex, 40);
+		excel_exportResultsBehaviours.setCellValue(upperusB1, sheetIndexPerWeek, rowIndex, 41);
+		
+		excel_exportResultsBehaviours.setCellValue(meanusB2, sheetIndexPerWeek, rowIndex, 42);
+		excel_exportResultsBehaviours.setCellValue(lowerusB2, sheetIndexPerWeek, rowIndex, 43);
+		excel_exportResultsBehaviours.setCellValue(upperusB2, sheetIndexPerWeek, rowIndex, 44);
+		
+		excel_exportResultsBehaviours.setCellValue(meanusB3, sheetIndexPerWeek, rowIndex, 45);
+		excel_exportResultsBehaviours.setCellValue(lowerusB3, sheetIndexPerWeek, rowIndex, 46);
+		excel_exportResultsBehaviours.setCellValue(upperusB3, sheetIndexPerWeek, rowIndex, 47);
+		
+		excel_exportResultsBehaviours.setCellValue(meankmd, sheetIndexPerWeek, rowIndex, 48);
+		excel_exportResultsBehaviours.setCellValue(lowerkmd, sheetIndexPerWeek, rowIndex, 49);
+		excel_exportResultsBehaviours.setCellValue(upperkmd, sheetIndexPerWeek, rowIndex, 50);
+		
+		excel_exportResultsBehaviours.setCellValue(meantrips, sheetIndexPerWeek, rowIndex, 51);
+		excel_exportResultsBehaviours.setCellValue(lowertrips, sheetIndexPerWeek, rowIndex, 52);
+		excel_exportResultsBehaviours.setCellValue(uppertrips, sheetIndexPerWeek, rowIndex, 53);
+		
+		excel_exportResultsBehaviours.setCellValue(r.getB1(), sheetIndexPerWeek, rowIndex, 54);
+		excel_exportResultsBehaviours.setCellValue(r.getB2(), sheetIndexPerWeek, rowIndex, 55);
+		excel_exportResultsBehaviours.setCellValue(r.getB3(), sheetIndexPerWeek, rowIndex, 56);
+		excel_exportResultsBehaviours.setCellValue(r.getB4(), sheetIndexPerWeek, rowIndex, 57);
+		excel_exportResultsBehaviours.setCellValue(r.getEVsPerCP(), sheetIndexPerWeek, rowIndex, 58);
 		
 		rowIndex++;
 	}	
@@ -1327,5 +1374,53 @@ for(J_MCResult r : c_MCResults){
 
 //Write file
 excel_exportResultsBehaviours.writeFile();
+excel_exportResultsBehaviours.close();
+/*ALCODEEND*/}
+
+double[] f_arDayToWeek(double[] arrayDailyValues)
+{/*ALCODESTART::1760695136979*/
+int days = arrayDailyValues.length;
+int weeks =  days / 7;
+double[] arrayWeeklyValues = new double[weeks];
+
+for(int i = 0; i < weeks; i++){
+	double sumValue = 0;
+	for(int j = 0; j < 7; j++ ){
+		int index = j + i * 7;
+		sumValue += arrayDailyValues[index];
+		
+		if( i == 8){
+		traceln(arrayDailyValues[index] + " value for day at index " + index);
+		}
+	}
+	arrayWeeklyValues[i] = sumValue;
+	traceln(arrayWeeklyValues[i] + " value for week " + i);
+}
+
+return arrayWeeklyValues;
+/*ALCODEEND*/}
+
+double f_percentile(double[] sorted,double p)
+{/*ALCODESTART::1760706139361*/
+double rank = p * (sorted.length - 1);
+int low = (int) Math.floor(rank);
+int high = (int) Math.ceil(rank);
+if (high == low) return sorted[low];
+return sorted[low] + (rank - low) * (sorted[high] - sorted[low]);
+/*ALCODEEND*/}
+
+double[] f_dailyToWeekly(double[] dailyArray)
+{/*ALCODESTART::1761056276108*/
+int days = dailyArray.length;
+int weeks = days / 7;
+
+double[] weeklyArray = new double[weeks];
+for(int i = 0; i<weeks; i++){
+	int endOfWeekIndex = (i + 1) * 7 - 1;  // last day of the week
+	weeklyArray[i] = dailyArray[endOfWeekIndex];
+}
+
+return weeklyArray;
+
 /*ALCODEEND*/}
 

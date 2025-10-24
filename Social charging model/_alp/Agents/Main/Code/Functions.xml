@@ -132,7 +132,7 @@
 		<Id>1746089953946</Id>
 		<Name><![CDATA[f_updateChart]]></Name>
 		<X>70</X>
-		<Y>1230</Y>
+		<Y>1250</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -148,7 +148,7 @@
 		<Id>1746090357452</Id>
 		<Name><![CDATA[f_endSimulationPeriod]]></Name>
 		<X>60</X>
-		<Y>1210</Y>
+		<Y>1230</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -202,7 +202,7 @@
 		<Id>1748942230602</Id>
 		<Name><![CDATA[f_simulateFirstWeekToGetInitialLocationCars]]></Name>
 		<X>50</X>
-		<Y>890</Y>
+		<Y>910</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -406,6 +406,7 @@
 		<ReturnType>double</ReturnType>
 		<Id>1754483086805</Id>
 		<Name><![CDATA[f_countBehavioursPerDay]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>70</X>
 		<Y>1190</Y>
 		<Label>
@@ -519,7 +520,7 @@
 		<Id>1755005247461</Id>
 		<Name><![CDATA[f_clearCounts]]></Name>
 		<X>60</X>
-		<Y>910</Y>
+		<Y>930</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -535,7 +536,7 @@
 		<Id>1755074064798</Id>
 		<Name><![CDATA[f_setArrays]]></Name>
 		<X>60</X>
-		<Y>930</Y>
+		<Y>950</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -571,7 +572,7 @@
 		<Id>1755167696732</Id>
 		<Name><![CDATA[f_setHistogramArrays]]></Name>
 		<X>60</X>
-		<Y>950</Y>
+		<Y>970</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -607,7 +608,7 @@
 		<Id>1756807925486</Id>
 		<Name><![CDATA[f_convertStandardizedToProb]]></Name>
 		<X>60</X>
-		<Y>980</Y>
+		<Y>1000</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -631,6 +632,38 @@
 			<Name><![CDATA[isLikert]]></Name>
 			<Type><![CDATA[boolean]]></Type>
 		</Parameter>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>VOID</ReturnModificator>
+		<ReturnType>double</ReturnType>
+		<Id>1760698613153</Id>
+		<Name><![CDATA[f_countBehavioursPerWeek]]></Name>
+		<X>70</X>
+		<Y>1210</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>VOID</ReturnModificator>
+		<ReturnType>double</ReturnType>
+		<Id>1761053835097</Id>
+		<Name><![CDATA[f_setInitialEVsToCP]]></Name>
+		<X>50</X>
+		<Y>890</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
 		<Body xmlns:al="http://anylogic.com"/>
 	</Function>
 </Functions>

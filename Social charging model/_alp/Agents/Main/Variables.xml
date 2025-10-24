@@ -1485,7 +1485,7 @@
 		<Id>1755169677447</Id>
 		<Name><![CDATA[color_b3]]></Name>
 		<X>-250</X>
-		<Y>1250</Y>
+		<Y>1340</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -2690,6 +2690,234 @@
 			<Type><![CDATA[double []]]></Type>
 		</Properties>
 	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1760698906152</Id>
+		<Name><![CDATA[v_week]]></Name>
+		<X>50</X>
+		<Y>350</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[int]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1760699128928</Id>
+		<Name><![CDATA[ar_interactionsPerWeek_b1]]></Name>
+		<X>280</X>
+		<Y>2080</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double[]]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1760699128930</Id>
+		<Name><![CDATA[ar_interactionsPerWeek_b2]]></Name>
+		<X>280</X>
+		<Y>2100</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double[]]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1760699128932</Id>
+		<Name><![CDATA[ar_interactionsPerWeek_b3]]></Name>
+		<X>280</X>
+		<Y>2120</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double[]]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1760699128934</Id>
+		<Name><![CDATA[ar_rechecksPerWeek]]></Name>
+		<X>280</X>
+		<Y>2140</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double[]]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1761058486136</Id>
+		<Name><![CDATA[ar_kmDrivenPerWeek]]></Name>
+		<X>390</X>
+		<Y>1710</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double[]]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1761063359901</Id>
+		<Name><![CDATA[count_b2_noProb]]></Name>
+		<X>-250</X>
+		<Y>1030</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[int]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1761063427875</Id>
+		<Name><![CDATA[count_b2_noIdleChargers]]></Name>
+		<X>-250</X>
+		<Y>1050</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[int]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1761063429899</Id>
+		<Name><![CDATA[count_b2_noMatchingRequests]]></Name>
+		<X>-250</X>
+		<Y>1070</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[int]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1761133990408</Id>
+		<Name><![CDATA[ar_tripsPerWeek]]></Name>
+		<X>390</X>
+		<Y>1730</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[double[]]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1761135552203</Id>
+		<Name><![CDATA[v_tripsFinished]]></Name>
+		<X>-250</X>
+		<Y>1100</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[int]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1761225048693</Id>
+		<Name><![CDATA[count_wantsToCharge]]></Name>
+		<X>350</X>
+		<Y>1390</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[int]]></Type>
+		</Properties>
+	</Variable>
 	<Variable Class="Parameter">
 		<Id>1745926425800</Id>
 		<Name><![CDATA[p_cars]]></Name>
@@ -2853,7 +3081,7 @@
 		<PresentationFlag>true</PresentationFlag>
 		<ShowLabel>true</ShowLabel>
 		<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-			<Type><![CDATA[double]]></Type>
+			<Type><![CDATA[int]]></Type>
 			<UnitType>NONE</UnitType>
 			<SdArray>false</SdArray>
 			<ParameterEditor>
@@ -2894,7 +3122,7 @@
 		<Id>1747141377109</Id>
 		<Name><![CDATA[p_b1_moveCar]]></Name>
 		<X>50</X>
-		<Y>350</Y>
+		<Y>370</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -2919,7 +3147,7 @@
 		<Id>1747141388080</Id>
 		<Name><![CDATA[p_b2_requestMove]]></Name>
 		<X>50</X>
-		<Y>370</Y>
+		<Y>390</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -2944,7 +3172,7 @@
 		<Id>1747141404520</Id>
 		<Name><![CDATA[p_b3_notifyNeighbor]]></Name>
 		<X>50</X>
-		<Y>390</Y>
+		<Y>410</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -2994,7 +3222,7 @@
 		<Id>1746001520580</Id>
 		<Name><![CDATA[c_carOwners]]></Name>
 		<X>50</X>
-		<Y>420</Y>
+		<Y>440</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -3012,7 +3240,7 @@
 		<Id>1746013636149</Id>
 		<Name><![CDATA[c_chargePoints]]></Name>
 		<X>50</X>
-		<Y>440</Y>
+		<Y>460</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -3031,7 +3259,7 @@
 		<Name><![CDATA[c_norms]]></Name>
 		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>-250</X>
-		<Y>1050</Y>
+		<Y>1140</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -3050,7 +3278,7 @@
 		<Name><![CDATA[c_trust]]></Name>
 		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>-250</X>
-		<Y>1070</Y>
+		<Y>1160</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -3069,7 +3297,7 @@
 		<Name><![CDATA[c_rc]]></Name>
 		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>-250</X>
-		<Y>1090</Y>
+		<Y>1180</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -3088,7 +3316,7 @@
 		<Name><![CDATA[c_psi]]></Name>
 		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>-250</X>
-		<Y>1110</Y>
+		<Y>1200</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -3107,7 +3335,7 @@
 		<Name><![CDATA[c_b1]]></Name>
 		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>-250</X>
-		<Y>1150</Y>
+		<Y>1240</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -3126,7 +3354,7 @@
 		<Name><![CDATA[c_b2]]></Name>
 		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>-250</X>
-		<Y>1170</Y>
+		<Y>1260</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -3145,7 +3373,7 @@
 		<Name><![CDATA[c_b3]]></Name>
 		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>-250</X>
-		<Y>1190</Y>
+		<Y>1280</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -3164,7 +3392,7 @@
 		<Name><![CDATA[c_pcp]]></Name>
 		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>-250</X>
-		<Y>1130</Y>
+		<Y>1220</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>

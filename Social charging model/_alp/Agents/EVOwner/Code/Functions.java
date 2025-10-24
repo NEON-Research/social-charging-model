@@ -35,7 +35,7 @@ double f_updateSOC(double tripDistance_km)
 double electricityConsumed_kWh = tripDistance_km * v_elecCons_kWhperKm;
 v_electricityInBattery_kWh -= electricityConsumed_kWh;
 
-if(v_electricityInBattery_kWh < 0){
+if(v_electricityInBattery_kWh < 0){ //if on-route below 0 soc
 	double chargeToPercentage = 0.1; //If regular fast charging on route required to 0.1, if often out of model charging because shortage in CPs charge in other neighbrohood to 100
 	if( v_leftUnchargedStreak > 2 ){
 		chargeToPercentage = 1;
@@ -56,9 +56,7 @@ if(v_electricityInBattery_kWh < 0){
 }
 
 v_soc = v_electricityInBattery_kWh / v_batteryCapacity_kWh;
-if(v_soc < v_socChargingThreshold){
-	count_chargingRequired++;
-}
+
 
 
 /*ALCODEEND*/}
@@ -71,6 +69,8 @@ if(v_status == ARRIVING){
 	//boolean foundCPThroughRequest = false;
 	
 	if(wantsToCharge){
+		main.count_wantsToCharge++;
+		count_chargingRequired++;
 		// Already charging
 		if(v_chargePoint != null){
 			v_status = PARKED_CHARGE_POINT_CHARGING;
@@ -122,11 +122,13 @@ if(main.p_b1_moveCar && main.v_withinSocialChargingTimes){
 	//act within probability
 	boolean actBehavior = f_actBehavior(v_prob_b1);
 	///act
-	boolean behaviorSucces = f_moveVehicle(actBehavior);
+	boolean behaviorSuccess = f_moveVehicle(actBehavior);
 	
 	//Social learning after interaction
 	//f_socialLearning_b1();
-	f_updateNorm_b1(behaviorSucces);
+	if(main.initializationMode == false){
+		f_updateNorm_b1(behaviorSuccess);
+	}
 }
 
 /*ALCODEEND*/}
@@ -170,7 +172,9 @@ if(main.p_b2_requestMove && main.v_withinSocialChargingTimes){
 	
 	//Social learning after interaction
 	//f_socialLearning_b2();
-	f_updateNorm_b2(behaviorSuccess);
+	if(main.initializationMode == false){
+		f_updateNorm_b2(behaviorSuccess);
+	}
 }
 //No CP available
 else {
@@ -239,7 +243,9 @@ if(main.p_b3_notifyNeighbor && main.v_withinSocialChargingTimes){
 	
 	//Social learning after interaction
 	//f_socialLearning_b3();
-	f_updateNorm_b3(behaviorSuccess);
+	if(main.initializationMode == false){
+		f_updateNorm_b3(behaviorSuccess);
+	}
 }
 
 /*ALCODEEND*/}

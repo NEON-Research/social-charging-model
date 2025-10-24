@@ -39,6 +39,16 @@ nbOfInputTrips = (int) selectFirstValue(int.class,
 //Create ICEs and EVs
 f_createICECarOwners();
 f_generateSyntehticPopulationEVs(evOwners);
+/*
+double trips = sum(EVOwners, x->x.c_tripSchedule.size());
+double km = 0;
+for(EVOwner ev : EVOwners){
+	for(J_Trip trip : ev.c_tripSchedule){
+		km += trip.getDistance_km();
+	}
+}
+traceln("number of weekly trips in trip schedules " + trips + " and " + km + "km");
+*/
 //f_normalizeFromLikert();
 
 
@@ -51,7 +61,10 @@ if (sortedRealData != null) {
 }*/
 
 f_setChargePoints();
-f_simulateFirstWeekToGetInitialLocationCars();
+f_setInitialEVsToCP();
+//f_simulateFirstWeekToGetInitialLocationCars();
+
+//traceln(sum(EVOwners, x->x.tripIndex) + " total sum of trip index");
 //traceln("has initialized model");
 /*ALCODEEND*/}
 
@@ -102,9 +115,9 @@ count_b2_notSuccessful = 0;
 count_b3_notSuccessful = 0;
 count_successfulRechecks = 0;
 count_unsuccessfulRechecks = 0;
-int count_b2_noIdleChargers = 0;
-int count_b2_noMatchingRequests = 0;
-int count_b2_noProb = 0;
+count_b2_noIdleChargers = 0;
+count_b2_noMatchingRequests = 0;
+count_b2_noProb = 0;
 
 outOfModelCharge_kWh = 0.0;
 count_leftWhileCharging = 0;
@@ -112,6 +125,9 @@ count_leftWhileChargingWithDelayedAccess = 0;
 count_leftUncharged = 0;
 count_requiredChargingSessions = 0;
 count_chargingSessions = 0;
+
+v_tripsFinished = 0;
+
 
 double totalProb_b1 = 0.0;
 double totalProb_b2 = 0.0;
@@ -162,6 +178,8 @@ for (EVOwner x : EVOwners) {
 	
 	count_requiredChargingSessions += x.count_chargingRequired;
 	count_chargingSessions += x.count_chargingSessions;
+	
+	v_tripsFinished += x.v_tripFinished;
 }
 
 
@@ -208,39 +226,41 @@ ar_EVsParkedNonCPChargingNotRequired[v_timestep] = EVsParkedNonCPChargingNotRequ
 ar_EVsParkedAtCPCharging[v_timestep] = EVsParkedAtCPCharging;
 ar_EVsParkedAtCPIdle[v_timestep] = EVsParkedAtCPIdle;
 
-
+//Once per day
+if(v_timestep % 96 == 0){
 //Norms, trust, PSI
-ar_avgNorms[v_timestep] = f_convertStandardizedToProb(avgNorms, mean_norms, sd_norms, true);
-ar_avgRC[v_timestep] = f_convertStandardizedToProb(avgRC, mean_rc, sd_rc, true);
-ar_avgPSI[v_timestep] = f_convertStandardizedToProb(avgPSI, mean_psi, sd_psi, true);
-ar_avgPCP[v_timestep] = f_convertStandardizedToProb(v_avgPCP, mean_pcp, sd_pcp, true);
-
-ar_avgNorm_b1[v_timestep] = f_convertStandardizedToProb(v_avgNorm_b1, mean_b1, sd_b1, true);
-ar_avgNorm_b2[v_timestep] = f_convertStandardizedToProb(v_avgNorm_b2, mean_b2, sd_b2, false);
-ar_avgNorm_b3[v_timestep] = f_convertStandardizedToProb(v_avgNorm_b3, mean_b3, sd_b3, false);
-
-//Success Rates
-ar_successRate_b1[v_timestep] = successRate_b1;
-ar_successRate_b2[v_timestep] = successRate_b2;
-ar_successRate_b3[v_timestep] = successRate_b3;
-ar_successRate_rechecks[v_timestep] = successRate_rechecks;
-
-//Probabilities
-ar_avgProbability_b1[v_timestep] = avgProb_b1;
-ar_avgProbability_b2[v_timestep] = avgProb_b2;
-ar_avgProbability_b3[v_timestep] = avgProb_b3;
-
-//Success/Not success
-ar_successful_b1[v_timestep] = count_b1_successful;
-ar_successful_b2[v_timestep] = count_b2_successful;
-ar_successful_b3[v_timestep] = count_b3_successful;
-ar_unsuccessful_b1[v_timestep] = count_b1_notSuccessful;
-ar_unsuccessful_b2[v_timestep] = count_b2_notSuccessful;
-ar_unsuccessful_b3[v_timestep] = count_b3_notSuccessful;
-ar_unsuccesfulDueToProb_b2[v_timestep] = count_b2_noProb;
-ar_noIdleChargers_b2[v_timestep] = count_b2_noIdleChargers;
-ar_noMatchingRequests_b2[v_timestep] = count_b2_noMatchingRequests;
-
+	ar_avgNorms[v_day] = f_convertStandardizedToProb(avgNorms, mean_norms, sd_norms, true);
+	ar_avgRC[v_day] = f_convertStandardizedToProb(avgRC, mean_rc, sd_rc, true);
+	ar_avgPSI[v_day] = f_convertStandardizedToProb(avgPSI, mean_psi, sd_psi, true);
+	ar_avgPCP[v_day] = f_convertStandardizedToProb(v_avgPCP, mean_pcp, sd_pcp, true);
+	
+	ar_avgNorm_b1[v_day] = f_convertStandardizedToProb(v_avgNorm_b1, mean_b1, sd_b1, true);
+	ar_avgNorm_b2[v_day] = f_convertStandardizedToProb(v_avgNorm_b2, mean_b2, sd_b2, false);
+	ar_avgNorm_b3[v_day] = f_convertStandardizedToProb(v_avgNorm_b3, mean_b3, sd_b3, false);
+	
+	//Success Rates
+	ar_successRate_b1[v_day] = successRate_b1;
+	ar_successRate_b2[v_day] = successRate_b2;
+	ar_successRate_b3[v_day] = successRate_b3;
+	ar_successRate_rechecks[v_day] = successRate_rechecks;
+	
+	//Probabilities
+	ar_avgProbability_b1[v_day] = avgProb_b1;
+	ar_avgProbability_b2[v_day] = avgProb_b2;
+	ar_avgProbability_b3[v_day] = avgProb_b3;
+	
+	//Success/Not success
+	/*
+	ar_successful_b1[v_day] = count_b1_successful;
+	ar_successful_b2[v_day] = count_b2_successful;
+	ar_successful_b3[v_day] = count_b3_successful;
+	ar_unsuccessful_b1[v_day] = count_b1_notSuccessful;
+	ar_unsuccessful_b2[v_day] = count_b2_notSuccessful;
+	ar_unsuccessful_b3[v_day] = count_b3_notSuccessful; 
+	ar_unsuccesfulDueToProb_b2[v_day] = count_b2_noProb;
+	ar_noIdleChargers_b2[v_day] = count_b2_noIdleChargers;
+	ar_noMatchingRequests_b2[v_day] = count_b2_noMatchingRequests;*/
+}
 //if(ar_unsuccesfulDueToProb_b2[v_timestep] < 0){ traceln(ar_unsuccesfulDueToProb_b2[v_timestep] + " unssuccesful due to prob");}
 
 
@@ -294,6 +314,7 @@ double f_simulatePeriod(int nbOfTimesteps)
 v_timestep = 0;
 v_hourOfDay = 0;
 v_day = 0;
+v_week = 0;
 initializationMode = false;
 
 //traceln("Start simulation period");
@@ -401,10 +422,17 @@ v_unfulfilledChargingSessions_perc = (double) (countLeftUncharged + countUnfinis
 v_outOfModelCharging_perc = outOfModelCharging/totalCharging;
 /*
 traceln("Total charging sessions = " + countTotalChargingSessions + ", is avg per EV per day " + avgChargingSessionPerEVPerDay);
+traceln("Total rcs = " + countTotalRequiredCharging + " total cs = " + countTotalChargingSessions);
 traceln("Unfinished charging = " + roundToInt((double) countUnfinishedCharging / countTotalChargingSessions * 100) + "% of charging sessions");
 traceln("Left without charging = " + roundToInt((double) countLeftUncharged / countTotalRequiredCharging * 100) + "% of required charging sessions");
 traceln("Out of model charging = " + roundToInt((double) outOfModelCharging/totalCharging * 100) + "% of total charging");
-*/
+
+traceln("Total km driven by EVs = " + sum(EVOwners, x->x.v_km_driven));
+double sumTrips = 0;
+for(int i=0; i < ar_tripsPerWeek.length; i++){
+	sumTrips += ar_tripsPerWeek[i];
+}
+traceln("Total trips = " + sumTrips);*/
 
 /*ALCODEEND*/}
 
@@ -615,7 +643,8 @@ int meanBatteryCap_kWh = 65;
 int spread = 5;
     
 x.v_batteryCapacity_kWh = normal(minBatteryCap_kWh, maxBatteryCap_kWh, meanBatteryCap_kWh, spread);
-double randomShare = uniform(0.25, 1);
+//double randomShare = normal(0.25, 1, 0.7, 0.2); // normal distribution of energy in battery at start
+double randomShare = uniform(0.25,1);
 x.v_electricityInBattery_kWh = x.v_batteryCapacity_kWh * randomShare;
 x.v_soc = x.v_electricityInBattery_kWh / x.v_batteryCapacity_kWh;
 c_carOwners.add(x);
@@ -1143,6 +1172,25 @@ ar_noIdleChargers_b2 = null;
 ar_noMatchingRequests_b2 = null;
 ar_unsuccesfulDueToProb_b2 = null;
 
+ar_kmDrivenPerWeek = null;
+ar_avgNorm_b1 = null;
+ar_avgNorm_b2 = null;
+ar_avgNorm_b3 = null;
+
+ar_interactionsPerWeek_b1 = null;
+ar_interactionsPerWeek_b2 = null;
+ar_interactionsPerWeek_b3 = null;
+ar_rechecksPerWeek = null;
+
+ar_outOfModelCharging = null;
+ar_leftWhileCharging = null;
+ar_leftUncharged = null;
+ar_leftWhileChargingWithDelayedAccess = null;
+
+ar_chargingSessions = null;
+ar_requiredChargingSessions = null;
+ar_percSatisfiedChargingSessions = null;
+
 pl_interactionPerDay.removeAll();
 pl_probability.removeAll();
 pl_successRate.removeAll();
@@ -1185,8 +1233,9 @@ for(int i=0; i<p_chargePoints; i++){
 double f_simulateTimestep()
 {/*ALCODESTART::1754912834653*/
 //Update minute of week to match database
-double minutesPerTimestep = p_timestep_minutes;
-double timestepStartMinuteOfWeek = (v_timestep * minutesPerTimestep) % (7 * 24 * 60);
+int timestepStartMinuteInWeek = (v_timestep * p_timestep_minutes) % (7 * 24 * 60); //range between 0-10080 minutes in aweek
+int timestepEndMinuteInWeek = timestepStartMinuteInWeek + p_timestep_minutes;	
+
 
 v_withinSocialChargingTimes = f_setWithinSocialChargingTime();
 
@@ -1197,12 +1246,14 @@ for(EVOwner ev : EVOwners){
 
 //2. Cars leaving on new trips and releasing charge points
 for(EVOwner ev : EVOwners){
-	ev.f_goOnTrip(timestepStartMinuteOfWeek, minutesPerTimestep);
+	if( ev.f_departureInCurrentTimestep(timestepStartMinuteInWeek, timestepEndMinuteInWeek)){
+		ev.f_goOnTrip();
+	}
 }
 
 //3. Arrive from trip
 for(EVOwner ev : EVOwners){
-	ev.f_arriveFromTrip(timestepStartMinuteOfWeek, minutesPerTimestep);
+	ev.f_arriveFromTrip(timestepStartMinuteInWeek, timestepEndMinuteInWeek);
 }
 
 //4. Connect to charger if required and available
@@ -1217,7 +1268,7 @@ for (EVOwner ev : EVOwners) {
 
 //5. Other vehicles	
 for(CarOwner ice : ICECarOwners){
-	ice.f_updateICETripStatus(timestepStartMinuteOfWeek, minutesPerTimestep);
+	ice.f_updateICETripStatus(timestepStartMinuteInWeek, timestepEndMinuteInWeek);
 }
 
 //6. Count totals
@@ -1242,8 +1293,14 @@ if(!initializationMode){
 	// Check if day ended (hour wrapped around)
 	if (v_hourOfDay < prevHourOfDay) {
 		v_day++;
-    	f_countBehavioursPerDay();
+    	//f_countBehavioursPerDay();
+    	if( v_day % 7 == 0 && v_day > 0){
+			v_week++;
+			f_countBehavioursPerWeek();
+			
+		}
 	}
+	
 }
 
 
@@ -1296,6 +1353,11 @@ for(EVOwner ev : EVOwners){
 	ev.v_outOfModelCharge_kWh = 0.0;
 	ev.v_totalElectricityCharged_kWh = 0.0;
 	ev.v_km_driven = 0.0;
+	ev.v_tripFinished = 0;
+
+	ev.count_b2_noIdleChargers = 0;
+	ev.count_b2_noMatchingRequest = 0;
+	ev.count_b2_noProb = 0;
 }
 for(CarOwner ice : ICECarOwners){
 	ice.v_km_driven = 0.0;
@@ -1304,6 +1366,7 @@ countTripDepartures = 0;
 countTripArrivals = 0;
 count_requiredChargingSessions = 0;
 count_chargingSessions = 0;
+count_wantsToCharge = 0;
 /*ALCODEEND*/}
 
 double f_setArrays()
@@ -1313,6 +1376,12 @@ ar_interactionsPerDay_b1 = new double[p_days];
 ar_interactionsPerDay_b2 = new double[p_days];
 ar_interactionsPerDay_b3 = new double[p_days];
 ar_rechecksPerDay = new double[p_days];
+
+int weeks = p_days / 7;
+ar_interactionsPerWeek_b1 = new double[weeks];
+ar_interactionsPerWeek_b2 = new double[weeks];
+ar_interactionsPerWeek_b3 = new double[weeks];
+ar_rechecksPerWeek = new double[weeks];
 
 // Cars on trip & parking states
 ar_carsOnTrip = new double[p_nbOfTimesteps];
@@ -1327,47 +1396,50 @@ ar_CPOccupied = new double[p_nbOfTimesteps];
 ar_CPAvailable = new double[p_nbOfTimesteps];
 
 // Socio-psychological data
-ar_avgNorms = new double[p_nbOfTimesteps];
-ar_avgRC = new double[p_nbOfTimesteps];
-ar_avgPSI = new double[p_nbOfTimesteps];
-ar_avgPCP = new double[p_nbOfTimesteps];
+ar_avgNorms = new double[p_days];
+ar_avgRC = new double[p_days];
+ar_avgPSI = new double[p_days];
+ar_avgPCP = new double[p_days];
 
-ar_avgNorm_b1 = new double[p_nbOfTimesteps];
-ar_avgNorm_b2 = new double[p_nbOfTimesteps];
-ar_avgNorm_b3 = new double[p_nbOfTimesteps];
+ar_avgNorm_b1 = new double[p_days];
+ar_avgNorm_b2 = new double[p_days];
+ar_avgNorm_b3 = new double[p_days];
 
 // Success rates
-ar_successRate_b1 = new double[p_nbOfTimesteps];
-ar_successRate_b2 = new double[p_nbOfTimesteps];
-ar_successRate_b3 = new double[p_nbOfTimesteps];
-ar_successRate_rechecks = new double[p_nbOfTimesteps];
+ar_successRate_b1 = new double[p_days];
+ar_successRate_b2 = new double[p_days];
+ar_successRate_b3 = new double[p_days];
+ar_successRate_rechecks = new double[p_days];
 
 // Probabilities
-ar_avgProbability_b1 = new double[p_nbOfTimesteps];
-ar_avgProbability_b2 = new double[p_nbOfTimesteps];
-ar_avgProbability_b3 = new double[p_nbOfTimesteps];
+ar_avgProbability_b1 = new double[p_days];
+ar_avgProbability_b2 = new double[p_days];
+ar_avgProbability_b3 = new double[p_days];
 
 // Successful & unsuccessful counts
-ar_successful_b1 = new double[p_nbOfTimesteps];
-ar_successful_b2 = new double[p_nbOfTimesteps];
-ar_successful_b3 = new double[p_nbOfTimesteps];
-ar_unsuccessful_b1 = new double[p_nbOfTimesteps];
-ar_unsuccessful_b2 = new double[p_nbOfTimesteps];
-ar_unsuccessful_b3 = new double[p_nbOfTimesteps];
+ar_successful_b1 = new double[weeks];
+ar_successful_b2 = new double[weeks];
+ar_successful_b3 = new double[weeks];
+ar_unsuccessful_b1 = new double[weeks];
+ar_unsuccessful_b2 = new double[weeks];
+ar_unsuccessful_b3 = new double[weeks];
 
 // Special cases
-ar_noIdleChargers_b2 = new double[p_nbOfTimesteps];
-ar_unsuccesfulDueToProb_b2 = new double[p_nbOfTimesteps];
-ar_noMatchingRequests_b2 = new double[p_nbOfTimesteps];
+ar_noIdleChargers_b2 = new double[weeks];
+ar_unsuccesfulDueToProb_b2 = new double[weeks];
+ar_noMatchingRequests_b2 = new double[weeks];
 
 //out of model and uncharged
-ar_outOfModelCharging = new double[p_days];
-ar_leftWhileCharging = new double[p_days];
-ar_leftUncharged = new double[p_days];
-ar_leftWhileChargingWithDelayedAccess = new double[p_days];
-ar_requiredChargingSessions = new double[p_days];
-ar_percSatisfiedChargingSessions = new double[p_days];
-ar_chargingSessions = new double[p_days];
+ar_outOfModelCharging = new double[weeks];
+ar_leftWhileCharging = new double[weeks];
+ar_leftUncharged = new double[weeks];
+ar_leftWhileChargingWithDelayedAccess = new double[weeks];
+ar_requiredChargingSessions = new double[weeks];
+ar_percSatisfiedChargingSessions = new double[weeks];
+ar_chargingSessions = new double[weeks];
+
+ar_kmDrivenPerWeek = new double[weeks];
+ar_tripsPerWeek = new double[weeks];
 /*ALCODEEND*/}
 
 DataSet f_arrayToDataSet(double[] arr)
@@ -1458,5 +1530,206 @@ probability = val_norm;
 //probability = (cdf_normal(val_stand) - cdf_normal(-1)) / (cdf_normal(1) - cdf_normal(-1));
 
 return probability;
+/*ALCODEEND*/}
+
+double f_countBehavioursPerWeek()
+{/*ALCODESTART::1760698613153*/
+double interactions_b1 = 0.0;
+double interactions_b2 = 0.0;
+double interactions_b3 = 0.0;
+double rechecking = 0.0;
+
+double outOfModelCharge_kWhperWeek = 0.0;
+int count_leftWhileChargingWeek = 0;
+int count_leftWhileChargingWithDelayedAccessWeek = 0;
+int count_leftUnchargedWeek = 0;
+int count_requiredChargingSessionsWeek = 0;
+int count_chargingSessionsWeek = 0;
+int count_tripsPerWeek = 0;
+
+int count_b1PerWeek = 0;
+int count_b2PerWeek = 0;
+int count_b3PerWeek = 0;
+double count_kmDrivenPerWeek = 0;
+
+int count_b1_successful_perWeek = 0;
+int count_b2_successful_perWeek = 0;
+int count_b3_successful_perWeek = 0;
+int count_b1_notSuccessful_perWeek = 0;
+int count_b2_notSuccessful_perWeek = 0;
+int count_b3_notSuccessful_perWeek = 0; 
+int count_b2_noProb_perWeek = 0;
+int count_b2_noIdleChargers_perWeek = 0;
+int count_b2_noMatchingRequests_perWeek = 0;
+
+int weekIndex = v_week-1;
+
+//traceln("v_week = " + v_week + " weekIndex " + weekIndex + " day = " + v_day);
+
+if(v_week == 1){
+	interactions_b1 = count_b1_successful + count_b1_notSuccessful;
+	interactions_b2 = count_b2_successful + count_b2_notSuccessful;
+	interactions_b3 = count_b3_successful + count_b3_notSuccessful;
+	rechecking = count_successfulRechecks + count_unsuccessfulRechecks;
+	
+	outOfModelCharge_kWhperWeek = outOfModelCharge_kWh;
+	count_leftWhileChargingWeek = count_leftWhileCharging;
+	count_leftUnchargedWeek = count_leftUncharged;
+	count_leftWhileChargingWithDelayedAccessWeek = count_leftWhileChargingWithDelayedAccess;
+	count_requiredChargingSessionsWeek = count_requiredChargingSessions;
+	count_chargingSessionsWeek = count_chargingSessions;
+	count_kmDrivenPerWeek = sum(EVOwners, x->x.v_km_driven);
+	count_tripsPerWeek = v_tripsFinished;
+	
+	count_b1_successful_perWeek = count_b1_successful;
+	count_b2_successful_perWeek = count_b2_successful;
+	count_b3_successful_perWeek = count_b3_successful;
+	count_b1_notSuccessful_perWeek = count_b1_notSuccessful;
+	count_b2_notSuccessful_perWeek = count_b2_notSuccessful;
+	count_b3_notSuccessful_perWeek = count_b3_notSuccessful; 
+	count_b2_noProb_perWeek = count_b2_noProb;
+	count_b2_noIdleChargers_perWeek = count_b2_noIdleChargers;
+	count_b2_noMatchingRequests_perWeek = count_b2_noMatchingRequests;	
+}
+
+
+else{
+	//Get previous total
+	double sum_prev_b1 = 0.0;
+	double sum_prev_b2 = 0.0;
+	double sum_prev_b3 = 0.0;
+	double sum_prev_rechecks = 0.0;
+	
+	double sum_prev_OoMC = 0.0;
+	int sum_prev_LWC = 0;
+	int sum_prev_LU = 0;
+	int sum_prev_LWCWDA = 0;
+	int sum_prev_RCD = 0;
+	int sum_prev_CS = 0;
+	double sum_prev_kmd = 0;
+	
+	int prev_count_b1_successful_perWeek = 0;
+	int prev_count_b2_successful_perWeek = 0;
+	int prev_count_b3_successful_perWeek = 0;
+	int prev_count_b1_notSuccessful_perWeek = 0;
+	int prev_count_b2_notSuccessful_perWeek = 0;
+	int prev_count_b3_notSuccessful_perWeek = 0;
+	int prev_count_b2_noProb_perWeek = 0;
+	int prev_count_b2_noIdleChargers_perWeek = 0;
+	int prev_count_b2_noMatchingRequests_perWeek = 0;
+	
+	int prev_tripsFinished = 0;
+	
+	
+	for (int i = 0; i < weekIndex; i++) {
+	    sum_prev_b1 += ar_interactionsPerWeek_b1[i];
+	    sum_prev_b2 += ar_interactionsPerWeek_b2[i];
+	    sum_prev_b3 += ar_interactionsPerWeek_b3[i];
+	    sum_prev_rechecks += ar_rechecksPerWeek[i];
+	    
+	    sum_prev_OoMC += ar_outOfModelCharging[i];
+	    sum_prev_LWC += ar_leftWhileCharging[i];
+	    sum_prev_LU += ar_leftUncharged[i];
+	    sum_prev_LWCWDA += ar_leftWhileChargingWithDelayedAccess[i];
+	    sum_prev_RCD += ar_requiredChargingSessions[i];
+	    sum_prev_CS += ar_chargingSessions[i];
+	    sum_prev_kmd += ar_kmDrivenPerWeek[i];
+	    
+	    prev_count_b1_successful_perWeek += ar_successful_b1[i];
+		prev_count_b2_successful_perWeek += ar_successful_b2[i];
+		prev_count_b3_successful_perWeek += ar_successful_b3[i];
+		prev_count_b1_notSuccessful_perWeek += ar_unsuccessful_b1[i];
+		prev_count_b2_notSuccessful_perWeek += ar_unsuccessful_b2[i];
+		prev_count_b3_notSuccessful_perWeek += ar_unsuccessful_b3[i];
+		prev_count_b2_noProb_perWeek += ar_unsuccesfulDueToProb_b2[i];
+		prev_count_b2_noIdleChargers_perWeek += ar_noIdleChargers_b2[i];
+		prev_count_b2_noMatchingRequests_perWeek += ar_noMatchingRequests_b2[i];
+		
+		prev_tripsFinished += ar_tripsPerWeek[i];
+	}	
+
+	interactions_b1 = count_b1_successful + count_b1_notSuccessful - sum_prev_b1;
+	interactions_b2 = count_b2_successful + count_b2_notSuccessful - sum_prev_b2;
+	interactions_b3 = count_b3_successful + count_b3_notSuccessful - sum_prev_b3;
+	rechecking = count_successfulRechecks + count_unsuccessfulRechecks - sum_prev_rechecks;
+
+	outOfModelCharge_kWhperWeek = outOfModelCharge_kWh - sum_prev_OoMC;
+	count_leftWhileChargingWeek = count_leftWhileCharging - sum_prev_LWC;
+	count_leftWhileChargingWithDelayedAccessWeek = count_leftWhileChargingWithDelayedAccess - sum_prev_LWCWDA;
+	count_leftUnchargedWeek = count_leftUncharged - sum_prev_LU;
+	count_chargingSessionsWeek = count_chargingSessions - sum_prev_CS;
+	count_requiredChargingSessionsWeek = count_requiredChargingSessions - sum_prev_RCD;
+	count_kmDrivenPerWeek = sum(EVOwners, x->x.v_km_driven) - sum_prev_kmd;
+	
+	count_b1_successful_perWeek = count_b1_successful - prev_count_b1_successful_perWeek;
+	count_b2_successful_perWeek = count_b2_successful - prev_count_b2_successful_perWeek;
+	count_b3_successful_perWeek = count_b3_successful - prev_count_b3_successful_perWeek;
+	count_b1_notSuccessful_perWeek = count_b1_notSuccessful - prev_count_b1_notSuccessful_perWeek;
+	count_b2_notSuccessful_perWeek = count_b2_notSuccessful - prev_count_b2_notSuccessful_perWeek;
+	count_b3_notSuccessful_perWeek = count_b3_notSuccessful - prev_count_b3_notSuccessful_perWeek; 
+	count_b2_noProb_perWeek = count_b2_noProb - prev_count_b2_noProb_perWeek;
+	count_b2_noIdleChargers_perWeek = count_b2_noIdleChargers - prev_count_b2_noIdleChargers_perWeek;
+	count_b2_noMatchingRequests_perWeek = count_b2_noMatchingRequests - prev_count_b2_noMatchingRequests_perWeek;
+	
+	count_tripsPerWeek = v_tripsFinished - prev_tripsFinished;
+	
+	//traceln(outOfModelCharge_kWhperWeek + " oomc in week " + v_week + " with sum prev " + sum_prev_OoMC + " and total " + outOfModelCharge_kWh);
+}
+
+ar_interactionsPerWeek_b1[weekIndex] = interactions_b1;
+ar_interactionsPerWeek_b2[weekIndex] = interactions_b2;
+ar_interactionsPerWeek_b3[weekIndex] = interactions_b3;
+ar_rechecksPerWeek[weekIndex] = rechecking;
+
+
+ar_outOfModelCharging[weekIndex] = outOfModelCharge_kWhperWeek;
+ar_leftWhileCharging[weekIndex] = count_leftWhileChargingWeek;
+ar_leftWhileChargingWithDelayedAccess[weekIndex] = count_leftWhileChargingWithDelayedAccessWeek;
+ar_leftUncharged[weekIndex] = count_leftUnchargedWeek;
+ar_chargingSessions[weekIndex] = count_chargingSessionsWeek;
+ar_requiredChargingSessions[weekIndex] = count_requiredChargingSessionsWeek;
+ar_kmDrivenPerWeek[weekIndex] = count_kmDrivenPerWeek;
+
+ar_successful_b1[weekIndex] = count_b1_successful_perWeek;
+ar_successful_b2[weekIndex] = count_b2_successful_perWeek;
+ar_successful_b3[weekIndex] = count_b3_successful_perWeek;
+ar_unsuccessful_b1[weekIndex] = count_b1_notSuccessful_perWeek;
+ar_unsuccessful_b2[weekIndex] = count_b2_notSuccessful_perWeek;
+ar_unsuccessful_b3[weekIndex] = count_b3_notSuccessful_perWeek; 
+ar_unsuccesfulDueToProb_b2[weekIndex] = count_b2_noProb_perWeek;
+ar_noIdleChargers_b2[weekIndex] = count_b2_noIdleChargers_perWeek;
+ar_noMatchingRequests_b2[weekIndex] = count_b2_noMatchingRequests_perWeek;
+ar_tripsPerWeek[weekIndex] = count_tripsPerWeek;
+//traceln(count_tripsPerWeek + " trips in week " + weekIndex);
+//traceln(count_chargingSessionsWeek + " cs and " + count_requiredChargingSessionsWeek + " rcs in week " + weekIndex);
+//double percSatisfiedChargingSessions = (double) (count_leftUnchargedWeek + count_leftWhileChargingWithDelayedAccessWeek) / count_requiredChargingSessionsWeek;
+double percSatisfiedChargingSessions;
+
+if (count_requiredChargingSessionsWeek == 0) {
+    percSatisfiedChargingSessions = 1.0;
+} else {
+    percSatisfiedChargingSessions = (double) count_chargingSessionsWeek / count_requiredChargingSessionsWeek;
+}
+ar_percSatisfiedChargingSessions[weekIndex] = percSatisfiedChargingSessions;
+/*ALCODEEND*/}
+
+double f_setInitialEVsToCP()
+{/*ALCODESTART::1761053835097*/
+//EVOwners.sort(Comparator.comparingDouble(o -> o.v_soc));
+
+List<EVOwner> listEVOwners = new ArrayList<>();
+for(int i=0; i<EVOwners.size(); i++){
+	listEVOwners.add(EVOwners.get(i));
+}
+listEVOwners.sort(Comparator.comparingDouble(o -> o.v_soc)); //
+
+int chargePoints = c_chargePoints.size();
+for(int i=0; i<chargePoints; i++){
+	EVOwner ev = listEVOwners.get(i);
+	J_ChargePoint cp = c_chargePoints.get(i);
+	ev.v_status = PARKED_CHARGE_POINT_CHARGING;
+	ev.v_chargePoint = cp;
+	cp.occupy(ev);
+}
 /*ALCODEEND*/}
 

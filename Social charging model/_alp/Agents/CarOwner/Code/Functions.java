@@ -2,8 +2,8 @@ double f_initializeNextTrip(int minuteOfWeek)
 {/*ALCODESTART::1745940705452*/
 c_tripSchedule.sort(Comparator.comparing(J_Trip::getDepartureTime));
 
-v_nextTrip = null;
-
+v_nextTrip = c_tripSchedule.get(0);
+/*
 for (J_Trip trip : c_tripSchedule) {
     if (trip.getDepartureTime() > minuteOfWeek) {
         v_nextTrip = trip;
@@ -17,16 +17,15 @@ if (v_nextTrip == null && !c_tripSchedule.isEmpty()) {
 }
 
 //text_nextTrip.setText("Next trip = " + v_nextTrip.toString());
-
-f_initializeStatus();
+/*/
+v_status = PARKED_NON_CHARGE_POINT_CHARGING_NOT_REQUIRED;
 /*ALCODEEND*/}
 
-double f_updateICETripStatus(double timestepStart,double minutesPerTimestep)
+double f_updateICETripStatus(int timestepStartMinuteInWeek,int timestepEndMinuteInWeek)
 {/*ALCODESTART::1745940705454*/
 //Start trip in timestep?
 int departureTime = (int) v_nextTrip.getDepartureTime();
-boolean departureInTimestep = f_isInCurrentTimestep(departureTime, timestepStart, minutesPerTimestep);
-
+boolean departureInTimestep = f_isInCurrentTimestep(departureTime, timestepStartMinuteInWeek, timestepEndMinuteInWeek);
 //Start if in timestep
 if( departureInTimestep ){
     v_status = ON_TRIP;
@@ -34,42 +33,42 @@ if( departureInTimestep ){
 
 //Finish trip
 int arrivalTime = (int) v_nextTrip.getArrivalTime();
-boolean arrivalInTimestep = f_isInCurrentTimestep(arrivalTime, timestepStart, minutesPerTimestep);
+boolean arrivalInTimestep = f_isInCurrentTimestep(arrivalTime, timestepStartMinuteInWeek, timestepEndMinuteInWeek);
 if (arrivalInTimestep) {
     v_km_driven += v_nextTrip.getDistance_km();
 
 	//New next trip
-    f_updateNextTrip();
+    f_updateNextTrip(timestepEndMinuteInWeek);
 }
 
 /*ALCODEEND*/}
 
-double f_updateNextTrip()
+double f_updateNextTrip(int timestepEndMinuteInWeek)
 {/*ALCODESTART::1745940705456*/
 int currentIndex = c_tripSchedule.indexOf(v_nextTrip);
 int nextIndex = (currentIndex + 1) % c_tripSchedule.size();
 v_nextTrip = c_tripSchedule.get(nextIndex);
+
+if(v_nextTrip.getDepartureTime() < timestepEndMinuteInWeek && nextIndex != 0){
+	f_goOnTrip();
+	//traceln("trigger next trip in same time period");
+}
+
+
 
 //text_nextTrip.setText("Next trip = " + v_nextTrip.toString());
 /*ALCODEEND*/}
 
 double f_initializeStatus()
 {/*ALCODESTART::1746001340956*/
-v_status = PARKED_NON_CHARGE_POINT_CHARGING_NOT_REQUIRED;
 
 /*ALCODEEND*/}
 
-boolean f_isInCurrentTimestep(int timeToCheck,double timestepStartMinuteOfWeek,double minutesPerTimestep)
+boolean f_departureInCurrentTimestep(int timestepStartMinuteInWeek,int timestepEndMinuteInWeek)
 {/*ALCODESTART::1746027432257*/
-double timestepEndMinuteOfWeek = (timestepStartMinuteOfWeek + minutesPerTimestep) % 10080;
-
-if (timestepStartMinuteOfWeek <= timestepEndMinuteOfWeek) {
-	// Normal case: no wrap-around
-	return timeToCheck >= timestepStartMinuteOfWeek && timeToCheck < timestepEndMinuteOfWeek;
-} else {
-	// Wrap-around case: timestep spans end of week
-	return timeToCheck >= timestepStartMinuteOfWeek || timeToCheck < timestepEndMinuteOfWeek;
-}
+//Start trip in timestep?
+int departureTime = (int) v_nextTrip.getDepartureTime();
+return departureTime >= timestepStartMinuteInWeek && departureTime < timestepEndMinuteInWeek;
 
 /*ALCODEEND*/}
 
@@ -89,36 +88,30 @@ v_delayedChargePointAccess = false;
 v_chargePoint = null;
 /*ALCODEEND*/}
 
-double f_goOnTrip(double timestepStart,double minutesPerTimestep)
+double f_goOnTrip()
 {/*ALCODESTART::1754916892774*/
-//Start trip in timestep?
-int departureTime = (int) v_nextTrip.getDepartureTime();
-boolean departureInTimestep = f_isInCurrentTimestep(departureTime, timestepStart, minutesPerTimestep);
-
-//Start if in timestep
-if( departureInTimestep ){
-	//for EVs
-    if (v_type == EV) {
-    	//Count unfulfilled charging sessions
-    	if(v_status == PARKED_CHARGE_POINT_CHARGING) {
-    		count_leftWhileCharging++;
-    		if( v_delayedChargePointAccess ){
-    			count_leftWhileChargingWithDelayedAccess++;
-    		}
-    	}
-    	//Count missed charging sessions
-    	else if( v_status == PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED){
-    		count_leftUncharged++;
-    		v_leftUnchargedStreak++;
-    	}
-    	//Leave CP
-    	if(v_chargePoint != null){
-    		f_leaveChargePoint();
+//for EVs
+if (v_type == EV) {
+    //Count unfulfilled charging sessions
+    if(v_status == PARKED_CHARGE_POINT_CHARGING) {
+    	count_leftWhileCharging++;
+    	if( v_delayedChargePointAccess ){
+    		count_leftWhileChargingWithDelayedAccess++;
     	}
     }
-    v_status = ON_TRIP;
-    main.countTripDepartures++;
+    //Count missed charging sessions
+    else if( v_status == PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED){
+    	count_leftUncharged++;
+    	v_leftUnchargedStreak++;
+    }
+    //Leave CP
+    if(v_chargePoint != null){
+    	f_leaveChargePoint();
+    }
 }
+v_status = ON_TRIP;
+main.countTripDepartures++;
+
 
 
 if(v_status == ON_TRIP && v_chargePoint != null){
@@ -126,14 +119,13 @@ if(v_status == ON_TRIP && v_chargePoint != null){
 }
 /*ALCODEEND*/}
 
-double f_arriveFromTrip(double timestepStart,double minutesPerTimestep)
+double f_arriveFromTrip(int timestepStartMinuteInWeek,int timestepEndMinuteInWeek)
 {/*ALCODESTART::1754918819469*/
 //Finish trip
 if(v_status == ON_TRIP){
-	int arrivalTime = (int) v_nextTrip.getArrivalTime();
-	boolean arrivalInTimestep = f_isInCurrentTimestep(arrivalTime, timestepStart, minutesPerTimestep);
-	if (arrivalInTimestep) {
+	if (f_arrivalInCurrentTimestep(timestepStartMinuteInWeek, timestepEndMinuteInWeek)) {
 	    v_km_driven += v_nextTrip.getDistance_km();
+	    v_tripFinished++;
 	
 	    //for EVs
 	    if (v_type == EV) {
@@ -144,12 +136,28 @@ if(v_status == ON_TRIP){
 	    else {
 	    	v_status = PARKED_NON_CHARGE_POINT_CHARGING_NOT_REQUIRED;
 	    }
-	    
-		//New next trip
-	    f_updateNextTrip();
 	    main.countTripArrivals++;
+		
+		//New next trip
+	    f_updateNextTrip(timestepEndMinuteInWeek);
+	    
 	}
 }
+
+/*ALCODEEND*/}
+
+boolean f_arrivalInCurrentTimestep(int timestepStartMinuteInWeek,int timestepEndMinuteInWeek)
+{/*ALCODESTART::1761218245825*/
+//Start trip in timestep?
+int arrivalTime = (int) v_nextTrip.getArrivalTime();
+return arrivalTime >= timestepStartMinuteInWeek && arrivalTime < timestepEndMinuteInWeek;
+
+/*ALCODEEND*/}
+
+boolean f_isInCurrentTimestep(int tripMinuteOfWeek,int timestepStartMinuteInWeek,int timestepEndMinuteInWeek)
+{/*ALCODESTART::1761218675468*/
+//Start trip in timestep?
+return tripMinuteOfWeek >= timestepStartMinuteInWeek && tripMinuteOfWeek < timestepEndMinuteInWeek;
 
 /*ALCODEEND*/}
 

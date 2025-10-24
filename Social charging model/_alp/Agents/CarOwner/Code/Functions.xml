@@ -35,12 +35,12 @@
 		<PresentationFlag>true</PresentationFlag>
 		<ShowLabel>true</ShowLabel>
 		<Parameter>
-			<Name><![CDATA[timestepStart]]></Name>
-			<Type><![CDATA[double]]></Type>
+			<Name><![CDATA[timestepStartMinuteInWeek]]></Name>
+			<Type><![CDATA[int]]></Type>
 		</Parameter>
 		<Parameter>
-			<Name><![CDATA[minutesPerTimestep]]></Name>
-			<Type><![CDATA[double]]></Type>
+			<Name><![CDATA[timestepEndMinuteInWeek]]></Name>
+			<Type><![CDATA[int]]></Type>
 		</Parameter>
 		<Body xmlns:al="http://anylogic.com"/>
 	</Function>
@@ -58,6 +58,10 @@
 		<PublicFlag>false</PublicFlag>
 		<PresentationFlag>true</PresentationFlag>
 		<ShowLabel>true</ShowLabel>
+		<Parameter>
+			<Name><![CDATA[timestepEndMinuteInWeek]]></Name>
+			<Type><![CDATA[int]]></Type>
+		</Parameter>
 		<Body xmlns:al="http://anylogic.com"/>
 	</Function>
 	<Function AccessType="default" StaticFunction="false">
@@ -65,6 +69,7 @@
 		<ReturnType>double</ReturnType>
 		<Id>1746001340956</Id>
 		<Name><![CDATA[f_initializeStatus]]></Name>
+		<ExcludeFromBuild>true</ExcludeFromBuild>
 		<X>50</X>
 		<Y>210</Y>
 		<Label>
@@ -74,13 +79,12 @@
 		<PublicFlag>false</PublicFlag>
 		<PresentationFlag>true</PresentationFlag>
 		<ShowLabel>true</ShowLabel>
-		<Body xmlns:al="http://anylogic.com"/>
 	</Function>
 	<Function AccessType="default" StaticFunction="false">
 		<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 		<ReturnType>boolean</ReturnType>
 		<Id>1746027432257</Id>
-		<Name><![CDATA[f_isInCurrentTimestep]]></Name>
+		<Name><![CDATA[f_departureInCurrentTimestep]]></Name>
 		<X>60</X>
 		<Y>290</Y>
 		<Label>
@@ -91,16 +95,12 @@
 		<PresentationFlag>true</PresentationFlag>
 		<ShowLabel>true</ShowLabel>
 		<Parameter>
-			<Name><![CDATA[timeToCheck]]></Name>
+			<Name><![CDATA[timestepStartMinuteInWeek]]></Name>
 			<Type><![CDATA[int]]></Type>
 		</Parameter>
 		<Parameter>
-			<Name><![CDATA[timestepStartMinuteOfWeek]]></Name>
-			<Type><![CDATA[double]]></Type>
-		</Parameter>
-		<Parameter>
-			<Name><![CDATA[minutesPerTimestep]]></Name>
-			<Type><![CDATA[double]]></Type>
+			<Name><![CDATA[timestepEndMinuteInWeek]]></Name>
+			<Type><![CDATA[int]]></Type>
 		</Parameter>
 		<Body xmlns:al="http://anylogic.com"/>
 	</Function>
@@ -110,7 +110,7 @@
 		<Id>1754493803320</Id>
 		<Name><![CDATA[f_cleanUp]]></Name>
 		<X>50</X>
-		<Y>400</Y>
+		<Y>430</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -126,7 +126,7 @@
 		<Id>1754909149408</Id>
 		<Name><![CDATA[f_leaveChargePoint]]></Name>
 		<X>50</X>
-		<Y>380</Y>
+		<Y>410</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -142,6 +142,70 @@
 		<Id>1754916892774</Id>
 		<Name><![CDATA[f_goOnTrip]]></Name>
 		<X>60</X>
+		<Y>360</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>VOID</ReturnModificator>
+		<ReturnType>double</ReturnType>
+		<Id>1754918819469</Id>
+		<Name><![CDATA[f_arriveFromTrip]]></Name>
+		<X>60</X>
+		<Y>380</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Parameter>
+			<Name><![CDATA[timestepStartMinuteInWeek]]></Name>
+			<Type><![CDATA[int]]></Type>
+		</Parameter>
+		<Parameter>
+			<Name><![CDATA[timestepEndMinuteInWeek]]></Name>
+			<Type><![CDATA[int]]></Type>
+		</Parameter>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+		<ReturnType>boolean</ReturnType>
+		<Id>1761218245825</Id>
+		<Name><![CDATA[f_arrivalInCurrentTimestep]]></Name>
+		<X>60</X>
+		<Y>310</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Parameter>
+			<Name><![CDATA[timestepStartMinuteInWeek]]></Name>
+			<Type><![CDATA[int]]></Type>
+		</Parameter>
+		<Parameter>
+			<Name><![CDATA[timestepEndMinuteInWeek]]></Name>
+			<Type><![CDATA[int]]></Type>
+		</Parameter>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+		<ReturnType>boolean</ReturnType>
+		<Id>1761218675468</Id>
+		<Name><![CDATA[f_isInCurrentTimestep]]></Name>
+		<X>60</X>
 		<Y>330</Y>
 		<Label>
 			<X>10</X>
@@ -151,36 +215,16 @@
 		<PresentationFlag>true</PresentationFlag>
 		<ShowLabel>true</ShowLabel>
 		<Parameter>
-			<Name><![CDATA[timestepStart]]></Name>
-			<Type><![CDATA[double]]></Type>
+			<Name><![CDATA[tripMinuteOfWeek]]></Name>
+			<Type><![CDATA[int]]></Type>
 		</Parameter>
 		<Parameter>
-			<Name><![CDATA[minutesPerTimestep]]></Name>
-			<Type><![CDATA[double]]></Type>
-		</Parameter>
-		<Body xmlns:al="http://anylogic.com"/>
-	</Function>
-	<Function AccessType="default" StaticFunction="false">
-		<ReturnModificator>VOID</ReturnModificator>
-		<ReturnType>double</ReturnType>
-		<Id>1754918819469</Id>
-		<Name><![CDATA[f_arriveFromTrip]]></Name>
-		<X>60</X>
-		<Y>350</Y>
-		<Label>
-			<X>10</X>
-			<Y>0</Y>
-		</Label>
-		<PublicFlag>false</PublicFlag>
-		<PresentationFlag>true</PresentationFlag>
-		<ShowLabel>true</ShowLabel>
-		<Parameter>
-			<Name><![CDATA[timestepStart]]></Name>
-			<Type><![CDATA[double]]></Type>
+			<Name><![CDATA[timestepStartMinuteInWeek]]></Name>
+			<Type><![CDATA[int]]></Type>
 		</Parameter>
 		<Parameter>
-			<Name><![CDATA[minutesPerTimestep]]></Name>
-			<Type><![CDATA[double]]></Type>
+			<Name><![CDATA[timestepEndMinuteInWeek]]></Name>
+			<Type><![CDATA[int]]></Type>
 		</Parameter>
 		<Body xmlns:al="http://anylogic.com"/>
 	</Function>

@@ -1,5 +1,5 @@
 /**
- * J_MCResult
+ * J_SensitivityResult
  */	
 public class J_SensitivityResult {
 

@@ -2,11 +2,27 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-excel_file = 'SCM_export_results_sensitivity.xlsx'
+excel_file = 'SCM_export_results_sensitivity_100EVs.xlsx'
 df = pd.read_excel(excel_file, sheet_name=1)
 print("Columns:", df.columns)
 
-metrics = ['oomc', 'lwc', 'lwcda', 'lu', 'pscs', 'cs', 'rcs']
+# metrics = ['oomc', 'lwc', 'lwcda', 'lu', 'pscs', 'cs', 'rcs']
+# titles = [
+# 	'Out of Model Charge (kWh/day)',
+# 	'Left Without Charging (#/day)',
+# 	'Left While Charging (#/day)',
+# 	'Load Unmet (kWh/day)',
+# 	'Partially Satisfied Charging Sessions (#/day)',
+# 	'Charging Satisfaction',
+# 	'Missed Charging Sessions (#/day)'
+# ]
+
+metrics = ['pscs', 'cs', 'rcs']
+titles = [
+	'Charging satisfaction (% of satisfied charging sessions)',
+	'Charging sessions (#/day)',
+	'Required charging Sessions (#/day)'
+]
 fig, axes = plt.subplots(1, len(metrics), figsize=(2.5*len(metrics), 2.5))
 
 for idx, metric in enumerate(metrics):
@@ -23,9 +39,9 @@ for idx, metric in enumerate(metrics):
 	ax.fill_between(mean.index, p5.values, p95.values, alpha=0.2, color='blue', label='5-95%')
 	ax.fill_between(mean.index, p10.values, p90.values, alpha=0.2, color='green', label='10-90%')
 	ax.fill_between(mean.index, p25.values, p75.values, alpha=0.2, color='orange', label='25-75%')
-	ax.set_title(metric, fontsize=10)
+	ax.set_title(titles[idx], fontsize=10)
 	ax.set_xlabel('Day', fontsize=10)
-	ax.set_ylabel(metric, fontsize=10)
+	# ax.set_ylabel(metric, fontsize=10)
 	ax.tick_params(axis='both', labelsize=8)
 
 fig.legend(['Mean', '5-95%', '10-90%', '25-75%'], loc='lower center', ncol=4, frameon=False, bbox_to_anchor=(0.5, 0.01))
