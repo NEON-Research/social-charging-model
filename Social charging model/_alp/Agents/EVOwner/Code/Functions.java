@@ -24,7 +24,13 @@ if(v_chargePoint != null && v_status == PARKED_CHARGE_POINT_CHARGING){
         v_status = PARKED_CHARGE_POINT_IDLE;
 		
 		//Execute by after charging
-		f_b1_movingVehicle();
+		if(main.v_withinSocialChargingTimes){
+			f_b1_movingVehicle();
+		}
+		else {
+			b1_extended = true;
+			main.count_b1ExtendedTriggered++;
+		}
     }
 }
 /*ALCODEEND*/}
@@ -76,20 +82,20 @@ if(v_status == ARRIVING){
 			v_status = PARKED_CHARGE_POINT_CHARGING;
 		}
 		// Not charging, trying to get CP
-		else if( f_tryAcquireChargePoint()){
-			v_status = PARKED_CHARGE_POINT_CHARGING;
-			count_chargingSessions++;
+		else if( f_tryAndAcquireChargePoint()){
+			f_updatePerceivedChargePointPressure(false);
 		}
 		//Behaviour 2: Request neighbor to move EV
 		else {
 			f_b2_requestMove();
+			f_updatePerceivedChargePointPressure(true);
 		}
 	}
 	else {
 		//If somehow still holding CP
 		if( v_chargePoint != null) {
 			traceln("Holding CP which should not happen with status " + v_status);
-			f_leaveChargePoint();
+			f_leaveChargePoint(false);
 		}
 		v_status = PARKED_NON_CHARGE_POINT_CHARGING_NOT_REQUIRED;
 	}
@@ -118,18 +124,20 @@ if(v_status == ARRIVING){
 double f_b1_movingVehicle()
 {/*ALCODESTART::1748950054520*/
 //check if within daytime and selected in scenario
-if(main.p_b1_moveCar && main.v_withinSocialChargingTimes){
+if(main.p_b1_moveCar){
 	//act within probability
 	boolean actBehavior = f_actBehavior(v_prob_b1);
 	///act
 	boolean behaviorSuccess = f_moveVehicle(actBehavior);
-	
+		
 	//Social learning after interaction
 	//f_socialLearning_b1();
 	if(main.initializationMode == false){
 		f_updateNorm_b1(behaviorSuccess);
 	}
 }
+main.b1++;
+
 
 /*ALCODEEND*/}
 
@@ -138,13 +146,10 @@ boolean f_moveVehicle(boolean actBehavior)
 boolean behaviorSuccess = false;
 //Move vehicle
 if( actBehavior ) {// && main.v_parkingPlacesAvailable > 0 ){
-	f_leaveChargePoint();
+	f_leaveChargePoint(false);
 	v_status = PARKED_NON_CHARGE_POINT_CHARGING_NOT_REQUIRED;
 	count_b1_successful++;
 	behaviorSuccess = true;
-	
-	//If moved, notify neighbor
-	f_b3_notifyNeighbor();
 }
 else {
 	count_b1_notSuccessful++;
@@ -175,11 +180,12 @@ if(main.p_b2_requestMove && main.v_withinSocialChargingTimes){
 	if(main.initializationMode == false){
 		f_updateNorm_b2(behaviorSuccess);
 	}
+	main.b2++;
 }
 //No CP available
 else {
 	v_status = PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED;
-	f_updatePerceivedChargePointPressure(true);
+	//f_updatePerceivedChargePointPressure(true);
 	count_noCPAvailable++;
 }
 
@@ -195,6 +201,7 @@ if (count_b2_noProb + count_b2_noIdleChargers + count_b2_noMatchingRequest != co
     );
 }
 
+
 /*ALCODEEND*/}
 
 boolean f_requestMove(boolean actBehavior)
@@ -206,21 +213,13 @@ boolean behaviorSuccess = false;
 if(movingEV != null){
 	movingEV.v_status = PARKED_NON_CHARGE_POINT_CHARGING_NOT_REQUIRED;
 	J_ChargePoint freedCP = movingEV.v_chargePoint;
-	movingEV.f_leaveChargePoint();
+	movingEV.f_leaveChargePoint(true);
 	movingEV.count_fulfilledMoveRequest++;
-			
-	//Change status of this EV
-	v_status = PARKED_CHARGE_POINT_CHARGING;
-	v_chargePoint = freedCP;
-	v_chargePoint.occupy(this);
-	
-	count_chargingSessions++;
-	//count_b2_successful++;
+	f_connectToCP(freedCP);
 	behaviorSuccess = true;
 }
 else {
 	v_status = PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED;
-	//count_b2_notSuccessful++;
 }
 
 int total_b2 = count_b2_successful + count_b2_notSuccessful;
@@ -232,25 +231,28 @@ successRate_b2 = (total_b2 != 0) ? ((double) count_b2_successful / total_b2) : 0
 return behaviorSuccess;
 /*ALCODEEND*/}
 
-double f_b3_notifyNeighbor()
+double f_b3_notifyNeighbor(J_ChargePoint chargePoint)
 {/*ALCODESTART::1753175429703*/
 //check if within daytime and selected in scenario
 if(main.p_b3_notifyNeighbor && main.v_withinSocialChargingTimes){
 	//act within probability
 	boolean actBehavior = f_actBehavior(v_prob_b3);
 	///act
-	boolean behaviorSuccess = f_notifyNeighbor(actBehavior);
+	boolean behaviorSuccess = f_notifyNeighbor(actBehavior, chargePoint);
 	
 	//Social learning after interaction
 	//f_socialLearning_b3();
 	if(main.initializationMode == false){
 		f_updateNorm_b3(behaviorSuccess);
 	}
+	
+	main.b3++;
 }
 
+main.b3Triggered++;
 /*ALCODEEND*/}
 
-boolean f_notifyNeighbor(boolean actBehavior)
+boolean f_notifyNeighbor(boolean actBehavior,J_ChargePoint chargePoint)
 {/*ALCODESTART::1753175429706*/
 int EVsAwaitingCP = count(main.EVOwners, x->x.v_status == PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED);
 boolean behaviorSuccess = false;
@@ -258,8 +260,10 @@ boolean behaviorSuccess = false;
 if( actBehavior && EVsAwaitingCP > 0 ){
 	//Get notified EV Owner
 	EVOwner EVNotified = randomWhere(main.EVOwners, x->x.v_status == PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED);
-	EVNotified.v_status = PARKED_CHARGE_POINT_CHARGING;
+	
+	EVNotified.f_connectToCP(chargePoint);
 	EVNotified.v_delayedChargePointAccess = true;
+	
 	count_b3_successful++;
 	behaviorSuccess = true;
 }
@@ -304,22 +308,6 @@ if(count_b1_notSuccessful + count_b1_successful == 0){
 }
 double perceivedSuccesRate = personalSuccessRate * alpha + globalSuccessRate * (1-alpha);
 
-/*
-double globalCPP = v_perc_charging_pressure;
-if(main.count_chargingSessions > 0 && main.count_requiredChargingSessions > 0){
-	globalCPP = (double) main.count_requiredChargingSessions / main.count_chargingSessions;
-}
-
-double personalCPP = v_perc_charging_pressure;
-if(count_chargingRequired > 0 && count_chargingSessions > 0){
-	personalCPP = (double) count_chargingRequired / count_chargingSessions;
-}
-
-if(globalCPP > 1) { globalCPP = 1; }
-if(personalCPP > 1) { personalCPP = 1; }
-
-double chargePointPressure = personalCPP * beta + globalCPP * (1-beta);
-*/
 double chargePointPressure = v_perc_charging_pressure;
 
 double norms_t0 = v_norm_b1;
@@ -358,8 +346,8 @@ EVOwner f_successfulMoveRequest(boolean actBehavior)
  * Returns the EV to move if successful, or null otherwise.
  */
 if (!actBehavior) {
-	count_b2_notSuccessful++;
 	count_b2_noProb++;
+	count_b2_notSuccessful++;
 	return null;  // Behavior not active, no move
 }
 
@@ -453,22 +441,6 @@ if(count_b2_notSuccessful + count_b2_successful == 0){
 }
 double perceivedSuccesRate = personalSuccessRate * alpha + globalSuccessRate * (1-alpha);
 
-//Charge point pressure
-/*
-double globalCPP = v_perc_charging_pressure;
-if(main.count_chargingSessions > 0 && main.count_requiredChargingSessions > 0){
-	globalCPP = (double) main.count_requiredChargingSessions / main.count_chargingSessions;
-}
-
-double personalCPP = v_perc_charging_pressure;
-if(count_chargingRequired > 0 && count_chargingSessions > 0){
-	personalCPP = (double) count_chargingRequired / count_chargingSessions;
-}
-
-if(globalCPP > 1) { globalCPP = 1; }
-if(personalCPP > 1) { personalCPP = 1; }
-double chargePointPressure = personalCPP * beta + globalCPP * (1-beta);
-*/
 double chargePointPressure = v_perc_charging_pressure; 
 
 double norms_t0 = v_norm_b2;
@@ -520,24 +492,6 @@ if(count_b3_notSuccessful + count_b3_successful == 0){
 	personalSuccessRate = main.avgProb_b3;
 }
 
-/*
-double globalCPP = v_perc_charging_pressure;
-if(main.count_chargingSessions > 0 && main.count_requiredChargingSessions > 0){
-	globalCPP = (double) main.count_requiredChargingSessions / main.count_chargingSessions;
-}
-
-double personalCPP = v_perc_charging_pressure;
-if(count_chargingRequired > 0 && count_chargingSessions > 0){
-	personalCPP = (double) count_chargingRequired / count_chargingSessions;
-}
-
-if(globalCPP > 1) { globalCPP = 1; }
-if(personalCPP > 1) { personalCPP = 1; }
-
-
-double chargePointPressure = v_perc_charging_pressure; //personalCPP * beta + globalCPP * (1-beta);
-*/
-
 double norms_t0 = v_norm_b3;
 double rc_t0 = v_reputational_concern;
 double psi_t0 = v_perc_social_interdep;
@@ -578,17 +532,16 @@ c_tripSchedule.clear();
 this.deleteSelf();
 /*ALCODEEND*/}
 
-boolean f_tryAcquireChargePoint()
+boolean f_tryAndAcquireChargePoint()
 {/*ALCODESTART::1754908555295*/
 for (J_ChargePoint cp : main.c_chargePoints) {
     if (!cp.isOccupied()) {
-        cp.occupy(this);
-        v_chargePoint = cp;
-        f_updatePerceivedChargePointPressure(false);
+        f_connectToCP(cp);
+        //f_updatePerceivedChargePointPressure(false);
         return true; //Succesfully acquired a CP
     }
 }
-f_updatePerceivedChargePointPressure(true);
+//f_updatePerceivedChargePointPressure(true);
 return false;
 /*ALCODEEND*/}
 
@@ -634,9 +587,8 @@ if(main.v_recheckCPAvailability && main.v_withinSocialChargingTimes){
 double f_tryRecheck()
 {/*ALCODESTART::1754999113828*/
 //Check CP availability
-if( f_tryAcquireChargePoint()){
-	v_status = PARKED_CHARGE_POINT_CHARGING;
-	count_chargingSessions++;
+boolean foundAvailableChargePoint = f_tryAndAcquireChargePoint();
+if( foundAvailableChargePoint ){
 	count_successfulRechecks++;
 	v_delayedChargePointAccess = true;
 }
@@ -910,6 +862,13 @@ double distance = Math.abs(combined_value - EMA_t0);////Math.abs(combined_value 
 //Smoothing based on dist from norm
 double effective_smoothing = smoothingFactor * (1.0 + distance); 
 
+if(experience){
+	effective_smoothing = smoothingFactor * 5.0; //success -> fast rise
+} else {
+	effective_smoothing = smoothingFactor * 0.3; //failure -> slow decay
+}
+
+
 //Clamp min max
 effective_smoothing = Math.max(0.01, Math.min(1.0, effective_smoothing));
 
@@ -1029,5 +988,41 @@ v_stand_prob_b3 = v_stand_prob_b3 + main.regCoef_psi_b3 * (psi_t1 - psi_t0);
 //update probability (normalized)
 v_prob_b3 = main.f_convertStandardizedToProb(v_stand_prob_b3, main.mean_b3, main.sd_b3, false);
 
+/*ALCODEEND*/}
+
+double f_extendedB1()
+{/*ALCODESTART::1761730717512*/
+if(main.v_withinSocialChargingTimes && b1_extended && v_status == PARKED_CHARGE_POINT_IDLE){
+	main.count_extendedB1++;
+	b1_extended = false;
+	f_b1_movingVehicle();
+}
+/*ALCODEEND*/}
+
+double f_leaveChargePoint(boolean triggeredByB2)
+{/*ALCODESTART::1761824568212*/
+v_chargePoint.release();
+v_delayedChargePointAccess = false;
+
+if(!triggeredByB2){
+	f_b3_notifyNeighbor(v_chargePoint);
+}
+if(v_chargePoint == null){
+	traceln("Error charge point at EV " + this.getIndex() + " is null at release");
+}
+
+v_chargePoint = null;
+
+main.leftCP++;
+/*ALCODEEND*/}
+
+double f_connectToCP(J_ChargePoint chargePoint)
+{/*ALCODESTART::1761904993266*/
+v_status = PARKED_CHARGE_POINT_CHARGING;
+v_chargePoint = chargePoint;
+v_chargePoint.occupy(this);
+count_chargingSessions++;
+
+main.connectedToCP++;
 /*ALCODEEND*/}
 

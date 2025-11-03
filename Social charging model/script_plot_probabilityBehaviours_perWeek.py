@@ -19,9 +19,9 @@ excel_file = 'SCM_results_behaviours.xlsx'
 df = pd.read_excel(excel_file, sheet_name=1)
 
 metrics = [
-    ('cs', 'Charging Satisfaction\n(% of satisfied charging sessions)'),
-    ('cspd', 'Charging Sessions\n(daily avg)'),
-    ('rcspd', 'Required charging sessions\n(daily avg)')
+    ('probb1', 'Behavior 1'),
+    ('probb2', 'Behavior 2'),
+    ('probb3', 'Behavior 3')
 ]
 
 
@@ -40,7 +40,7 @@ for idx, (abbr, title) in enumerate(metrics):
         )
                 
         data = df[mask & 
-            (df['EVsPerCP'] == 7)
+            (df['EVsPerCP'] == 10)
        ].copy()
         
          # --- Divide by 7 for 'cspd' and 'rcspd' ---
@@ -61,40 +61,10 @@ for idx, (abbr, title) in enumerate(metrics):
             continue
 
         evs_per_cp = data['EVsPerCP'].iloc[0] if 'EVsPerCP' in data.columns else 'NA'
-        cummean = data[mean_col].expanding().mean()
+       
+        # Plot normally for other behaviors
+        ax.plot(data['week'], data[mean_col], label=label) 
 
-        data_filtered_weeks = data[data['week'] >= 3]
-
-        # --- Styling logic ---
-        if label == "No behaviors":
-            # Plot normally and store its color
-            line, = ax.plot(data_filtered_weeks['week'], cummean[data_filtered_weeks.index], label=label, linestyle='-')
-            base_color = line.get_color()
-
-        elif label == "No behaviors, daily availability check":
-            # Use same color but dashed line
-            ax.plot(data_filtered_weeks['week'], cummean[data_filtered_weeks.index], label=label, linestyle='--', color=base_color)
-
-        else:
-            # Plot normally for other behaviors
-            ax.plot(data_filtered_weeks['week'], cummean[data_filtered_weeks.index], label=label) 
-
-            # --- Styling logic ---
-        # if label == "No behaviors":
-        #     # Plot normally and store its color
-        #     line, = ax.plot(data_filtered_weeks['week'], data_filtered_weeks[mean_col], label=label, linestyle='-')
-        #     base_color = line.get_color()
-
-        # elif label == "No behaviors, daily availability check":
-        #     # Use same color but dashed line
-        #     ax.plot(data_filtered_weeks['week'], data_filtered_weeks[mean_col], label=label, linestyle='--', color=base_color)
-
-        # else:
-        #     # Plot normally for other behaviors
-        #     ax.plot(data_filtered_weeks['week'], data_filtered_weeks[mean_col], label=label) 
-
-        # Optional: add fill_between for uncertainty
-        # ax.fill_between(data['day'], data[lower_col], data[upper_col], alpha=0.2)
 
     ax.set_title(title, fontsize=8, pad=10)
     ax.set_xlabel('Week', fontsize=8)
@@ -102,12 +72,12 @@ for idx, (abbr, title) in enumerate(metrics):
     ax.tick_params(axis='both', labelsize=6)
 
  # --- Control decimal places on y-axis ---
-    if idx == 0:
-        ax.set_yticks([50, 60, 70, 80, 90, 100])
-    elif idx == 1:
-        ax.set_yticks([7, 8, 9, 10]) 
-    elif idx == 2:
-        ax.set_yticks([11, 12, 13, 14, 15])  
+    # if idx == 0:
+    #     ax.set_yticks([50, 60, 70, 80, 90, 100])
+    # elif idx == 1:
+    #     ax.set_yticks([7, 8, 9, 10]) 
+    # elif idx == 2:
+    #     ax.set_yticks([11, 12, 13, 14, 15])  
 
 # --- Combine legend entries across subplots ---
 handles, labels = [], []
@@ -131,11 +101,9 @@ if handles:
 # Add a bit of margin below for the legend
 fig.subplots_adjust(bottom=0.18, top=0.8,  wspace=0.35)  # optional: add top margin too
 
-fig.suptitle("Development of probability of behavior from decision-making framework", fontsize=12)
-
 # --- Save with tight bounding box ---
 #fig.savefig('plot_charging_satisfaction_perWeek_5EVsPerCP.pdf', bbox_inches='tight')
-fig.savefig('plot_charging_satisfaction_perWeek_7EVsPerCP.png', bbox_inches='tight', dpi=300)
+fig.savefig('plot_prob_behaviours_perWeek_10EVsPerCP.png', bbox_inches='tight', dpi=300)
 #fig.savefig('plot_charging_satisfaction_perWeek_10EVsPerCP.png', bbox_inches='tight', dpi=300)
 
 plt.show()

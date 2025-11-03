@@ -1214,6 +1214,25 @@
 			<Type><![CDATA[boolean]]></Type>
 		</Properties>
 	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1761654146513</Id>
+		<Name><![CDATA[v_chargePoints]]></Name>
+		<X>-570</X>
+		<Y>280</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[int]]></Type>
+		</Properties>
+	</Variable>
 	<Variable Class="Parameter">
 		<Id>1755014914224</Id>
 		<Name><![CDATA[p_nbOfTimesteps]]></Name>
@@ -1372,7 +1391,7 @@
 		<Id>1755520121714</Id>
 		<Name><![CDATA[c_MCResults]]></Name>
 		<X>-380</X>
-		<Y>1560</Y>
+		<Y>1610</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1523,7 +1542,7 @@
 		<Id>1760695010171</Id>
 		<Name><![CDATA[c_outOfModelChargingPerWeek]]></Name>
 		<X>-380</X>
-		<Y>1670</Y>
+		<Y>1720</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1541,7 +1560,7 @@
 		<Id>1760695010587</Id>
 		<Name><![CDATA[c_leftWhileChargingPerWeek]]></Name>
 		<X>-380</X>
-		<Y>1690</Y>
+		<Y>1740</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1559,7 +1578,7 @@
 		<Id>1760695010589</Id>
 		<Name><![CDATA[c_leftUnchargedPerWeek]]></Name>
 		<X>-380</X>
-		<Y>1730</Y>
+		<Y>1780</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1577,7 +1596,7 @@
 		<Id>1760695010591</Id>
 		<Name><![CDATA[c_leftWhileChargingWithDelayedAccessPerWeek]]></Name>
 		<X>-380</X>
-		<Y>1710</Y>
+		<Y>1760</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1595,7 +1614,7 @@
 		<Id>1760695010593</Id>
 		<Name><![CDATA[c_percSatisfiedChargingSessionsPerWeek]]></Name>
 		<X>-380</X>
-		<Y>1750</Y>
+		<Y>1800</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1613,7 +1632,7 @@
 		<Id>1760695010595</Id>
 		<Name><![CDATA[c_chargingSessionsPerWeek]]></Name>
 		<X>-380</X>
-		<Y>1770</Y>
+		<Y>1820</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1631,7 +1650,7 @@
 		<Id>1760695010597</Id>
 		<Name><![CDATA[c_requiredChargingSessionsPerWeek]]></Name>
 		<X>-380</X>
-		<Y>1790</Y>
+		<Y>1840</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1649,7 +1668,7 @@
 		<Id>1761058908754</Id>
 		<Name><![CDATA[c_b1_perWeek]]></Name>
 		<X>-380</X>
-		<Y>1830</Y>
+		<Y>1880</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1667,7 +1686,7 @@
 		<Id>1761058933174</Id>
 		<Name><![CDATA[c_b2_perWeek]]></Name>
 		<X>-380</X>
-		<Y>1850</Y>
+		<Y>1900</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1685,7 +1704,7 @@
 		<Id>1761058936705</Id>
 		<Name><![CDATA[c_b3_perWeek]]></Name>
 		<X>-380</X>
-		<Y>1870</Y>
+		<Y>1920</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1703,7 +1722,7 @@
 		<Id>1761058940417</Id>
 		<Name><![CDATA[c_b1Successful_perWeek]]></Name>
 		<X>-380</X>
-		<Y>1910</Y>
+		<Y>1960</Y>
 		<Label>
 			<X>10</X>
 			<Y>5</Y>
@@ -1721,7 +1740,7 @@
 		<Id>1761058954233</Id>
 		<Name><![CDATA[c_b2Successful_perWeek]]></Name>
 		<X>-380</X>
-		<Y>1930</Y>
+		<Y>1980</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1739,7 +1758,7 @@
 		<Id>1761058957495</Id>
 		<Name><![CDATA[c_b3Successful_perWeek]]></Name>
 		<X>-380</X>
-		<Y>1950</Y>
+		<Y>2000</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1757,7 +1776,7 @@
 		<Id>1761059714114</Id>
 		<Name><![CDATA[c_kmDrivenPerWeek]]></Name>
 		<X>-380</X>
-		<Y>2040</Y>
+		<Y>2090</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1775,7 +1794,7 @@
 		<Id>1761134473584</Id>
 		<Name><![CDATA[c_tripsPerWeek]]></Name>
 		<X>-380</X>
-		<Y>2060</Y>
+		<Y>2110</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1793,7 +1812,7 @@
 		<Id>1761233425139</Id>
 		<Name><![CDATA[c_b1Unsuccessful_perWeek]]></Name>
 		<X>-380</X>
-		<Y>1970</Y>
+		<Y>2020</Y>
 		<Label>
 			<X>10</X>
 			<Y>5</Y>
@@ -1811,7 +1830,7 @@
 		<Id>1761233425141</Id>
 		<Name><![CDATA[c_b2Unsuccessful_perWeek]]></Name>
 		<X>-380</X>
-		<Y>1990</Y>
+		<Y>2040</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1829,7 +1848,115 @@
 		<Id>1761233425143</Id>
 		<Name><![CDATA[c_b3Unsuccessful_perWeek]]></Name>
 		<X>-380</X>
-		<Y>2010</Y>
+		<Y>2060</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+			<CollectionClass>ArrayList</CollectionClass>
+			<ElementClass>double[]</ElementClass>
+			<ValueElementClass>String</ValueElementClass>
+		</Properties>
+	</Variable>
+	<Variable Class="CollectionVariable">
+		<Id>1762191437751</Id>
+		<Name><![CDATA[c_PCP_MC]]></Name>
+		<X>-620</X>
+		<Y>1340</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+			<CollectionClass>ArrayList</CollectionClass>
+			<ElementClass>double[]</ElementClass>
+			<ValueElementClass>String</ValueElementClass>
+		</Properties>
+	</Variable>
+	<Variable Class="CollectionVariable">
+		<Id>1762191437757</Id>
+		<Name><![CDATA[c_RC_MC]]></Name>
+		<X>-620</X>
+		<Y>1360</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+			<CollectionClass>ArrayList</CollectionClass>
+			<ElementClass>double[]</ElementClass>
+			<ValueElementClass>String</ValueElementClass>
+		</Properties>
+	</Variable>
+	<Variable Class="CollectionVariable">
+		<Id>1762191437759</Id>
+		<Name><![CDATA[c_PSI_MC]]></Name>
+		<X>-620</X>
+		<Y>1380</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+			<CollectionClass>ArrayList</CollectionClass>
+			<ElementClass>double[]</ElementClass>
+			<ValueElementClass>String</ValueElementClass>
+		</Properties>
+	</Variable>
+	<Variable Class="CollectionVariable">
+		<Id>1762191437761</Id>
+		<Name><![CDATA[c_norm1_MC]]></Name>
+		<X>-620</X>
+		<Y>1400</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+			<CollectionClass>ArrayList</CollectionClass>
+			<ElementClass>double[]</ElementClass>
+			<ValueElementClass>String</ValueElementClass>
+		</Properties>
+	</Variable>
+	<Variable Class="CollectionVariable">
+		<Id>1762191437763</Id>
+		<Name><![CDATA[c_norm2_MC]]></Name>
+		<X>-620</X>
+		<Y>1420</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+			<CollectionClass>ArrayList</CollectionClass>
+			<ElementClass>double[]</ElementClass>
+			<ValueElementClass>String</ValueElementClass>
+		</Properties>
+	</Variable>
+	<Variable Class="CollectionVariable">
+		<Id>1762191437765</Id>
+		<Name><![CDATA[c_norm3_MC]]></Name>
+		<X>-620</X>
+		<Y>1440</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>

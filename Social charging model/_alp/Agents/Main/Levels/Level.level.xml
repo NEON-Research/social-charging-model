@@ -770,7 +770,7 @@ f_cleanUp();</ActionCode>
 		<DrawLine>true</DrawLine>
 		<Interpolation>LINEAR</Interpolation>
 		<SamplesToKeep>100</SamplesToKeep>
-		<TimeWindowExpression>p_nbOfTimesteps</TimeWindowExpression>
+		<TimeWindowExpression>p_days</TimeWindowExpression>
 		<FillAreaUnderLine>false</FillAreaUnderLine>
 		<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
 	</TimePlot>
@@ -3210,7 +3210,7 @@ f_cleanUp();</ActionCode>
 		<DrawLine>true</DrawLine>
 		<Interpolation>LINEAR</Interpolation>
 		<SamplesToKeep>100</SamplesToKeep>
-		<TimeWindowExpression>p_nbOfTimesteps</TimeWindowExpression>
+		<TimeWindowExpression>p_days</TimeWindowExpression>
 		<FillAreaUnderLine>false</FillAreaUnderLine>
 		<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
 	</TimePlot>
@@ -3488,7 +3488,7 @@ f_cleanUp();</ActionCode>
 		<DrawLine>true</DrawLine>
 		<Interpolation>LINEAR</Interpolation>
 		<SamplesToKeep>100</SamplesToKeep>
-		<TimeWindowExpression>p_nbOfTimesteps</TimeWindowExpression>
+		<TimeWindowExpression>p_days</TimeWindowExpression>
 		<FillAreaUnderLine>false</FillAreaUnderLine>
 		<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
 	</TimePlot>

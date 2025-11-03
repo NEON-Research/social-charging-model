@@ -8,9 +8,22 @@ subselection = [
     # {'b1': False,  'b2': False, 'b3': False, 'b4': True,  'label': 'No behaviors, daily availability check'},
     {'b1': True,  'b2': False, 'b3': False, 'b4': False,  'label': 'Behavior 1'},
     {'b1': False, 'b2': True,  'b3': False, 'b4': False,  'label': 'Behavior 2'},
+    {'b1': False, 'b2': False,  'b3': True, 'b4': False,  'label': 'Behavior 3'},
+    {'b1': True,  'b2': True, 'b3': False,  'b4': False,  'label': 'Behavior 1 and 2'},
     {'b1': True,  'b2': False, 'b3': True,  'b4': False,  'label': 'Behavior 1 and 3'},
+    {'b1': False,  'b2': True, 'b3': True,  'b4': False,  'label': 'Behavior 2 and 3'},
     {'b1': True,  'b2': True,  'b3': True,  'b4': False,  'label': 'All social behaviors'},
 ]
+
+# # Simplified scenario selection and labels
+# subselection = [
+#     {'b1': False, 'b2': False, 'b3': False, 'b4': True,  'label': 'No behaviors'},
+#     # {'b1': False,  'b2': False, 'b3': False, 'b4': True,  'label': 'No behaviors, daily availability check'},
+#     {'b1': True,  'b2': False, 'b3': False, 'b4': True,  'label': 'Behavior 1'},
+#     {'b1': False, 'b2': True,  'b3': False, 'b4': True,  'label': 'Behavior 2'},
+#     {'b1': False,  'b2': False, 'b3': True,  'b4': True,  'label': 'Behavior 3'},
+#     {'b1': True,  'b2': True,  'b3': True,  'b4': True,  'label': 'All social behaviors'},
+# ]
 
 
 # Set the Excel file name
@@ -43,52 +56,74 @@ for idx, (abbr, title) in enumerate(metrics):
             (df['b3'] == sel['b3']) &
             (df['b4'] == sel['b4'])
         )
-        subset = df[mask & (df['week'] == 51)].copy()
+        
+        # filter your data based on mask (but keep all weeks)
+        data = df[mask & (df['week'] >= 42) & (df['EVsPerCP'] <= 15)].copy()
 
+        # sort by EVsPerCP so the smallest EVsPerCP for each charge_points is kept
+        data = data.sort_values(['charge_points', 'EVsPerCP', 'week'])
+
+        # Find the smallest EVsPerCP per charge_points
+        # first_evs = (
+        #     data.groupby('charge_points', as_index=False)['EVsPerCP']
+        #     .min()
+        #     .rename(columns={'EVsPerCP': 'first_EVsPerCP'})
+        # )
+
+        # Merge to keep only matching rows
+        # data_filtered = data.merge(first_evs, on='charge_points')
+        # data_filtered = data_filtered[data_filtered['EVsPerCP'] == data_filtered['first_EVsPerCP']]
+
+        # Drop helper column
+        # data_filtered = data_filtered.drop(columns='first_EVsPerCP')
+        
         # --- Divide by 7 for 'cspd' and 'rcspd' ---
         if abbr in ['cspd', 'rcspd']:
-            subset[mean_col] /= 7
-            subset[lower_col] /= 7
-            subset[upper_col] /= 7
+            data[mean_col] /= 7
+            data[lower_col] /= 7
+            data[upper_col] /= 7
 
         # --- * 100 for % in cs
         if abbr in ['cs']:
-            subset[mean_col] *= 100
-            subset[lower_col] *= 100
-            subset[upper_col] *= 100    
+            data[mean_col] *= 100
+            data[lower_col] *= 100
+            data[upper_col] *= 100  
 
-        if subset.empty:
+
+        # compute the mean of 'mean_col' across all weeks for each charge_points
+        data_mean = (
+            data.groupby('charge_points', as_index=False)
+            .agg({mean_col: 'mean', 'EVsPerCP': 'mean'})
+        )  
+        
+        # 5. Sort the result for plotting
+        data_mean = data_mean.sort_values('EVsPerCP')
+
+          
+
+        if data_mean.empty:
             continue
-
-        # sort by EVsPerCP so the smallest EVsPerCP for each charge_points is kept
-        subset = subset.sort_values('EVsPerCP')
-
-        # drop duplicates based on charge_points, keeping first (smallest EVsPerCP)
-        subset_unique_cp = subset.drop_duplicates(subset='charge_points', keep='first')
-
-        # now group by EVsPerCP and compute mean (if you still have multiple runs per EVsPerCP)
-        # grouped = subset_unique_cp.groupby('EVsPerCP')[mean_col].mean().reset_index()
 
 
         label = sel['label']
 
-        # --- Styling logic ---
-        if label == "No behaviors":
-            # plot normally and capture its color
-            line, = ax.plot(subset_unique_cp['EVsPerCP'], subset_unique_cp[mean_col],
-                            label=label, linestyle='-')
-            base_color = line.get_color()
+        # # --- Styling logic ---
+        # if label == "No behaviors":
+        #     # plot normally and capture its color
+        #     line, = ax.plot(data_mean['EVsPerCP'], data_mean[mean_col],
+        #                     label=label, linestyle='-')
+        #     base_color = line.get_color()
 
-        elif label == "No behaviors, daily availability check":
-            # use same color but dashed line
-            ax.plot(subset_unique_cp['EVsPerCP'], subset_unique_cp[mean_col],
-                    label=label, linestyle='--', color=base_color)
+        # elif label == "No behaviors, daily availability check":
+        #     # use same color but dashed line
+        #     ax.plot(data_mean['EVsPerCP'], data_mean[mean_col],
+        #             label=label, linestyle='--', color=base_color)
 
-        else:
-            # default style
-            ax.plot(subset_unique_cp['EVsPerCP'], subset_unique_cp[mean_col],
-                    label=label)
-            
+        # else:
+        #     # default style
+        #     ax.plot(data_mean['EVsPerCP'], data_mean[mean_col],
+        #             label=label)
+        ax.plot(data_mean['EVsPerCP'], data_mean[mean_col], label=label)    
 
     #ax.set_title(title, fontsize=10)
       # --- Wrap long titles into 2 lines ---
@@ -98,8 +133,8 @@ for idx, (abbr, title) in enumerate(metrics):
     # ax.set_ylabel(title, fontsize=10)
     ax.set_ylabel(None)
     ax.tick_params(axis='both', labelsize=8)
-    ax.set_xlim(1, 20)                           # Force axis range 1–20
-    ax.set_xticks([5, 10, 15, 20])            
+    ax.set_xlim(1, 15)                           # Force axis range 1–20
+    ax.set_xticks([5, 10, 15])            
 
 # --- Place legend below all subplots ---
 handles, labels = [], []
@@ -122,7 +157,11 @@ if handles:
 # Add a bit of margin below for the legend
 fig.subplots_adjust(bottom=0.2)
 
-# --- Save with tight bounding box ---
+# # --- Save with tight bounding box ---
+# fig.savefig('plot_charging_satisfaction_EVsPerCP_wRecheck.pdf', bbox_inches='tight')
+# fig.savefig('plot_charging_satisfaction_EVsPerCP_wRecheck.png', bbox_inches='tight', dpi=300)
+
+#--- Save with tight bounding box ---
 fig.savefig('plot_charging_satisfaction_EVsPerCP.pdf', bbox_inches='tight')
 fig.savefig('plot_charging_satisfaction_EVsPerCP.png', bbox_inches='tight', dpi=300)
 

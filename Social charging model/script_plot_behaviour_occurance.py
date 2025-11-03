@@ -3,13 +3,45 @@ import matplotlib.pyplot as plt
 
 # Simplified scenario selection and labels
 subselection = [
-    {'b1': False, 'b2': False, 'b3': False, 'b4': False,  'label': 'No behaviors'},
+    # {'b1': False, 'b2': False, 'b3': False, 'b4': False,  'label': 'No behaviors'},
     # {'b1': False,  'b2': False, 'b3': False, 'b4': True,  'label': 'No behaviors, daily availability check'},
-    {'b1': True,  'b2': False, 'b3': False, 'b4': False,  'label': 'Behavior 1'},
-    {'b1': False, 'b2': True,  'b3': False, 'b4': False,  'label': 'Behavior 2'},
-    {'b1': True,  'b2': False, 'b3': True,  'b4': False,  'label': 'Behavior 1 and 3'},
-    {'b1': True,  'b2': True,  'b3': True,  'b4': False,  'label': 'All social behaviors'},
+    {'b1': True,  'b2': False, 'b3': False, 'b4': False,  'label': 'B1'},
+    {'b1': False, 'b2': True,  'b3': False, 'b4': False,  'label': 'B2'},
+    {'b1': False,  'b2': False, 'b3': True,  'b4': False,  'label': 'B3'},
+    # {'b1': True,  'b2': False, 'b3': True,  'b4': False,  'label': 'B1 and B3'},
+    {'b1': True,  'b2': True,  'b3': True,  'b4': False,  'label': 'All behaviors'},
 ]
+
+# Define which behaviors to exclude per subplot
+exclude_map = {
+    0: ['B2', 'B3'],        # for plot 1 (sib1)
+    1: ['B1', 'B3'],        # for plot 2 (sib2)
+    2: ['B1', 'B2'],        # for plot 3 (sib3)
+}
+
+# color map: force consistent colors across subplots
+color_map = {
+    #'No behaviors':     'tab:blue',   # or any color you prefer
+    'B1':  'tab:orange',
+    'B2':  'tab:green',
+    'B3':  'tab:red',
+    'All behaviors': 'tab:purple'
+}
+
+# desired legend order
+desired_order = [
+    #'No behaviors',
+    'B1',
+    'B2',
+    'B3',
+    #'B1 and B3',
+    'All behaviors'
+]
+
+fig, axes = plt.subplots(1, 3, figsize=(7.2, 3))
+
+# dictionary to capture one handle per label (for the combined legend)
+plot_handles = {}
 
 
 # Set the Excel file name
@@ -19,46 +51,76 @@ excel_file = 'SCM_results_behaviours.xlsx'
 df = pd.read_excel(excel_file, sheet_name=1)
 
 metrics = [
-    ('sib1', 'Successful B1 (# per week)'),
-    ('sib2', 'Successful B2 (# per week)'),
-    ('sib3', 'Successful B3 (# per week)'),
+    ('sib1', 'Behavior 1'),
+    ('sib2', 'Behavior 2'),
+    ('sib3', 'Behavior 3'),
 ]
 
 metrics2 = [
-    ('usib1', 'unsuccessful B1 (# per week)'),
-    ('usib2', 'unuccessful B2 (# per week)'),
-    ('usib3', 'unSuccessful B3 (# per week)'),
+    ('usib1', 'B1 unsuccessful'),
+    ('usib2', 'B2 unuccessful'),
+    ('usib3', 'B3 unsuccessful'),
 ]
 
+# --- Create proportional sib/usib columns (normalized by m_cspd) ---
+for b in ['b1', 'b2', 'b3']:
+    sib_col = f'm_si{b}'
+    usib_col = f'm_usi{b}'
+    psib_col = f'm_psi{b}'
+    pusib_col = f'm_pusi{b}'
+
+    # Only create columns if they exist to avoid KeyErrors
+    if sib_col in df.columns:
+        df[psib_col] = df[sib_col] / df['m_cspd'] * 100
+    if usib_col in df.columns:
+        df[pusib_col] = df[usib_col] / df['m_cspd'] * 100
 
 fig, axes = plt.subplots(1, 3, figsize=(7.2, 3))
 for idx, (abbr, title) in enumerate(metrics):
     ax = axes[idx]
-    mean_col = f'm_{abbr}'
-    lower_col = f'l_{abbr}'
-    upper_col = f'u_{abbr}'
+    mean_col = f'm_p{abbr}'
+    #lower_col = f'l_{abbr}'
+    #upper_col = f'u_{abbr}'
 
-    
+    # Get excluded labels for this plot
+    excluded_labels = exclude_map.get(idx, [])
+
     for sel in subselection:
+        label = sel['label']
+        if label in excluded_labels:
+            continue  # skip this behavior for this plot
+    
         mask = (
             (df['b1'] == sel['b1']) &
             (df['b2'] == sel['b2']) &
             (df['b3'] == sel['b3']) &
             (df['b4'] == sel['b4'])
         )
+
                 
         # filter your data based on mask (but keep all weeks)
-        data = df[mask].copy()
+        data = df[mask & (df['week'] >= 42)].copy()
 
         # sort by EVsPerCP so the smallest EVsPerCP for each charge_points is kept
-        data = data.sort_values('EVsPerCP')
+        data = data.sort_values(['charge_points', 'EVsPerCP', 'week'])
 
-        # drop duplicates based on charge_points, keeping first (smallest EVsPerCP)
-        data_unique_cp = data.drop_duplicates(subset='charge_points', keep='first')
+        # Find the smallest EVsPerCP per charge_points
+        first_evs = (
+            data.groupby('charge_points', as_index=False)['EVsPerCP']
+            .min()
+            .rename(columns={'EVsPerCP': 'first_EVsPerCP'})
+        )
+
+        # Merge to keep only matching rows
+        data_filtered = data.merge(first_evs, on='charge_points')
+        data_filtered = data_filtered[data_filtered['EVsPerCP'] == data_filtered['first_EVsPerCP']]
+
+        # Drop helper column
+        data_filtered = data_filtered.drop(columns='first_EVsPerCP')
 
         # compute the mean of 'mean_col' across all weeks for each charge_points
         data_mean = (
-            data_unique_cp.groupby('charge_points', as_index=False)
+            data_filtered.groupby('charge_points', as_index=False)
             .agg({mean_col: 'mean', 'EVsPerCP': 'mean'})
         )  
         
@@ -74,57 +136,49 @@ for idx, (abbr, title) in enumerate(metrics):
         
                # --- Styling logic ---
         # Plot main behavior
-        line, = ax.plot(data_mean['EVsPerCP'], data_mean[mean_col], label=label, linestyle='-')
+        success_label = f"{label} successful"
+        line, = ax.plot(
+            data_mean['EVsPerCP'],
+            data_mean[mean_col],
+            label=success_label,
+            linestyle='-',
+            color=color_map.get(label, None)
+        )
+
+        # store one handle per unique label
+        if success_label not in plot_handles:
+            plot_handles[success_label] = line
 
         # Plot corresponding unsuccessful behavior
         unsuccess_abbr, _ = metrics2[idx]
-        unsuccess_mean_col = f'm_{unsuccess_abbr}'
+        unsuccess_mean_col = f'm_p{unsuccess_abbr}'
 
         # compute mean for unsuccessful column
         data_mean_unsuccess = (
-            data_unique_cp.groupby('charge_points', as_index=False)
+            data_filtered.groupby('charge_points', as_index=False)
             .agg({unsuccess_mean_col: 'mean', 'EVsPerCP': 'mean'})
         )
         data_mean_unsuccess = data_mean_unsuccess.sort_values('EVsPerCP')
         
-        ax.plot(
-            data_unique_cp['EVsPerCP'],
-            data_unique_cp[unsuccess_mean_col],
+        unsuccess_label = f"{label} unsuccessful"
+        line_unsuccess, = ax.plot(
+            data_mean_unsuccess['EVsPerCP'],
+            data_mean_unsuccess[unsuccess_mean_col],
             linestyle='--',
             color=line.get_color(),
-            label=f"{label} (Unsuccessful)"
+            label=unsuccess_label
         )
 
-        # Inspect what data is being averaged
-        print("Unique combinations before mean:")
-        print(data[['charge_points', 'EVsPerCP', 'week', mean_col]].sort_values('charge_points').head(20))
+        if unsuccess_label not in plot_handles:
+            plot_handles[unsuccess_label] = line_unsuccess
 
-        # Check grouping behavior
-        check_group = data[data['charge_points'] == some_charge_point_value]
-        print(check_group[['charge_points', 'EVsPerCP', 'week', mean_col]])
-
-            # --- Styling logic ---
-        # if label == "No behaviors":
-        #     # Plot normally and store its color
-        #     line, = ax.plot(data_filtered_weeks['week'], data_filtered_weeks[mean_col], label=label, linestyle='-')
-        #     base_color = line.get_color()
-
-        # elif label == "No behaviors, daily availability check":
-        #     # Use same color but dashed line
-        #     ax.plot(data_filtered_weeks['week'], data_filtered_weeks[mean_col], label=label, linestyle='--', color=base_color)
-
-        # else:
-        #     # Plot normally for other behaviors
-        #     ax.plot(data_filtered_weeks['week'], data_filtered_weeks[mean_col], label=label) 
-
-        # Optional: add fill_between for uncertainty
-        # ax.fill_between(data['day'], data[lower_col], data[upper_col], alpha=0.2)
 
     ax.set_title(title, fontsize=8, pad=10)
-    ax.set_xlabel('EVs per CP', fontsize=8)
+    ax.set_xlabel('EVs per CP', fontsize=6)
     ax.set_ylabel(None)
     ax.tick_params(axis='both', labelsize=6)
-    ax.set_xticks([5, 10, 15, 20]) 
+    ax.set_xticks([5, 10, 15]) 
+    ax.set_yticks([0, 10, 20, 30, 40, 50, 60, 70])#, 15, 20, 25, 30])
 
  # --- Control decimal places on y-axis ---
     # if idx == 0:
@@ -134,7 +188,34 @@ for idx, (abbr, title) in enumerate(metrics):
     # elif idx == 2:
     #     ax.set_yticks([10, 11, 12, 13])  
 
-# --- Combine legend entries across subplots ---
+# Build the combined legend in the desired order
+# legend_order = []
+# for label in desired_order:
+#     legend_order.append(f"{label} successful")
+#     legend_order.append(f"{label} unsuccessful")
+# legend_order = [
+#     "B1 successful",
+#     "B1 unsuccessful",
+#     "B2 successful",
+#     "B2 unsuccessful",
+#     "B1 and B3 successful",
+#     "B1 and B3 unsuccessful",
+#     "All behaviors successful",
+#     "All behaviors unsuccessful",  # <-- now directly below
+# ]
+
+# handles = [plot_handles[label] for label in legend_order if label in plot_handles]
+# # labels = [label for label in legend_order if label in plot_handles]
+
+# if handles:
+#     fig.legend(handles, labels,
+#         loc='lower center',
+#         ncol=min(len(labels), 4),
+#         frameon=False,
+#         bbox_to_anchor=(0.5, -0.05),
+#         fontsize=6,
+#     )
+# --- Place legend below all subplots ---
 handles, labels = [], []
 for ax in axes.flat:
     h, l = ax.get_legend_handles_labels()
@@ -144,17 +225,16 @@ for ax in axes.flat:
             labels.append(label)
 
 if handles:
-    fig.legend(
-        handles, labels,
-        loc='lower center',
-        ncol=min(len(labels), 5),
-        frameon=False,
-        bbox_to_anchor=(0.5, -0.05),
-        fontsize=6
-    )
+    # add legend in a new figure row at the bottom (works with constrained_layout)
+    fig.legend(handles, labels,
+               loc='lower center',
+               ncol=min(len(labels), 5),
+               frameon=False,
+               bbox_to_anchor=(0.5, -0.05),  # put it below the plots
+               fontsize=8)
 
-# Add a bit of margin below for the legend
-fig.subplots_adjust(bottom=0.18, top=0.8,  wspace=0.35)  # optional: add top margin too
+fig.suptitle("Occurance behaviors (% of charging sessions)", fontsize=12)
+fig.subplots_adjust(bottom=0.18, top=0.8, wspace=0.35)
 
 # --- Save with tight bounding box ---
 fig.savefig('plot_behaviour_occurance_EVsPerCP.pdf', bbox_inches='tight')

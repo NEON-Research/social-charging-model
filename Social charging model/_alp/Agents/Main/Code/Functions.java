@@ -182,6 +182,17 @@ for (EVOwner x : EVOwners) {
 	v_tripsFinished += x.v_tripFinished;
 }
 
+if (count_b2_noProb + count_b2_noIdleChargers + count_b2_noMatchingRequests != count_b2_notSuccessful) {
+    traceln(
+        "B2 counter mismatch at main, noProb=" + count_b2_noProb +
+        ", noIdleChargers=" + count_b2_noIdleChargers +
+        ", noMatchingRequest=" + count_b2_noMatchingRequests +
+        ", notSuccessful=" + count_b2_notSuccessful +
+        ", successful=" + count_b2_successful +
+        ", total=" + (count_b2_successful + count_b2_notSuccessful)
+    );
+}
+
 
 int total_b1 = count_b1_successful + count_b1_notSuccessful;
 successRate_b1 = (total_b1 != 0) ? ((double) count_b1_successful / total_b1) : 0;
@@ -194,9 +205,6 @@ successRate_b3 = (total_b3 != 0) ? ((double) count_b3_successful / total_b3) : 0
 
 int total_rechecks = count_successfulRechecks + count_unsuccessfulRechecks;
 successRate_rechecks = (total_rechecks != 0) ? ((double) count_successfulRechecks / total_rechecks) : 0;
-
-//Added no idle chargers category
-count_b2_notSuccessful -= count_b2_noIdleChargers;
 
 //Probabilities
 avgProb_b1 = totalProb_b1 / EVs;
@@ -1261,6 +1269,11 @@ for(EVOwner ev : EVOwners){
 	ev.f_setChargingStatus();
 }
 
+//5. Extended b1 - when full in night
+for (EVOwner ev : EVOwners){
+	ev.f_extendedB1();
+}
+
 //5. Try and aquire if waiting for charge point
 for (EVOwner ev : EVOwners) {
 	ev.f_recheckChargePoints();
@@ -1367,6 +1380,15 @@ countTripArrivals = 0;
 count_requiredChargingSessions = 0;
 count_chargingSessions = 0;
 count_wantsToCharge = 0;
+b1 = 0;
+b2 = 0;
+b3 = 0;
+count_extendedB1 = 0;
+count_extendedB1AlreadyOnTrip = 0;
+count_b1ExtendedTriggered = 0;
+b3Triggered = 0;
+leftCP = 0;
+connectedToCP = 0;
 /*ALCODEEND*/}
 
 double f_setArrays()

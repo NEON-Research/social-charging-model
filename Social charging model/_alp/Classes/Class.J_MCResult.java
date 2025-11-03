@@ -60,7 +60,14 @@ public class J_MCResult {
 	ArrayList<double[]> unsuccessfulBehaviour3_perWeek;
 	ArrayList<double[]> kmDriven_perWeek;
 	ArrayList<double[]> tripsPerWeek;
-		
+	
+	ArrayList<double[]> pcp_perWeek;
+	ArrayList<double[]> rc_perWeek;
+	ArrayList<double[]> psi_perWeek;
+	ArrayList<double[]> norm1_perWeek;
+	ArrayList<double[]> norm2_perWeek;		
+	ArrayList<double[]> norm3_perWeek;
+	
 	int window = 14;
 	int days;
 	
@@ -198,7 +205,31 @@ public class J_MCResult {
     public ArrayList<double[]> getRequiredChargingSessionsPerWeek() {
         return requiredChargingSessions_perWeek;
     }
-
+    
+    public ArrayList<double[]> getPCP() {
+        return pcp_perWeek;
+    }
+    
+    public ArrayList<double[]> getRC() {
+        return rc_perWeek;
+    }
+    
+    public ArrayList<double[]> getPSI() {
+        return psi_perWeek;
+    }
+    
+    public ArrayList<double[]> getNorm1() {
+        return norm1_perWeek;
+    }
+    
+    public ArrayList<double[]> getNorm2() {
+        return norm2_perWeek;
+    }
+    
+    public ArrayList<double[]> getNorm3() {
+        return norm3_perWeek;
+    }
+    
     // --- Setters ---
     public void setIterations(int iterations) {
         this.iterations = iterations;
@@ -256,6 +287,28 @@ public class J_MCResult {
     
     public void setAvgProb_b3( ArrayList<double[]> uncertaintyBounds ) {
     	avgProb_b3 = uncertaintyBounds;
+    }
+    
+    public void setPCP( ArrayList<double[]> uncertaintyBounds ) {
+    	pcp_perWeek = uncertaintyBounds;
+    }
+    
+    public void setRC( ArrayList<double[]> uncertaintyBounds ) {
+    	rc_perWeek = uncertaintyBounds;
+    }
+    
+    public void setPSI( ArrayList<double[]> uncertaintyBounds ) {
+    	psi_perWeek = uncertaintyBounds;
+    }
+    
+    public void setNorm1( ArrayList<double[]> uncertaintyBounds ) {
+    	norm1_perWeek = uncertaintyBounds;
+    }
+    public void setNorm2( ArrayList<double[]> uncertaintyBounds ) {
+    	norm2_perWeek = uncertaintyBounds;
+    }
+    public void setNorm3( ArrayList<double[]> uncertaintyBounds ) {
+    	norm3_perWeek = uncertaintyBounds;
     }
     
     public void setChargingSessionsPerWeek( ArrayList<double[]> uncertaintyBounds ) {

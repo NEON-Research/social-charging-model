@@ -81,17 +81,10 @@ c_tripSchedule.clear();
 this.deleteSelf();
 /*ALCODEEND*/}
 
-double f_leaveChargePoint()
-{/*ALCODESTART::1754909149408*/
-v_chargePoint.release();
-v_delayedChargePointAccess = false;
-v_chargePoint = null;
-/*ALCODEEND*/}
-
 double f_goOnTrip()
 {/*ALCODESTART::1754916892774*/
 //for EVs
-if (v_type == EV) {
+if (this instanceof EVOwner) {
     //Count unfulfilled charging sessions
     if(v_status == PARKED_CHARGE_POINT_CHARGING) {
     	count_leftWhileCharging++;
@@ -106,8 +99,13 @@ if (v_type == EV) {
     }
     //Leave CP
     if(v_chargePoint != null){
-    	f_leaveChargePoint();
+    	((EVOwner) this).f_leaveChargePoint(false);
     }
+    if (b1_extended){
+    	b1_extended = false;
+    	main.count_extendedB1AlreadyOnTrip++;
+    }
+    
 }
 v_status = ON_TRIP;
 main.countTripDepartures++;
