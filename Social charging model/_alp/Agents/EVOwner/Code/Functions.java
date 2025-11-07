@@ -88,7 +88,7 @@ if(v_status == ARRIVING){
 		//Behaviour 2: Request neighbor to move EV
 		else {
 			f_b2_requestMove();
-			f_updatePerceivedChargePointPressure(true);
+			//f_updatePerceivedChargePointPressure(true);
 		}
 	}
 	else {
@@ -168,11 +168,12 @@ return behaviorSuccess;
 double f_b2_requestMove()
 {/*ALCODESTART::1753175364935*/
 //check if within daytime and selected in scenario
+boolean behaviorSuccess = false;
 if(main.p_b2_requestMove && main.v_withinSocialChargingTimes){
 	//act within probability
 	boolean actBehavior = f_actBehavior(v_prob_b2);
 	///act
-	boolean behaviorSuccess = f_requestMove(actBehavior);
+	behaviorSuccess = f_requestMove(actBehavior);
 	//f_updatePerceivedChargePointPressure(false);
 	
 	//Social learning after interaction
@@ -185,9 +186,10 @@ if(main.p_b2_requestMove && main.v_withinSocialChargingTimes){
 //No CP available
 else {
 	v_status = PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED;
-	//f_updatePerceivedChargePointPressure(true);
 	count_noCPAvailable++;
 }
+boolean missedChargingSession = !behaviorSuccess;
+f_updatePerceivedChargePointPressure(missedChargingSession);
 
 if (count_b2_noProb + count_b2_noIdleChargers + count_b2_noMatchingRequest != count_b2_notSuccessful) {
     traceln(
@@ -693,7 +695,7 @@ double f_updateNorm_b1(boolean experience)
 double norms_t0 = v_norm_b1;
 
 //learning independent variables
-double norms_t1 = f_updateNorms(experience, v_norm_b1, main.v_avgNorm_b1, main.mean_b1, main.sd_b1, main.avgProb_b1);
+double norms_t1 = f_updateNorms(experience, v_norm_b1, main.v_avgNorm_b1, main.mean_b1, main.sd_b1, main.avgProb_b1, true);
 v_norm_b1 = norms_t1;
 
 //Update mediator
@@ -715,7 +717,7 @@ double f_updateNorm_b2(boolean experience)
 double norms_t0 = v_norm_b2;
 
 //learning independent variables
-double norms_t1 = f_updateNorms(experience, v_norm_b2, main.v_avgNorm_b2, main.mean_b2, main.sd_b2, main.avgProb_b2);
+double norms_t1 = f_updateNorms(experience, v_norm_b2, main.v_avgNorm_b2, main.mean_b2, main.sd_b2, main.avgProb_b2, false);
 v_norm_b2 = norms_t1;
 
 //Update mediator
@@ -736,7 +738,7 @@ double f_updateNorm_b3(boolean experience)
 double norms_t0 = v_norm_b3;
 
 //learning independent variables
-double norms_t1 = f_updateNorms(experience, v_norm_b3, main.v_avgNorm_b3, main.mean_b3, main.sd_b3, main.avgProb_b3);
+double norms_t1 = f_updateNorms(experience, v_norm_b3, main.v_avgNorm_b3, main.mean_b3, main.sd_b3, main.avgProb_b3, false);
 v_norm_b3 = norms_t1;
 
 //Update mediator
@@ -766,24 +768,30 @@ double pcp_t0 = v_perc_charging_pressure;
 double global_avg = main.v_avgPCP;
 double smoothingFactor = main.v_smoothingFactorPCP;
 double sharePersonal = main.v_sharePersonal;
-double personal_value = experience ? main.mean_pcp + 3 * main.sd_pcp : main.mean_pcp - 3 * main.sd_pcp;
-//double maxPCP = main.mean_pcp + 3 * main.sd_pcp;
+double mean_pcp = main.mean_pcp;
+double sd_pcp = main.sd_pcp;
 
-//Combine personal and global value
-double combined_value = sharePersonal * personal_value + (1 - sharePersonal) * global_avg;
+double avgPCP = EMA_t0 * sharePersonal + (1-sharePersonal) * global_avg;
+double minVal_standardized = -1.61303;
+double maxVal_standardized = 3.04025;
+double experienceValue = experience 
+      ? maxVal_standardized
+      : minVal_standardized;
+
 
 //Assymetric smoothing: strong update on rise, weak on decay
 double effective_smoothing;
+
 if(experience){
-	effective_smoothing = smoothingFactor * 2.0; //failure -> fast rise
+	effective_smoothing = smoothingFactor * 3.0; //failure -> fast rise
 } else {
-	effective_smoothing = smoothingFactor * 0.3; //success -> slow decay
+	effective_smoothing = smoothingFactor * 0.01; //success -> slow decay
 }
 
 effective_smoothing = Math.max(0.01, Math.min(1.0, effective_smoothing));
 
 //Update EMA
-double EMA_t1 = (1 - effective_smoothing) * EMA_t0 + effective_smoothing * combined_value;
+double EMA_t1 = EMA_t0 + effective_smoothing * (experienceValue - EMA_t0);
 double pcp_t1 = EMA_t1;
 v_perc_charging_pressure = pcp_t1;
 
@@ -825,55 +833,86 @@ return EMA_t1;
 
 /*ALCODEEND*/}
 
-double f_updateNorms(boolean experience,double personalNorm,double globalNorm,double mean_norm,double sd_norm,double globalBehaviorRate)
+double f_updateNorms(boolean experience,double personalNorm,double globalNorm,double mean_norm,double sd_norm,double globalBehaviorRate,boolean b1)
 {/*ALCODESTART::1757511287794*/
 double EMA_t0 = personalNorm; //EMA = exponential moving average, here applied with non linear smoothing factor
 
 double smoothingFactor = main.v_smoothingFactorNorms;
-double sharePersonal = 0.5;//main.v_sharePersonal;
+double sharePersonal = 0.5;
+double avgNorm = personalNorm * sharePersonal + (1-sharePersonal) * globalNorm;
+
 //double experience_value = experience ? mean_norm + sd_norm * 3 : mean_norm - sd_norm * 3;
 
-//Set behavior impact stronger if further from global norm
-double globalNorm_normalized = main.f_convertStandardizedToProb(globalNorm, mean_norm, sd_norm, true);
-double pTrue = Math.min(Math.max(globalNorm_normalized, 0.01), 0.99); // clamp
+//Set behavior impact stronger if further from personal norm
+//double norm = sharePersonal * personalNorm + (1 - sharePersonal) * globalNorm;
+double norm_normalized = main.f_convertStandardizedToProb(avgNorm, mean_norm, sd_norm, b1);
+double pTrue = Math.min(Math.max(norm_normalized, 0.01), 0.99); // clamp
 double pFalse = 1.0 - pTrue;
 
 // Weight by surprisal
-double weight = experience 
+double rawSurprisalWeight = experience 
       ? -Math.log(pTrue)   // rare "true"
       : -Math.log(pFalse); // rare "false"
+      
+double surprisalWeight = Math.min(1.0, rawSurprisalWeight / 4.6); //4.6 takes a 99% deviation as 1 and a 0% deviation as 0
 
-// Map to standardized scale
-double baseValue = experience 
-      ? mean_norm + sd_norm * 3 
-      : mean_norm - sd_norm * 3;
+//Emperical disitrbution min and max from mean
+//For B1 max standardized val =  1.42664, min standardized val = -1.63056
+//For B2 and 3 max standardized val = 3.65424, min standardized val = -0.2727
 
-// Apply weight scaling
-double experience_value = mean_norm + (baseValue - mean_norm) * weight;
-
-//Combine personal and global value
-double combined_value = sharePersonal * experience_value + (1 - sharePersonal) * globalNorm;
-
-//Scale by distance from norm
-double distance = Math.abs(combined_value - EMA_t0);////Math.abs(combined_value - EMA_t0);
-//double distanceCap = 0.4;
-//distance = Math.min(distance, distanceCap);
-
-//Smoothing based on dist from norm
-double effective_smoothing = smoothingFactor * (1.0 + distance); 
-
-if(experience){
-	effective_smoothing = smoothingFactor * 5.0; //success -> fast rise
-} else {
-	effective_smoothing = smoothingFactor * 0.3; //failure -> slow decay
+double minVal_standardized = 0.0;
+double maxVal_standardized = 0.0;
+if(b1){
+	minVal_standardized = -1.63056;
+	maxVal_standardized = 1.42664;
 }
+else {
+	minVal_standardized = -0.2727;
+	maxVal_standardized = 3.65424;
+}	
 
+double experienceValue = experience 
+      ? maxVal_standardized
+      : minVal_standardized;
 
-//Clamp min max
-effective_smoothing = Math.max(0.01, Math.min(1.0, effective_smoothing));
-
+/*
+//Scale by distance from current norm
+double distance = Math.abs(experienceValue - EMA_t0);
+*/
+//double effective_smoothing = smoothingFactor * (1 + distance) * weight;
+//effective_smoothing = Math.max(0.01, Math.min(1.0, effective_smoothing));
 //Update EMA
-double EMA_t1 = (1 - effective_smoothing) * EMA_t0 + effective_smoothing * combined_value;
+double EMA_t1 = EMA_t0 + smoothingFactor * (experienceValue - EMA_t0) * surprisalWeight;
+/* For debugging
+if(!b1){
+	if(distance > main.maxDistance){
+		main.maxDistance = distance;
+	}
+	if(distance < main.minDistance){
+		main.minDistance = distance;
+	}
+	if(surprisalWeight > main.maxWeight){
+		main.maxWeight = surprisalWeight;
+	}
+	if(smoothingFactor > main.maxEffectiveSmoothing){
+		main.maxEffectiveSmoothing = smoothingFactor;
+	}
+	if(smoothingFactor < main.minEffectiveSmoothing){
+		main.minEffectiveSmoothing = smoothingFactor;
+	}
+	
+	if(experienceValue > main.maxExperienceValue){
+		main.maxExperienceValue = experienceValue;
+	}
+	double deltaExpEMA = experienceValue - EMA_t0;
+	if(deltaExpEMA > main.maxDeltaExpEMA){
+		main.maxDeltaExpEMA = deltaExpEMA;
+	}
+	if(norm_normalized > main.norm_normalized){
+		main.norm_normalized = norm_normalized;
+	}
+}*/
+
 return EMA_t1;
 
 /*ALCODEEND*/}

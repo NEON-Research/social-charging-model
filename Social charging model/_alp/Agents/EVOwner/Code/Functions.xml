@@ -550,6 +550,10 @@
 			<Name><![CDATA[globalBehaviorRate]]></Name>
 			<Type><![CDATA[double]]></Type>
 		</Parameter>
+		<Parameter>
+			<Name><![CDATA[b1]]></Name>
+			<Type><![CDATA[boolean]]></Type>
+		</Parameter>
 		<Body xmlns:al="http://anylogic.com"/>
 	</Function>
 	<Function AccessType="default" StaticFunction="false">

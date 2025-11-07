@@ -3067,7 +3067,7 @@ double scenTime = time;
 monteCarlo = true;
 f_clearResultsCollections();
 
-iterations = 500;
+iterations = 50;
 //v_EVsPerCP = 10;
 
 
@@ -3081,6 +3081,7 @@ ShapeCheckBox[] checkBoxes = {
 
 // Define only the desired combinations
 // Order of booleans: {b1, b2, b3, b4}
+
 boolean[][] subselection = {
     {false, false, false, false}, // No behaviors
     //{false, false, false, true},  // No behaviors, self checking
@@ -3092,6 +3093,18 @@ boolean[][] subselection = {
     {false,  true, true,  false}, // Behavior 2 and 3
     {true,  true,  true,  false}  // All behaviors
 };
+/*
+boolean[][] subselection = {
+    {false, false, false, true}, // No behaviors
+    //{false, false, false, true},  // No behaviors, self checking
+    {true,  false, false, true}, // Behavior 1
+    {false, true,  false, true}, // Behavior 2
+    {false, false, true, true}, // Behavior 3
+    {true,  false, true,  true}, // Behavior 1 and 3
+    {true,  true, false,  true}, // Behavior 1 and 2
+    {false,  true, true,  true}, // Behavior 2 and 3
+    {true,  true,  true,  true}  // All behaviors
+};*/
 
 // Corresponding labels
 String[] labels = {
@@ -3106,8 +3119,11 @@ String[] labels = {
     "All behaviors"
 };
 
+// not 13, 15, 17, 18, 20
+
+
 // Iterate only over these subselections
-for( v_EVsPerCP = 1  ; v_EVsPerCP &lt;= 15; v_EVsPerCP++ ){
+for( v_EVsPerCP = 1  ; v_EVsPerCP &lt;= 20; v_EVsPerCP++ ){
 	int newChargePoints = roundToInt(v_cars * v_shareEVs / v_EVsPerCP);
 	if( newChargePoints != v_chargePoints ){
 		

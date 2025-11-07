@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 # Simplified scenario selection and labels
 subselection = [
-    {'b1': False, 'b2': False, 'b3': False, 'b4': False,  'label': 'No behaviors'},
+    {'b1': False, 'b2': False, 'b3': False, 'b4': True,  'label': 'No behaviors'},
     # {'b1': False,  'b2': False, 'b3': False, 'b4': True,  'label': 'No behaviors, daily availability check'},
     {'b1': True,  'b2': False, 'b3': False, 'b4': False,  'label': 'Behavior 1'},
     {'b1': False, 'b2': True,  'b3': False, 'b4': False,  'label': 'Behavior 2'},
@@ -23,6 +23,19 @@ metrics = [
     ('probb2', 'Behavior 2'),
     ('probb3', 'Behavior 3')
 ]
+
+metrics2 = [
+    ('n1', 'Behavior 1'),   # Norm behavior 1
+    ('n2', 'Behavior 2'),   # Norm behavior 2
+    ('n3', 'Behavior 3')    # Norm behavior 3
+]
+
+metrics3 = [
+    ('pcp', 'Perceived CP pressure'),   # Social influence behavior 1
+    ('rc', 'Reputational concern'),   # Social influence behavior 2
+    ('psi', 'Perceived social interdependence')    # Social influence behavior 3
+]
+
 
 
 fig, axes = plt.subplots(1, 3, figsize=(7.2, 3))

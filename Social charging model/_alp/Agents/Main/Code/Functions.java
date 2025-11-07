@@ -401,6 +401,8 @@ ch_b3.removeAll();
 ch_b3.addDataSet(f_arrayToDataSet(ar_unsuccessful_b3), "Non successful interactions", red);
 ch_b3.addDataSet(f_arrayToDataSet(ar_successful_b3), "Successful interactions", green);
 
+
+hs_norms_pop2.updateData();
 f_setHistograms();
 /*ALCODEEND*/}
 
@@ -695,7 +697,7 @@ Color colorPDF = crimson;
 Color colorCDF = green;
 float lineWidthCDF = 1;
 Color colorMean = green;
-
+/*
 //hs_norms_data.addHistogram(hs_data_norms_pop, "Norms pop", colorLowPercent, colorHighPercent, colorPDF, colorCDF, lineWidthCDF, colorMean);
 hs_b1_pop.addHistogram(hs_data_b1_pop, "b1 pop", colorLowPercent, colorHighPercent, colorPDF, colorCDF, lineWidthCDF, colorMean);
 hs_b2_pop.addHistogram(hs_data_b2_pop, "b1 pop", colorLowPercent, colorHighPercent, colorPDF, colorCDF, lineWidthCDF, colorMean);
@@ -1533,6 +1535,7 @@ hs_b3_all.updateData();
 
 double f_convertStandardizedToProb(double val_stand,double mean,double sd,boolean isLikert)
 {/*ALCODESTART::1756807925486*/
+
 double probability = 0.0;
 double val_norm = 0.0;
 
@@ -1548,9 +1551,6 @@ else {
 val_norm = Math.max(0.0, Math.min(1.0, val_norm));
 
 probability = val_norm;
-//if non linear translation using cdf
-//probability = (cdf_normal(val_stand) - cdf_normal(-1)) / (cdf_normal(1) - cdf_normal(-1));
-
 return probability;
 /*ALCODEEND*/}
 

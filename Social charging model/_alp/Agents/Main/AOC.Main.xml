@@ -103,6 +103,46 @@ import java.util.*;
 	<ConnectionsId>1743154070894</ConnectionsId>
 	<Variables xmlns:al="http://anylogic.com"/>
 	<Functions xmlns:al="http://anylogic.com"/>
+	<AnalysisData>
+		<HistogramData>
+			<Id>1762433782645</Id>
+			<Name><![CDATA[hs_supr_weight]]></Name>
+			<X>3300</X>
+			<Y>250</Y>
+			<Label>
+				<X>15</X>
+				<Y>0</Y>
+			</Label>
+			<PublicFlag>false</PublicFlag>
+			<PresentationFlag>true</PresentationFlag>
+			<ShowLabel>true</ShowLabel>
+			<AutoUpdate>true</AutoUpdate>
+			<RecurrenceProperties>
+				<Id>1762433782643</Id>
+				<OccurrenceAtTime>true</OccurrenceAtTime>
+				<OccurrenceDate>1762502400000</OccurrenceDate>
+				<OccurrenceTime Class="CodeUnitValue">
+					<Code><![CDATA[0]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</OccurrenceTime>
+				<RecurrenceCode Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="TimeUnits">HOUR</Unit>
+				</RecurrenceCode>
+			</RecurrenceProperties>
+			<Value/>
+			<NumberOfIntervals>10</NumberOfIntervals>
+			<MinMaxAutodetect>true</MinMaxAutodetect>
+			<RangeMinExpression>0</RangeMinExpression>
+			<RangeMaxExpression>1</RangeMaxExpression>
+			<InitialIntervalSize>0.1</InitialIntervalSize>
+			<CalculateCDF>true</CalculateCDF>
+			<CalculatePercentiles>false</CalculatePercentiles>
+			<LowPercent>10</LowPercent>
+			<HighPercent>10</HighPercent>
+			<Title/>
+		</HistogramData>
+	</AnalysisData>
 	<Connectivity>
 		<ExcelFile>
 			<Id>1754383332051</Id>

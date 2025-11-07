@@ -2,30 +2,40 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Simplified scenario selection and labels
+# subselection = [
+#     # {'b1': False, 'b2': False, 'b3': False, 'b4': False,  'label': 'No behaviors'},
+#     # {'b1': False,  'b2': False, 'b3': False, 'b4': True,  'label': 'No behaviors, daily availability check'},
+#     {'b1': True,  'b2': False, 'b3': False, 'b4': False,  'label': 'B1'},
+#     {'b1': False, 'b2': True,  'b3': False, 'b4': False,  'label': 'B2'},
+#     {'b1': False,  'b2': False, 'b3': True,  'b4': False,  'label': 'B3'},
+#     # {'b1': True,  'b2': False, 'b3': True,  'b4': False,  'label': 'B1 and B3'},
+#     {'b1': True,  'b2': True,  'b3': True,  'b4': False,  'label': 'All behaviors'},
+# ]
+
+# Define the behavior scenarios
 subselection = [
-    # {'b1': False, 'b2': False, 'b3': False, 'b4': False,  'label': 'No behaviors'},
-    # {'b1': False,  'b2': False, 'b3': False, 'b4': True,  'label': 'No behaviors, daily availability check'},
-    {'b1': True,  'b2': False, 'b3': False, 'b4': False,  'label': 'B1'},
-    {'b1': False, 'b2': True,  'b3': False, 'b4': False,  'label': 'B2'},
-    {'b1': False,  'b2': False, 'b3': True,  'b4': False,  'label': 'B3'},
-    # {'b1': True,  'b2': False, 'b3': True,  'b4': False,  'label': 'B1 and B3'},
-    {'b1': True,  'b2': True,  'b3': True,  'b4': False,  'label': 'All behaviors'},
+    {'b1': True,  'b2': False, 'b3': False, 'b4': False,
+     'label': 'B1', 'color': 'tab:green', 'linestyle': '-'},
+    {'b1': False, 'b2': True,  'b3': False, 'b4': False,
+     'label': 'B2', 'color': 'tab:red', 'linestyle': '-'},
+    {'b1': False, 'b2': False, 'b3': True,  'b4': False,
+     'label': 'B3', 'color': 'tab:orange', 'linestyle': '-'},
+    # {'b1': True,  'b2': True,  'b3': False, 'b4': False,
+    #  'label': 'B1 and B2', 'color': 'tab:cyan', 'linestyle': '--'},
+    # {'b1': True,  'b2': False, 'b3': True,  'b4': False,
+    #  'label': 'B1 and B3', 'color': 'tab:olive', 'linestyle': '--'},
+    # {'b1': False, 'b2': True,  'b3': True,  'b4': False,
+    #  'label': 'B2 and B3', 'color': 'tab:brown', 'linestyle': '--'},
+    {'b1': True,  'b2': True,  'b3': True,  'b4': False,
+     'label': 'All behaviors', 'color': 'tab:purple', 'linestyle': '-'}
 ]
+
 
 # Define which behaviors to exclude per subplot
 exclude_map = {
-    0: ['B2', 'B3'],        # for plot 1 (sib1)
-    1: ['B1', 'B3'],        # for plot 2 (sib2)
-    2: ['B1', 'B2'],        # for plot 3 (sib3)
-}
-
-# color map: force consistent colors across subplots
-color_map = {
-    #'No behaviors':     'tab:blue',   # or any color you prefer
-    'B1':  'tab:orange',
-    'B2':  'tab:green',
-    'B3':  'tab:red',
-    'All behaviors': 'tab:purple'
+    0: ['B2', 'B3', 'B2 and B3'],        # for plot 1 (sib1)
+    1: ['B1', 'B3', 'B1 and B3'],        # for plot 2 (sib2)
+    2: ['B1', 'B2', 'B1 and B2'],        # for plot 3 (sib3)
 }
 
 # desired legend order
@@ -34,11 +44,15 @@ desired_order = [
     'B1',
     'B2',
     'B3',
-    #'B1 and B3',
+    # 'B1 and B2',
+    # 'B1 and B3',
+    # 'B2 and B3',
     'All behaviors'
 ]
 
-fig, axes = plt.subplots(1, 3, figsize=(7.2, 3))
+width = 15.92 / 2.52 # width word cm to inch
+height = width * (3 / 7)  # maintain aspect ratio
+fig, axes = plt.subplots(1, 3, figsize=(width, height))
 
 # dictionary to capture one handle per label (for the combined legend)
 plot_handles = {}
@@ -142,7 +156,7 @@ for idx, (abbr, title) in enumerate(metrics):
             data_mean[mean_col],
             label=success_label,
             linestyle='-',
-            color=color_map.get(label, None)
+            color=sel['color']
         )
 
         # store one handle per unique label
@@ -165,7 +179,7 @@ for idx, (abbr, title) in enumerate(metrics):
             data_mean_unsuccess['EVsPerCP'],
             data_mean_unsuccess[unsuccess_mean_col],
             linestyle='--',
-            color=line.get_color(),
+            color=sel['color'],
             label=unsuccess_label
         )
 
@@ -174,9 +188,9 @@ for idx, (abbr, title) in enumerate(metrics):
 
 
     ax.set_title(title, fontsize=8, pad=10)
-    ax.set_xlabel('EVs per CP', fontsize=6)
+    ax.set_xlabel('EVs per CP', fontsize=8)
     ax.set_ylabel(None)
-    ax.tick_params(axis='both', labelsize=6)
+    ax.tick_params(axis='both', labelsize=8)
     ax.set_xticks([5, 10, 15]) 
     ax.set_yticks([0, 10, 20, 30, 40, 50, 60, 70])#, 15, 20, 25, 30])
 
@@ -189,34 +203,25 @@ for idx, (abbr, title) in enumerate(metrics):
     #     ax.set_yticks([10, 11, 12, 13])  
 
 # Build the combined legend in the desired order
-# legend_order = []
-# for label in desired_order:
-#     legend_order.append(f"{label} successful")
-#     legend_order.append(f"{label} unsuccessful")
-# legend_order = [
-#     "B1 successful",
-#     "B1 unsuccessful",
-#     "B2 successful",
-#     "B2 unsuccessful",
-#     "B1 and B3 successful",
-#     "B1 and B3 unsuccessful",
-#     "All behaviors successful",
-#     "All behaviors unsuccessful",  # <-- now directly below
-# ]
+legend_order = []
+for label in desired_order:
+    legend_order.append(f"{label} successful")
+    legend_order.append(f"{label} unsuccessful")
+legend_order = [
+    "B1 successful",
+    "B1 unsuccessful",
+    "B2 successful",
+    "B2 unsuccessful",
+    "B3 successful",
+    "B3 unsuccessful",
+    "All behaviors successful",
+    "All behaviors unsuccessful",  # <-- now directly below
+]
 
-# handles = [plot_handles[label] for label in legend_order if label in plot_handles]
-# # labels = [label for label in legend_order if label in plot_handles]
+handles = [plot_handles[label] for label in legend_order if label in plot_handles]
+labels = [label for label in legend_order if label in plot_handles]
 
-# if handles:
-#     fig.legend(handles, labels,
-#         loc='lower center',
-#         ncol=min(len(labels), 4),
-#         frameon=False,
-#         bbox_to_anchor=(0.5, -0.05),
-#         fontsize=6,
-#     )
-# --- Place legend below all subplots ---
-handles, labels = [], []
+#handles, labels = [], []
 for ax in axes.flat:
     h, l = ax.get_legend_handles_labels()
     for handle, label in zip(h, l):
@@ -228,13 +233,13 @@ if handles:
     # add legend in a new figure row at the bottom (works with constrained_layout)
     fig.legend(handles, labels,
                loc='lower center',
-               ncol=min(len(labels), 5),
+               ncol=min(len(labels), 4),
                frameon=False,
                bbox_to_anchor=(0.5, -0.05),  # put it below the plots
                fontsize=8)
 
-fig.suptitle("Occurance behaviors (% of charging sessions)", fontsize=12)
-fig.subplots_adjust(bottom=0.18, top=0.8, wspace=0.35)
+fig.suptitle("Occurance behaviors (% of charging sessions)", fontsize=9)
+fig.subplots_adjust(bottom=0.24, top=0.8, wspace=0.35)
 
 # --- Save with tight bounding box ---
 fig.savefig('plot_behaviour_occurance_EVsPerCP.pdf', bbox_inches='tight')
