@@ -80,21 +80,22 @@ metrics2 = [
 for b in ['b1', 'b2', 'b3']:
     sib_col = f'm_si{b}'
     usib_col = f'm_usi{b}'
-    psib_col = f'm_psi{b}'
-    pusib_col = f'm_pusi{b}'
+    #psib_col = f'm_psi{b}'
+    #pusib_col = f'm_pusi{b}'
 
     # Only create columns if they exist to avoid KeyErrors
-    if sib_col in df.columns:
-        df[psib_col] = df[sib_col] / df['m_cspd'] * 100
-    if usib_col in df.columns:
-        df[pusib_col] = df[usib_col] / df['m_cspd'] * 100
+    # if sib_col in df.columns:
+    #     df[psib_col] #= df[sib_col] #/ df['m_cspd'] * 100
+    # if usib_col in df.columns:
+    #     df[pusib_col] #= df[usib_col] #/ df['m_cspd'] * 100
 
 fig, axes = plt.subplots(1, 3, figsize=(7.2, 3))
 for idx, (abbr, title) in enumerate(metrics):
     ax = axes[idx]
-    mean_col = f'm_p{abbr}'
+    mean_col = f'm_{abbr}'
     #lower_col = f'l_{abbr}'
-    #upper_col = f'u_{abbr}'
+    #upper_col = f'u_{abbr}'   
+    print(mean_col)
 
     # Get excluded labels for this plot
     excluded_labels = exclude_map.get(idx, [])
@@ -113,7 +114,7 @@ for idx, (abbr, title) in enumerate(metrics):
 
                 
         # filter your data based on mask (but keep all weeks)
-        data = df[mask & (df['week'] >= 42)].copy()
+        data = df[mask & (df['week'] >= 42) & (df['EVsPerCP'] <= 15)].copy()
 
         # sort by EVsPerCP so the smallest EVsPerCP for each charge_points is kept
         data = data.sort_values(['charge_points', 'EVsPerCP', 'week'])
@@ -165,7 +166,8 @@ for idx, (abbr, title) in enumerate(metrics):
 
         # Plot corresponding unsuccessful behavior
         unsuccess_abbr, _ = metrics2[idx]
-        unsuccess_mean_col = f'm_p{unsuccess_abbr}'
+        unsuccess_mean_col = f'm_{unsuccess_abbr}'
+        print(unsuccess_mean_col)
 
         # compute mean for unsuccessful column
         data_mean_unsuccess = (
@@ -192,7 +194,7 @@ for idx, (abbr, title) in enumerate(metrics):
     ax.set_ylabel(None)
     ax.tick_params(axis='both', labelsize=8)
     ax.set_xticks([5, 10, 15]) 
-    ax.set_yticks([0, 10, 20, 30, 40, 50, 60, 70])#, 15, 20, 25, 30])
+    ax.set_yticks([0, 10, 20, 30, 40, 50])#, 15, 20, 25, 30])
 
  # --- Control decimal places on y-axis ---
     # if idx == 0:
@@ -238,11 +240,11 @@ if handles:
                bbox_to_anchor=(0.5, -0.05),  # put it below the plots
                fontsize=8)
 
-fig.suptitle("Occurance behaviors (% of charging sessions)", fontsize=9)
-fig.subplots_adjust(bottom=0.24, top=0.8, wspace=0.35)
+fig.suptitle("Occurance behaviors (avg per week)", fontsize=9)
+fig.subplots_adjust(bottom=0.24, top=0.8, wspace=0.3)
 
 # --- Save with tight bounding box ---
-fig.savefig('plot_behaviour_occurance_EVsPerCP.pdf', bbox_inches='tight')
+#fig.savefig('plot_behaviour_occurance_EVsPerCP.pdf', bbox_inches='tight')
 fig.savefig('plot_behaviour_occurance_EVsPerCP.png', bbox_inches='tight', dpi=300)
 
 plt.show()

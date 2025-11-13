@@ -336,7 +336,7 @@ c_colorPalette.add(new Color(0xD68910));   // Amber
 double f_storeMCArrays()
 {/*ALCODESTART::1755183120871*/
 Main m = mains.get(0);
-
+/*
 c_succesRate_b1_MC.add(f_dailyToWeekly(m.ar_successRate_b1));
 c_succesRate_b2_MC.add(f_dailyToWeekly(m.ar_successRate_b2));
 c_succesRate_b3_MC.add(f_dailyToWeekly(m.ar_successRate_b3));
@@ -350,6 +350,23 @@ c_PSI_MC.add(f_dailyToWeekly(m.ar_avgPSI));
 c_norm1_MC.add(f_dailyToWeekly(m.ar_avgNorm_b1));
 c_norm2_MC.add(f_dailyToWeekly(m.ar_avgNorm_b2));
 c_norm3_MC.add(f_dailyToWeekly(m.ar_avgNorm_b3));
+*/
+
+c_succesRate_b1_MC.add(m.ar_successRate_b1.clone());
+c_succesRate_b2_MC.add(m.ar_successRate_b2.clone());
+c_succesRate_b3_MC.add(m.ar_successRate_b3.clone());
+c_avgProb_b1_MC.add(m.ar_avgProbability_b1.clone());
+c_avgProb_b2_MC.add(m.ar_avgProbability_b2.clone());
+c_avgProb_b3_MC.add(m.ar_avgProbability_b3.clone());
+
+c_PCP_MC.add(m.ar_avgPCP.clone());
+c_RC_MC.add(m.ar_avgRC.clone());
+c_PSI_MC.add(m.ar_avgPSI.clone());
+c_norm1_MC.add(m.ar_avgNorm_b1.clone());
+c_norm2_MC.add(m.ar_avgNorm_b2.clone());
+c_norm3_MC.add(m.ar_avgNorm_b3.clone());
+
+//traceln("last point avg norm B3 = " + c_norm3_MC.get(c_norm3_MC.size() - 1)[c_norm3_MC.get(c_norm3_MC.size() - 1).length -1] + " and of ar = " + m.ar_avgNorm_b3[m.ar_avgNorm_b3.length - 1]);
 
 c_kmDrivenPerWeek.add(m.ar_kmDrivenPerWeek.clone());
 
@@ -732,11 +749,9 @@ results.setNorm1(uncertaintyBounds_norm1);
 results.setNorm2(uncertaintyBounds_norm2);
 results.setNorm3(uncertaintyBounds_norm3);
 
-
-
-
-
-
+/*double meanNorm3 = results.getNorm3().get(0)[results.getNorm3().get(0).length-1];
+traceln(meanNorm3 + " b3 last timepoint written to results");
+*/
 c_MCResults.add(results);
 
 
@@ -819,6 +834,14 @@ c_b2Unsuccessful_perWeek.clear();
 c_b3Unsuccessful_perWeek.clear();
 
 c_kmDrivenPerWeek.clear();
+c_tripsPerWeek.clear();
+
+c_PCP_MC.clear();
+c_RC_MC.clear();
+c_PSI_MC.clear();
+c_norm1_MC.clear();
+c_norm2_MC.clear();
+c_norm3_MC.clear();
 
 for(J_MCResult rs : c_MCResults){
 	rs.clear();

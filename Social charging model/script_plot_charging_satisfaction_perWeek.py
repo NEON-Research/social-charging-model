@@ -27,7 +27,9 @@ df = pd.read_excel(excel_file, sheet_name=1)
 
 # --- Create subplots: one per EVsPerCP value ---
 EV_values = [5, 10, 14]
-fig, axes = plt.subplots(1, len(EV_values), figsize=(10, 4), sharey=True)
+width = 15.92 / 2.52 # width word cm to inch
+height = width * (3 / 7)  # maintain aspect ratio
+fig, axes = plt.subplots(1, len(EV_values), figsize=(width, height), sharey=True)
 
 for ax_i, (ax, ev_value) in enumerate(zip(axes, EV_values)):
     for sel in subselection1:
@@ -64,13 +66,13 @@ for ax_i, (ax, ev_value) in enumerate(zip(axes, EV_values)):
         if ev_value == 14:
             title_value += 1
         
-    ax.set_title(f'{title_value} EVs per CP', fontsize=9, pad=10)
+    ax.set_title(f'{title_value} EVs per CP', fontsize=8, pad=10)
     ax.set_xlabel('Week', fontsize=8)
-    ax.tick_params(axis='both', labelsize=8)
+    ax.tick_params(axis='both', labelsize=7, labelleft=True)
 
 # Shared labels and legend
-axes[0].set_ylabel('Charging Satisfaction (%)', fontsize=9)
-fig.suptitle('Charging fulfillment ratio\n(% of required charging sessions fulfilled)', fontsize=10, y=1.02)
+#axes[0].set_ylabel('Charging Satisfaction (%)', fontsize=9)
+fig.suptitle('Charging fulfillment ratio\n(% of required charging sessions fulfilled)', fontsize=9, y=1.02)
 
 # --- Legend and layout ---
 fig.legend(loc='lower center',
@@ -79,10 +81,11 @@ fig.legend(loc='lower center',
            bbox_to_anchor=(0.5, -0.05),
            fontsize=8)
 
-fig.subplots_adjust(bottom=0.2)
+
+fig.subplots_adjust(bottom=0.24, top=0.8, wspace=0.3)
 
 # --- Save plot ---
-fig.savefig('plot_charging_satisfaction_perWeek_threeSubplots.pdf', bbox_inches='tight')
+#fig.savefig('plot_charging_satisfaction_perWeek_threeSubplots.pdf', bbox_inches='tight')
 fig.savefig('plot_charging_satisfaction_perWeek_threeSubplots.png', bbox_inches='tight', dpi=300)
 
 

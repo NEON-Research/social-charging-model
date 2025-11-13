@@ -54,7 +54,7 @@
 		<ShowLegend>true</ShowLegend>
 		<TimeWindowsMovementType>MOVEMENT_WITH_TIME</TimeWindowsMovementType>
 		<TimeWindowUnits>MODEL_TIME_UNIT</TimeWindowUnits>
-		<TimeWindowExpression>p_nbOfTimesteps</TimeWindowExpression>
+		<TimeWindowExpression>96*14</TimeWindowExpression>
 		<SamplesToKeep>35040</SamplesToKeep>
 		<VerScaleToExpression>1</VerScaleToExpression>
 		<VerScaleType>AUTO</VerScaleType>
@@ -3491,7 +3491,7 @@ f_cleanUp();</ActionCode>
 		<DrawLine>true</DrawLine>
 		<Interpolation>LINEAR</Interpolation>
 		<SamplesToKeep>100</SamplesToKeep>
-		<TimeWindowExpression>p_days</TimeWindowExpression>
+		<TimeWindowExpression>p_days/7</TimeWindowExpression>
 		<FillAreaUnderLine>false</FillAreaUnderLine>
 		<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
 	</TimePlot>

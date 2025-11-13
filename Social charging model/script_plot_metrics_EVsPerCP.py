@@ -8,7 +8,7 @@ df = pd.read_excel(excel_file, sheet_name=1)
 subselection = [
     {'b1': True, 'b2': True, 'b3': True, 'b4': False, 'EVsPerCP': 5,  'color': 'tab:blue',  'label': 'All behaviors (5 EVs/CP)'},
     {'b1': True, 'b2': True, 'b3': True, 'b4': False, 'EVsPerCP': 10, 'color': 'tab:orange','label': 'All behaviors (10 EVs/CP)'},
-    {'b1': True, 'b2': True, 'b3': True, 'b4': False, 'EVsPerCP': 19, 'color': 'tab:green', 'label': 'All behaviors (20 EVs/CP)'}
+    {'b1': True, 'b2': True, 'b3': True, 'b4': False, 'EVsPerCP': 14, 'color': 'tab:green', 'label': 'All behaviors (15 EVs/CP)'}
 ]
 
 # Metrics to plot as lines
@@ -22,7 +22,9 @@ metrics = [
 ]
 
 # --- Create subplots ---
-fig, axes = plt.subplots(1, 3, figsize=(7.5, 3), sharey=True)
+width = 15.92 / 2.52 # width word cm to inch
+height = width * (3 / 7)  # maintain aspect ratio
+fig, axes = plt.subplots(1, 3, figsize=(width, height))
 
 for idx, sel in enumerate(subselection):
     ax = axes[idx]
@@ -48,16 +50,11 @@ for idx, sel in enumerate(subselection):
         abbr_metric = f"m_{met['met']}"
         if abbr_metric not in data.columns:
             continue
-
-        # Aggregate per week (mean over charge_points)
-        data_mean = (
-            data.groupby('week', as_index=False)
-            .agg({abbr_metric: 'mean'})
-        )
-
+        
+        #data_metric = data[abbr_metric]
         ax.plot(
-            data_mean['week'],
-            data_mean[abbr_metric],
+            data['week'],
+            data[abbr_metric],
             label=met['label'],
             linewidth=1.8
         )
@@ -67,7 +64,7 @@ for idx, sel in enumerate(subselection):
     ax.set_xlabel('Week', fontsize=8)
     ax.set_ylim(0, 1)
     ax.tick_params(axis='both', labelsize=7)
-    ax.set_xlim(data_mean['week'].min(), data_mean['week'].max())
+    ax.set_xlim(data['week'].min(), data['week'].max())
 
 axes[0].set_ylabel('Metric value', fontsize=8)
 
@@ -90,8 +87,8 @@ fig.legend(
 )
 
 # Layout
-fig.subplots_adjust(bottom=0.25, wspace=0.3)
-plt.tight_layout()
+fig.suptitle("Learning in average behavioral characteristics", fontsize=9)
+fig.subplots_adjust(bottom=0.24, top=0.8, wspace=0.3)
 
 # Save and show
 fig.savefig('plot_metrics_EVsPerCP.png', bbox_inches='tight', dpi=300)

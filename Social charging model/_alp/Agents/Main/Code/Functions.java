@@ -235,27 +235,27 @@ ar_EVsParkedAtCPCharging[v_timestep] = EVsParkedAtCPCharging;
 ar_EVsParkedAtCPIdle[v_timestep] = EVsParkedAtCPIdle;
 
 //Once per day
-if(v_timestep % 96 == 0){
+if(v_timestep % (96 * 7) == 0){
 //Norms, trust, PSI
-	ar_avgNorms[v_day] = f_convertStandardizedToProb(avgNorms, mean_norms, sd_norms, true);
-	ar_avgRC[v_day] = f_convertStandardizedToProb(avgRC, mean_rc, sd_rc, true);
-	ar_avgPSI[v_day] = f_convertStandardizedToProb(avgPSI, mean_psi, sd_psi, true);
-	ar_avgPCP[v_day] = f_convertStandardizedToProb(v_avgPCP, mean_pcp, sd_pcp, true);
+	ar_avgNorms[v_week] = f_convertStandardizedToProb(avgNorms, mean_norms, sd_norms, true);
+	ar_avgRC[v_week] = f_convertStandardizedToProb(avgRC, mean_rc, sd_rc, true);
+	ar_avgPSI[v_week] = f_convertStandardizedToProb(avgPSI, mean_psi, sd_psi, true);
+	ar_avgPCP[v_week] = f_convertStandardizedToProb(v_avgPCP, mean_pcp, sd_pcp, true);
 	
-	ar_avgNorm_b1[v_day] = f_convertStandardizedToProb(v_avgNorm_b1, mean_b1, sd_b1, true);
-	ar_avgNorm_b2[v_day] = f_convertStandardizedToProb(v_avgNorm_b2, mean_b2, sd_b2, false);
-	ar_avgNorm_b3[v_day] = f_convertStandardizedToProb(v_avgNorm_b3, mean_b3, sd_b3, false);
+	ar_avgNorm_b1[v_week] = f_convertStandardizedToProb(v_avgNorm_b1, mean_b1, sd_b1, true);
+	ar_avgNorm_b2[v_week] = f_convertStandardizedToProb(v_avgNorm_b2, mean_b2, sd_b2, false);
+	ar_avgNorm_b3[v_week] = f_convertStandardizedToProb(v_avgNorm_b3, mean_b3, sd_b3, false);
 	
 	//Success Rates
-	ar_successRate_b1[v_day] = successRate_b1;
-	ar_successRate_b2[v_day] = successRate_b2;
-	ar_successRate_b3[v_day] = successRate_b3;
-	ar_successRate_rechecks[v_day] = successRate_rechecks;
+	ar_successRate_b1[v_week] = successRate_b1;
+	ar_successRate_b2[v_week] = successRate_b2;
+	ar_successRate_b3[v_week] = successRate_b3;
+	ar_successRate_rechecks[v_week] = successRate_rechecks;
 	
 	//Probabilities
-	ar_avgProbability_b1[v_day] = avgProb_b1;
-	ar_avgProbability_b2[v_day] = avgProb_b2;
-	ar_avgProbability_b3[v_day] = avgProb_b3;
+	ar_avgProbability_b1[v_week] = avgProb_b1;
+	ar_avgProbability_b2[v_week] = avgProb_b2;
+	ar_avgProbability_b3[v_week] = avgProb_b3;
 	
 	//Success/Not success
 	/*
@@ -344,12 +344,28 @@ double f_updateChart()
 {/*ALCODESTART::1746089953946*/
 // Count EVs chart
 ch_countEVs.removeAll();
-ch_countEVs.addDataSet(f_arrayToDataSet(ar_carsOnTrip), "Cars on trip", coral);
-ch_countEVs.addDataSet(f_arrayToDataSet(ar_ICECarsParkedNonCP), "ICE cars parked", darkKhaki);
-ch_countEVs.addDataSet(f_arrayToDataSet(ar_EVsParkedNonCPChargingNotRequired), "EVs parked not at charge point charging not required", limeGreen);
-ch_countEVs.addDataSet(f_arrayToDataSet(ar_EVsParkedNonCPChargingRequired), "EVs parked not at charge point charging required", slateGray);
-ch_countEVs.addDataSet(f_arrayToDataSet(ar_EVsParkedAtCPCharging), "EVs parked at charge point and charging", darkMagenta);
-ch_countEVs.addDataSet(f_arrayToDataSet(ar_EVsParkedAtCPIdle), "EVs parked at charge point and idle", orange);
+
+int samplesPerDay = 24 * 4;
+int twoWeeksSamples = 14 * samplesPerDay;
+
+// ensure we don’t go below 0
+int startIndex = Math.max(0, ar_carsOnTrip.length - twoWeeksSamples);
+
+// get last two weeks
+double[] ar_carsOnTrip_ltw = Arrays.copyOfRange(ar_carsOnTrip, startIndex, ar_carsOnTrip.length);
+double[] ar_ICECarsParkedNonCP_ltw = Arrays.copyOfRange(ar_ICECarsParkedNonCP, startIndex, ar_ICECarsParkedNonCP.length);
+double[] ar_EVsParkedNonCPChargingNotRequired_ltw = Arrays.copyOfRange(ar_EVsParkedNonCPChargingNotRequired, startIndex, ar_EVsParkedNonCPChargingNotRequired.length);
+double[] ar_EVsParkedNonCPChargingRequired_ltw = Arrays.copyOfRange(ar_EVsParkedNonCPChargingRequired, startIndex, ar_EVsParkedNonCPChargingRequired.length);
+double[] ar_EVsParkedAtCPCharging_ltw = Arrays.copyOfRange(ar_EVsParkedAtCPCharging, startIndex, ar_EVsParkedAtCPCharging.length);
+double[] ar_EVsParkedAtCPIdle_ltw = Arrays.copyOfRange(ar_EVsParkedAtCPIdle, startIndex, ar_EVsParkedAtCPIdle.length);
+
+
+ch_countEVs.addDataSet(f_arrayToDataSet(ar_carsOnTrip_ltw), "Cars on trip", coral);
+ch_countEVs.addDataSet(f_arrayToDataSet(ar_ICECarsParkedNonCP_ltw), "ICE cars parked", darkKhaki);
+ch_countEVs.addDataSet(f_arrayToDataSet(ar_EVsParkedNonCPChargingNotRequired_ltw), "EVs parked not at charge point charging not required", limeGreen);
+ch_countEVs.addDataSet(f_arrayToDataSet(ar_EVsParkedNonCPChargingRequired_ltw), "EVs parked not at charge point charging required", slateGray);
+ch_countEVs.addDataSet(f_arrayToDataSet(ar_EVsParkedAtCPCharging_ltw), "EVs parked at charge point and charging", darkMagenta);
+ch_countEVs.addDataSet(f_arrayToDataSet(ar_EVsParkedAtCPIdle_ltw), "EVs parked at charge point and idle", orange);
 
 // Charge points chart
 ch_countCPs.removeAll();
@@ -1391,6 +1407,9 @@ count_b1ExtendedTriggered = 0;
 b3Triggered = 0;
 leftCP = 0;
 connectedToCP = 0;
+countOOMCTo100 = 0;
+
+totalElecChargedAfterB3 = 0;
 /*ALCODEEND*/}
 
 double f_setArrays()
@@ -1420,25 +1439,25 @@ ar_CPOccupied = new double[p_nbOfTimesteps];
 ar_CPAvailable = new double[p_nbOfTimesteps];
 
 // Socio-psychological data
-ar_avgNorms = new double[p_days];
-ar_avgRC = new double[p_days];
-ar_avgPSI = new double[p_days];
-ar_avgPCP = new double[p_days];
+ar_avgNorms = new double[weeks];
+ar_avgRC = new double[weeks];
+ar_avgPSI = new double[weeks];
+ar_avgPCP = new double[weeks];
 
-ar_avgNorm_b1 = new double[p_days];
-ar_avgNorm_b2 = new double[p_days];
-ar_avgNorm_b3 = new double[p_days];
+ar_avgNorm_b1 = new double[weeks];
+ar_avgNorm_b2 = new double[weeks];
+ar_avgNorm_b3 = new double[weeks];
 
 // Success rates
-ar_successRate_b1 = new double[p_days];
-ar_successRate_b2 = new double[p_days];
-ar_successRate_b3 = new double[p_days];
-ar_successRate_rechecks = new double[p_days];
+ar_successRate_b1 = new double[weeks];
+ar_successRate_b2 = new double[weeks];
+ar_successRate_b3 = new double[weeks];
+ar_successRate_rechecks = new double[weeks];
 
 // Probabilities
-ar_avgProbability_b1 = new double[p_days];
-ar_avgProbability_b2 = new double[p_days];
-ar_avgProbability_b3 = new double[p_days];
+ar_avgProbability_b1 = new double[weeks];
+ar_avgProbability_b2 = new double[weeks];
+ar_avgProbability_b3 = new double[weeks];
 
 // Successful & unsuccessful counts
 ar_successful_b1 = new double[weeks];

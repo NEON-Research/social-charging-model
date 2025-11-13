@@ -13,6 +13,10 @@ if(v_chargePoint != null && v_status == PARKED_CHARGE_POINT_CHARGING){
         double actualCharge = Math.min(charge_kWhperTimestep, needed_kWh);
         v_electricityInBattery_kWh += actualCharge;
         v_totalElectricityCharged_kWh += actualCharge;
+        
+        if(v_delayedChargePointAccess == true){
+        	main.totalElecChargedAfterB3 += actualCharge;
+        }
     }
 
     // Always update SOC
@@ -43,9 +47,10 @@ v_electricityInBattery_kWh -= electricityConsumed_kWh;
 
 if(v_electricityInBattery_kWh < 0){ //if on-route below 0 soc
 	double chargeToPercentage = 0.1; //If regular fast charging on route required to 0.1, if often out of model charging because shortage in CPs charge in other neighbrohood to 100
-	if( v_leftUnchargedStreak > 2 ){
+	if( v_leftUnchargedStreak >= 3 ){
 		chargeToPercentage = 1;
 		v_leftUnchargedStreak = 0;
+		main.countOOMCTo100++;
 		//traceln("out of model charge to 100% for EV " + this.getIndex());
 	}
 	
@@ -266,8 +271,13 @@ if( actBehavior && EVsAwaitingCP > 0 ){
 	EVNotified.f_connectToCP(chargePoint);
 	EVNotified.v_delayedChargePointAccess = true;
 	
+	
 	count_b3_successful++;
 	behaviorSuccess = true;
+	successfulB3 = true;
+	if(chargePoint == null){
+		traceln("CP at B3 is null");
+	}
 }
 else {
 	count_b3_notSuccessful++;

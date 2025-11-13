@@ -99,6 +99,9 @@ if (this instanceof EVOwner) {
     }
     //Leave CP
     if(v_chargePoint != null){
+    	if(v_status != PARKED_CHARGE_POINT_CHARGING && v_status != PARKED_CHARGE_POINT_IDLE){
+    		traceln("Error at EV " + this.getIndex() + " has v_chargePoint when going on trip but no corresponding status");
+    	}
     	((EVOwner) this).f_leaveChargePoint(false);
     }
     if (b1_extended){
