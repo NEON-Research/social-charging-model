@@ -662,13 +662,16 @@ x.v_prob_b3 = f_convertStandardizedToProb(x.v_stand_prob_b3, mean_b3, sd_b3, fal
 
 x.v_type = EV;
 f_initializeTrips(x);
-    
+
+/*
 int minBatteryCap_kWh = 50;
 int maxBatteryCap_kWh = 80;
 int meanBatteryCap_kWh = 65;
 int spread = 5;
-    
-x.v_batteryCapacity_kWh = normal(minBatteryCap_kWh, maxBatteryCap_kWh, meanBatteryCap_kWh, spread);
+*/
+
+x.v_batteryCapacity_kWh = uniform_discr(50, 100);
+x.v_elecCons_kWhperKm = uniform_discr(136, 246) / 1000.0; //https://ev-database.org/cheatsheet/energy-consumption-electric-car
 //double randomShare = normal(0.25, 1, 0.7, 0.2); // normal distribution of energy in battery at start
 double randomShare = uniform(0.25,1);
 x.v_electricityInBattery_kWh = x.v_batteryCapacity_kWh * randomShare;

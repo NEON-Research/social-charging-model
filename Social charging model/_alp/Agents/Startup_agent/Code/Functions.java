@@ -619,43 +619,52 @@ for(J_MCResult r : c_MCResults){
 excel_exportResults.writeFile();
 /*ALCODEEND*/}
 
-ArrayList<double[]> f_getUncertaintyBounds(ArrayList<double[]> resultsCollection)
+Map<String, double[]> f_getUncertaintyBoundsMap(ArrayList<double[]> resultsCollection)
 {/*ALCODESTART::1755521234175*/
 int nTimePoints = resultsCollection.get(0).length;
 int nRuns = resultsCollection.size();
 
-//double[] mean = new double[nTimePoints];
-//double[] lower = new double[nTimePoints];
-//double[] upper = new double[nTimePoints];
-
-ArrayList<double[]> resultsList = new ArrayList<>();
-//Mean
-resultsList.add(new double[nTimePoints]);
-//Lower
-resultsList.add(new double[nTimePoints]);
-//Upper
-resultsList.add(new double[nTimePoints]);
+// Prepare arrays for mean and intervals
+double[] mean = new double[nTimePoints];
+double[] lower90 = new double[nTimePoints];
+double[] upper90 = new double[nTimePoints];
+double[] lower80 = new double[nTimePoints];
+double[] upper80 = new double[nTimePoints];
+double[] lower50 = new double[nTimePoints];
+double[] upper50 = new double[nTimePoints];
 
 for (int t = 0; t < nTimePoints; t++) {
-	double[] valuesAtTimeT = new double[nRuns];
-	for (int r = 0; r < nRuns; r++) {
-		valuesAtTimeT[r] = resultsCollection.get(r)[t];
-	}
-	Arrays.sort(valuesAtTimeT);
-	
-	//mean
-	double mean = Arrays.stream(valuesAtTimeT).average().orElse(Double.NaN);
-	
-	// Percentiles (linear interpolation)
-    double lower = f_percentile(valuesAtTimeT, 0.05);
-    double upper = f_percentile(valuesAtTimeT, 0.95);
-    
-    resultsList.get(0)[t] = mean;
-    resultsList.get(1)[t] = lower;
-    resultsList.get(2)[t] = upper;
+    double[] valuesAtTimeT = new double[nRuns];
+    for (int r = 0; r < nRuns; r++) {
+        valuesAtTimeT[r] = resultsCollection.get(r)[t];
+    }
+    Arrays.sort(valuesAtTimeT);
+
+    // Mean
+    mean[t] = Arrays.stream(valuesAtTimeT).average().orElse(Double.NaN);
+
+    // Percentiles
+    lower90[t] = f_percentile(valuesAtTimeT, 0.05);
+    upper90[t] = f_percentile(valuesAtTimeT, 0.95);
+
+    lower80[t] = f_percentile(valuesAtTimeT, 0.10);
+    upper80[t] = f_percentile(valuesAtTimeT, 0.90);
+
+    lower50[t] = f_percentile(valuesAtTimeT, 0.25);
+    upper50[t] = f_percentile(valuesAtTimeT, 0.75);
 }
 
-return resultsList;
+// You can return them in a structured object or list
+Map<String, double[]> resultsMap = new HashMap<>();
+resultsMap.put("mean", mean);
+resultsMap.put("lower90", lower90);
+resultsMap.put("upper90", upper90);
+resultsMap.put("lower80", lower80);
+resultsMap.put("upper80", upper80);
+resultsMap.put("lower50", lower50);
+resultsMap.put("upper50", upper50);
+
+return resultsMap;
 
 /*ALCODEEND*/}
 
@@ -748,6 +757,14 @@ results.setPSI(uncertaintyBounds_psi);
 results.setNorm1(uncertaintyBounds_norm1);
 results.setNorm2(uncertaintyBounds_norm2);
 results.setNorm3(uncertaintyBounds_norm3);
+
+results.setChargingSatisfactionMap(f_getUncertaintyBoundsMap(c_percSatisfiedChargingSessionsPerWeek));
+results.setChargingSessionsMap(f_getUncertaintyBoundsMap(c_chargingSessionsPerWeek));
+results.setRequiredChargingSessionsMap(f_getUncertaintyBoundsMap(c_requiredChargingSessionsPerWeek));
+results.setTripsMap(f_getUncertaintyBoundsMap(c_tripsPerWeek));
+results.setKMDMap(f_getUncertaintyBoundsMap(c_kmDrivenPerWeek));
+
+
 
 /*double meanNorm3 = results.getNorm3().get(0)[results.getNorm3().get(0).length-1];
 traceln(meanNorm3 + " b3 last timepoint written to results");
@@ -1181,7 +1198,7 @@ int scenarioIndex = v_EVsPerCP;
 int rowIndex = f_getTrueLastRow(sheetIndex, excel_exportResultsSensitivity) + 1;
 int nTimePoints = c_succesRate_b1_MC.get(0).length;
 
-for(int run = 0; run < iteration; run++){
+for(int run = 0; run < c_chargingSessionsPerWeek.size() - 1; run++){
 	for(int i = 0; i< nTimePoints; i++){
 		int day = i / 96;
 		
@@ -1218,10 +1235,10 @@ for(int run = 0; run < iteration; run++){
 		//rowIndex++;
 	}
 	
-	int days = c_outOfModelChargingPerWeek.get(0).length;
+	int weeks = c_outOfModelChargingPerWeek.get(0).length;
 	//rowIndex = 2;
 	rowIndex = f_getTrueLastRow(sheetIndexPerDay, excel_exportResultsSensitivity) + 1;
-	for( int i = 0; i < days; i++ ){
+	for( int i = 0; i < weeks; i++ ){
 			
 		excel_exportResultsSensitivity.setCellValue(scenarioIndex, sheetIndexPerDay, rowIndex, 1);
 		excel_exportResultsSensitivity.setCellValue(run, sheetIndexPerDay, rowIndex, 2);
@@ -1234,6 +1251,10 @@ for(int run = 0; run < iteration; run++){
 		excel_exportResultsSensitivity.setCellValue(c_percSatisfiedChargingSessionsPerWeek.get(run)[i], sheetIndexPerDay, rowIndex, 8);
 		excel_exportResultsSensitivity.setCellValue(c_chargingSessionsPerWeek.get(run)[i], sheetIndexPerDay, rowIndex, 9);	
 		excel_exportResultsSensitivity.setCellValue(c_requiredChargingSessionsPerWeek.get(run)[i], sheetIndexPerDay, rowIndex, 10);
+		excel_exportResultsSensitivity.setCellValue(c_tripsPerWeek.get(run)[i], sheetIndexPerDay, rowIndex, 11);
+		excel_exportResultsSensitivity.setCellValue(c_kmDrivenPerWeek.get(run)[i], sheetIndexPerDay, rowIndex, 12);
+		
+		
 		
 		rowIndex++;
 		
@@ -1253,26 +1274,16 @@ DataSet f_writeBehaviorScenariosToExcel()
 //excel_exportResults.readFile();
 
 
-int sheetIndex = 1;
-int sheetIndexPerWeek = 2;
+//int sheetIndex = 1;
+int sheetIndexPerWeek = 1;
 
 excel_exportResultsBehaviours.readFile();
 
 for(J_MCResult r : c_MCResults){
 
 	int scenarioIndex = r.getScenarioIndex();
-	int rowIndex = f_getTrueLastRow(sheetIndex, excel_exportResultsBehaviours) + 1;
-	int nTimePoints = r.getSuccessRate_b1().get(0).length;
-	
-	
-	for( int t = 0; t < nTimePoints; t++ ){
-		
-		double meanSRB1 = r.getSuccessRate_b1().get(0)[t];
-		double lowerSRB1 = r.getSuccessRate_b1().get(1)[t];
-	}
-	
 	int weeks = r.getOutOfModelChargingPerWeek().get(0).length;
-	rowIndex = f_getTrueLastRow(sheetIndexPerWeek, excel_exportResultsBehaviours) + 1;
+	int rowIndex = f_getTrueLastRow(sheetIndexPerWeek, excel_exportResultsBehaviours) + 1;
 	for( int t = 0; t < weeks; t++ ){
 		
 		double meanOoMC = r.getOutOfModelChargingPerWeek().get(0)[t];
@@ -1484,8 +1495,7 @@ for(J_MCResult r : c_MCResults){
 		
 		excel_exportResultsBehaviours.setCellValue(meanNorm3, sheetIndexPerWeek, rowIndex, 78);
 		excel_exportResultsBehaviours.setCellValue(lowerNorm3, sheetIndexPerWeek, rowIndex, 79);
-		excel_exportResultsBehaviours.setCellValue(upperNorm3, sheetIndexPerWeek, rowIndex, 80);
-			
+		excel_exportResultsBehaviours.setCellValue(upperNorm3, sheetIndexPerWeek, rowIndex, 80);			
 				
 		excel_exportResultsBehaviours.setCellValue(r.getB1(), sheetIndexPerWeek, rowIndex, 81);
 		excel_exportResultsBehaviours.setCellValue(r.getB2(), sheetIndexPerWeek, rowIndex, 82);
@@ -1494,6 +1504,42 @@ for(J_MCResult r : c_MCResults){
 		excel_exportResultsBehaviours.setCellValue(r.getEVsPerCP(), sheetIndexPerWeek, rowIndex, 85);
 		excel_exportResultsBehaviours.setCellValue(roundToInt(100/r.getEVsPerCP()), sheetIndexPerWeek, rowIndex, 86);
 		
+		int columnIndex = 87;
+		exportUncertaintyBoundsToExcel(
+			r.getChargingSatisfactionMap(),
+			t,
+		    sheetIndexPerWeek,
+		    rowIndex,
+		    columnIndex);
+		columnIndex += 7;
+		exportUncertaintyBoundsToExcel(
+			r.getChargingSessionsMap(),
+			t,
+		    sheetIndexPerWeek,
+		    rowIndex,
+		    columnIndex);
+		columnIndex += 7;
+		exportUncertaintyBoundsToExcel(
+			r.getRequiredChargingSessionsMap(),
+			t,
+		    sheetIndexPerWeek,
+		    rowIndex,
+		    columnIndex);
+		columnIndex += 7;
+		exportUncertaintyBoundsToExcel(
+			r.getTripsMap(),
+			t,
+		    sheetIndexPerWeek,
+		    rowIndex,
+		    columnIndex);
+		columnIndex += 7;
+		exportUncertaintyBoundsToExcel(
+			r.getKMDMap(),
+			t,
+		    sheetIndexPerWeek,
+		    rowIndex,
+		    columnIndex);
+		columnIndex += 7;
 		rowIndex++;
 	}	
 }
@@ -1532,7 +1578,8 @@ double rank = p * (sorted.length - 1);
 int low = (int) Math.floor(rank);
 int high = (int) Math.ceil(rank);
 if (high == low) return sorted[low];
-return sorted[low] + (rank - low) * (sorted[high] - sorted[low]);
+double val = sorted[low] + (rank - low) * (sorted[high] - sorted[low]);
+return roundToDecimal(val, 2);
 /*ALCODEEND*/}
 
 double[] f_dailyToWeekly(double[] dailyArray)
@@ -1547,6 +1594,73 @@ for(int i = 0; i<weeks; i++){
 }
 
 return weeklyArray;
+
+/*ALCODEEND*/}
+
+ArrayList<double[]> f_getUncertaintyBounds(ArrayList<double[]> resultsCollection)
+{/*ALCODESTART::1764002698969*/
+int nTimePoints = resultsCollection.get(0).length;
+int nRuns = resultsCollection.size();
+
+//double[] mean = new double[nTimePoints];
+//double[] lower = new double[nTimePoints];
+//double[] upper = new double[nTimePoints];
+
+ArrayList<double[]> resultsList = new ArrayList<>();
+//Mean
+resultsList.add(new double[nTimePoints]);
+//Lower
+resultsList.add(new double[nTimePoints]);
+//Upper
+resultsList.add(new double[nTimePoints]);
+
+for (int t = 0; t < nTimePoints; t++) {
+	double[] valuesAtTimeT = new double[nRuns];
+	for (int r = 0; r < nRuns; r++) {
+		valuesAtTimeT[r] = resultsCollection.get(r)[t];
+	}
+	Arrays.sort(valuesAtTimeT);
+	
+	//mean
+	double mean = Arrays.stream(valuesAtTimeT).average().orElse(Double.NaN);
+	
+	// Percentiles (linear interpolation)
+    double lower = f_percentile(valuesAtTimeT, 0.05);
+    double upper = f_percentile(valuesAtTimeT, 0.95);
+    
+    resultsList.get(0)[t] = mean;
+    resultsList.get(1)[t] = lower;
+    resultsList.get(2)[t] = upper;
+}
+
+return resultsList;
+/*ALCODEEND*/}
+
+double exportUncertaintyBoundsToExcel(Map<String, double[]> resultsMap,int weekIndex,int sheetIndex,int rowIndex,int startColumn)
+{/*ALCODESTART::1764004296168*/
+/**
+ * Exports all uncertainty bounds from a given map to Excel.
+ *
+ * @param excelExporter   Your Excel export utility instance
+ * @param resultsMap      Map<String, double[]> containing mean and bounds
+ * @param sheetIndex      Excel sheet index
+ * @param rowIndex        Row index to start writing
+ * @param startColumn     Column index to start writing
+ */
+
+// Define the order of keys to export
+String[] keys = {"mean", "lower90", "upper90", "lower80", "upper80", "lower50", "upper50"};
+
+for (int i = 0; i < keys.length; i++) {
+	double[] values = resultsMap.get(keys[i]);
+	
+	if (values != null) {
+		excel_exportResultsBehaviours.setCellValue(values[weekIndex], sheetIndex, rowIndex, startColumn + i);
+	} else {
+		traceln("Not a number");
+		excel_exportResultsBehaviours.setCellValue(0, sheetIndex, rowIndex, startColumn + i);
+	}
+}
 
 /*ALCODEEND*/}
 

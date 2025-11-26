@@ -68,6 +68,12 @@ public class J_MCResult {
 	ArrayList<double[]> norm2_perWeek;		
 	ArrayList<double[]> norm3_perWeek;
 	
+	Map<String, double[]> chargingSatisfactionMap;
+	Map<String, double[]> chargingSessionsMap;
+	Map<String, double[]> requiredChargingSessionsMap;
+	Map<String, double[]> tripsMap;
+	Map<String, double[]> kmDrivenMap;
+	
 	int window = 14;
 	int days;
 	
@@ -229,6 +235,29 @@ public class J_MCResult {
     public ArrayList<double[]> getNorm3() {
         return norm3_perWeek;
     }
+    
+    public Map<String, double[]> getChargingSatisfactionMap() {
+        return this.chargingSatisfactionMap;
+    }
+
+    public Map<String, double[]> getChargingSessionsMap() {
+        return this.chargingSessionsMap;
+    }
+
+    public Map<String, double[]> getRequiredChargingSessionsMap() {
+        return this.requiredChargingSessionsMap;
+    }
+
+    public Map<String, double[]> getTripsMap() {
+        return this.tripsMap;
+    }
+
+    public Map<String, double[]> getKMDMap() {
+        return this.kmDrivenMap;
+    }
+    
+    
+    
     
     // --- Setters ---
     public void setIterations(int iterations) {
@@ -449,8 +478,25 @@ public class J_MCResult {
 
     public void setTripsPerWeek(ArrayList<double[]> tripsPerWeek) {
         this.tripsPerWeek = tripsPerWeek;
-    }    
-
+    }
+    
+    public void setChargingSatisfactionMap(Map<String, double[]> resultsMap) {
+    	this.chargingSatisfactionMap = resultsMap;
+    }
+    public void setChargingSessionsMap(Map<String, double[]> resultsMap) {
+    	this.chargingSessionsMap = resultsMap;
+    }
+    public void setRequiredChargingSessionsMap(Map<String, double[]> resultsMap) {
+    	this.requiredChargingSessionsMap = resultsMap;
+    }
+    public void setTripsMap(Map<String, double[]> resultsMap) {
+    	this.tripsMap = resultsMap;
+    }
+    public void setKMDMap(Map<String, double[]> resultsMap) {
+    	this.kmDrivenMap = resultsMap;
+    }
+    
+    
        
     
     public ArrayList<double[]> getRollingAverage(int window, int days, ArrayList<double[]> timeseriesStats) {

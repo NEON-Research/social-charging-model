@@ -159,9 +159,9 @@
 	</Function>
 	<Function AccessType="default" StaticFunction="false">
 		<ReturnModificator>RETURNS_VALUE</ReturnModificator>
-		<ReturnType>ArrayList&lt;double[]&gt;</ReturnType>
+		<ReturnType>Map&lt;String, double[]&gt;</ReturnType>
 		<Id>1755521234175</Id>
-		<Name><![CDATA[f_getUncertaintyBounds]]></Name>
+		<Name><![CDATA[f_getUncertaintyBoundsMap]]></Name>
 		<X>-210</X>
 		<Y>1160</Y>
 		<Label>
@@ -497,6 +497,62 @@
 		<Parameter>
 			<Name><![CDATA[dailyArray]]></Name>
 			<Type><![CDATA[double[]]]></Type>
+		</Parameter>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+		<ReturnType>ArrayList&lt;double[]&gt;</ReturnType>
+		<Id>1764002698969</Id>
+		<Name><![CDATA[f_getUncertaintyBounds]]></Name>
+		<X>-210</X>
+		<Y>1140</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Parameter>
+			<Name><![CDATA[resultsCollection]]></Name>
+			<Type><![CDATA[ArrayList<double[]>]]></Type>
+		</Parameter>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>VOID</ReturnModificator>
+		<ReturnType>double</ReturnType>
+		<Id>1764004296168</Id>
+		<Name><![CDATA[exportUncertaintyBoundsToExcel]]></Name>
+		<X>-380</X>
+		<Y>1530</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Parameter>
+			<Name><![CDATA[resultsMap]]></Name>
+			<Type><![CDATA[Map<String, double[]>]]></Type>
+		</Parameter>
+		<Parameter>
+			<Name><![CDATA[weekIndex]]></Name>
+			<Type><![CDATA[int]]></Type>
+		</Parameter>
+		<Parameter>
+			<Name><![CDATA[sheetIndex]]></Name>
+			<Type><![CDATA[int]]></Type>
+		</Parameter>
+		<Parameter>
+			<Name><![CDATA[rowIndex]]></Name>
+			<Type><![CDATA[int]]></Type>
+		</Parameter>
+		<Parameter>
+			<Name><![CDATA[startColumn]]></Name>
+			<Type><![CDATA[int]]></Type>
 		</Parameter>
 		<Body xmlns:al="http://anylogic.com"/>
 	</Function>

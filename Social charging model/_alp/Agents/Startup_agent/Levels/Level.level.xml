@@ -2961,7 +2961,7 @@ double time = System.currentTimeMillis();
 monteCarlo = true;
 f_clearResultsCollections();
 
-iterations = 1000;
+iterations = 500;
 
 for(int i = 0; i &lt; iterations; i++){
 	f_initializeModel();
@@ -3067,7 +3067,7 @@ double scenTime = time;
 monteCarlo = true;
 f_clearResultsCollections();
 
-iterations = 25;
+iterations = 500;
 //v_EVsPerCP = 10;
 
 
@@ -3123,7 +3123,7 @@ String[] labels = {
 
 
 // Iterate only over these subselections
-for( v_EVsPerCP = 1  ; v_EVsPerCP &lt;= 20; v_EVsPerCP++ ){
+for( v_EVsPerCP = 1  ; v_EVsPerCP &lt;= 3; v_EVsPerCP++ ){
 	int newChargePoints = roundToInt(v_cars * v_shareEVs / v_EVsPerCP);
 	if( newChargePoints != v_chargePoints ){
 		

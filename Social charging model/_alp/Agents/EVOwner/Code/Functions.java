@@ -371,13 +371,11 @@ if (idleCount == 0) {
 	return null;
 }
 
-// Calculate sigmoid-based probability
-/*
-double scale = 2; // Steepness
-double x_shift = 0.6; // Center
-double sigmoid = 1.0 / (1.0 + Math.exp(-scale * (main.successRate_b2 - x_shift)));
-double probability = 0.2 + 0.6 * sigmoid;*/
-double probability = 0.75;
+double sumProb = sumWhere(main.EVOwners, x -> x.v_prob_b2, x -> x.v_status == PARKED_CHARGE_POINT_IDLE);
+//totalProbB2 = 
+double probability = 0.5 + 0.5 * sumProb; //Distribution transpose from 0-1 to 0.5-1, to always have 50% change of positive response
+
+//double probability = 0.75;
 double rand = uniform();
 
 if (rand > probability) {
