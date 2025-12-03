@@ -65,9 +65,9 @@ excel_file = 'SCM_results_behaviours.xlsx'
 df = pd.read_excel(excel_file, sheet_name=0)
 
 metrics = [
-    ('sib1', 'Behavior 1'),
-    ('sib2', 'Behavior 2'),
-    ('sib3', 'Behavior 3'),
+    ('sib1', 'Behaviour 1\n(moving)'),
+    ('sib2', 'Behaviour 2\n(requesting)'),
+    ('sib3', 'Behaviour 3\n(notifying)'),
 ]
 
 metrics2 = [
@@ -151,7 +151,7 @@ for idx, (abbr, title) in enumerate(metrics):
         
                # --- Styling logic ---
         # Plot main behavior
-        success_label = f"{label} successful"
+        success_label = f"{label} success"
         line, = ax.plot(
             data_mean['EVsPerCP'],
             data_mean[mean_col],
@@ -176,7 +176,7 @@ for idx, (abbr, title) in enumerate(metrics):
         )
         data_mean_unsuccess = data_mean_unsuccess.sort_values('EVsPerCP')
         
-        unsuccess_label = f"{label} unsuccessful"
+        unsuccess_label = f"{label} no success"
         line_unsuccess, = ax.plot(
             data_mean_unsuccess['EVsPerCP'],
             data_mean_unsuccess[unsuccess_mean_col],
@@ -207,17 +207,17 @@ for idx, (abbr, title) in enumerate(metrics):
 # Build the combined legend in the desired order
 legend_order = []
 for label in desired_order:
-    legend_order.append(f"{label} successful")
-    legend_order.append(f"{label} unsuccessful")
+    legend_order.append(f"{label} success")
+    legend_order.append(f"{label} no success")
 legend_order = [
-    "B1 successful",
-    "B1 unsuccessful",
-    "B2 successful",
-    "B2 unsuccessful",
-    "B3 successful",
-    "B3 unsuccessful",
-    "All behaviors successful",
-    "All behaviors unsuccessful",  # <-- now directly below
+    "B1 success",
+    "B1 no success",
+    "B2 success",
+    "B2 no success",
+    "B3 success",
+    "B3 no success",
+    "All behaviors success",
+    "All behaviors no success",
 ]
 
 handles = [plot_handles[label] for label in legend_order if label in plot_handles]
@@ -240,8 +240,8 @@ if handles:
                bbox_to_anchor=(0.5, -0.05),  # put it below the plots
                fontsize=8)
 
-fig.suptitle("Occurance behaviors (avg per week)", fontsize=9)
-fig.subplots_adjust(bottom=0.24, top=0.8, wspace=0.3)
+fig.suptitle("Occurance behavioirs (avg per week)", fontsize=9)
+fig.subplots_adjust(bottom=0.24, top=0.78, wspace=0.3)
 
 # --- Save with tight bounding box ---
 #fig.savefig('plot_behaviour_occurance_EVsPerCP.pdf', bbox_inches='tight')

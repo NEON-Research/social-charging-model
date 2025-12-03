@@ -4,21 +4,21 @@ import matplotlib.pyplot as plt
 # Define the behavior scenarios
 subselection1 = [
     {'b1': False, 'b2': False, 'b3': False, 'b4': False,
-     'label': 'No behaviors', 'color': 'tab:blue', 'linestyle': '-', 'marker': 'o'},
+     'label': 'No behaviours', 'color': 'tab:blue', 'linestyle': '-', 'marker': 'o'},
     {'b1': True,  'b2': False, 'b3': False, 'b4': False,
-     'label': 'Behavior 1', 'color': 'tab:green', 'linestyle': '-', 'marker': 'o'},
+     'label': 'B1 (moving)', 'color': 'tab:green', 'linestyle': '-', 'marker': 'o'},
     {'b1': False, 'b2': True,  'b3': False, 'b4': False,
-     'label': 'Behavior 2', 'color': 'tab:red', 'linestyle': '-', 'marker': 'o'},
+     'label': 'B2 (requesting)', 'color': 'tab:red', 'linestyle': '-', 'marker': 'o'},
     {'b1': False, 'b2': False, 'b3': True,  'b4': False,
-     'label': 'Behavior 3', 'color': 'tab:orange', 'linestyle': '-', 'marker': 'o'},
+     'label': 'B3 (notifying)', 'color': 'tab:orange', 'linestyle': '-', 'marker': 'o'},
     {'b1': True,  'b2': True,  'b3': False, 'b4': False,
-     'label': 'Behavior 1 and 2', 'color': 'tab:cyan', 'linestyle': '--', 'marker': 'x'},
+     'label': 'B1 (moving) and B2 (requesting)', 'color': 'tab:cyan', 'linestyle': '--', 'marker': 'x'},
     {'b1': True,  'b2': False, 'b3': True,  'b4': False,
-     'label': 'Behavior 1 and 3', 'color': 'tab:olive', 'linestyle': '--', 'marker': 'x'},
+     'label': 'B1 (moving) and B3 (notifying)', 'color': 'tab:olive', 'linestyle': '--', 'marker': 'x'},
     {'b1': False, 'b2': True,  'b3': True,  'b4': False,
-     'label': 'Behavior 2 and 3', 'color': 'tab:brown', 'linestyle': '--', 'marker': 'x'},
+     'label': 'B2 (requesting) and B3 (notifying)', 'color': 'tab:brown', 'linestyle': '--', 'marker': 'x'},
     {'b1': True,  'b2': True,  'b3': True,  'b4': False,
-     'label': 'All social behaviors', 'color': 'tab:purple', 'linestyle': '-', 'marker': 'o'}
+     'label': 'All behaviours', 'color': 'tab:purple', 'linestyle': '-', 'marker': 'o'}
 ]
 
 # Load data
@@ -26,7 +26,7 @@ excel_file = 'SCM_results_behaviours.xlsx'
 df = pd.read_excel(excel_file, sheet_name=0)
 
 # --- Setup plot ---
-fig, ax = plt.subplots(figsize=(3.3, 3.85))
+fig, ax = plt.subplots(figsize=(3.3, 4.45))
 
 # --- Plot charging satisfaction for each scenario ---
 for sel in subselection1:
@@ -74,12 +74,12 @@ ax.set_xticks([5, 10, 15])
 
 # --- Legend and layout ---
 fig.legend(loc='lower center',
-           ncol=min(len(subselection1), 4),
+           ncol=2,
            frameon=False,
            bbox_to_anchor=(0.5, -0.05),
            fontsize=8)
 
-fig.subplots_adjust(bottom=0.2)
+fig.subplots_adjust(bottom=0.25, top=0.8)
 
 # --- Save plot ---
 fig.savefig('plot_charging_satisfaction_EVsPerCP.png', bbox_inches='tight', dpi=300)
