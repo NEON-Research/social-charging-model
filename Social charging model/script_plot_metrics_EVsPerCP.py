@@ -2,13 +2,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 excel_file = 'SCM_results_behaviours.xlsx'
-df = pd.read_excel(excel_file, sheet_name=1)
+df = pd.read_excel(excel_file, sheet_name=0)
 
 # Define the scenarios for each subplot
 subselection = [
-    {'b1': True, 'b2': True, 'b3': True, 'b4': False, 'EVsPerCP': 5,  'color': 'tab:blue',  'label': 'All behaviors (5 EVs/CP)'},
-    {'b1': True, 'b2': True, 'b3': True, 'b4': False, 'EVsPerCP': 10, 'color': 'tab:orange','label': 'All behaviors (10 EVs/CP)'},
-    {'b1': True, 'b2': True, 'b3': True, 'b4': False, 'EVsPerCP': 14, 'color': 'tab:green', 'label': 'All behaviors (15 EVs/CP)'}
+    {'b1': True, 'b2': True, 'b3': True, 'b4': False, 'EVsPerCP': 5,  'color': 'tab:blue',  'label': '5 EVs per CP'},
+    {'b1': True, 'b2': True, 'b3': True, 'b4': False, 'EVsPerCP': 10, 'color': 'tab:orange','label': '10 EVs per CP'},
+    {'b1': True, 'b2': True, 'b3': True, 'b4': False, 'EVsPerCP': 100/7, 'color': 'tab:green', 'label': '14.3 EVs per CP'}
 ]
 
 # Metrics to plot as lines
@@ -16,14 +16,14 @@ metrics = [
     {'met': 'pcp', 'label': 'Perceived CP pressure'},
     # {'met': 'rc', 'label': 'Reputational concern'},
     {'met': 'psi', 'label': 'Perceived social interdependence'},
-    {'met': 'n1', 'label': 'Norm behavior 1'},
-    {'met': 'n2', 'label': 'Norm behavior 2'},
-    {'met': 'n3', 'label': 'Norm behavior 3'}
+    {'met': 'n1', 'label': 'Norm b1 (moving)'},
+    {'met': 'n2', 'label': 'Norm b2 (requesting)'},
+    {'met': 'n3', 'label': 'Norm b3 (notifying)'}
 ]
 
 # --- Create subplots ---
 width = 15.92 / 2.52 # width word cm to inch
-height = width * (3 / 7)  # maintain aspect ratio
+height = width * (3,7)  # maintain aspect ratio
 fig, axes = plt.subplots(1, 3, figsize=(width, height))
 
 for idx, sel in enumerate(subselection):
@@ -87,9 +87,11 @@ fig.legend(
 )
 
 # Layout
-fig.suptitle("Learning in average behavioral characteristics", fontsize=9)
-fig.subplots_adjust(bottom=0.24, top=0.8, wspace=0.3)
+fig.suptitle("Learning in average behavioural characteristics\n in the 'all behaviours' scenario", fontsize=9)
+fig.subplots_adjust(bottom=0.24, top=0.76, wspace=0.3)
 
 # Save and show
 fig.savefig('plot_metrics_EVsPerCP.png', bbox_inches='tight', dpi=300)
 plt.show()
+
+#test

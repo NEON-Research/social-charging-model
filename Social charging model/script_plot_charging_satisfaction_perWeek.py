@@ -4,31 +4,31 @@ import matplotlib.pyplot as plt
 # Define the behavior scenarios
 subselection1 = [
     {'b1': False, 'b2': False, 'b3': False, 'b4': False,
-     'label': 'No behaviors', 'color': 'tab:blue', 'linestyle': '-'},
+     'label': 'No behaviours', 'color': 'tab:blue', 'linestyle': '-'},
     {'b1': True,  'b2': False, 'b3': False, 'b4': False,
-     'label': 'Behavior 1', 'color': 'tab:green', 'linestyle': '-'},
+     'label': 'Behaviour 1 (moving)', 'color': 'tab:green', 'linestyle': '-'},
     {'b1': False, 'b2': True,  'b3': False, 'b4': False,
-     'label': 'Behavior 2', 'color': 'tab:red', 'linestyle': '-'},
+     'label': 'Behaviour 2 (requesting)', 'color': 'tab:red', 'linestyle': '-'},
     {'b1': False, 'b2': False, 'b3': True,  'b4': False,
-     'label': 'Behavior 3', 'color': 'tab:orange', 'linestyle': '-'},
+     'label': 'Behaviour 3 (notifying)', 'color': 'tab:orange', 'linestyle': '-'},
     {'b1': True,  'b2': True,  'b3': False, 'b4': False,
-     'label': 'Behavior 1 and 2', 'color': 'tab:cyan', 'linestyle': '--'},
+     'label': 'Behaviour 1 (moving) and 2 (requesting)', 'color': 'tab:cyan', 'linestyle': '--'},
     {'b1': True,  'b2': False, 'b3': True,  'b4': False,
-     'label': 'Behavior 1 and 3', 'color': 'tab:olive', 'linestyle': '--'},
+     'label': 'Behaviour 1 (moving) and 3 (notifying)', 'color': 'tab:olive', 'linestyle': '--'},
     {'b1': False, 'b2': True,  'b3': True,  'b4': False,
-     'label': 'Behavior 2 and 3', 'color': 'tab:brown', 'linestyle': '--'},
+     'label': 'Behaviour 2 (requesting) and 3 (notifying)', 'color': 'tab:brown', 'linestyle': '--'},
     {'b1': True,  'b2': True,  'b3': True,  'b4': False,
-     'label': 'All social behaviors', 'color': 'tab:purple', 'linestyle': '-'}
+     'label': 'All behaviours', 'color': 'tab:purple', 'linestyle': '-'}
 ]
 
 # Load data
 excel_file = 'SCM_results_behaviours.xlsx'
-df = pd.read_excel(excel_file, sheet_name=1)
+df = pd.read_excel(excel_file, sheet_name=0)
 
 # --- Create subplots: one per EVsPerCP value ---
-EV_values = [5, 10, 14]
+EV_values = [5, 10, 100/7]  # 14.2857 approximated as 100/7
 width = 15.92 / 2.52 # width word cm to inch
-height = width * (3 / 7)  # maintain aspect ratio
+height = width * (4 / 8)  # maintain aspect ratio
 fig, axes = plt.subplots(1, len(EV_values), figsize=(width, height), sharey=True)
 
 for ax_i, (ax, ev_value) in enumerate(zip(axes, EV_values)):
@@ -62,9 +62,7 @@ for ax_i, (ax, ev_value) in enumerate(zip(axes, EV_values)):
             linewidth=2
         )
 
-        title_value = ev_value
-        if ev_value == 14:
-            title_value += 1
+        title_value = round(ev_value, 1)
         
     ax.set_title(f'{title_value} EVs per CP', fontsize=8, pad=10)
     ax.set_xlabel('Week', fontsize=8)
@@ -76,19 +74,20 @@ fig.suptitle('Charging fulfillment ratio\n(% of required charging sessions fulfi
 
 # --- Legend and layout ---
 fig.legend(loc='lower center',
-           ncol=4,
+           ncol=2,
            frameon=False,
            bbox_to_anchor=(0.5, -0.05),
            fontsize=8)
 
 
-fig.subplots_adjust(bottom=0.24, top=0.8, wspace=0.3)
+fig.subplots_adjust(bottom=0.35, top=0.8, wspace=0.3)
 
 # --- Save plot ---
 #fig.savefig('plot_charging_satisfaction_perWeek_threeSubplots.pdf', bbox_inches='tight')
 fig.savefig('plot_charging_satisfaction_perWeek_threeSubplots.png', bbox_inches='tight', dpi=300)
 
 
+#test
 
 
 plt.show()

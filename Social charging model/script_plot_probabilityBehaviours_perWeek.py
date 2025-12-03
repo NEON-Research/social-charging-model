@@ -16,7 +16,7 @@ subselection = [
 excel_file = 'SCM_results_behaviours.xlsx'
 
 # Read the second sheet for out of model charge, left without charging, left while charging
-df = pd.read_excel(excel_file, sheet_name=1)
+df = pd.read_excel(excel_file, sheet_name=0)
 
 metrics = [
     ('probb1', 'Behavior 1'),

@@ -135,6 +135,7 @@ fig1.savefig('plot_confidence_charging_satisfaction.png', dpi=300, bbox_inches='
 
 
 
+#test
 # ============================================================
 # FIGURE 2 — Simplified Trips & Km driven (same style as Fig1)
 # ============================================================

@@ -15,7 +15,7 @@ public class J_MCResult {
 	private boolean b2;
 	private boolean b3;
 	private boolean b4;
-	private int EVsPerCP;
+	private double EVsPerCP;
 	
 	ArrayList<double[]> successRate_b1;
 	ArrayList<double[]> successRate_b2;
@@ -112,7 +112,7 @@ public class J_MCResult {
     	return b4;
     }
 
-    public int getEVsPerCP() {
+    public double getEVsPerCP() {
     	return EVsPerCP;
     }
     
@@ -288,7 +288,7 @@ public class J_MCResult {
     	this.b4 = val;
     }
     
-    public void setEVsPerCP(int val) {
+    public void setEVsPerCP(double val) {
     	this.EVsPerCP = val;
     }
 

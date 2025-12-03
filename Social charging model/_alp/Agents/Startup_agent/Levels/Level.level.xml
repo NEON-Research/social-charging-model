@@ -3123,11 +3123,12 @@ String[] labels = {
 
 
 // Iterate only over these subselections
-for( v_EVsPerCP = 1  ; v_EVsPerCP &lt;= 3; v_EVsPerCP++ ){
-	int newChargePoints = roundToInt(v_cars * v_shareEVs / v_EVsPerCP);
-	if( newChargePoints != v_chargePoints ){
+//for( v_EVsPerCP = 1  ; v_EVsPerCP &lt;= 2; v_EVsPerCP++ ){
+	//int newChargePoints = roundToInt(v_cars * v_shareEVs / v_EVsPerCP);
+	//if( newChargePoints != v_chargePoints ){
 		
-	
+for(v_chargePoints = 50; v_chargePoints &lt;=50; v_chargePoints++){
+	v_EVsPerCP = v_cars * v_shareEVs / v_chargePoints;
 		for (int s = 0; s &lt; subselection.length; s++) {
 		    boolean[] scenario = subselection[s];
 		    String label = labels[s];
@@ -3155,10 +3156,10 @@ for( v_EVsPerCP = 1  ; v_EVsPerCP &lt;= 3; v_EVsPerCP++ ){
 		}
 		long usedMemory = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1024 * 1024);
 		scenTime = (System.currentTimeMillis() - scenTime) / 1000.0;
-		traceln("NCP = " + newChargePoints + " v_CP = " + v_chargePoints);
+		//traceln("NCP = " + newChargePoints + " v_CP = " + v_chargePoints);
 		traceln("Finished scenarios for " + v_EVsPerCP + " EVs per CP in " + roundToDecimal(scenTime / 60,2) + " minutes, with used memory: " + usedMemory + " MB");
 		scenTime = System.currentTimeMillis();
-	}
+	//}
 }
 
 

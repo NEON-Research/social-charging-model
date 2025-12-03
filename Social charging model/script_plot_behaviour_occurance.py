@@ -62,7 +62,7 @@ plot_handles = {}
 excel_file = 'SCM_results_behaviours.xlsx'
 
 # Read the second sheet for out of model charge, left without charging, left while charging
-df = pd.read_excel(excel_file, sheet_name=1)
+df = pd.read_excel(excel_file, sheet_name=0)
 
 metrics = [
     ('sib1', 'Behavior 1'),
@@ -248,3 +248,5 @@ fig.subplots_adjust(bottom=0.24, top=0.8, wspace=0.3)
 fig.savefig('plot_behaviour_occurance_EVsPerCP.png', bbox_inches='tight', dpi=300)
 
 plt.show()
+
+#test

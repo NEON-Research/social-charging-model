@@ -3320,6 +3320,7 @@
 	<Variable Class="Parameter">
 		<Id>1745926425800</Id>
 		<Name><![CDATA[p_cars]]></Name>
+		<Description><![CDATA[100]]></Description>
 		<X>50</X>
 		<Y>80</Y>
 		<Label>

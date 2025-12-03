@@ -7,24 +7,24 @@ df = pd.read_excel(excel_file, sheet_name=0)
 
 # Define scenario groups
 scenarios_group1 = [
-    {'b1': False, 'b2': False, 'b3': False, 'b4': False, 'label': 'No behaviors', 'color': 'tab:blue'},
-    {'b1': True,  'b2': True,  'b3': True,  'b4': False, 'label': 'All social behaviors', 'color': 'tab:purple'}
+    {'b1': False, 'b2': False, 'b3': False, 'b4': False, 'label': 'No behaviours', 'color': 'tab:blue'},
+    {'b1': True,  'b2': True,  'b3': True,  'b4': False, 'label': 'All behaviours', 'color': 'tab:purple'}
 ]
 
 scenarios_group2 = [
-    {'b1': True,  'b2': False, 'b3': False, 'b4': False, 'label': 'Behavior 1', 'color': 'tab:green'},
-    {'b1': False, 'b2': True,  'b3': False, 'b4': False, 'label': 'Behavior 2', 'color': 'tab:red'},
-    {'b1': False, 'b2': False, 'b3': True,  'b4': False, 'label': 'Behavior 3', 'color': 'tab:orange'}
+    {'b1': True,  'b2': False, 'b3': False, 'b4': False, 'label': 'B1 (moving)', 'color': 'tab:green'},
+    {'b1': False, 'b2': True,  'b3': False, 'b4': False, 'label': 'B2 (requesting)', 'color': 'tab:red'},
+    {'b1': False, 'b2': False, 'b3': True,  'b4': False, 'label': 'B3 (notifying)', 'color': 'tab:orange'}
 ]
 
 scenarios_group3 = [
-    {'b1': True,  'b2': True,  'b3': False, 'b4': False, 'label': 'Behavior 1 and 2', 'color': 'tab:cyan'},
-    {'b1': True,  'b2': False, 'b3': True,  'b4': False, 'label': 'Behavior 1 and 3', 'color': 'tab:olive'},
-    {'b1': False, 'b2': True,  'b3': True,  'b4': False, 'label': 'Behavior 2 and 3', 'color': 'tab:brown'}
+    {'b1': True,  'b2': True,  'b3': False, 'b4': False, 'label': 'B1 (moving) and B2 (requesting)', 'color': 'tab:cyan'},
+    {'b1': True,  'b2': False, 'b3': True,  'b4': False, 'label': 'B1 (moving) and B3 (notifying)', 'color': 'tab:olive'},
+    {'b1': False, 'b2': True,  'b3': True,  'b4': False, 'label': 'B2 (requesting) and B3 (notifying)', 'color': 'tab:brown'}
 ]
 
 width = 15.92 / 2.52 # width word cm to inch
-height = width * (3 / 7)  # maintain aspect ratio
+height = width * (1/2)  # maintain aspect ratio
 fig, axes = plt.subplots(1, 3, figsize=(width, height), sharey=True )
 
 def plot_scenarios(ax, scenarios):
@@ -81,8 +81,10 @@ axes[2].set_title('Combination behaviors', fontsize=8)
 axes[0].set_ylabel('Charging fulfillment ratio (%)', fontsize=8)
 
 # Single legend below all plots
-fig.legend(loc='lower center', ncol=4, frameon=False, bbox_to_anchor=(0.5, -0.05), fontsize=8)
-fig.subplots_adjust(bottom=0.25, wspace=0.3)
+fig.legend(loc='lower center', ncol=2, frameon=False, bbox_to_anchor=(0.5, -0.05), fontsize=8)
+fig.subplots_adjust(bottom=0.35, top=0.8, wspace=0.3)
 
 # Save figure
 fig.savefig('plot_charging_satisfaction_behaviors_confidence.png', bbox_inches='tight', dpi=300)
+
+#test

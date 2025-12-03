@@ -4,26 +4,26 @@ import matplotlib.pyplot as plt
 # Define the behavior scenarios
 subselection1 = [
     {'b1': False, 'b2': False, 'b3': False, 'b4': False,
-     'label': 'No behaviors', 'color': 'tab:blue', 'linestyle': '-'},
+     'label': 'No behaviors', 'color': 'tab:blue', 'linestyle': '-', 'marker': 'o'},
     {'b1': True,  'b2': False, 'b3': False, 'b4': False,
-     'label': 'Behavior 1', 'color': 'tab:green', 'linestyle': '-'},
+     'label': 'Behavior 1', 'color': 'tab:green', 'linestyle': '-', 'marker': 'o'},
     {'b1': False, 'b2': True,  'b3': False, 'b4': False,
-     'label': 'Behavior 2', 'color': 'tab:red', 'linestyle': '-'},
+     'label': 'Behavior 2', 'color': 'tab:red', 'linestyle': '-', 'marker': 'o'},
     {'b1': False, 'b2': False, 'b3': True,  'b4': False,
-     'label': 'Behavior 3', 'color': 'tab:orange', 'linestyle': '-'},
+     'label': 'Behavior 3', 'color': 'tab:orange', 'linestyle': '-', 'marker': 'o'},
     {'b1': True,  'b2': True,  'b3': False, 'b4': False,
-     'label': 'Behavior 1 and 2', 'color': 'tab:cyan', 'linestyle': '--'},
+     'label': 'Behavior 1 and 2', 'color': 'tab:cyan', 'linestyle': '--', 'marker': 'x'},
     {'b1': True,  'b2': False, 'b3': True,  'b4': False,
-     'label': 'Behavior 1 and 3', 'color': 'tab:olive', 'linestyle': '--'},
+     'label': 'Behavior 1 and 3', 'color': 'tab:olive', 'linestyle': '--', 'marker': 'x'},
     {'b1': False, 'b2': True,  'b3': True,  'b4': False,
-     'label': 'Behavior 2 and 3', 'color': 'tab:brown', 'linestyle': '--'},
+     'label': 'Behavior 2 and 3', 'color': 'tab:brown', 'linestyle': '--', 'marker': 'x'},
     {'b1': True,  'b2': True,  'b3': True,  'b4': False,
-     'label': 'All social behaviors', 'color': 'tab:purple', 'linestyle': '-'}
+     'label': 'All social behaviors', 'color': 'tab:purple', 'linestyle': '-', 'marker': 'o'}
 ]
 
 # Load data
 excel_file = 'SCM_results_behaviours.xlsx'
-df = pd.read_excel(excel_file, sheet_name=1)
+df = pd.read_excel(excel_file, sheet_name=0)
 
 # --- Setup plot ---
 fig, ax = plt.subplots(figsize=(3.3, 3.85))
@@ -37,7 +37,7 @@ for sel in subselection1:
         (df['b4'] == sel['b4'])
     )
 
-    data = df[mask & (df['week'] >= 42) & (df['EVsPerCP'] <= 15)].copy()
+    data = df[mask & (df['week'] >= 42) ].copy() #& (df['charge_points'] <= 20)].copy()
     data = data.sort_values(['charge_points', 'EVsPerCP', 'week'])
 
     # Convert to percentage
@@ -57,7 +57,9 @@ for sel in subselection1:
         data_mean['m_cs'],
         label=sel['label'],
         color=sel['color'],
-        linestyle=sel['linestyle'],
+        linestyle= sel['linestyle'],
+        marker = sel['marker'],
+        markersize=6,
         linewidth=2
     )
 

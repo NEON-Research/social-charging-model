@@ -130,7 +130,7 @@
               Constant="false"
               AccessType="public"
               StaticVariable="false">
-			<Type><![CDATA[int]]></Type>
+			<Type><![CDATA[double]]></Type>
 		</Properties>
 	</Variable>
 	<Variable Class="PlainVariable">

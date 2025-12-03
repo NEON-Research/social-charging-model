@@ -1,8 +1,24 @@
-import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 from matplotlib.lines import Line2D
 from matplotlib.patches import Patch
+import pandas as pd
+
+# -------- Custom Stacked Legend Patch --------
+class StackedBands(Rectangle):
+    def __init__(self, width=1.0, height=1.0, colors=None, alphas=None):
+        super().__init__((0,0), width, height, facecolor="none")
+        self.colors = colors
+        self.alphas = alphas
+
+    def draw(self, renderer):
+        for color, alpha in zip(self.colors, self.alphas):
+            r = Rectangle(
+                self.get_xy(), self.get_width(), self.get_height(),
+                facecolor=color, edgecolor="none", alpha=alpha
+            )
+            r.set_transform(self.get_transform())
+            r.draw(renderer)
 
 # -----------------------------
 # Updated band colors & alpha
@@ -10,6 +26,8 @@ from matplotlib.patches import Patch
 band_colors = ["#9ecae1", "#6baed6", "#3182bd"]  # 90%, 80%, 50%
 band_labels = ["90%", "80%", "50%"]
 band_alpha = 0.6
+
+#stacked_handle = StackedBands(colors=band_colors, alphas=band_alphas)
 
 # -------------------------
 # Load data
@@ -70,8 +88,9 @@ def compute_group(data, metric):
 
     return grouped
 
+
 # ============================================================
-# FIGURE 1 — three-panel plot with percentile bands
+# FIGURE 1 — three-panel plot
 # ============================================================
 
 metrics_fig1 = {
@@ -80,12 +99,21 @@ metrics_fig1 = {
     "rcs": "Required charging sessions\n(avg per car per week)"
 }
 
-fig1, axes1 = plt.subplots(1, 3, figsize=(15.92 / 2.52, (15.92 / 2.52)*(3/7)))
+width = 15.92 / 2.52
+height = width * (3 / 7)
+fig1, axes1 = plt.subplots(1, 3, figsize=(width, height))
 
 for ax, (metric, title) in zip(axes1, metrics_fig1.items()):
 
     for sel in subselection1:
-        mask = (df['b1'] == sel['b1']) & (df['b2'] == sel['b2']) & (df['b3'] == sel['b3']) & (df['b4'] == sel['b4'])
+
+        mask = (
+            (df['b1'] == sel['b1']) &
+            (df['b2'] == sel['b2']) &
+            (df['b3'] == sel['b3']) &
+            (df['b4'] == sel['b4'])
+        )
+
         data = df[mask]
         if data.empty:
             continue
@@ -93,13 +121,16 @@ for ax, (metric, title) in zip(axes1, metrics_fig1.items()):
         g = compute_group(data, metric)
 
         # Mean line
-        ax.plot(g['EVsPerCP'], g[f'{metric}_m'], label=sel['label'], color=sel['color'], linestyle=sel['linestyle'], linewidth=2)
+        ax.plot(
+            g['EVsPerCP'], g[f'{metric}_m'],
+            label=sel['label'], color=sel['color'],
+            linestyle=sel['linestyle'], linewidth=2
+        )
 
-        # Percentile bands using band_colors
-        for l,u,color in zip([f'{metric}_l90', f'{metric}_l80', f'{metric}_l50'],
-                             [f'{metric}_u90', f'{metric}_u80', f'{metric}_u50'],
-                             band_colors):
-            ax.fill_between(g['EVsPerCP'], g[l], g[u], color=color, alpha=band_alpha)
+        # Percentile bands
+        ax.fill_between(g['EVsPerCP'], g[f'{metric}_l90'], g[f'{metric}_u90'], alpha=0.1, color=sel['color'])
+        ax.fill_between(g['EVsPerCP'], g[f'{metric}_l80'], g[f'{metric}_u80'], alpha=0.1, color=sel['color'])
+        ax.fill_between(g['EVsPerCP'], g[f'{metric}_l50'], g[f'{metric}_u50'],  alpha=0.1, color=sel['color'])
 
     ax.set_title(title, fontsize=8)
     ax.set_xlabel("EVs per CP", fontsize=8)
@@ -108,13 +139,23 @@ for ax, (metric, title) in zip(axes1, metrics_fig1.items()):
     ax.tick_params(axis='both', labelsize=8)
     ax.grid(True)
 
-# Legend: mean line + percentile bands
-mean_handles = [Line2D([0],[0], color=s['color'], linestyle=s['linestyle'], linewidth=2, label=s['label']) for s in subselection1]
-band_handles = [Patch(facecolor=c, alpha=band_alpha, label=l) for c,l in zip(band_colors, band_labels)]
-fig1.legend(handles=mean_handles + band_handles, loc='lower center', ncol=6, frameon=False, fontsize=8)
+# Custom legend for scenarios
+legend_handles = [
+    Line2D([0], [0], color=s['color'], linestyle=s['linestyle'],
+           linewidth=2, label=s['label'])
+    for s in subselection1
+]
 
-fig1.tight_layout(rect=[0,0.08,1,1])
-fig1.savefig('plot_confidence_charging_satisfaction_with_bands.png', dpi=300, bbox_inches='tight')
+fig1.legend(
+    handles=legend_handles,
+    loc='lower center',
+    ncol=4,
+    frameon=False,
+    fontsize=8
+)
+
+fig1.tight_layout(rect=[0, 0.08, 1, 1])
+fig1.savefig('plot_confidence_charging_satisfaction.png', dpi=300, bbox_inches='tight')
 
 
 # ============================================================

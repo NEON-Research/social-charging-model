@@ -1,7 +1,7 @@
 double f_initializeModel()
 {/*ALCODESTART::1746025123736*/
 int v_days = (int) floor(v_timestep_minutes * v_numberOfTimesteps / 24 / 60);
-v_chargePoints = roundToInt(v_cars * v_shareEVs / v_EVsPerCP);
+//v_chargePoints = roundToInt(v_cars * v_shareEVs / v_EVsPerCP);
 
 Main m = add_mains(v_cars,
 	v_parkingPlaces,
@@ -677,6 +677,7 @@ results.setB1(v_b1_moveCar);
 results.setB2(v_b2_requestMove);
 results.setB3(v_b3_notifyNeighbor);
 results.setB4(v_recheckCPAvailability);
+//double EVsPerCP = v_cars*v_shareEVs / v_chargePoints;
 results.setEVsPerCP(v_EVsPerCP);
 
 ArrayList<double[]> uncertaintyBounds_SR_b1 = f_getUncertaintyBounds(c_succesRate_b1_MC);
@@ -1194,7 +1195,7 @@ DataSet f_writeSensitivityResultsToExcel()
 int sheetIndex = 1;
 int sheetIndexPerDay = 2;
 
-int scenarioIndex = v_EVsPerCP;
+int scenarioIndex = (int) roundToInt(v_EVsPerCP);
 int rowIndex = f_getTrueLastRow(sheetIndex, excel_exportResultsSensitivity) + 1;
 int nTimePoints = c_succesRate_b1_MC.get(0).length;
 
