@@ -240,7 +240,7 @@ if handles:
                bbox_to_anchor=(0.5, -0.05),  # put it below the plots
                fontsize=8)
 
-fig.suptitle("Occurance behavioirs (avg per week)", fontsize=9)
+fig.suptitle("Behaviour occurance (avg per week)", fontsize=9)
 fig.subplots_adjust(bottom=0.24, top=0.78, wspace=0.3)
 
 # --- Save with tight bounding box ---

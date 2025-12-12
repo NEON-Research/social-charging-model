@@ -23,7 +23,7 @@ metrics = [
 
 # --- Create subplots ---
 width = 15.92 / 2.52 # width word cm to inch
-height = width * (3,7)  # maintain aspect ratio
+height = width * (3/7)  # maintain aspect ratio
 fig, axes = plt.subplots(1, 3, figsize=(width, height))
 
 for idx, sel in enumerate(subselection):
@@ -87,7 +87,7 @@ fig.legend(
 )
 
 # Layout
-fig.suptitle("Learning in average behavioural characteristics\n in the 'all behaviours' scenario", fontsize=9)
+fig.suptitle("Learning in average behavioural characteristics\n in the all-behaviours scenario", fontsize=9)
 fig.subplots_adjust(bottom=0.24, top=0.76, wspace=0.3)
 
 # Save and show

@@ -183,7 +183,7 @@ from matplotlib.patches import Patch
 
 fig2, axes2 = plt.subplots(1, 2, figsize=(15.92 / 2.52, (15.92 / 2.52)*(3/7)))
 pairs = [("trips", "No behaviors"), ("kmd", "No behaviors")]
-title_map = {"trips": "Trips\n(avg per car per week)", "kmd": "Kilometers driven\n(avg per car per week)"}
+title_map = {"trips": "Trips\n(avg per car per week)", "kmd": "Kilometres driven\n(avg per car per week)"}
 
 band_alphas = [0.1, 0.1, 0.1]  # same as Fig1
 
@@ -213,7 +213,7 @@ for ax, (metric, scenario) in zip(axes2, pairs):
 # Create legend
 # -------------------
 mean_line = Line2D([], [], color='tab:blue', linestyle='-', linewidth=2, label='Mean')  # color doesn't matter much
-band_patch = Patch(facecolor='tab:blue', alpha=0.1, label='50%, 80% and 90% uncertainty intervals')      # use one of the band colors
+band_patch = Patch(facecolor='tab:blue', alpha=0.1, label='50%, 80%, and 90% uncertainty intervals')      # use one of the band colors
 
 fig2.legend(handles=[mean_line, band_patch], loc='lower center', ncol=2, frameon=False, fontsize=8, bbox_to_anchor=(0.5, -0.12))
 
