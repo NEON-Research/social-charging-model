@@ -1,7 +1,7 @@
 double f_initializeModel()
 {/*ALCODESTART::1746025123736*/
 int v_days = (int) floor(v_timestep_minutes * v_numberOfTimesteps / 24 / 60);
-v_chargePoints = roundToInt(v_cars * v_shareEVs / v_EVsPerCP);
+//v_chargePoints = roundToInt(v_cars * v_shareEVs / v_EVsPerCP);
 
 Main m = add_mains(v_cars,
 	v_parkingPlaces,
@@ -678,6 +678,7 @@ results.setB2(v_b2_requestMove);
 results.setB3(v_b3_notifyNeighbor);
 results.setB4(v_recheckCPAvailability);
 results.setEVsPerCP(v_EVsPerCP);
+results.setChargePoints(v_chargePoints);
 
 ArrayList<double[]> uncertaintyBounds_SR_b1 = f_getUncertaintyBounds(c_succesRate_b1_MC);
 ArrayList<double[]> uncertaintyBounds_SR_b2 = f_getUncertaintyBounds(c_succesRate_b2_MC);
@@ -1194,7 +1195,7 @@ DataSet f_writeSensitivityResultsToExcel()
 int sheetIndex = 1;
 int sheetIndexPerDay = 2;
 
-int scenarioIndex = v_EVsPerCP;
+double scenarioIndex = v_EVsPerCP;
 int rowIndex = f_getTrueLastRow(sheetIndex, excel_exportResultsSensitivity) + 1;
 int nTimePoints = c_succesRate_b1_MC.get(0).length;
 
@@ -1502,7 +1503,7 @@ for(J_MCResult r : c_MCResults){
 		excel_exportResultsBehaviours.setCellValue(r.getB3(), sheetIndexPerWeek, rowIndex, 83);
 		excel_exportResultsBehaviours.setCellValue(r.getB4(), sheetIndexPerWeek, rowIndex, 84);
 		excel_exportResultsBehaviours.setCellValue(r.getEVsPerCP(), sheetIndexPerWeek, rowIndex, 85);
-		excel_exportResultsBehaviours.setCellValue(roundToInt(100/r.getEVsPerCP()), sheetIndexPerWeek, rowIndex, 86);
+		excel_exportResultsBehaviours.setCellValue(r.getChargePoints(), sheetIndexPerWeek, rowIndex, 86);
 		
 		int columnIndex = 87;
 		exportUncertaintyBoundsToExcel(

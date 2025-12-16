@@ -3081,7 +3081,7 @@ ShapeCheckBox[] checkBoxes = {
 
 // Define only the desired combinations
 // Order of booleans: {b1, b2, b3, b4}
-
+/*
 boolean[][] subselection = {
     {false, false, false, false}, // No behaviors
     //{false, false, false, true},  // No behaviors, self checking
@@ -3092,8 +3092,8 @@ boolean[][] subselection = {
     {true,  true, false,  false}, // Behavior 1 and 2
     {false,  true, true,  false}, // Behavior 2 and 3
     {true,  true,  true,  false}  // All behaviors
-};
-/*
+};*/
+
 boolean[][] subselection = {
     {false, false, false, true}, // No behaviors
     //{false, false, false, true},  // No behaviors, self checking
@@ -3104,7 +3104,7 @@ boolean[][] subselection = {
     {true,  true, false,  true}, // Behavior 1 and 2
     {false,  true, true,  true}, // Behavior 2 and 3
     {true,  true,  true,  true}  // All behaviors
-};*/
+};
 
 // Corresponding labels
 String[] labels = {
@@ -3123,11 +3123,13 @@ String[] labels = {
 
 
 // Iterate only over these subselections
-for( v_EVsPerCP = 1  ; v_EVsPerCP &lt;= 3; v_EVsPerCP++ ){
+/*for( v_EVsPerCP = 1  ; v_EVsPerCP &lt;= 3; v_EVsPerCP++ ){
 	int newChargePoints = roundToInt(v_cars * v_shareEVs / v_EVsPerCP);
 	if( newChargePoints != v_chargePoints ){
-		
-	
+*/		
+
+for( v_chargePoints = 100; v_chargePoints &lt;= 100; v_chargePoints++){
+	v_EVsPerCP = v_cars * v_shareEVs / v_chargePoints;
 		for (int s = 0; s &lt; subselection.length; s++) {
 		    boolean[] scenario = subselection[s];
 		    String label = labels[s];
@@ -3155,10 +3157,10 @@ for( v_EVsPerCP = 1  ; v_EVsPerCP &lt;= 3; v_EVsPerCP++ ){
 		}
 		long usedMemory = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1024 * 1024);
 		scenTime = (System.currentTimeMillis() - scenTime) / 1000.0;
-		traceln("NCP = " + newChargePoints + " v_CP = " + v_chargePoints);
+		//traceln("NCP = " + newChargePoints + " v_CP = " + v_chargePoints);
 		traceln("Finished scenarios for " + v_EVsPerCP + " EVs per CP in " + roundToDecimal(scenTime / 60,2) + " minutes, with used memory: " + usedMemory + " MB");
 		scenTime = System.currentTimeMillis();
-	}
+//	}
 }
 
 
