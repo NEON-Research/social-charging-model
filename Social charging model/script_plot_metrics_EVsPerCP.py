@@ -5,10 +5,16 @@ excel_file = 'SCM_results_behaviours.xlsx'
 df = pd.read_excel(excel_file, sheet_name=0)
 
 # Define the scenarios for each subplot
+# subselection = [
+#     {'b1': True, 'b2': True, 'b3': True, 'b4': False, 'EVsPerCP': 5,  'color': 'tab:blue',  'label': '5 EVs per CP'},
+#     {'b1': True, 'b2': True, 'b3': True, 'b4': False, 'EVsPerCP': 10, 'color': 'tab:orange','label': '10 EVs per CP'},
+#     {'b1': True, 'b2': True, 'b3': True, 'b4': False, 'EVsPerCP': 100/7, 'color': 'tab:green', 'label': '14.3 EVs per CP'}
+# ]
+# Define the scenarios for each subplot
 subselection = [
-    {'b1': True, 'b2': True, 'b3': True, 'b4': False, 'EVsPerCP': 5,  'color': 'tab:blue',  'label': '5 EVs per CP'},
-    {'b1': True, 'b2': True, 'b3': True, 'b4': False, 'EVsPerCP': 10, 'color': 'tab:orange','label': '10 EVs per CP'},
-    {'b1': True, 'b2': True, 'b3': True, 'b4': False, 'EVsPerCP': 100/7, 'color': 'tab:green', 'label': '14.3 EVs per CP'}
+    {'b1': True, 'b2': True, 'b3': True, 'b4': True, 'EVsPerCP': 5,  'color': 'tab:blue',  'label': '5 EVs per CP'},
+    {'b1': True, 'b2': True, 'b3': True, 'b4': True, 'EVsPerCP': 10, 'color': 'tab:orange','label': '10 EVs per CP'},
+    {'b1': True, 'b2': True, 'b3': True, 'b4': True, 'EVsPerCP': 100/7, 'color': 'tab:green', 'label': '14.3 EVs per CP'}
 ]
 
 # Metrics to plot as lines

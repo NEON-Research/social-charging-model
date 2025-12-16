@@ -17,11 +17,18 @@ df = df[(df['week'] >= 42) & (df['week'] <= 51)]
 # -------------------------
 # Behavior scenarios
 # -------------------------
+# subselection1 = [
+#     {'b1': False, 'b2': False, 'b3': False, 'b4': False,
+#      'label': 'No behaviors', 'color': 'tab:blue', 'linestyle': '-'},
+
+#     {'b1': True,  'b2': True,  'b3': True,  'b4': False,
+#      'label': 'All social behaviors', 'color': 'tab:purple', 'linestyle': '-'}
+# ]
 subselection1 = [
-    {'b1': False, 'b2': False, 'b3': False, 'b4': False,
+    {'b1': False, 'b2': False, 'b3': False, 'b4': True,
      'label': 'No behaviors', 'color': 'tab:blue', 'linestyle': '-'},
 
-    {'b1': True,  'b2': True,  'b3': True,  'b4': False,
+    {'b1': True,  'b2': True,  'b3': True,  'b4': True,
      'label': 'All social behaviors', 'color': 'tab:purple', 'linestyle': '-'}
 ]
 

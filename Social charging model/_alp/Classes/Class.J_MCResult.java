@@ -16,6 +16,7 @@ public class J_MCResult {
 	private boolean b3;
 	private boolean b4;
 	private double EVsPerCP;
+	private int chargePoints;
 	
 	ArrayList<double[]> successRate_b1;
 	ArrayList<double[]> successRate_b2;
@@ -114,6 +115,10 @@ public class J_MCResult {
 
     public double getEVsPerCP() {
     	return EVsPerCP;
+    }
+    
+    public double getChargePoints() {
+    	return chargePoints;
     }
     
     public ArrayList<double[]> getSuccessRate_b1() {
@@ -290,6 +295,10 @@ public class J_MCResult {
     
     public void setEVsPerCP(double val) {
     	this.EVsPerCP = val;
+    }
+    
+    public void setChargePoints(int val) {
+    	this.chargePoints = val;
     }
 
 

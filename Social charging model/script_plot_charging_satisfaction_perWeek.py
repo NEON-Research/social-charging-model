@@ -1,26 +1,44 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# # Define the behavior scenarios
+# subselection1 = [
+#     {'b1': False, 'b2': False, 'b3': False, 'b4': False,
+#      'label': 'No behaviours', 'color': 'tab:blue', 'linestyle': '-'},
+#     {'b1': True,  'b2': False, 'b3': False, 'b4': False,
+#      'label': 'Behaviour 1 (moving)', 'color': 'tab:green', 'linestyle': '-'},
+#     {'b1': False, 'b2': True,  'b3': False, 'b4': False,
+#      'label': 'Behaviour 2 (requesting)', 'color': 'tab:red', 'linestyle': '-'},
+#     {'b1': False, 'b2': False, 'b3': True,  'b4': False,
+#      'label': 'Behaviour 3 (notifying)', 'color': 'tab:orange', 'linestyle': '-'},
+#     {'b1': True,  'b2': True,  'b3': False, 'b4': False,
+#      'label': 'Behaviour 1 (moving) and 2 (requesting)', 'color': 'tab:cyan', 'linestyle': '--'},
+#     {'b1': True,  'b2': False, 'b3': True,  'b4': False,
+#      'label': 'Behaviour 1 (moving) and 3 (notifying)', 'color': 'tab:olive', 'linestyle': '--'},
+#     {'b1': False, 'b2': True,  'b3': True,  'b4': False,
+#      'label': 'Behaviour 2 (requesting) and 3 (notifying)', 'color': 'tab:brown', 'linestyle': '--'},
+#     {'b1': True,  'b2': True,  'b3': True,  'b4': False,
+#      'label': 'All behaviours', 'color': 'tab:purple', 'linestyle': '-'}
+# ]
 # Define the behavior scenarios
 subselection1 = [
-    {'b1': False, 'b2': False, 'b3': False, 'b4': False,
+    {'b1': False, 'b2': False, 'b3': False, 'b4': True,
      'label': 'No behaviours', 'color': 'tab:blue', 'linestyle': '-'},
-    {'b1': True,  'b2': False, 'b3': False, 'b4': False,
+    {'b1': True,  'b2': False, 'b3': False, 'b4': True,
      'label': 'Behaviour 1 (moving)', 'color': 'tab:green', 'linestyle': '-'},
-    {'b1': False, 'b2': True,  'b3': False, 'b4': False,
+    {'b1': False, 'b2': True,  'b3': False, 'b4': True,
      'label': 'Behaviour 2 (requesting)', 'color': 'tab:red', 'linestyle': '-'},
-    {'b1': False, 'b2': False, 'b3': True,  'b4': False,
+    {'b1': False, 'b2': False, 'b3': True,  'b4': True,
      'label': 'Behaviour 3 (notifying)', 'color': 'tab:orange', 'linestyle': '-'},
-    {'b1': True,  'b2': True,  'b3': False, 'b4': False,
+    {'b1': True,  'b2': True,  'b3': False, 'b4': True,
      'label': 'Behaviour 1 (moving) and 2 (requesting)', 'color': 'tab:cyan', 'linestyle': '--'},
-    {'b1': True,  'b2': False, 'b3': True,  'b4': False,
+    {'b1': True,  'b2': False, 'b3': True,  'b4': True,
      'label': 'Behaviour 1 (moving) and 3 (notifying)', 'color': 'tab:olive', 'linestyle': '--'},
-    {'b1': False, 'b2': True,  'b3': True,  'b4': False,
+    {'b1': False, 'b2': True,  'b3': True,  'b4': True,
      'label': 'Behaviour 2 (requesting) and 3 (notifying)', 'color': 'tab:brown', 'linestyle': '--'},
-    {'b1': True,  'b2': True,  'b3': True,  'b4': False,
+    {'b1': True,  'b2': True,  'b3': True,  'b4': True,
      'label': 'All behaviours', 'color': 'tab:purple', 'linestyle': '-'}
 ]
-
 # Load data
 excel_file = 'SCM_results_behaviours.xlsx'
 df = pd.read_excel(excel_file, sheet_name=0)

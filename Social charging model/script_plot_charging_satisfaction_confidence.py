@@ -5,22 +5,39 @@ import matplotlib.pyplot as plt
 excel_file = 'SCM_results_behaviours.xlsx'
 df = pd.read_excel(excel_file, sheet_name=0)
 
+# # Define scenario groups
+# scenarios_group1 = [
+#     {'b1': False, 'b2': False, 'b3': False, 'b4': False, 'label': 'No behaviours', 'color': 'tab:blue'},
+#     {'b1': True,  'b2': True,  'b3': True,  'b4': False, 'label': 'All behaviours', 'color': 'tab:purple'}
+# ]
+
+# scenarios_group2 = [
+#     {'b1': True,  'b2': False, 'b3': False, 'b4': False, 'label': 'B1 (moving)', 'color': 'tab:green'},
+#     {'b1': False, 'b2': True,  'b3': False, 'b4': False, 'label': 'B2 (requesting)', 'color': 'tab:red'},
+#     {'b1': False, 'b2': False, 'b3': True,  'b4': False, 'label': 'B3 (notifying)', 'color': 'tab:orange'}
+# ]
+
+# scenarios_group3 = [
+#     {'b1': True,  'b2': True,  'b3': False, 'b4': False, 'label': 'B1 (moving) and B2 (requesting)', 'color': 'tab:cyan'},
+#     {'b1': True,  'b2': False, 'b3': True,  'b4': False, 'label': 'B1 (moving) and B3 (notifying)', 'color': 'tab:olive'},
+#     {'b1': False, 'b2': True,  'b3': True,  'b4': False, 'label': 'B2 (requesting) and B3 (notifying)', 'color': 'tab:brown'}
+# ]
 # Define scenario groups
 scenarios_group1 = [
-    {'b1': False, 'b2': False, 'b3': False, 'b4': False, 'label': 'No behaviours', 'color': 'tab:blue'},
-    {'b1': True,  'b2': True,  'b3': True,  'b4': False, 'label': 'All behaviours', 'color': 'tab:purple'}
+    {'b1': False, 'b2': False, 'b3': False, 'b4': True, 'label': 'No behaviours', 'color': 'tab:blue'},
+    {'b1': True,  'b2': True,  'b3': True,  'b4': True, 'label': 'All behaviours', 'color': 'tab:purple'}
 ]
 
 scenarios_group2 = [
-    {'b1': True,  'b2': False, 'b3': False, 'b4': False, 'label': 'B1 (moving)', 'color': 'tab:green'},
-    {'b1': False, 'b2': True,  'b3': False, 'b4': False, 'label': 'B2 (requesting)', 'color': 'tab:red'},
-    {'b1': False, 'b2': False, 'b3': True,  'b4': False, 'label': 'B3 (notifying)', 'color': 'tab:orange'}
+    {'b1': True,  'b2': False, 'b3': False, 'b4': True, 'label': 'B1 (moving)', 'color': 'tab:green'},
+    {'b1': False, 'b2': True,  'b3': False, 'b4': True, 'label': 'B2 (requesting)', 'color': 'tab:red'},
+    {'b1': False, 'b2': False, 'b3': True,  'b4': True, 'label': 'B3 (notifying)', 'color': 'tab:orange'}
 ]
 
 scenarios_group3 = [
-    {'b1': True,  'b2': True,  'b3': False, 'b4': False, 'label': 'B1 (moving) and B2 (requesting)', 'color': 'tab:cyan'},
-    {'b1': True,  'b2': False, 'b3': True,  'b4': False, 'label': 'B1 (moving) and B3 (notifying)', 'color': 'tab:olive'},
-    {'b1': False, 'b2': True,  'b3': True,  'b4': False, 'label': 'B2 (requesting) and B3 (notifying)', 'color': 'tab:brown'}
+    {'b1': True,  'b2': True,  'b3': False, 'b4': True, 'label': 'B1 (moving) and B2 (requesting)', 'color': 'tab:cyan'},
+    {'b1': True,  'b2': False, 'b3': True,  'b4': True, 'label': 'B1 (moving) and B3 (notifying)', 'color': 'tab:olive'},
+    {'b1': False, 'b2': True,  'b3': True,  'b4': True, 'label': 'B2 (requesting) and B3 (notifying)', 'color': 'tab:brown'}
 ]
 
 width = 15.92 / 2.52 # width word cm to inch

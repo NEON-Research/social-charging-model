@@ -1,23 +1,43 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# # Define the behavior scenarios
+# subselection1 = [
+#     {'b1': False, 'b2': False, 'b3': False, 'b4': False,
+#      'label': 'No behaviours', 'color': 'tab:blue', 'linestyle': '-', 'marker': 'o'},
+#     {'b1': True,  'b2': False, 'b3': False, 'b4': False,
+#      'label': 'B1 (moving)', 'color': 'tab:green', 'linestyle': '-', 'marker': 'o'},
+#     {'b1': False, 'b2': True,  'b3': False, 'b4': False,
+#      'label': 'B2 (requesting)', 'color': 'tab:red', 'linestyle': '-', 'marker': 'o'},
+#     {'b1': False, 'b2': False, 'b3': True,  'b4': False,
+#      'label': 'B3 (notifying)', 'color': 'tab:orange', 'linestyle': '-', 'marker': 'o'},
+#     {'b1': True,  'b2': True,  'b3': False, 'b4': False,
+#      'label': 'B1 (moving) and B2 (requesting)', 'color': 'tab:cyan', 'linestyle': '--', 'marker': 'x'},
+#     {'b1': True,  'b2': False, 'b3': True,  'b4': False,
+#      'label': 'B1 (moving) and B3 (notifying)', 'color': 'tab:olive', 'linestyle': '--', 'marker': 'x'},
+#     {'b1': False, 'b2': True,  'b3': True,  'b4': False,
+#      'label': 'B2 (requesting) and B3 (notifying)', 'color': 'tab:brown', 'linestyle': '--', 'marker': 'x'},
+#     {'b1': True,  'b2': True,  'b3': True,  'b4': False,
+#      'label': 'All behaviours', 'color': 'tab:purple', 'linestyle': '-', 'marker': 'o'}
+# ]
+
 # Define the behavior scenarios
 subselection1 = [
-    {'b1': False, 'b2': False, 'b3': False, 'b4': False,
+    {'b1': False, 'b2': False, 'b3': False, 'b4': True,
      'label': 'No behaviours', 'color': 'tab:blue', 'linestyle': '-', 'marker': 'o'},
-    {'b1': True,  'b2': False, 'b3': False, 'b4': False,
+    {'b1': True,  'b2': False, 'b3': False, 'b4': True,
      'label': 'B1 (moving)', 'color': 'tab:green', 'linestyle': '-', 'marker': 'o'},
-    {'b1': False, 'b2': True,  'b3': False, 'b4': False,
+    {'b1': False, 'b2': True,  'b3': False, 'b4': True,
      'label': 'B2 (requesting)', 'color': 'tab:red', 'linestyle': '-', 'marker': 'o'},
-    {'b1': False, 'b2': False, 'b3': True,  'b4': False,
+    {'b1': False, 'b2': False, 'b3': True,  'b4': True,
      'label': 'B3 (notifying)', 'color': 'tab:orange', 'linestyle': '-', 'marker': 'o'},
-    {'b1': True,  'b2': True,  'b3': False, 'b4': False,
+    {'b1': True,  'b2': True,  'b3': False, 'b4': True,
      'label': 'B1 (moving) and B2 (requesting)', 'color': 'tab:cyan', 'linestyle': '--', 'marker': 'x'},
-    {'b1': True,  'b2': False, 'b3': True,  'b4': False,
+    {'b1': True,  'b2': False, 'b3': True,  'b4': True,
      'label': 'B1 (moving) and B3 (notifying)', 'color': 'tab:olive', 'linestyle': '--', 'marker': 'x'},
-    {'b1': False, 'b2': True,  'b3': True,  'b4': False,
+    {'b1': False, 'b2': True,  'b3': True,  'b4': True,
      'label': 'B2 (requesting) and B3 (notifying)', 'color': 'tab:brown', 'linestyle': '--', 'marker': 'x'},
-    {'b1': True,  'b2': True,  'b3': True,  'b4': False,
+    {'b1': True,  'b2': True,  'b3': True,  'b4': True,
      'label': 'All behaviours', 'color': 'tab:purple', 'linestyle': '-', 'marker': 'o'}
 ]
 
@@ -96,7 +116,7 @@ for sel in subselection1:
         (df['b4'] == sel['b4'])
     )
 
-    data = df[mask & (df['week'] >= 42) & (df['EVsPerCP'] <= 15)].copy()
+    data = df[mask & (df['week'] >= 42) & (df['EVsPerCP'] <= 20)].copy()
     data = data.sort_values(['charge_points', 'EVsPerCP', 'week'])
 
     # Convert to percentage

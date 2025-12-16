@@ -1,35 +1,41 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Simplified scenario selection and labels
-# subselection = [
-#     # {'b1': False, 'b2': False, 'b3': False, 'b4': False,  'label': 'No behaviors'},
-#     # {'b1': False,  'b2': False, 'b3': False, 'b4': True,  'label': 'No behaviors, daily availability check'},
-#     {'b1': True,  'b2': False, 'b3': False, 'b4': False,  'label': 'B1'},
-#     {'b1': False, 'b2': True,  'b3': False, 'b4': False,  'label': 'B2'},
-#     {'b1': False,  'b2': False, 'b3': True,  'b4': False,  'label': 'B3'},
-#     # {'b1': True,  'b2': False, 'b3': True,  'b4': False,  'label': 'B1 and B3'},
-#     {'b1': True,  'b2': True,  'b3': True,  'b4': False,  'label': 'All behaviors'},
-# ]
 
+# # Define the behavior scenarios
+# subselection = [
+#     {'b1': True,  'b2': False, 'b3': False, 'b4': False,
+#      'label': 'B1', 'color': 'tab:green', 'linestyle': '-'},
+#     {'b1': False, 'b2': True,  'b3': False, 'b4': False,
+#      'label': 'B2', 'color': 'tab:red', 'linestyle': '-'},
+#     {'b1': False, 'b2': False, 'b3': True,  'b4': False,
+#      'label': 'B3', 'color': 'tab:orange', 'linestyle': '-'},
+#     # {'b1': True,  'b2': True,  'b3': False, 'b4': False,
+#     #  'label': 'B1 and B2', 'color': 'tab:cyan', 'linestyle': '--'},
+#     # {'b1': True,  'b2': False, 'b3': True,  'b4': False,
+#     #  'label': 'B1 and B3', 'color': 'tab:olive', 'linestyle': '--'},
+#     # {'b1': False, 'b2': True,  'b3': True,  'b4': False,
+#     #  'label': 'B2 and B3', 'color': 'tab:brown', 'linestyle': '--'},
+#     {'b1': True,  'b2': True,  'b3': True,  'b4': False,
+#      'label': 'All behaviors', 'color': 'tab:purple', 'linestyle': '-'}
+# ]
 # Define the behavior scenarios
 subselection = [
-    {'b1': True,  'b2': False, 'b3': False, 'b4': False,
+    {'b1': True,  'b2': False, 'b3': False, 'b4': True,
      'label': 'B1', 'color': 'tab:green', 'linestyle': '-'},
-    {'b1': False, 'b2': True,  'b3': False, 'b4': False,
+    {'b1': False, 'b2': True,  'b3': False, 'b4': True,
      'label': 'B2', 'color': 'tab:red', 'linestyle': '-'},
-    {'b1': False, 'b2': False, 'b3': True,  'b4': False,
+    {'b1': False, 'b2': False, 'b3': True,  'b4': True,
      'label': 'B3', 'color': 'tab:orange', 'linestyle': '-'},
-    # {'b1': True,  'b2': True,  'b3': False, 'b4': False,
+    # {'b1': True,  'b2': True,  'b3': False, 'b4': True,
     #  'label': 'B1 and B2', 'color': 'tab:cyan', 'linestyle': '--'},
-    # {'b1': True,  'b2': False, 'b3': True,  'b4': False,
+    # {'b1': True,  'b2': False, 'b3': True,  'b4': True,
     #  'label': 'B1 and B3', 'color': 'tab:olive', 'linestyle': '--'},
-    # {'b1': False, 'b2': True,  'b3': True,  'b4': False,
+    # {'b1': False, 'b2': True,  'b3': True,  'b4': True,
     #  'label': 'B2 and B3', 'color': 'tab:brown', 'linestyle': '--'},
-    {'b1': True,  'b2': True,  'b3': True,  'b4': False,
+    {'b1': True,  'b2': True,  'b3': True,  'b4': True,
      'label': 'All behaviors', 'color': 'tab:purple', 'linestyle': '-'}
 ]
-
 
 # Define which behaviors to exclude per subplot
 exclude_map = {
