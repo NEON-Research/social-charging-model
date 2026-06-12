@@ -17,6 +17,12 @@ public class J_MCResult {
 	private boolean b4;
 	private double EVsPerCP;
 	private int chargePoints;
+	private double randomMissFactorB2;
+	private double rechecksPerDay;
+	private double smoothingFactorEMA;
+	private double negBiasFactor;
+	private String surprisalFunction;
+	private String socialChargingHours;
 	
 	ArrayList<double[]> successRate_b1;
 	ArrayList<double[]> successRate_b2;
@@ -44,7 +50,8 @@ public class J_MCResult {
 	
 	ArrayList<double[]> leftWhileCharging_perWeek;
 	ArrayList<double[]> leftUncharged_perWeek;
-	ArrayList<double[]> outOfModelCharging_perWeek;
+	ArrayList<double[]> outOfModelCharging_sessionsPerWeek;
+	ArrayList<double[]> outOfModelCharging_kWhPerWeek;
 	ArrayList<double[]> leftWhileChargingWithDelayedAccess_perWeek;
 	ArrayList<double[]> percSatisfiedChargingSessions_perWeek;
 	ArrayList<double[]> chargingSessions_perWeek;
@@ -119,6 +126,26 @@ public class J_MCResult {
     
     public double getChargePoints() {
     	return chargePoints;
+    }
+    public double getRandomMissFactorB2() {
+    	return randomMissFactorB2;
+    }
+    public double getRechecksPerDay() {
+    	return rechecksPerDay;
+    }
+    public double getSmoothingFactorEMA() {
+    	return smoothingFactorEMA;
+    }
+    
+    public double getNegBiasFactor() {
+    	return negBiasFactor;
+    }
+    public String getSurprisalFunction() {
+    	return surprisalFunction;
+    }
+    
+    public String getSocialChargingHours() {
+    	return socialChargingHours;
     }
     
     public ArrayList<double[]> getSuccessRate_b1() {
@@ -201,8 +228,12 @@ public class J_MCResult {
         return leftUncharged_perWeek;
     }
 
-    public ArrayList<double[]> getOutOfModelChargingPerWeek() {
-        return outOfModelCharging_perWeek;
+    public ArrayList<double[]> getOutOfModelChargingSessionsPerWeek() {
+        return outOfModelCharging_sessionsPerWeek;
+    }
+    
+    public ArrayList<double[]> getOutOfModelChargingkWhPerWeek() {
+        return outOfModelCharging_kWhPerWeek;
     }
     
     public ArrayList<double[]> getPercSatisfiedChargingSessionsPerWeek() {
@@ -300,6 +331,24 @@ public class J_MCResult {
     public void setChargePoints(int val) {
     	this.chargePoints = val;
     }
+    public void setRandomMissFactorB2(double val) {
+    	this.randomMissFactorB2 = val;
+    }
+    public void setRechecksPerDay(double val) {
+    	this.rechecksPerDay = val;
+    }
+    public void setSmoothingFactorEMA(double val) {
+    	this.smoothingFactorEMA = val;
+    }
+    public void setNegBiasFactor(double val) {
+    	this.negBiasFactor = val;
+    }
+    public void setSurprisalFunction(String val) {
+    	this.surprisalFunction = val;
+    }
+    public void setSocialChargingHours(String val) {
+    	this.socialChargingHours = val;
+    }
 
 
     
@@ -386,8 +435,15 @@ public class J_MCResult {
     	//leftUncharged_perWeek = getStatsPerWeek(uncertaintyBounds);
     }
     
-    public void setOutOfModelChargingPerWeek( ArrayList<double[]> uncertaintyBounds ) {
-    	outOfModelCharging_perWeek = uncertaintyBounds;
+    public void setOutOfModelChargingkWhPerWeek( ArrayList<double[]> uncertaintyBounds ) {
+    	outOfModelCharging_kWhPerWeek = uncertaintyBounds;
+    	//days = uncertaintyBounds.get(0).length;
+    	//outOfModelCharging_rollingAvg = getRollingAverage(window, days, uncertaintyBounds);
+    	//outOfModelCharging_perWeek = getStatsPerWeek(uncertaintyBounds);
+    }
+    
+    public void setOutOfModelChargingSessionsPerWeek( ArrayList<double[]> uncertaintyBounds ) {
+    	outOfModelCharging_sessionsPerWeek = uncertaintyBounds;
     	//days = uncertaintyBounds.get(0).length;
     	//outOfModelCharging_rollingAvg = getRollingAverage(window, days, uncertaintyBounds);
     	//outOfModelCharging_perWeek = getStatsPerWeek(uncertaintyBounds);

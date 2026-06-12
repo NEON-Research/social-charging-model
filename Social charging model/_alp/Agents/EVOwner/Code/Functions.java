@@ -47,11 +47,14 @@ v_electricityInBattery_kWh -= electricityConsumed_kWh;
 
 if(v_electricityInBattery_kWh < 0){ //if on-route below 0 soc
 	double chargeToPercentage = 0.1; //If regular fast charging on route required to 0.1, if often out of model charging because shortage in CPs charge in other neighbrohood to 100
-	if( v_leftUnchargedStreak >= 3 ){
-		chargeToPercentage = 1;
-		v_leftUnchargedStreak = 0;
-		main.countOOMCTo100++;
-		//traceln("out of model charge to 100% for EV " + this.getIndex());
+	if(main.outOfModelChargeStreakEnabled){
+		if( v_leftUnchargedStreak >= 3 ){
+			chargeToPercentage = 1;
+			v_leftUnchargedStreak = 0;
+			v_outOfModelCharge_sessions++;
+			main.countOOMCTo100++;
+			//traceln("out of model charge to 100% for EV " + this.getIndex());
+		}
 	}
 	
 	double outOfModelCharging_kWh = abs(v_electricityInBattery_kWh) + v_batteryCapacity_kWh * chargeToPercentage;
@@ -75,6 +78,7 @@ v_soc = v_electricityInBattery_kWh / v_batteryCapacity_kWh;
 double f_setChargingStatus()
 {/*ALCODESTART::1747136105778*/
 if(v_status == ARRIVING){
+	v_socChargingThreshold = normal(0.1, 0.5, 0.2, 0.11);
 	boolean wantsToCharge = v_soc < v_socChargingThreshold;
 	Status currentStatus = v_status;
 	//boolean foundCPThroughRequest = false;
@@ -357,24 +361,44 @@ EVOwner f_successfulMoveRequest(boolean actBehavior)
  * Attempts to find an EV to move based on actBehavior probability and availability.
  * Returns the EV to move if successful, or null otherwise.
  */
+
 if (!actBehavior) {
 	count_b2_noProb++;
 	count_b2_notSuccessful++;
 	return null;  // Behavior not active, no move
 }
 
-// Check if any EV with idle CP available
-int idleCount = count(main.EVOwners, x -> x.v_status == PARKED_CHARGE_POINT_IDLE);
-if (idleCount == 0) {
-	count_b2_noIdleChargers++;
-	count_b2_notSuccessful++;
-	return null;
+List<EVOwner> candidates = new ArrayList<>();
+for (EVOwner owner : main.EVOwners) {
+    if (owner.v_status == PARKED_CHARGE_POINT_IDLE) {
+        double rand = uniform();
+        if (rand <= owner.v_prob_b2 * (1-main.v_randomMissFactorB2)) {
+            candidates.add(owner);
+        }
+    }
 }
 
-double sumProb = sumWhere(main.EVOwners, x -> x.v_prob_b2, x -> x.v_status == PARKED_CHARGE_POINT_IDLE);
-//totalProbB2 = 
-double probability = 0.5 + 0.5 * sumProb; //Distribution transpose from 0-1 to 0.5-1, to always have 50% change of positive response
+if (candidates.isEmpty()) {
+    count_b2_noMatchingRequest++;
+    count_b2_notSuccessful++;
+    return null;
+}
 
+// Pick one randomly from willing candidates
+EVOwner selected = candidates.get((int)(uniform() * candidates.size()));
+return selected;
+
+/*
+
+
+double sumProb = sumWhere(main.EVOwners, x -> x.v_prob_b2, x -> x.v_status == PARKED_CHARGE_POINT_IDLE);
+
+//totalProbB2 = 
+double probability = sumProb; //0.5 + 0.5 * sumProb; //Distribution transpose from 0-1 to 0.5-1, to always have 50% change of positive response
+if(this.getIndex() < 5){
+	traceln("Sumprob at b2 succesfull move request" + sumProb + " and why is this not averageProb?");
+	//traceln("probability at b2 " + probability + " checking this factor is later used with rand = uniform() and rand > prob");
+}
 //double probability = 0.75;
 double rand = uniform();
 
@@ -398,7 +422,7 @@ if (selected == null) {
 count_b2_successful++;
 return selected;
 
-
+*/
 /*
 boolean act = false;
 if( actBehavior ){
@@ -558,7 +582,18 @@ return false;
 double f_recheckChargePoints()
 {/*ALCODESTART::1754997016641*/
 if(main.v_recheckCPAvailability && main.v_withinSocialChargingTimes){
-	//Get EVs waiting for CP
+    if (v_status == PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED) {
+
+        if (uniform(0, 1) < main.pRecheck) {
+            f_tryRecheck();
+        }
+    }
+}	
+	
+	
+	
+	
+	/*//Get EVs waiting for CP
 	if(v_status == PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED){
 		
 		int currentPartOfDay = main.f_getPartOfDay();
@@ -589,7 +624,7 @@ if(main.v_recheckCPAvailability && main.v_withinSocialChargingTimes){
             traceln("WARNING: First day check skipped unexpectedly");
         }
 	}
-}
+}*/
 			
 
 /*ALCODEEND*/}
@@ -789,11 +824,23 @@ double experienceValue = experience
 
 //Assymetric smoothing: strong update on rise, weak on decay
 double effective_smoothing;
+double biasFactorFailure = 0.0;;
+double biasFactorSucces = 0.0;
+if(main.negBiasFactor == 2){
+	biasFactorFailure = 1;
+	biasFactorSucces = 0.5;
+} else if (main.negBiasFactor == 300){
+	biasFactorFailure = 3.0;
+	biasFactorSucces = 0.01;
+} else if( main.negBiasFactor == 10){
+	biasFactorFailure = 1;
+	biasFactorSucces = 0.1;
+}
 
 if(experience){
-	effective_smoothing = smoothingFactor * 3.0; //failure -> fast rise
+	effective_smoothing = smoothingFactor * biasFactorFailure; //3.0 //failure -> fast rise
 } else {
-	effective_smoothing = smoothingFactor * 0.01; //success -> slow decay
+	effective_smoothing = smoothingFactor * biasFactorSucces; //0.01//success -> slow decay
 }
 
 effective_smoothing = Math.max(0.01, Math.min(1.0, effective_smoothing));
@@ -858,12 +905,26 @@ double pTrue = Math.min(Math.max(norm_normalized, 0.01), 0.99); // clamp
 double pFalse = 1.0 - pTrue;
 
 // Weight by surprisal
-double rawSurprisalWeight = experience 
+double surprisalWeight;
+
+if(main.surprisalFunction.equals("linear")){
+	double rawLinear = experience ? (1.0 - pTrue) : pTrue;
+	surprisalWeight = Math.min(1.0, rawLinear ); // main.v_surprisalScale set to 4.6 4.6 takes a 99% deviation as 1 and a 0% deviation as 0
+} else if(main.surprisalFunction.equals("quadratic")){
+    double raw = experience ? (1.0 - pTrue) : (1.0 - pFalse);
+    surprisalWeight = Math.min(1.0, (raw * raw));
+} else {
+    // default: log
+    double rawSurprisalWeight = experience 
       ? -Math.log(pTrue)   // rare "true"
       : -Math.log(pFalse); // rare "false"
+    surprisalWeight = Math.min(1.0, rawSurprisalWeight / main.v_surprisalScale);
+}
+/*
+
       
 double surprisalWeight = Math.min(1.0, rawSurprisalWeight / 4.6); //4.6 takes a 99% deviation as 1 and a 0% deviation as 0
-
+*/
 //Emperical disitrbution min and max from mean
 //For B1 max standardized val =  1.42664, min standardized val = -1.63056
 //For B2 and 3 max standardized val = 3.65424, min standardized val = -0.2727

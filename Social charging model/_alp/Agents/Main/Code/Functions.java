@@ -22,7 +22,8 @@ for(int i = 0; i < EVs; i++){
 double f_initializeModel()
 {/*ALCODESTART::1745928671433*/
 v_hourOfDay = 0;
-
+timestepsPerSocialDay = ((v_socialChargingEndHour - v_socialChargingStartHour) * 60.0) / p_timestep_minutes;
+pRecheck = v_rechecksPerDay / timestepsPerSocialDay;
 
 f_setArrays();
 
@@ -120,6 +121,7 @@ count_b2_noMatchingRequests = 0;
 count_b2_noProb = 0;
 
 outOfModelCharge_kWh = 0.0;
+outOfModelCharge_sessions = 0;
 count_leftWhileCharging = 0;
 count_leftWhileChargingWithDelayedAccess = 0;
 count_leftUncharged = 0;
@@ -172,6 +174,7 @@ for (EVOwner x : EVOwners) {
 	totalNorm_b3 += x.v_norm_b3;
 	
 	outOfModelCharge_kWh += x.v_outOfModelCharge_kWh;
+	outOfModelCharge_sessions += x.v_outOfModelCharge_sessions;
 	count_leftWhileCharging += x.count_leftWhileCharging;
 	count_leftWhileChargingWithDelayedAccess += x.count_leftWhileChargingWithDelayedAccess;
 	count_leftUncharged += x.count_leftUncharged;
@@ -181,6 +184,8 @@ for (EVOwner x : EVOwners) {
 	
 	v_tripsFinished += x.v_tripFinished;
 }
+
+//traceln("outOfModelCharge_sessions at f_countTotals " + outOfModelCharge_sessions);
 
 if (count_b2_noProb + count_b2_noIdleChargers + count_b2_noMatchingRequests != count_b2_notSuccessful) {
     traceln(
@@ -1211,7 +1216,8 @@ ar_interactionsPerWeek_b2 = null;
 ar_interactionsPerWeek_b3 = null;
 ar_rechecksPerWeek = null;
 
-ar_outOfModelCharging = null;
+ar_outOfModelCharging_kWh = null;
+ar_outOfModelCharging_sessions = null;
 ar_leftWhileCharging = null;
 ar_leftUncharged = null;
 ar_leftWhileChargingWithDelayedAccess = null;
@@ -1385,6 +1391,7 @@ for(EVOwner ev : EVOwners){
 	ev.count_leftWhileCharging = 0;
 	ev.count_leftWhileChargingWithDelayedAccess = 0;
 	ev.v_outOfModelCharge_kWh = 0.0;
+	ev.v_outOfModelCharge_sessions = 0;
 	ev.v_totalElectricityCharged_kWh = 0.0;
 	ev.v_km_driven = 0.0;
 	ev.v_tripFinished = 0;
@@ -1476,7 +1483,8 @@ ar_unsuccesfulDueToProb_b2 = new double[weeks];
 ar_noMatchingRequests_b2 = new double[weeks];
 
 //out of model and uncharged
-ar_outOfModelCharging = new double[weeks];
+ar_outOfModelCharging_kWh = new double[weeks];
+ar_outOfModelCharging_sessions = new double[weeks];
 ar_leftWhileCharging = new double[weeks];
 ar_leftUncharged = new double[weeks];
 ar_leftWhileChargingWithDelayedAccess = new double[weeks];
@@ -1584,6 +1592,7 @@ double interactions_b3 = 0.0;
 double rechecking = 0.0;
 
 double outOfModelCharge_kWhperWeek = 0.0;
+int outOfModelCharge_sessionsPerWeek = 0;
 int count_leftWhileChargingWeek = 0;
 int count_leftWhileChargingWithDelayedAccessWeek = 0;
 int count_leftUnchargedWeek = 0;
@@ -1617,6 +1626,7 @@ if(v_week == 1){
 	rechecking = count_successfulRechecks + count_unsuccessfulRechecks;
 	
 	outOfModelCharge_kWhperWeek = outOfModelCharge_kWh;
+	outOfModelCharge_sessionsPerWeek = outOfModelCharge_sessions;
 	count_leftWhileChargingWeek = count_leftWhileCharging;
 	count_leftUnchargedWeek = count_leftUncharged;
 	count_leftWhileChargingWithDelayedAccessWeek = count_leftWhileChargingWithDelayedAccess;
@@ -1644,7 +1654,8 @@ else{
 	double sum_prev_b3 = 0.0;
 	double sum_prev_rechecks = 0.0;
 	
-	double sum_prev_OoMC = 0.0;
+	double sum_prev_OoMC_kWh = 0.0;
+	int sum_prev_OoMC_sessions = 0;
 	int sum_prev_LWC = 0;
 	int sum_prev_LU = 0;
 	int sum_prev_LWCWDA = 0;
@@ -1671,7 +1682,8 @@ else{
 	    sum_prev_b3 += ar_interactionsPerWeek_b3[i];
 	    sum_prev_rechecks += ar_rechecksPerWeek[i];
 	    
-	    sum_prev_OoMC += ar_outOfModelCharging[i];
+	    sum_prev_OoMC_kWh += ar_outOfModelCharging_kWh[i];
+	    sum_prev_OoMC_sessions += ar_outOfModelCharging_sessions[i];
 	    sum_prev_LWC += ar_leftWhileCharging[i];
 	    sum_prev_LU += ar_leftUncharged[i];
 	    sum_prev_LWCWDA += ar_leftWhileChargingWithDelayedAccess[i];
@@ -1697,7 +1709,8 @@ else{
 	interactions_b3 = count_b3_successful + count_b3_notSuccessful - sum_prev_b3;
 	rechecking = count_successfulRechecks + count_unsuccessfulRechecks - sum_prev_rechecks;
 
-	outOfModelCharge_kWhperWeek = outOfModelCharge_kWh - sum_prev_OoMC;
+	outOfModelCharge_kWhperWeek = outOfModelCharge_kWh - sum_prev_OoMC_kWh;
+	outOfModelCharge_sessionsPerWeek = outOfModelCharge_sessions - sum_prev_OoMC_sessions;
 	count_leftWhileChargingWeek = count_leftWhileCharging - sum_prev_LWC;
 	count_leftWhileChargingWithDelayedAccessWeek = count_leftWhileChargingWithDelayedAccess - sum_prev_LWCWDA;
 	count_leftUnchargedWeek = count_leftUncharged - sum_prev_LU;
@@ -1725,8 +1738,8 @@ ar_interactionsPerWeek_b2[weekIndex] = interactions_b2;
 ar_interactionsPerWeek_b3[weekIndex] = interactions_b3;
 ar_rechecksPerWeek[weekIndex] = rechecking;
 
-
-ar_outOfModelCharging[weekIndex] = outOfModelCharge_kWhperWeek;
+ar_outOfModelCharging_kWh[weekIndex] = outOfModelCharge_kWhperWeek;
+ar_outOfModelCharging_sessions[weekIndex] = outOfModelCharge_sessionsPerWeek;
 ar_leftWhileCharging[weekIndex] = count_leftWhileChargingWeek;
 ar_leftWhileChargingWithDelayedAccess[weekIndex] = count_leftWhileChargingWithDelayedAccessWeek;
 ar_leftUncharged[weekIndex] = count_leftUnchargedWeek;

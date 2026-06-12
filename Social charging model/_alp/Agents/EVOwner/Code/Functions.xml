@@ -6,7 +6,7 @@
 		<Id>1746011766273</Id>
 		<Name><![CDATA[f_chargeCar]]></Name>
 		<X>250</X>
-		<Y>670</Y>
+		<Y>690</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -22,7 +22,7 @@
 		<Id>1746011780748</Id>
 		<Name><![CDATA[f_updateSOC]]></Name>
 		<X>250</X>
-		<Y>615</Y>
+		<Y>635</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -42,7 +42,7 @@
 		<Id>1747136105778</Id>
 		<Name><![CDATA[f_setChargingStatus]]></Name>
 		<X>250</X>
-		<Y>635</Y>
+		<Y>655</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -613,7 +613,7 @@
 		<Id>1761730717512</Id>
 		<Name><![CDATA[f_extendedB1]]></Name>
 		<X>250</X>
-		<Y>750</Y>
+		<Y>770</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>

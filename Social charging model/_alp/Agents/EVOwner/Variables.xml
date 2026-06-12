@@ -101,6 +101,7 @@
 	<Variable Class="PlainVariable">
 		<Id>1746012725326</Id>
 		<Name><![CDATA[v_socChargingThreshold]]></Name>
+		<Description><![CDATA[https://www.mdpi.com/2032-6653/17/6/305]]></Description>
 		<X>250</X>
 		<Y>495</Y>
 		<Label>
@@ -116,7 +117,7 @@
               StaticVariable="false">
 			<Type><![CDATA[double]]></Type>
 			<InitialValue Class="CodeValue">
-				<Code><![CDATA[0.2]]></Code>
+				<Code><![CDATA[normal(0.1, 0.5, 0.2, 0.11)]]></Code>
 			</InitialValue>
 		</Properties>
 	</Variable>
@@ -580,7 +581,7 @@
 		<Id>1754487073931</Id>
 		<Name><![CDATA[v_totalElectricityCharged_kWh]]></Name>
 		<X>250</X>
-		<Y>590</Y>
+		<Y>610</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -994,7 +995,7 @@
 		<Id>1757422744594</Id>
 		<Name><![CDATA[hasUpdatedPCP]]></Name>
 		<X>250</X>
-		<Y>720</Y>
+		<Y>740</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -1052,6 +1053,25 @@
 		<Name><![CDATA[lwc_successB3]]></Name>
 		<X>810</X>
 		<Y>620</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Properties SaveInSnapshot="true"
+              Constant="false"
+              AccessType="public"
+              StaticVariable="false">
+			<Type><![CDATA[int]]></Type>
+		</Properties>
+	</Variable>
+	<Variable Class="PlainVariable">
+		<Id>1781170887395</Id>
+		<Name><![CDATA[v_outOfModelCharge_sessions]]></Name>
+		<X>250</X>
+		<Y>590</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>

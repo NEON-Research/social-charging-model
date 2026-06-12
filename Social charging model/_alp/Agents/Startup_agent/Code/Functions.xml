@@ -556,4 +556,32 @@
 		</Parameter>
 		<Body xmlns:al="http://anylogic.com"/>
 	</Function>
+	<Function AccessType="default" StaticFunction="false">
+		<ReturnModificator>VOID</ReturnModificator>
+		<ReturnType>double</ReturnType>
+		<Id>1781178152834</Id>
+		<Name><![CDATA[simulateBehaviorSelectionScenario]]></Name>
+		<X>100</X>
+		<Y>350</Y>
+		<Label>
+			<X>10</X>
+			<Y>0</Y>
+		</Label>
+		<PublicFlag>false</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>true</ShowLabel>
+		<Parameter>
+			<Name><![CDATA[labels]]></Name>
+			<Type><![CDATA[String[]]]></Type>
+		</Parameter>
+		<Parameter>
+			<Name><![CDATA[subselection]]></Name>
+			<Type><![CDATA[boolean[][]]]></Type>
+		</Parameter>
+		<Parameter>
+			<Name><![CDATA[checkBoxes]]></Name>
+			<Type><![CDATA[ShapeCheckBox[]]]></Type>
+		</Parameter>
+		<Body xmlns:al="http://anylogic.com"/>
+	</Function>
 </Functions>
