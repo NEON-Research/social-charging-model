@@ -3131,6 +3131,14 @@ String[] labels = {
 	if( newChargePoints != v_chargePoints ){
 */		
 
+for( v_chargePoints = 19; v_chargePoints &lt;= 20; v_chargePoints++){
+	simulateBehaviorSelectionScenario(labels, subselection, checkBoxes);
+	long usedMemory = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1024 * 1024);
+		scenTime = (System.currentTimeMillis() - scenTime) / 1000.0;
+	//traceln("NCP = " + newChargePoints + " v_CP = " + v_chargePoints);
+	traceln("Finished scenarios for " + v_EVsPerCP + " EVs per CP in " + roundToDecimal(scenTime / 60,2) + " minutes, with used memory: " + usedMemory + " MB");
+	scenTime = System.currentTimeMillis();	
+}
 for( v_chargePoints = 100; v_chargePoints &lt;= 100; v_chargePoints++){
 	simulateBehaviorSelectionScenario(labels, subselection, checkBoxes);
 	long usedMemory = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1024 * 1024);

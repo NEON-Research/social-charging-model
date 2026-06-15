@@ -79,8 +79,9 @@ def plot_scenarios(ax, scenarios):
                         color=sel['color'], alpha=0.2)
 
     ax.set_xlim(1, 15)
+    ax.set_ylim(0, 100)
     ax.set_xticks([5, 10, 15])
-    ax.set_yticks([30, 40, 50, 60, 70, 80, 90, 100])
+    #ax.set_yticks([10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
     ax.set_xlabel('EVs per CP', fontsize=8)
     ax.tick_params(axis='both', labelsize=8)
 

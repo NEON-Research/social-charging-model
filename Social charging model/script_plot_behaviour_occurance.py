@@ -65,7 +65,7 @@ plot_handles = {}
 
 
 # Set the Excel file name
-excel_file = 'SCM_results_behaviours.xlsx'
+excel_file = 'SCM_results_behaviours300it.xlsx'
 
 # Read the second sheet for out of model charge, left without charging, left while charging
 df = pd.read_excel(excel_file, sheet_name=0)
@@ -200,7 +200,7 @@ for idx, (abbr, title) in enumerate(metrics):
     ax.set_ylabel(None)
     ax.tick_params(axis='both', labelsize=8)
     ax.set_xticks([5, 10, 15]) 
-    ax.set_yticks([0, 10, 20, 30, 40, 50])#, 15, 20, 25, 30])
+    ax.set_yticks([0, 20, 40, 60])#, 15, 20, 25, 30])
 
  # --- Control decimal places on y-axis ---
     # if idx == 0:

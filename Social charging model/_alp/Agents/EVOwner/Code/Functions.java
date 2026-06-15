@@ -228,9 +228,11 @@ if(movingEV != null){
 	movingEV.count_fulfilledMoveRequest++;
 	f_connectToCP(freedCP);
 	behaviorSuccess = true;
+	count_b2_successful++;
 }
 else {
 	v_status = PARKED_NON_CHARGE_POINT_CHARGING_REQUIRED;
+	count_b2_notSuccessful++;
 }
 
 int total_b2 = count_b2_successful + count_b2_notSuccessful;
@@ -364,7 +366,7 @@ EVOwner f_successfulMoveRequest(boolean actBehavior)
 
 if (!actBehavior) {
 	count_b2_noProb++;
-	count_b2_notSuccessful++;
+	//count_b2_notSuccessful++;
 	return null;  // Behavior not active, no move
 }
 
@@ -380,7 +382,7 @@ for (EVOwner owner : main.EVOwners) {
 
 if (candidates.isEmpty()) {
     count_b2_noMatchingRequest++;
-    count_b2_notSuccessful++;
+    //count_b2_notSuccessful++;
     return null;
 }
 
