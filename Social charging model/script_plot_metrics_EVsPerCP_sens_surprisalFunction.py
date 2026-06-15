@@ -1,8 +1,10 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-excel_file = 'SCM_results_behaviours.xlsx'
+excel_file = 'SCM_results_behaviours_sensSurprisalFunction.xlsx'
 df = pd.read_excel(excel_file, sheet_name=0)
+
+print("Unique surprisalFunction values in data:", df['surprisalFunction'].unique())
 
 # EVs per CP scenarios (subplots)
 subselection = [

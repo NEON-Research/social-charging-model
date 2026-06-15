@@ -12,12 +12,6 @@ subselection = [
      'label': 'B2', 'color': 'tab:red'},
     {'b1': False, 'b2': False, 'b3': True,  'b4': True,
      'label': 'B3', 'color': 'tab:orange'},
-    {'b1': True,  'b2': True,  'b3': False, 'b4': True,
-     'label': 'B1 and B2', 'color': 'tab:cyan'},
-    {'b1': True,  'b2': False, 'b3': True,  'b4': True,
-     'label': 'B1 and B3', 'color': 'tab:olive'},
-    {'b1': False, 'b2': True,  'b3': True,  'b4': True,
-     'label': 'B2 and B3', 'color': 'tab:brown'},
     {'b1': True,  'b2': True,  'b3': True,  'b4': True,
      'label': 'All behaviours', 'color': 'tab:purple'},
 ]
@@ -67,7 +61,7 @@ for sel in subselection:
         )
 
 # --- Format plot ---
-ax.set_title('Charging fulfillment ratio\n(sensitivity: rechecksPerDay)', fontsize=9, pad=15)
+ax.set_title('Charging fulfillment ratio\n(sensitivity: Rechecks per day)', fontsize=9, pad=15)
 ax.set_xlabel('EVs per CP', fontsize=8)
 ax.tick_params(axis='both', labelsize=8)
 ax.set_xlim(1, 15)

@@ -12,13 +12,13 @@ subselection = [
 
 # Two randomMissFactorB2 values to compare
 factor_styles = [
-    {'value': 0.5, 'linestyle': '--',  'factor_label': '50% unavailable'},
-    {'value': 0.25, 'linestyle': '-',  'factor_label': '25% unavailable'},
-    {'value': 0.0, 'linestyle': '--', 'factor_label': '0% unavailable'},
+    {'value': 0.5, 'linestyle': ':',  'factor_label': '50% unavailable'},
+    {'value': 0.25, 'linestyle': '--',  'factor_label': '25% unavailable'},
+    {'value': 0.0, 'linestyle': '-', 'factor_label': '0% unavailable'},
 ]
 
 # Load data
-excel_file = 'SCM_results_behaviours_responseB2.xlsx'
+excel_file = 'SCM_results_behaviours_sensResponseB2.xlsx'
 df = pd.read_excel(excel_file, sheet_name=0)
 
 # --- Setup plot ---
@@ -55,7 +55,7 @@ for sel in subselection:
         )
 
 # --- Format plot ---
-ax.set_title('Charging fulfillment ratio\n(B2 sensitivity: randomMissFactorB2)', fontsize=9, pad=15)
+ax.set_title('Charging fulfillment ratio\n(sensitivity: Unsuccessful response factor B2)', fontsize=9, pad=15)
 ax.set_xlabel('EVs per CP', fontsize=8)
 ax.tick_params(axis='both', labelsize=8)
 ax.set_xlim(1, 15)

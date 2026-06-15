@@ -67,7 +67,7 @@ for sel in subselection:
         )
 
 # --- Format plot ---
-ax.set_title('Charging fulfillment ratio\n(sensitivity: EMASmoothingFactor)', fontsize=9, pad=15)
+ax.set_title('Charging fulfillment ratio\n(sensitivity: EMA smoothing factor)', fontsize=9, pad=15)
 ax.set_xlabel('EVs per CP', fontsize=8)
 ax.tick_params(axis='both', labelsize=8)
 ax.set_xlim(1, 15)

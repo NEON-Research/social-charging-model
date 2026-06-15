@@ -3131,7 +3131,7 @@ String[] labels = {
 	if( newChargePoints != v_chargePoints ){
 */		
 
-for( v_chargePoints = 6; v_chargePoints &lt;= 8; v_chargePoints++){
+for( v_chargePoints = 100; v_chargePoints &lt;= 100; v_chargePoints++){
 	simulateBehaviorSelectionScenario(labels, subselection, checkBoxes);
 	long usedMemory = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1024 * 1024);
 		scenTime = (System.currentTimeMillis() - scenTime) / 1000.0;
@@ -3384,7 +3384,7 @@ traceln("Finished behavior scenarios " + simulationCount + " in " + runTime + " 
 			<EmbeddedIcon>false</EmbeddedIcon>
 			<TextColor>-16777216</TextColor>
 			<Enabled>true</Enabled>
-			<ActionCode>traceln("Starting behavior selection simulation");
+			<ActionCode>traceln("Starting behavior selection simulation smooting factor");
 v_rapidRun = true;
 double time = System.currentTimeMillis();
 double scenTime = time;
@@ -4088,7 +4088,7 @@ for(int i = 0; i &lt;=2; i++){
 	} else if (i == 1){
 		v_randomMissFactorB2 = 0.25;
 	} else if (i == 2){
-		v_rechecksPerDay = 0.5;
+		v_randomMissFactorB2 = 0.5;
 	}
 	
 	for( v_chargePoints = 6; v_chargePoints &lt;= 20; v_chargePoints++){
@@ -4147,7 +4147,7 @@ double scenTime = time;
 monteCarlo = true;
 f_clearResultsCollections();
 
-iterations = 50;
+iterations = 25;
 //iterations = 500;
 //v_EVsPerCP = 10;
 

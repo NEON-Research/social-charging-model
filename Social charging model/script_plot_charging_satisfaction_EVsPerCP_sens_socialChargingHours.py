@@ -23,7 +23,7 @@ hours_styles = [
 ]
 
 # Load data
-excel_file = 'SCM_results_behaviours.xlsx'
+excel_file = 'SCM_results_behaviours_sensSocialChargingHours.xlsx'
 df = pd.read_excel(excel_file, sheet_name=0)
 
 # --- Setup plot ---
@@ -60,7 +60,7 @@ for sel in subselection:
         )
 
 # --- Format plot ---
-ax.set_title('Charging fulfillment ratio\n(sensitivity: socialChargingHours)', fontsize=9, pad=15)
+ax.set_title('Charging fulfillment ratio\n(sensitivity: Social charging hours)', fontsize=9, pad=15)
 ax.set_xlabel('EVs per CP', fontsize=8)
 ax.tick_params(axis='both', labelsize=8)
 ax.set_xlim(1, 15)
