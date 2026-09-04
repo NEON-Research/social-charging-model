@@ -567,6 +567,19 @@ RealMatrix L = new CholeskyDecomposition(corr).getL();
 List<double[]> synthethicAgents = new ArrayList<>();
 NormalDistribution standardNormal = new NormalDistribution(0, 1);
 
+
+
+final int IDX_B2 = 5;
+List<Double> b2Sorted = sortedRealData.get(IDX_B2);
+double b2Min = b2Sorted.get(0);
+double b2Max = b2Sorted.get(b2Sorted.size() - 1);
+double b2BasePrevalence = 0.0;
+for (double v : b2Sorted) { if (v > b2Min) b2BasePrevalence++; }
+b2BasePrevalence /= b2Sorted.size();          // 0.0694 in the current sample
+double b2Prevalence = Math.max(0.0, Math.min(1.0,
+        v_prosocialityFactor * b2BasePrevalence));
+
+
 for(int i= 0; i < numAgents; i++){
 	//Step 1: Generate independent standard normals
 	double[] z = new double[numVars];
@@ -582,7 +595,14 @@ for(int i= 0; i < numAgents; i++){
 	double[] agentAttributes = new double[numVars];
 	for(int j= 0; j < numVars; j++){
 		double u = standardNormal.cumulativeProbability(correlated.getEntry(j));
-		agentAttributes[j] = f_inverseECDF(sortedRealData.get(j), u);
+		if (j == IDX_B2 && v_prosocialityFactor != 1.0) {
+			// b2 is binary, so its ECDF inverse is a threshold on u.
+			// Moving the threshold changes the share of prosocial agents while
+			// the copula still decides which agents they are.
+			agentAttributes[j] = (u > 1.0 - b2Prevalence) ? b2Max : b2Min;
+		} else {
+			agentAttributes[j] = f_inverseECDF(sortedRealData.get(j), u);
+		}
 	}
 	
 	f_addEVOwner(agentAttributes);
@@ -654,12 +674,31 @@ x.v_norms = agentAttributes[0];
 x.v_reputational_concern = agentAttributes[1];
 x.v_perc_social_interdep = agentAttributes[2];
 x.v_perc_charging_pressure = agentAttributes[3];
+
+double lambda = v_prosocialityFactor;
+
 x.v_stand_prob_b1 = agentAttributes[4];
+x.v_stand_prob_b2 = agentAttributes[5];
+x.v_stand_prob_b3 = agentAttributes[5];   // prob_b3 = prob_b2
+
+if (lambda != 1.0) {
+    double p_b1 = f_convertStandardizedToProb(agentAttributes[4], mean_b1, sd_b1, true);
+    p_b1 = Math.max(0.0, Math.min(1.0, lambda * p_b1));
+    x.v_stand_prob_b1 = f_convertProbToStandardized(p_b1, mean_b1, sd_b1, true);
+}
+
+x.v_norm_b1 = x.v_stand_prob_b1;
+x.v_norm_b2 = x.v_stand_prob_b2;
+x.v_norm_b3 = x.v_stand_prob_b3;
+
+
+/*x.v_stand_prob_b1 = agentAttributes[4];
 x.v_stand_prob_b2 = agentAttributes[5];
 x.v_stand_prob_b3 = agentAttributes[5]; //prob_b3 = prob_b2
 x.v_norm_b1 = agentAttributes[4];
 x.v_norm_b2 = agentAttributes[5];
 x.v_norm_b3 = agentAttributes[5];
+*/ 
 
 x.v_prob_b1 = f_convertStandardizedToProb(x.v_stand_prob_b1, mean_b1, sd_b1, true);
 x.v_prob_b2 = f_convertStandardizedToProb(x.v_stand_prob_b2, mean_b2, sd_b2, false);
@@ -1788,5 +1827,10 @@ for(int i=0; i<chargePoints; i++){
 	ev.v_chargePoint = cp;
 	cp.occupy(ev);
 }
+/*ALCODEEND*/}
+
+double f_convertProbToStandardized(double p,double mean,double sd,boolean isLikert)
+{/*ALCODESTART::1788542458287*/
+return ((isLikert ? p*6+1 : p) - mean) / sd;
 /*ALCODEEND*/}
 

@@ -23,6 +23,7 @@ public class J_MCResult {
 	private double negBiasFactor;
 	private String surprisalFunction;
 	private String socialChargingHours;
+	private double prosocialityFactor;
 	
 	ArrayList<double[]> successRate_b1;
 	ArrayList<double[]> successRate_b2;
@@ -292,12 +293,20 @@ public class J_MCResult {
         return this.kmDrivenMap;
     }
     
+    public double getProsocialityFactor() {
+    	return prosocialityFactor;
+    }
+    
     
     
     
     // --- Setters ---
     public void setIterations(int iterations) {
         this.iterations = iterations;
+    }
+    
+    public void setProsocialityFactor(double val) {
+    	this.prosocialityFactor = val;
     }
     
     public void setScenarioIndex(int scenIndex) {

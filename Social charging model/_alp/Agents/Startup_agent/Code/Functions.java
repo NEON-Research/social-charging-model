@@ -69,6 +69,7 @@ m.v_rechecksPerDay = v_rechecksPerDay;
 m.v_smoothingFactorNorms = v_smoothingFactorNorms;
 m.negBiasFactor = negBiasFactor;
 m.surprisalFunction = surprisalFunction;
+m.v_prosocialityFactor = v_prosocialityFactor;
 
 
 m.f_initializeModel();
@@ -695,6 +696,7 @@ results.setSmoothingFactorEMA(v_smoothingFactorNorms);
 results.setNegBiasFactor(negBiasFactor);
 results.setSurprisalFunction(surprisalFunction);
 results.setSocialChargingHours(v_socialChargingStartHour + "-" + v_socialChargingEndHour);
+results.setProsocialityFactor(v_prosocialityFactor);
 
 ArrayList<double[]> uncertaintyBounds_SR_b1 = f_getUncertaintyBounds(c_succesRate_b1_MC);
 ArrayList<double[]> uncertaintyBounds_SR_b2 = f_getUncertaintyBounds(c_succesRate_b2_MC);
@@ -1384,7 +1386,7 @@ for(J_MCResult r : c_MCResults){
 		
 		double meanavgProbB2 = r.getAvgProb_b2().get(0)[t];
 		double loweravgProbB2 = r.getAvgProb_b2().get(1)[t];
-		double upperavgProbB2 = r.getAvgProb_b1().get(2)[t];
+		double upperavgProbB2 = r.getAvgProb_b2().get(2)[t];
 		
 		double meanavgProbB3 = r.getAvgProb_b2().get(0)[t];
 		double loweravgProbB3 = r.getAvgProb_b2().get(1)[t];
@@ -1550,6 +1552,7 @@ for(J_MCResult r : c_MCResults){
 		excel_exportResultsBehaviours.setCellValue(r.getNegBiasFactor(),	 sheetIndexPerWeek, rowIndex, col++);
 		excel_exportResultsBehaviours.setCellValue(r.getSurprisalFunction(),	 sheetIndexPerWeek, rowIndex, col++);
 		excel_exportResultsBehaviours.setCellValue(r.getSocialChargingHours(),	 sheetIndexPerWeek, rowIndex, col++);
+		excel_exportResultsBehaviours.setCellValue(r.getProsocialityFactor(),	 sheetIndexPerWeek, rowIndex, col++);
 		
 		// Maps via exportUncertaintyBoundsToExcel (each advances col by 7)
 		exportUncertaintyBoundsToExcel(r.getChargingSatisfactionMap(),  t, sheetIndexPerWeek, rowIndex, col); col += 7;
